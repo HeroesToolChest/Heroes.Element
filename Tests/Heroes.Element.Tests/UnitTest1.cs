@@ -1,11 +1,17 @@
 //using Heroes.Element.Models;
 //using System.Text.Json;
 
-//namespace Heroes.Element.Tests;
+namespace Heroes.Element.Tests;
 
-//[TestClass]
-//public class UnitTest1
-//{
+[TestClass]
+public class UnitTest1
+{
+    [TestMethod]
+    public void Test()
+    {
+        Assert.IsTrue(true);
+    }
+}
 //    [TestMethod]
 //    public void TestMethod1()
 //    {
