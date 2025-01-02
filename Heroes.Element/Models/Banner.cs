@@ -12,5 +12,6 @@ public class Banner : HeroesCollectionObject
     public Banner(string id)
         : base(id)
     {
+        Rarity = Types.Rarity.None;
     }
 }

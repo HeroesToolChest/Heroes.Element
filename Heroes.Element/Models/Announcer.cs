@@ -12,16 +12,26 @@ public class Announcer : HeroesCollectionObject
     public Announcer(string id)
         : base(id)
     {
+        Rarity = Types.Rarity.None;
     }
 
-    //[JsonPropertyOrder(1)]
+    /// <summary>
+    /// Gets or sets the gender.
+    /// </summary>
     public string? Gender { get; set; }
 
-    //[JsonPropertyOrder(2)]
+    /// <summary>
+    /// Gets or sets the hero id.
+    /// </summary>
     public string? HeroId { get; set; }
 
-    //[JsonPropertyOrder(3)]
+    /// <summary>
+    /// Gets or sets the file name of the image.
+    /// </summary>
     public string? Image { get; set; }
 
+    /// <summary>
+    /// Gets or sets the relative path of the image that resides in CASC or on file.
+    /// </summary>
     internal string? ImagePath { get; set; }
 }

@@ -39,14 +39,12 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
     public DateOnly? ReleaseDate { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyName("category")]
     [JsonPropertyOrder(-4)]
-    public string? CollectionCategory { get; set; }
+    public string? Category { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyName("event")]
     [JsonPropertyOrder(-3)]
-    public string? EventName { get; set; }
+    public string? Event { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]

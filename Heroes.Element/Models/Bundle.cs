@@ -46,8 +46,6 @@ public class Bundle : HeroesCollectionObject, IFranchise
     /// </summary>
     public string? Image { get; set; }
 
-    internal string? ImagePath { get; set; }
-
     /// <summary>
     /// Gets or sets the boost id that is in this bundle.
     /// </summary>
@@ -68,4 +66,9 @@ public class Bundle : HeroesCollectionObject, IFranchise
     /// Gets or sets the loot chest id that is in this bundle.
     /// </summary>
     public string? LootChestBonus { get; set; }
+
+    /// <summary>
+    /// Gets or sets the relative path of the image that resides in CASC or on file.
+    /// </summary>
+    internal string? ImagePath { get; set; }
 }
