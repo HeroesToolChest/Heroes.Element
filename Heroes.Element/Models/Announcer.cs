@@ -33,5 +33,5 @@ public class Announcer : HeroesCollectionObject
     /// <summary>
     /// Gets or sets the relative path of the image that resides in CASC or on file.
     /// </summary>
-    internal string? ImagePath { get; set; }
+    internal RelativeFilePath? ImagePath { get; set; }
 }

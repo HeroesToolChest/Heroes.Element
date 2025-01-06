@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the map data.
 /// </summary>
-public class Map : ElementObject
+public class Map : ElementObject, IName
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Map"/> class.
@@ -14,9 +14,7 @@ public class Map : ElementObject
     {
     }
 
-    /// <summary>
-    /// Gets or sets the display name.
-    /// </summary>
+    /// <inheritdoc/>
     public TooltipDescription? Name { get; set; }
 
     /// <summary>
@@ -27,7 +25,7 @@ public class Map : ElementObject
     /// <summary>
     /// Gets or sets the map link id. This is the id found in the xml files for CMap.
     /// <para>
-    /// This is not unique. Cursed Hollow and Cursed Hollow (Sandbox) share the same map link.
+    /// This is not unique (unless you exclude the sandbox maps). Cursed Hollow and Cursed Hollow (Sandbox) share the same map link.
     /// </para>
     /// </summary>
     public string? MapLink { get; set; }
@@ -48,11 +46,17 @@ public class Map : ElementObject
     public string? LoadingScreenImage { get; set; }
 
     /// <summary>
-    /// 
+    /// Gets or sets the map objectives information.
     /// </summary>
     public IList<MapObjective> MapObjectives { get; set; } = [];
 
-    internal string? ReplayPreviewImagePath { get; set; }
+    /// <summary>
+    /// Gets or sets the relative path of the image that resides in CASC or on file.
+    /// </summary>
+    internal RelativeFilePath? ReplayPreviewImagePath { get; set; }
 
-    internal string? LoadingScreenImagePath { get; set; }
+    /// <summary>
+    /// Gets or sets the relative path of the image that resides in CASC or on file.
+    /// </summary>
+    internal RelativeFilePath? LoadingScreenImagePath { get; set; }
 }

@@ -1,22 +1,22 @@
 ﻿namespace Heroes.Element.Models;
 
 /// <summary>
-/// 
+/// Contains the map objective data.
 /// </summary>
 public class MapObjective
 {
     /// <summary>
-    /// 
+    /// Gets or sets the title.
     /// </summary>
-    public string? Title { get; set; }
+    public TooltipDescription? Title { get; set; }
 
     /// <summary>
-    /// 
+    /// Gets or sets the description.
     /// </summary>
-    public string? Description { get; set; }
+    public TooltipDescription? Description { get; set; }
 
     /// <summary>
-    /// 
+    /// Gets or sets the icons for this map objective.
     /// </summary>
     public IList<MapObjectiveIcon> Icons { get; set; } = [];
 }
