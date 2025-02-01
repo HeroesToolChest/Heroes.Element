@@ -1,14 +1,14 @@
 ﻿namespace Heroes.Element.Models;
 
 /// <summary>
-/// An interface for a element object found in the in-game store collection.
+/// An interface for an element object found in the in-game store collection.
 /// </summary>
 public interface IHeroesCollectionObject : IName, IHyperlinkId, IRarity, IEventName, IDescription
 {
     /// <summary>
     /// Gets or sets the sort name.
     /// </summary>
-    TooltipDescription? SortName { get; set; }
+    string? SortName { get; set; }
 
     /// <summary>
     /// Gets or sets the attribute id.
@@ -26,7 +26,7 @@ public interface IHeroesCollectionObject : IName, IHyperlinkId, IRarity, IEventN
     string? Category { get; set; }
 
     /// <summary>
-    /// Gets a unique collection of search texts.
+    /// Gets or sets the search texts (should be space delimited).
     /// </summary>
-    ISet<string> SearchTexts { get; }
+    string? SearchText { get; set; }
 }

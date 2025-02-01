@@ -1,12 +1,12 @@
-﻿namespace Heroes.Element.Models;
+﻿namespace Heroes.Element.Models.ObjectProperties;
 
 /// <summary>
-/// An interface to present a franchise.
+/// An interface for a franchise.
 /// </summary>
 public interface IFranchise
 {
     /// <summary>
-    /// Gets or sets the franchise the bundle belongs to.
+    /// Gets or sets the franchise.
     /// </summary>
     public Franchise? Franchise { get; set; }
 }
