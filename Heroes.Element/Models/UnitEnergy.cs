@@ -18,7 +18,7 @@ public class UnitEnergy
     /// <summary>
     /// Gets or sets the energy type.
     /// </summary>
-    public string? EnergyType { get; set; }
+    public TooltipDescription? EnergyType { get; set; }
 
     /// <inheritdoc/>
     public override string ToString()

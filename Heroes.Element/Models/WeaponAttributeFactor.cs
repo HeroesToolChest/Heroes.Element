@@ -3,11 +3,11 @@
 /// <summary>
 /// Represents a type value pair for the attribute factor of a weapon.
 /// </summary>
-public class WeaponAttributeFactor : TypeValue
+public record WeaponAttributeFactor : TypeValue
 {
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"Type: {Type}, Value: {Value}";
-    }
+    ///// <inheritdoc/>
+    //public override string ToString()
+    //{
+    //    return $"Type: {Type}, Value: {Value}";
+    //}
 }

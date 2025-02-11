@@ -15,17 +15,6 @@ public class Unit : HeroesCollectionObject
     }
 
     /// <summary>
-    /// Gets or sets the unit id.
-    /// </summary>
-    [JsonPropertyOrder(-99)]
-    public string? UnitId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the gender of the unit.
-    /// </summary>
-    public Gender? Gender { get; set; }
-
-    /// <summary>
     /// Gets or sets the size of the inner radius.
     /// </summary>
     public double InnerRadius { get; set; }
@@ -46,24 +35,19 @@ public class Unit : HeroesCollectionObject
     public double Speed { get; set; }
 
     /// <summary>
-    /// Gets or sets the damage type of this unit.
-    /// </summary>
-    public string? DamageType { get; set; }
-
-    /// <summary>
     /// Gets or sets the kill xp.
     /// </summary>
     public int? KillXP { get; set; }
 
     /// <summary>
-    /// Gets or sets the scaling link id.
+    /// Gets or sets the damage type of this unit. This value is the <see cref="ArmorSet"/>.
     /// </summary>
-    public string? ScalingLinkId { get; set; }
+    public ArmorSet? DamageType { get; set; }
 
     /// <summary>
-    /// Gets or sets the parent link of this unit.
+    /// Gets the scaling link ids. This is the <see cref="BehaviorVeterancy"/>.
     /// </summary>
-    public string? ParentLink { get; set; }
+    public ISet<string> ScalingLinkIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets or sets the Life properties.
@@ -81,9 +65,9 @@ public class Unit : HeroesCollectionObject
     public UnitShield Shield { get; set; } = new UnitShield();
 
     /// <summary>
-    /// Gets a collection of unit armor.
+    /// Gets the unit armor by the type of armor set.
     /// </summary>
-    public ISet<UnitArmor> Armor { get; } = new HashSet<UnitArmor>();
+    public IDictionary<ArmorSet, UnitArmor> Armor { get; } = new SortedDictionary<ArmorSet, UnitArmor>();
 
     /// <summary>
     /// Gets or sets the info text of the unit.
@@ -93,27 +77,34 @@ public class Unit : HeroesCollectionObject
     /// <summary>
     /// Gets or sets the unit portraits.
     /// </summary>
+    [JsonPropertyName("portraits")]
     public UnitPortrait UnitPortrait { get; set; } = new UnitPortrait();
 
     /// <summary>
     /// Gets a collection of the hero play styles.
     /// </summary>
-    public ISet<string> HeroDescriptors { get; } = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+    [JsonPropertyName("playstyles")]
+    public ISet<string> HeroPlayStyles { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
-    /// Gets a collection of basic attack weapons.
+    /// Gets or sets a collection of basic attack weapons.
     /// </summary>
-    public ISet<UnitWeapon> Weapons { get; } = new HashSet<UnitWeapon>();
+    public ICollection<UnitWeapon> Weapons { get; set; } = [];
 
     /// <summary>
     /// Gets a collection of attributes.
     /// </summary>
-    public ISet<string> Attributes { get; } = new HashSet<string>();
+    public ISet<string> Attributes { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a collection of additional units associated with this unit.
     /// </summary>
-    public ISet<string> UnitIds { get; } = new HashSet<string>();
+    public ISet<string> UnitIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
-    // TODO: add abilities
+    //// TODO: add abilities
+
+    /// <summary>
+    /// Gets or sets the parent link of this unit.
+    /// </summary>
+    public string? ParentLink { get; set; }
 }

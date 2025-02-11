@@ -13,22 +13,7 @@ public class UnitWeapon
     /// <summary>
     /// Gets or sets the name of the weapon.
     /// </summary>
-    public string? Name { get; set; } = string.Empty;
-
-    /// <summary>
-    /// Gets or sets the amount of damage the attack deals.
-    /// </summary>
-    public double Damage { get; set; }
-
-    /// <summary>
-    /// Gets a collection of attribute factors.
-    /// </summary>
-    public ISet<WeaponAttributeFactor> AttributeFactors { get; } = new HashSet<WeaponAttributeFactor>();
-
-    /// <summary>
-    /// Gets or sets the time between attacks.
-    /// </summary>
-    public double Period { get; set; }
+    public TooltipDescription? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the distance of the attack.
@@ -36,9 +21,25 @@ public class UnitWeapon
     public double Range { get; set; }
 
     /// <summary>
+    /// Gets or sets the time between attacks.
+    /// </summary>
+    public double Period { get; set; }
+
+    /// <summary>
+    /// Gets or sets the amount of damage the attack deals.
+    /// </summary>
+    public double Damage { get; set; }
+
+    /// <summary>
     /// Gets or sets the damage scaling per level.
     /// </summary>
     public double DamageScaling { get; set; }
+
+    /// <summary>
+    /// Gets a collection of attribute factors. These are the damage value by the attribute.
+    /// </summary>
+    [JsonPropertyName("damageFactors")]
+    public IDictionary<string, double> AttributeFactors { get; } = new SortedDictionary<string, double>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets or sets the unit that is associated with this weapon.
@@ -49,6 +50,7 @@ public class UnitWeapon
     /// Gets the attacks per second.
     /// </summary>
     /// <returns>A value indicating the number of attacks per second.</returns>
+    [JsonIgnore]
     public double AttacksPerSecond
     {
         get

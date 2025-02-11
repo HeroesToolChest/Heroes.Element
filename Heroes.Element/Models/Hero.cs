@@ -15,12 +15,23 @@ public class Hero : Unit, IFranchise
     }
 
     /// <summary>
+    /// Gets or sets the unit id.
+    /// </summary>
+    [JsonPropertyOrder(-99)]
+    public string? UnitId { get; set; }
+
+    /// <summary>
     /// Gets or sets the difficulty of the hero.
     /// </summary>
     public TooltipDescription? Difficulty { get; set; }
 
     /// <inheritdoc/>
     public Franchise? Franchise { get; set; }
+
+    /// <summary>
+    /// Gets or sets the gender of the hero.
+    /// </summary>
+    public Gender? Gender { get; set; }
 
     /// <summary>
     /// Gets or sets the hero title.
@@ -60,22 +71,22 @@ public class Hero : Unit, IFranchise
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
-    public ISet<string> SkinIds { get; } = new HashSet<string>();
+    public ISet<string> SkinIds { get; } = new SortedSet<string>();
 
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
-    public ISet<string> VariationSkinIds { get; } = new HashSet<string>();
+    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>();
 
     /// <summary>
     /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
     /// </summary>
-    public ISet<string> VoiceLineIds { get; } = new HashSet<string>();
+    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>();
 
     /// <summary>
     /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
     /// </summary>
-    public ISet<string> MountCategoryIds { get; } = new HashSet<string>();
+    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>();
 
     // TODO: Hero Units
 }

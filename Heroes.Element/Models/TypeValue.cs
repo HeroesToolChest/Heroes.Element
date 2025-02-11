@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the base class for type value pairs data.
 /// </summary>
-public abstract class TypeValue
+public abstract record TypeValue
 {
     /// <summary>
     /// Gets or sets the type.
@@ -15,9 +15,9 @@ public abstract class TypeValue
     /// </summary>
     public double Value { get; set; }
 
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"{nameof(Type)}: {Type}, {nameof(Value)}: {Value}";
-    }
+    ///// <inheritdoc/>
+    //public override string ToString()
+    //{
+    //    return $"{nameof(Type)}: {Type}, {nameof(Value)}: {Value}";
+    //}
 }

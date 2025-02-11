@@ -33,7 +33,7 @@ public class UnitShield
     /// <summary>
     /// Gets or sets the type of shield.
     /// </summary>
-    public string? ShieldType { get; set; }
+    public TooltipDescription? ShieldType { get; set; }
 
     /// <inheritdoc/>
     public override string ToString()
