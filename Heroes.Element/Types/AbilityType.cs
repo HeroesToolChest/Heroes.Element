@@ -3,8 +3,7 @@
 /// <summary>
 /// Specifies the type of an ability.
 /// </summary>
-[Flags]
-public enum AbilityTypes
+public enum AbilityType
 {
     /// <summary>
     /// Indicates an unknown type.
@@ -115,19 +114,4 @@ public enum AbilityTypes
     /// Indicates a hidden type.
     /// </summary>
     Hidden = 1 << 20,
-
-    /// <summary>
-    /// Indicates a standard type.
-    /// </summary>
-    Standard = Q | W | E | Heroic | Z | Trait | Active | Passive | B,
-
-    /// <summary>
-    /// Indicates a special type.
-    /// </summary>
-    Special = Taunt | Dance | Spray | Voice | MapMechanic,
-
-    /// <summary>
-    /// Indicates a misc type.
-    /// </summary>
-    Misc = Attack | Stop | Hold | Cancel | Interact | ForceMove,
 }

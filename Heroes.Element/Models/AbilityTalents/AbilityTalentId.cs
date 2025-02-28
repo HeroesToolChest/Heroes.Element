@@ -5,16 +5,16 @@
 /// </summary>
 public class AbilityTalentId
 {
-    /// <summary>
-    /// Initializes a new instance of the <see cref="AbilityTalentId"/> class.
-    /// </summary>
-    /// <param name="referenceId">The ability or talent id.</param>
-    /// <param name="buttonId">The button id.</param>
-    public AbilityTalentId(string referenceId, string buttonId)
-    {
-        ReferenceId = referenceId;
-        ButtonId = buttonId;
-    }
+    ///// <summary>
+    ///// Initializes a new instance of the <see cref="AbilityTalentId"/> class.
+    ///// </summary>
+    ///// <param name="referenceId">The ability or talent id.</param>
+    ///// <param name="buttonId">The button id.</param>
+    //public AbilityTalentId(string referenceId, string buttonId)
+    //{
+    //    ReferenceId = referenceId;
+    //    ButtonId = buttonId;
+    //}
 
     /// <summary>
     /// Gets the unique id. Same as <see cref="ToString()"/>.
@@ -25,19 +25,19 @@ public class AbilityTalentId
     public string Id => ToString();
 
     /// <summary>
-    /// Gets or sets the reference id. This is usually the ability id.
+    /// Gets or sets the reference id. This ability id or talent id.
     /// </summary>
-    public string ReferenceId { get; set; }
+    public string ReferenceId { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the button id.
     /// </summary>
-    public string ButtonId { get; set; }
+    public string ButtonId { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the abilityType.
     /// </summary>
-    public AbilityTypes AbilityType { get; set; } = AbilityTypes.Unknown;
+    public AbilityType AbilityType { get; set; } = AbilityType.Unknown;
 
     /// <summary>
     /// Gets or sets a value indicating whether this is a passive ability.

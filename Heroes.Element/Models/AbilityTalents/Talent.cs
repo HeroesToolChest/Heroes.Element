@@ -5,6 +5,15 @@
 /// </summary>
 public class Talent : AbilityTalentBase
 {
+    ///// <summary>
+    ///// Initializes a new instance of the <see cref="Talent"/> class.
+    ///// </summary>
+    ///// <param name="abilityTalentId">Used for a unique id.</param>
+    //public Talent(AbilityTalentId abilityTalentId)
+    //    : base(abilityTalentId)
+    //{
+    //}
+
     /// <summary>
     /// Gets or sets the tier of the talent.
     /// </summary>
