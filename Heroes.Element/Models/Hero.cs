@@ -76,17 +76,17 @@ public class Hero : Unit, IFranchise
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
-    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>();
+    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
     /// </summary>
-    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>();
+    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
     /// </summary>
-    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>();
+    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     // TODO: Hero Units
 }

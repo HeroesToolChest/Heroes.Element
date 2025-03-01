@@ -66,6 +66,12 @@ public abstract class AbilityTalentBase
     public bool IsPassive { get; set; }
 
     /// <summary>
+    /// Gets a collection of created units.
+    /// </summary>
+    [JsonIgnore]
+    public ISet<string> CreateUnits { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
     /// Gets or sets the relative path of the icon that resides in CASC or on file.
     /// </summary>
     internal RelativeFilePath? IconPath { get; set; }
