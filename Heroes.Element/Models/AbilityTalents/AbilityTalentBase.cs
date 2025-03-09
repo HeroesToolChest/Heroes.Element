@@ -1,9 +1,12 @@
-﻿namespace Heroes.Element.Models.AbilityTalents;
+﻿using System.Diagnostics;
+
+namespace Heroes.Element.Models.AbilityTalents;
 
 /// <summary>
 /// Abtract class that contains properties related to both abilities and talents.
 /// </summary>
-public abstract class AbilityTalentBase
+[DebuggerDisplay("{Id,nq}")]
+public abstract class AbilityTalentBase : IEquatable<AbilityTalentBase>
 {
     ///// <summary>
     ///// Initializes a new instance of the <see cref="AbilityTalentBase"/> class.
@@ -19,6 +22,12 @@ public abstract class AbilityTalentBase
     ///// </summary>
     //[JsonIgnore]
     //public AbilityTalentId AbilityTalentId { get; }
+
+    /// <summary>
+    /// Gets a unique id.
+    /// </summary>
+    [JsonIgnore]
+    public string Id => $"{NameId}|{ButtonId}|{AbilityType}|{IsPassive}";
 
     /// <summary>
     /// Gets or sets the name id (also known as the reference id).
@@ -75,4 +84,25 @@ public abstract class AbilityTalentBase
     /// Gets or sets the relative path of the icon that resides in CASC or on file.
     /// </summary>
     internal RelativeFilePath? IconPath { get; set; }
+
+    /// <inheritdoc/>
+    public bool Equals(AbilityTalentBase? other)
+    {
+        if (other is null)
+            return false;
+
+        return other.Id.Equals(Id, StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as AbilityTalentBase);
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(NameId.ToUpperInvariant(), ButtonId.ToUpperInvariant(), AbilityType, IsPassive);
+    }
 }

@@ -3,12 +3,12 @@
 /// <summary>
 /// An interface for an element object found in the in-game store collection.
 /// </summary>
-public interface IHeroesCollectionObject : IName, IHyperlinkId, IRarity, IEventName, IDescription
+public interface IHeroesCollectionObject : IName, IHyperlinkId, IFranchise, IRarity, IEventName, IDescription
 {
     /// <summary>
     /// Gets or sets the sort name.
     /// </summary>
-    string? SortName { get; set; }
+    TooltipDescription? SortName { get; set; }
 
     /// <summary>
     /// Gets or sets the attribute id.
@@ -28,5 +28,5 @@ public interface IHeroesCollectionObject : IName, IHyperlinkId, IRarity, IEventN
     /// <summary>
     /// Gets or sets the search texts (should be space delimited).
     /// </summary>
-    string? SearchText { get; set; }
+    TooltipDescription? SearchText { get; set; }
 }

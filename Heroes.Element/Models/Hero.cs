@@ -1,9 +1,12 @@
-﻿namespace Heroes.Element.Models;
+﻿using Heroes.Element.Comparers;
+
+namespace Heroes.Element.Models;
 
 /// <summary>
 /// Contains the hero data.
 /// </summary>
-public class Hero : Unit, IFranchise
+[DebuggerDisplay("{Id,nq}")]
+public class Hero : Unit, IInfoText
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Hero"/> class.
@@ -21,72 +24,119 @@ public class Hero : Unit, IFranchise
     public string? UnitId { get; set; }
 
     /// <summary>
-    /// Gets or sets the difficulty of the hero.
-    /// </summary>
-    public TooltipDescription? Difficulty { get; set; }
-
-    /// <inheritdoc/>
-    public Franchise? Franchise { get; set; }
-
-    /// <summary>
-    /// Gets or sets the gender of the hero.
-    /// </summary>
-    public Gender? Gender { get; set; }
-
-    /// <summary>
     /// Gets or sets the hero title.
     /// </summary>
+    [JsonPropertyOrder(-79)]
     public TooltipDescription? Title { get; set; }
+
+    /// <summary>
+    /// Gets or sets the difficulty of the hero.
+    /// </summary>
+    [JsonPropertyOrder(-29)]
+    public TooltipDescription? Difficulty { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this hero is melee.
     /// </summary>
+    [JsonPropertyOrder(-28)]
     public bool IsMelee { get; set; } = false;
-
-    /// <summary>
-    /// Gets a unique collection roles of the hero, multiclass will be first if hero has multiple roles.
-    /// </summary>
-    public ISet<string> Roles { get; } = new HashSet<string>(StringComparer.Ordinal);
-
-    /// <summary>
-    /// Gets or sets the expanded role of the hero.
-    /// </summary>
-    public TooltipDescription? ExpandedRole { get; set; }
 
     /// <summary>
     /// Gets or sets the default mount id of this hero.
     /// </summary>
+    [JsonPropertyOrder(-10)]
     public string? DefaultMountId { get; set; }
+
+    /// <summary>
+    /// Gets a unique collection roles of the hero, multiclass will be first if hero has multiple roles.
+    /// </summary>
+    [JsonPropertyOrder(-9)]
+    public ISet<TooltipDescription> Roles { get; } = new HashSet<TooltipDescription>(new TooltipDescriptionEqualityComparer());
+
+    /// <summary>
+    /// Gets or sets the expanded role of the hero.
+    /// </summary>
+    [JsonPropertyOrder(-8)]
+    public TooltipDescription? ExpandedRole { get; set; }
 
     /// <summary>
     /// Gets or sets the ratings of the hero.
     /// </summary>
+    [JsonPropertyOrder(-7)]
     public HeroRatings Ratings { get; set; } = new HeroRatings();
 
     /// <summary>
     /// Gets or sets the hero portraits.
     /// </summary>
-    public HeroPortrait Portraits { get; set; } = new HeroPortrait();
+    [JsonPropertyOrder(-6)]
+    public new HeroPortrait Portraits { get; set; } = new HeroPortrait();
 
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
+    [JsonPropertyOrder(-5)]
     public ISet<string> SkinIds { get; } = new SortedSet<string>();
 
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
+    [JsonPropertyOrder(-4)]
     public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
     /// </summary>
+    [JsonPropertyOrder(-3)]
     public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
     /// </summary>
+    [JsonPropertyOrder(-2)]
     public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
-    // TODO: Hero Units
+    /// <summary>
+    /// Gets or sets the info text of the unit.
+    /// </summary>
+    [JsonPropertyOrder(105)]
+    public TooltipDescription? InfoText { get; set; }
+
+    //// TODO: Hero Units
+
+    internal void SetUnitData(Unit unit)
+    {
+        Name = unit.Name;
+        SortName = unit.SortName;
+        HyperlinkId = unit.HyperlinkId;
+        AttributeId = unit.AttributeId;
+        Rarity = unit.Rarity;
+        ReleaseDate = unit.ReleaseDate;
+        Category = unit.Category;
+        Event = unit.Event;
+        SearchText = unit.SearchText;
+        Description = unit.Description;
+        InnerRadius = unit.InnerRadius;
+        Radius = unit.Radius;
+        Sight = unit.Sight;
+        Speed = unit.Speed;
+        KillXP = unit.KillXP;
+        DamageType = unit.DamageType;
+        ScalingLinkIds.UnionWith(unit.ScalingLinkIds);
+        Life = unit.Life;
+        Energy = unit.Energy;
+        Shield = unit.Shield;
+        unit.Armor.ToList().ForEach(x => Armor[x.Key] = x.Value);
+        HeroPlayStyles.UnionWith(unit.HeroPlayStyles);
+        unit.Weapons.ToList().ForEach(Weapons.Add);
+        Attributes.UnionWith(unit.Attributes);
+        UnitIds.UnionWith(unit.UnitIds);
+        Abilities.UnionWith(unit.Abilities);
+        ParentLink = unit.ParentLink;
+        Gender = unit.Gender;
+
+        Portraits.MiniMapIcon = unit.Portraits.MiniMapIcon;
+        Portraits.TargetInfoPanel = unit.Portraits.TargetInfoPanel;
+        Portraits.MiniMapIconPath = unit.Portraits.MiniMapIconPath;
+        Portraits.TargetInfoPanelPath = unit.Portraits.TargetInfoPanelPath;
+    }
 }

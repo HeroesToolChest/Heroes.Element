@@ -1,8 +1,11 @@
-﻿namespace Heroes.Element.Models.AbilityTalents;
+﻿using System.Diagnostics;
+
+namespace Heroes.Element.Models.AbilityTalents;
 
 /// <summary>
 /// Contains the data for ability talent ingame-tooltip data.
 /// </summary>
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public class AbilityTalentTooltip
 {
     /// <summary>
@@ -35,7 +38,21 @@ public class AbilityTalentTooltip
     /// </summary>
     public TooltipDescription? FullTooltip { get; set; }
 
-    internal double? EnergyValue { get; set; }
+    internal string? EnergyCost { get; set; }
 
-    internal double? LifeValue { get; set; }
+    internal string? LifeCost { get; set; }
+
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    private string DebuggerDisplay
+    {
+        get
+        {
+            if (ShortTooltip is not null)
+                return ShortTooltip.PlainText;
+            else if (FullTooltip is not null)
+                return FullTooltip.PlainText;
+            else
+                return ToString()!;
+        }
+    }
 }

@@ -15,20 +15,24 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
     }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(-100)]
+    [JsonPropertyOrder(-110)]
     public TooltipDescription? Name { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(-90)]
-    public string? SortName { get; set; }
+    [JsonPropertyOrder(-100)]
+    public TooltipDescription? SortName { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(-80)]
+    [JsonPropertyOrder(-90)]
     public string? HyperlinkId { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(-70)]
+    [JsonPropertyOrder(-80)]
     public string? AttributeId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-70)]
+    public Franchise? Franchise { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-60)]
@@ -48,7 +52,7 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
 
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]
-    public string? SearchText { get; set; }
+    public TooltipDescription? SearchText { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(101)]

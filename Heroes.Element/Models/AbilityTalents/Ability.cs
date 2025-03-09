@@ -24,9 +24,4 @@ public class Ability : AbilityTalentBase
     /// Gets or sets the tier of the ability.
     /// </summary>
     public AbilityTier Tier { get; set; } = AbilityTier.Unknown;
-
-    /// <summary>
-    /// Gets or sets the toggle cooldown.
-    /// </summary>
-    public double? ToggleCooldown { get; set; }
 }
