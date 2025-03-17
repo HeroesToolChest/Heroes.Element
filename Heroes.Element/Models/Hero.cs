@@ -6,7 +6,7 @@ namespace Heroes.Element.Models;
 /// Contains the hero data.
 /// </summary>
 [DebuggerDisplay("{Id,nq}")]
-public class Hero : Unit, IInfoText
+public class Hero : Unit, IHeroesCollectionObject, IInfoText
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Hero"/> class.
@@ -17,17 +17,49 @@ public class Hero : Unit, IInfoText
     {
     }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-100)]
+    public TooltipDescription? SortName { get; set; }
+
     /// <summary>
     /// Gets or sets the unit id.
     /// </summary>
     [JsonPropertyOrder(-99)]
     public string? UnitId { get; set; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-90)]
+    public string? HyperlinkId { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-80)]
+    public string? AttributeId { get; set; }
+
     /// <summary>
     /// Gets or sets the hero title.
     /// </summary>
     [JsonPropertyOrder(-79)]
     public TooltipDescription? Title { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-70)]
+    public Franchise? Franchise { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-60)]
+    public Rarity? Rarity { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-50)]
+    public DateOnly? ReleaseDate { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-40)]
+    public string? Category { get; set; }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-30)]
+    public string? Event { get; set; }
 
     /// <summary>
     /// Gets or sets the difficulty of the hero.
@@ -75,7 +107,7 @@ public class Hero : Unit, IInfoText
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(-5)]
-    public ISet<string> SkinIds { get; } = new SortedSet<string>();
+    public ISet<string> SkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
@@ -101,19 +133,18 @@ public class Hero : Unit, IInfoText
     [JsonPropertyOrder(105)]
     public TooltipDescription? InfoText { get; set; }
 
-    //// TODO: Hero Units
+    /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
+    public TooltipDescription? SearchText { get; set; }
+
+    /// <summary>
+    /// Gets a collection of <see cref="Unit"/>s by their id which represents other hero type units that this hero has control over.
+    /// </summary>
+    public IDictionary<string, Unit> HeroUnits { get; } = new Dictionary<string, Unit>(StringComparer.OrdinalIgnoreCase);
 
     internal void SetUnitData(Unit unit)
     {
         Name = unit.Name;
-        SortName = unit.SortName;
-        HyperlinkId = unit.HyperlinkId;
-        AttributeId = unit.AttributeId;
-        Rarity = unit.Rarity;
-        ReleaseDate = unit.ReleaseDate;
-        Category = unit.Category;
-        Event = unit.Event;
-        SearchText = unit.SearchText;
         Description = unit.Description;
         InnerRadius = unit.InnerRadius;
         Radius = unit.Radius;
@@ -130,7 +161,7 @@ public class Hero : Unit, IInfoText
         unit.Weapons.ToList().ForEach(Weapons.Add);
         Attributes.UnionWith(unit.Attributes);
         UnitIds.UnionWith(unit.UnitIds);
-        Abilities.UnionWith(unit.Abilities);
+        unit.Abilities.ToList().ForEach(x => Abilities[x.Key] = x.Value);
         ParentLink = unit.ParentLink;
         Gender = unit.Gender;
 

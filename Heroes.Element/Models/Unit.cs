@@ -1,10 +1,11 @@
-﻿namespace Heroes.Element.Models;
+﻿
+namespace Heroes.Element.Models;
 
 /// <summary>
 /// Contains the unit data.
 /// </summary>
 [DebuggerDisplay("{Id,nq}")]
-public class Unit : HeroesCollectionObject
+public class Unit : ElementObject, IName, IDescription
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Unit"/> class.
@@ -14,6 +15,10 @@ public class Unit : HeroesCollectionObject
         : base(id)
     {
     }
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(-110)]
+    public TooltipDescription? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the gender of the unit.
@@ -69,6 +74,10 @@ public class Unit : HeroesCollectionObject
     [JsonPropertyOrder(-12)]
     public ISet<string> ScalingLinkIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(101)]
+    public TooltipDescription? Description { get; set; }
+
     /// <summary>
     /// Gets or sets the Life properties.
     /// </summary>
@@ -123,11 +132,32 @@ public class Unit : HeroesCollectionObject
     /// Gets a collection of abilities.
     /// </summary>
     [JsonPropertyOrder(120)]
-    public ISet<Ability> Abilities { get; } = new HashSet<Ability>();
+    public IDictionary<AbilityTier, IList<Ability>> Abilities { get; } = new Dictionary<AbilityTier, IList<Ability>>();
 
     /// <summary>
     /// Gets or sets the parent link of this unit.
     /// </summary>
     [JsonIgnore]
     public string? ParentLink { get; set; }
+
+    /// <summary>
+    /// Adds an ability.
+    /// </summary>
+    /// <param name="ability">The <see cref="Ability"/>.</param>
+    /// <returns><see langword="true"/> if the ability was added, otherwise <see langword="false"/>.</returns>
+    public bool AddAbility(Ability ability)
+    {
+        if (Abilities.TryGetValue(ability.Tier, out IList<Ability>? abilities))
+        {
+            abilities.Add(ability);
+
+            return true;
+        }
+        else
+        {
+            Abilities[ability.Tier] = [ability];
+
+            return true;
+        }
+    }
 }

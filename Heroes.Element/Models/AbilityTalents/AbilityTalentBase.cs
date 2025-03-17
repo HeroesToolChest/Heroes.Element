@@ -24,7 +24,7 @@ public abstract class AbilityTalentBase : IEquatable<AbilityTalentBase>
     //public AbilityTalentId AbilityTalentId { get; }
 
     /// <summary>
-    /// Gets a unique id.
+    /// Gets a unique id. Is in the format of NameId|ButtonId|AbilityType|IsPassive.
     /// </summary>
     [JsonIgnore]
     public string Id => $"{NameId}|{ButtonId}|{AbilityType}|{IsPassive}";
