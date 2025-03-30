@@ -16,27 +16,27 @@ public class AbilityTalentTooltip
     /// <summary>
     /// Gets or sets the energy tooltip.
     /// </summary>
-    public TooltipDescription? EnergyTooltip { get; set; }
+    public TooltipDescription? EnergyText { get; set; }
 
     /// <summary>
     /// Gets or sets the life tooltip.
     /// </summary>
-    public TooltipDescription? LifeTooltip { get; set; }
+    public TooltipDescription? LifeText { get; set; }
 
     /// <summary>
     /// Gets or sets the cooldown tooltip.
     /// </summary>
-    public TooltipDescription? CooldownTooltip { get; set; }
+    public TooltipDescription? CooldownText { get; set; }
 
     /// <summary>
     /// Gets or sets the short tooltip.
     /// </summary>
-    public TooltipDescription? ShortTooltip { get; set; }
+    public TooltipDescription? ShortText { get; set; }
 
     /// <summary>
     /// Gets or sets the full tooltip.
     /// </summary>
-    public TooltipDescription? FullTooltip { get; set; }
+    public TooltipDescription? FullText { get; set; }
 
     internal string? EnergyCost { get; set; }
 
@@ -47,10 +47,10 @@ public class AbilityTalentTooltip
     {
         get
         {
-            if (ShortTooltip is not null)
-                return ShortTooltip.PlainText;
-            else if (FullTooltip is not null)
-                return FullTooltip.PlainText;
+            if (ShortText is not null)
+                return ShortText.PlainText;
+            else if (FullText is not null)
+                return FullText.PlainText;
             else
                 return ToString()!;
         }

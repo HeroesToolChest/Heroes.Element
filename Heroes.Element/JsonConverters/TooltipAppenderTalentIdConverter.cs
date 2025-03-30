@@ -1,0 +1,38 @@
+﻿using System.Text.Json;
+
+namespace Heroes.Element.JsonConverters;
+
+internal class TooltipAppenderTalentIdConverter : JsonConverter<ISet<TalentId>>
+{
+    public override ISet<TalentId>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        HashSet<TalentId> items = [];
+
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+        {
+            string? value = reader.GetString();
+            if (value is null)
+                continue;
+
+            string[] parts = value.Split('|');
+            if (parts.Length == 2)
+            {
+                items.Add(new TalentId(parts[0], parts[1]));
+            }
+        }
+
+        return items;
+    }
+
+    public override void Write(Utf8JsonWriter writer, ISet<TalentId> value, JsonSerializerOptions options)
+    {
+        writer.WriteStartArray();
+
+        foreach (TalentId item in value)
+        {
+            writer.WriteStringValue(item.ToString());
+        }
+
+        writer.WriteEndArray();
+    }
+}

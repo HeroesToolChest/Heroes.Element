@@ -7,6 +7,9 @@ namespace Heroes.Element.Models;
 [DebuggerDisplay("{Id,nq}")]
 public class Unit : ElementObject, IName, IDescription
 {
+    private readonly Dictionary<string, AbilityType> _layoutAbilityTypeByButtonId = [];
+    private readonly SortedDictionary<AbilityTier, IList<Ability>> _abilities = [];
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Unit"/> class.
     /// </summary>
@@ -131,8 +134,8 @@ public class Unit : ElementObject, IName, IDescription
     /// <summary>
     /// Gets a collection of abilities.
     /// </summary>
-    [JsonPropertyOrder(120)]
-    public IDictionary<AbilityTier, IList<Ability>> Abilities { get; } = new Dictionary<AbilityTier, IList<Ability>>();
+    [JsonPropertyOrder(200)]
+    public IReadOnlyDictionary<AbilityTier, IList<Ability>> Abilities => _abilities.AsReadOnly();
 
     /// <summary>
     /// Gets or sets the parent link of this unit.
@@ -147,7 +150,9 @@ public class Unit : ElementObject, IName, IDescription
     /// <returns><see langword="true"/> if the ability was added, otherwise <see langword="false"/>.</returns>
     public bool AddAbility(Ability ability)
     {
-        if (Abilities.TryGetValue(ability.Tier, out IList<Ability>? abilities))
+        _layoutAbilityTypeByButtonId[ability.ButtonId] = ability.AbilityType;
+
+        if (_abilities.TryGetValue(ability.Tier, out IList<Ability>? abilities))
         {
             abilities.Add(ability);
 
@@ -155,9 +160,20 @@ public class Unit : ElementObject, IName, IDescription
         }
         else
         {
-            Abilities[ability.Tier] = [ability];
+            _abilities[ability.Tier] = [ability];
 
             return true;
         }
+    }
+
+    /// <summary>
+    /// Returns a value indicating whether the ability type was found by the button id. Based on the layout buttons.
+    /// </summary>
+    /// <param name="buttonId">The button id (or face value).</param>
+    /// <param name="abilityType">The <see cref="AbilityType"/>.</param>
+    /// <returns><see langword="true"/> if found, otherwise <see langword="false"/>.</returns>
+    public bool GetAbilityTypeByButtonId(string buttonId, out AbilityType abilityType)
+    {
+        return _layoutAbilityTypeByButtonId.TryGetValue(buttonId, out abilityType);
     }
 }

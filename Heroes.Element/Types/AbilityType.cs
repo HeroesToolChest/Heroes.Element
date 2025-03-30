@@ -13,105 +13,105 @@ public enum AbilityType
     /// <summary>
     /// Indicates a Q type.
     /// </summary>
-    Q = 1 << 0,
+    Q = 1,
 
     /// <summary>
     /// Indicates a W type.
     /// </summary>
-    W = 1 << 1,
+    W = 2,
 
     /// <summary>
     /// Indicates am E type.
     /// </summary>
-    E = 1 << 2,
+    E = 3,
 
     /// <summary>
     /// Indicates a heroic type.
     /// </summary>
-    Heroic = 1 << 3,
+    Heroic = 4,
 
     /// <summary>
     /// Indicates a Z type.
     /// </summary>
-    Z = 1 << 4,
+    Z = 5,
 
     /// <summary>
     /// Indicates a trait type.
     /// </summary>
-    Trait = 1 << 5,
+    Trait = 6,
 
     /// <summary>
     /// Indicates an active type.
     /// </summary>
-    Active = 1 << 6,
+    Active = 7,
 
     /// <summary>
     /// Indicates a passive type.
     /// </summary>
-    Passive = 1 << 7,
+    Passive = 8,
 
     /// <summary>
     /// Indicates a B type.
     /// </summary>
-    B = 1 << 8,
+    B = 9,
 
     /// <summary>
     /// Indicates an attack type.
     /// </summary>
-    Attack = 1 << 9,
+    Attack = 10,
 
     /// <summary>
     /// Indicates a stop type.
     /// </summary>
-    Stop = 1 << 10,
+    Stop = 11,
 
     /// <summary>
     /// Indicates a hold type.
     /// </summary>
-    Hold = 1 << 11,
+    Hold = 12,
 
     /// <summary>
     /// Indicates a cancel type.
     /// </summary>
-    Cancel = 1 << 12,
+    Cancel = 13,
 
     /// <summary>
     /// Indicates an interact type.
     /// </summary>
-    Interact = 1 << 13,
+    Interact = 14,
 
     /// <summary>
     /// Indicates a taunt type.
     /// </summary>
-    Taunt = 1 << 14,
+    Taunt = 15,
 
     /// <summary>
     /// Indicates a dance type.
     /// </summary>
-    Dance = 1 << 15,
+    Dance = 16,
 
     /// <summary>
     /// Indicates a spray type.
     /// </summary>
-    Spray = 1 << 16,
+    Spray = 17,
 
     /// <summary>
     /// Indicates a voice type.
     /// </summary>
-    Voice = 1 << 17,
+    Voice = 18,
 
     /// <summary>
     /// Indicates a force move type.
     /// </summary>
-    ForceMove = 1 << 18,
+    ForceMove = 19,
 
     /// <summary>
     /// Indicates a map mechanic type.
     /// </summary>
-    MapMechanic = 1 << 19,
+    MapMechanic = 20,
 
     /// <summary>
     /// Indicates a hidden type.
     /// </summary>
-    Hidden = 1 << 20,
+    Hidden = 21,
 }

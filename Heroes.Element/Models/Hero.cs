@@ -8,6 +8,8 @@ namespace Heroes.Element.Models;
 [DebuggerDisplay("{Id,nq}")]
 public class Hero : Unit, IHeroesCollectionObject, IInfoText
 {
+    private readonly SortedDictionary<TalentTier, IList<Talent>> _talents = [];
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Hero"/> class.
     /// </summary>
@@ -104,30 +106,6 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     public new HeroPortrait Portraits { get; set; } = new HeroPortrait();
 
     /// <summary>
-    /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
-    /// </summary>
-    [JsonPropertyOrder(-5)]
-    public ISet<string> SkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
-
-    /// <summary>
-    /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
-    /// </summary>
-    [JsonPropertyOrder(-4)]
-    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
-
-    /// <summary>
-    /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
-    /// </summary>
-    [JsonPropertyOrder(-3)]
-    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
-
-    /// <summary>
-    /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
-    /// </summary>
-    [JsonPropertyOrder(-2)]
-    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
-
-    /// <summary>
     /// Gets or sets the info text of the unit.
     /// </summary>
     [JsonPropertyOrder(105)]
@@ -138,36 +116,59 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     public TooltipDescription? SearchText { get; set; }
 
     /// <summary>
+    /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
+    /// </summary>
+    [JsonPropertyOrder(190)]
+    public ISet<string> SkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
+    /// </summary>
+    [JsonPropertyOrder(191)]
+    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
+    /// </summary>
+    [JsonPropertyOrder(192)]
+    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
+    /// </summary>
+    [JsonPropertyOrder(193)]
+    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Gets a collection of talents.
+    /// </summary>
+    [JsonPropertyOrder(220)]
+    public IReadOnlyDictionary<TalentTier, IList<Talent>> Talents => _talents.AsReadOnly();
+
+    /// <summary>
     /// Gets a collection of <see cref="Unit"/>s by their id which represents other hero type units that this hero has control over.
     /// </summary>
+    [JsonPropertyOrder(230)]
     public IDictionary<string, Unit> HeroUnits { get; } = new Dictionary<string, Unit>(StringComparer.OrdinalIgnoreCase);
 
-    internal void SetUnitData(Unit unit)
+    /// <summary>
+    /// Adds a talent.
+    /// </summary>
+    /// <param name="talent">The <see cref="Talent"/>.</param>
+    /// <returns><see langword="true"/> if the ability was added, otherwise <see langword="false"/>.</returns>
+    public bool AddTalent(Talent talent)
     {
-        Name = unit.Name;
-        Description = unit.Description;
-        InnerRadius = unit.InnerRadius;
-        Radius = unit.Radius;
-        Sight = unit.Sight;
-        Speed = unit.Speed;
-        KillXP = unit.KillXP;
-        DamageType = unit.DamageType;
-        ScalingLinkIds.UnionWith(unit.ScalingLinkIds);
-        Life = unit.Life;
-        Energy = unit.Energy;
-        Shield = unit.Shield;
-        unit.Armor.ToList().ForEach(x => Armor[x.Key] = x.Value);
-        HeroPlayStyles.UnionWith(unit.HeroPlayStyles);
-        unit.Weapons.ToList().ForEach(Weapons.Add);
-        Attributes.UnionWith(unit.Attributes);
-        UnitIds.UnionWith(unit.UnitIds);
-        unit.Abilities.ToList().ForEach(x => Abilities[x.Key] = x.Value);
-        ParentLink = unit.ParentLink;
-        Gender = unit.Gender;
+        if (_talents.TryGetValue(talent.Tier, out IList<Talent>? talents))
+        {
+            talents.Add(talent);
 
-        Portraits.MiniMapIcon = unit.Portraits.MiniMapIcon;
-        Portraits.TargetInfoPanel = unit.Portraits.TargetInfoPanel;
-        Portraits.MiniMapIconPath = unit.Portraits.MiniMapIconPath;
-        Portraits.TargetInfoPanelPath = unit.Portraits.TargetInfoPanelPath;
+            return true;
+        }
+        else
+        {
+            _talents[talent.Tier] = [talent];
+
+            return true;
+        }
     }
 }

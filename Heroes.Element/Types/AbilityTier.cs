@@ -15,70 +15,70 @@ public enum AbilityTier
     /// <summary>
     /// Indicates a basic tier.
     /// </summary>
-    Basic = 1 << 0,
+    Basic = 1,
 
     /// <summary>
     /// Indicates a heroic tier.
     /// </summary>
-    Heroic = 1 << 1,
+    Heroic = 2,
 
     /// <summary>
     /// Indicates a trait tier.
     /// </summary>
-    Trait = 1 << 2,
+    Trait = 3,
 
     /// <summary>
     /// Indicates a mount tier.
     /// </summary>
-    Mount = 1 << 3,
+    Mount = 4,
 
     /// <summary>
     /// Indicates an activable tier.
     /// </summary>
-    Activable = 1 << 4,
+    Activable = 5,
 
     /// <summary>
     /// Indicates a hearth tier.
     /// </summary>
-    Hearth = 1 << 5,
+    Hearth = 6,
 
     /// <summary>
     /// Indicates a taunt tier.
     /// </summary>
-    Taunt = 1 << 6,
+    Taunt = 7,
 
     /// <summary>
     /// Indicates a dance tier.
     /// </summary>
-    Dance = 1 << 7,
+    Dance = 8,
 
     /// <summary>
     /// Indicates a spray tier.
     /// </summary>
-    Spray = 1 << 8,
+    Spray = 9,
 
     /// <summary>
     /// Indicates a voice tier.
     /// </summary>
-    Voice = 1 << 9,
+    Voice = 10,
 
     /// <summary>
     /// Indicates a map mechanic tier.
     /// </summary>
-    MapMechanic = 1 << 10,
+    MapMechanic = 11,
 
     /// <summary>
     /// Indicates an interact tier.
     /// </summary>
-    Interact = 1 << 11,
+    Interact = 12,
 
     /// <summary>
     /// Indicates an action tier.
     /// </summary>
-    Action = 1 << 12,
+    Action = 13,
 
     /// <summary>
     /// Indicates a hidden tier.
     /// </summary>
-    Hidden = 1 << 13,
+    Hidden = 14,
 }

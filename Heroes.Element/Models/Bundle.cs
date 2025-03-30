@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the bundle data.
 /// </summary>
-public class Bundle : HeroesCollectionObject, IFranchise
+public class Bundle : HeroesCollectionObject
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Bundle"/> class.
@@ -13,9 +13,6 @@ public class Bundle : HeroesCollectionObject, IFranchise
         : base(id)
     {
     }
-
-    /// <inheritdoc/>
-    public Franchise? Franchise { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this is dynamic content.

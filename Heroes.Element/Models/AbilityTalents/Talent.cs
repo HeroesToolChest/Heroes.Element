@@ -3,34 +3,57 @@
 /// <summary>
 /// Contains the data for talent data.
 /// </summary>
-public class Talent : AbilityTalentBase
+public class Talent : AbilityTalentBase, IEquatable<Talent>
 {
-    ///// <summary>
-    ///// Initializes a new instance of the <see cref="Talent"/> class.
-    ///// </summary>
-    ///// <param name="abilityTalentId">Used for a unique id.</param>
-    //public Talent(AbilityTalentId abilityTalentId)
-    //    : base(abilityTalentId)
-    //{
-    //}
+    /// <summary>
+    /// Gets the talent id.
+    /// </summary>
+    [JsonIgnore]
+    public TalentId Id => new(NameId, ButtonId);
 
     /// <summary>
     /// Gets or sets the tier of the talent.
     /// </summary>
-    public TalentTiers Tier { get; set; }
+    [JsonIgnore]
+    public TalentTier Tier { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this is a quest.
+    /// If <see langword="true"/>, then ingame the quest icon will be displayed before the <see cref="AbilityType"/>.
+    /// </summary>
+    [JsonPropertyOrder(100)]
+    public bool IsQuest { get; set; }
 
     /// <summary>
     /// Gets or sets the column number, also known as the sort index number.
     /// </summary>
+    [JsonPropertyName("sort")]
+    [JsonPropertyOrder(101)]
     public int Column { get; set; }
-
-    /// <summary>
-    /// Gets a collection of ability and talent ids that the talent affects or upgrades.
-    /// </summary>
-    public ISet<string> AbilityTalentLinkIds { get; } = new HashSet<string>();
 
     /// <summary>
     /// Gets a collection of prerequisite talent ids.
     /// </summary>
     public ISet<string> PrerequisiteTalentIds { get; } = new HashSet<string>();
+
+    /// <inheritdoc/>
+    public bool Equals(Talent? other)
+    {
+        if (other is null)
+            return false;
+
+        return other.Id.Equals(Id);
+    }
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj)
+    {
+        return Equals(obj as Talent);
+    }
+
+    /// <inheritdoc/>
+    public override int GetHashCode()
+    {
+        return Id.GetHashCode();
+    }
 }
