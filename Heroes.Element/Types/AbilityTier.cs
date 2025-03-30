@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Heroes.Element.Types;
+﻿namespace Heroes.Element.Types;
 
 /// <summary>
 /// Specifices the tier of an ability.

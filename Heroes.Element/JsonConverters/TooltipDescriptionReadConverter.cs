@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace Heroes.Element.JsonConverters;
+﻿namespace Heroes.Element.JsonConverters;
 
 /// <summary>
 /// Converter to convert strings to <see cref="TooltipDescription"/>.

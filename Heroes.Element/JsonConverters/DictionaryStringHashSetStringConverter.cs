@@ -1,6 +1,4 @@
-﻿using System.Text.Json;
-
-namespace Heroes.Element.JsonConverters;
+﻿namespace Heroes.Element.JsonConverters;
 
 public class DictionaryStringHashSetStringConverter : JsonConverter<IDictionary<string, SortedSet<string>>>
 {

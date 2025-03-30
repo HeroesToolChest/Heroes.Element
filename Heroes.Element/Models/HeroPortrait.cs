@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Heroes.Element.Models;
+﻿namespace Heroes.Element.Models;
 
 /// <summary>
 /// Contains the properties for hero portraits.

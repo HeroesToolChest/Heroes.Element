@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Heroes.Element.Models.AbilityTalents;
+﻿namespace Heroes.Element.Models.AbilityTalents;
 
 /// <summary>
 /// Abtract class that contains properties related to both abilities and talents.

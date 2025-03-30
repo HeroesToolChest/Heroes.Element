@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Heroes.Element.Models.AbilityTalents;
+﻿namespace Heroes.Element.Models.AbilityTalents;
 
 /// <summary>
 /// Contains the data for ability talent ingame-tooltip data.
