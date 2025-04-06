@@ -1,4 +1,5 @@
-﻿
+﻿using System.Collections.Immutable;
+
 namespace Heroes.Element.Models;
 
 /// <summary>
@@ -9,6 +10,7 @@ public class Unit : ElementObject, IName, IDescription
 {
     private readonly Dictionary<string, AbilityType> _layoutAbilityTypeByButtonId = [];
     private readonly SortedDictionary<AbilityTier, IList<Ability>> _abilities = [];
+    private readonly Dictionary<AbilityId, SortedDictionary<AbilityTier, IList<Ability>>> _subAbilities = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Unit"/> class.
@@ -132,10 +134,23 @@ public class Unit : ElementObject, IName, IDescription
     public ICollection<UnitWeapon> Weapons { get; } = [];
 
     /// <summary>
-    /// Gets a collection of abilities.
+    /// Gets a collection of abilities by their <see cref="AbilityTier"/>.
     /// </summary>
     [JsonPropertyOrder(200)]
-    public IReadOnlyDictionary<AbilityTier, IList<Ability>> Abilities => _abilities.AsReadOnly();
+    public IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>> Abilities => _abilities.ToDictionary(
+        x => x.Key,
+        x => (IReadOnlyList<Ability>)[.. x.Value]);
+
+    /// <summary>
+    /// Gets a collection of subabilities by their parent's ability's <see cref="AbilityId"/>.
+    /// A subability becomes available after the parent's ability is used.
+    /// </summary>
+    [JsonPropertyOrder(201)]
+    public IReadOnlyDictionary<AbilityId, IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>>> SubAbilities => _subAbilities.ToDictionary(
+        outerKvp => outerKvp.Key,
+        outerKvp => (IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>>)outerKvp.Value.ToDictionary(
+            innerKvp => innerKvp.Key,
+            innerKvp => (IReadOnlyList<Ability>)[.. innerKvp.Value]));
 
     /// <summary>
     /// Gets or sets the parent link of this unit.
@@ -164,6 +179,45 @@ public class Unit : ElementObject, IName, IDescription
 
             return true;
         }
+    }
+
+    /// <summary>
+    /// Adds a sub ability.
+    /// </summary>
+    /// <param name="subAbility">The <see cref="Ability"/>.</param>
+    /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
+    public bool AddSubAbility(Ability subAbility)
+    {
+        // no parent ability id, so no sub ability
+        if (string.IsNullOrEmpty(subAbility.ParentAbililtyId))
+            return false;
+
+        IEnumerable<Ability> matchingAbilities = _abilities
+            .SelectMany(x => x.Value)
+            .Where(x => x.NameId == subAbility.ParentAbililtyId);
+
+        if (!matchingAbilities.Any())
+            return false;
+
+        foreach (Ability ability in matchingAbilities)
+        {
+            if (_subAbilities.TryGetValue(ability.Id, out SortedDictionary<AbilityTier, IList<Ability>>? subAbilities))
+            {
+                if (subAbilities.TryGetValue(subAbility.Tier, out IList<Ability>? abilities))
+                    abilities.Add(subAbility);
+                else
+                    subAbilities[subAbility.Tier] = [subAbility];
+            }
+            else
+            {
+                _subAbilities[ability.Id] = new SortedDictionary<AbilityTier, IList<Ability>>()
+                {
+                    [subAbility.Tier] = [subAbility],
+                };
+            }
+        }
+
+        return true;
     }
 
     /// <summary>

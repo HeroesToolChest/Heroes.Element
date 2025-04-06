@@ -1,36 +1,41 @@
-﻿namespace Heroes.Element.JsonConverters;
+﻿//namespace Heroes.Element.JsonConverters;
 
-internal class TooltipAppenderTalentIdConverter : JsonConverter<ISet<TalentId>>
-{
-    public override ISet<TalentId>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-    {
-        HashSet<TalentId> items = [];
+///// <summary>
+///// Converter to convert <see cref="ISet{TalentId}"/> to and from JSON.
+///// </summary>
+//public class TooltipAppenderTalentIdConverter : JsonConverter<ISet<TalentId>>
+//{
+//    /// <inheritdoc/>
+//    public override ISet<TalentId>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+//    {
+//        HashSet<TalentId> items = [];
 
-        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
-        {
-            string? value = reader.GetString();
-            if (value is null)
-                continue;
+//        while (reader.Read() && reader.TokenType != JsonTokenType.EndArray)
+//        {
+//            string? value = reader.GetString();
+//            if (value is null)
+//                continue;
 
-            string[] parts = value.Split('|');
-            if (parts.Length == 2)
-            {
-                items.Add(new TalentId(parts[0], parts[1]));
-            }
-        }
+//            string[] parts = value.Split('|');
+//            if (parts.Length == 2)
+//            {
+//                items.Add(new TalentId(parts[0], parts[1]));
+//            }
+//        }
 
-        return items;
-    }
+//        return items;
+//    }
 
-    public override void Write(Utf8JsonWriter writer, ISet<TalentId> value, JsonSerializerOptions options)
-    {
-        writer.WriteStartArray();
+//    /// <inheritdoc/>
+//    public override void Write(Utf8JsonWriter writer, ISet<TalentId> value, JsonSerializerOptions options)
+//    {
+//        writer.WriteStartArray();
 
-        foreach (TalentId item in value)
-        {
-            writer.WriteStringValue(item.ToString());
-        }
+//        foreach (TalentId item in value)
+//        {
+//            writer.WriteStringValue(item.ToString());
+//        }
 
-        writer.WriteEndArray();
-    }
-}
+//        writer.WriteEndArray();
+//    }
+//}

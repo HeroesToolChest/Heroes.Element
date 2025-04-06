@@ -1,0 +1,54 @@
+﻿namespace Heroes.Element.JsonConverters;
+
+/// <summary>
+/// Converter to convert <see cref="AbilityId"/> to and from JSON.
+/// </summary>
+public class AbilityIdConverter : JsonConverter<AbilityId>
+{
+    /// <inheritdoc/>
+    public override AbilityId? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        string? value = reader.GetString();
+        if (string.IsNullOrWhiteSpace(value))
+            return null;
+
+        string[] parts = value.Split('|');
+
+        if (parts.Length >= 3)
+        {
+            if (!Enum.TryParse(parts[2], out AbilityType abilityType))
+                throw new JsonException();
+
+            if (parts.Length == 3)
+            {
+                return new AbilityId(parts[0], parts[1], abilityType, false);
+            }
+            else if (parts.Length == 4)
+            {
+                if (!bool.TryParse(parts[3], out bool isPassive))
+                    throw new JsonException();
+                return new AbilityId(parts[0], parts[1], abilityType, isPassive);
+            }
+        }
+
+        throw new JsonException();
+    }
+
+    /// <inheritdoc/>
+    public override void Write(Utf8JsonWriter writer, AbilityId value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value.ToString());
+    }
+
+    /// <inheritdoc/>
+    public override AbilityId ReadAsPropertyName(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        return Read(ref reader, typeToConvert, options) ?? throw new JsonException();
+    }
+
+    /// <inheritdoc/>
+    public override void WriteAsPropertyName(Utf8JsonWriter writer, [DisallowNull] AbilityId value, JsonSerializerOptions options)
+    {
+        writer.WritePropertyName(value.ToString());
+    }
+}

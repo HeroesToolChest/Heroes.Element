@@ -3,6 +3,7 @@
 /// <summary>
 /// Contains the data for talent data.
 /// </summary>
+[DebuggerDisplay("{Id,nq}")]
 public class Talent : AbilityTalentBase, IEquatable<Talent>
 {
     /// <summary>
@@ -18,8 +19,8 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public TalentTier Tier { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this is a quest.
-    /// If <see langword="true"/>, then ingame the quest icon will be displayed before the <see cref="AbilityType"/>.
+    /// Gets or sets a value indicating whether this is a quest. This indicates if the talent has a quest icon.
+    /// Ingame the quest icon will be displayed before the <see cref="AbilityType"/>.
     /// </summary>
     [JsonPropertyOrder(100)]
     public bool IsQuest { get; set; }
@@ -55,5 +56,11 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public override int GetHashCode()
     {
         return Id.GetHashCode();
+    }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        return Id.ToString();
     }
 }

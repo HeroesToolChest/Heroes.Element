@@ -48,7 +48,7 @@ public abstract class AbilityTalentBase
     public bool IsActive { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this is a passive ability, requires no hotkey to be pressed.
+    /// Gets or sets a value indicating whether this is a passive ability. Either requires no hotkey to be pressed or has an ability that activates automatically (auto cast).
     /// </summary>
     public bool IsPassive { get; set; }
 

@@ -26,13 +26,14 @@ public class TooltipCharges
     public double? RecastCooldown { get; set; }
 
     /// <summary>
-    /// Gets or sets if charges are hidden.
+    /// Gets or sets a value indicating whether the charge counts are hidden.
     /// </summary>
-    public bool? IsHideCount { get; set; }
+    public bool IsHideCount { get; set; }
 
     /// <summary>
     /// Gets a value indicating whether charges exists.
     /// </summary>
+    [JsonIgnore]
     public bool HasCharges => CountMax.HasValue || (CountMax.HasValue && CountMax.Value > 0);
 
     /// <inheritdoc/>

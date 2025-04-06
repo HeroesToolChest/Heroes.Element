@@ -4,5 +4,6 @@ global using Heroes.Element.Models.ObjectProperties;
 global using Heroes.Element.Types;
 global using Heroes.LocaleText;
 global using System.Diagnostics;
+global using System.Diagnostics.CodeAnalysis;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
