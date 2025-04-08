@@ -7,7 +7,7 @@
 public abstract class AbilityTalentBase
 {
     /// <summary>
-    /// Gets or sets the name id (also known as the reference id).
+    /// Gets or sets the name id (also an ability or talent id).
     /// </summary>
     public string NameId { get; set; } = string.Empty;
 
@@ -27,7 +27,7 @@ public abstract class AbilityTalentBase
     public string? Icon { get; set; }
 
     /// <summary>
-    /// Gets or sets the toggle cooldown. 
+    /// Gets or sets the toggle cooldown.
     /// </summary>
     public double? ToggleCooldown { get; set; }
 
@@ -53,10 +53,16 @@ public abstract class AbilityTalentBase
     public bool IsPassive { get; set; }
 
     /// <summary>
+    /// Gets or sets the parent ability this ability. This is the id of the ability element (the <see cref="NameId"/>).
+    /// </summary>
+    [JsonIgnore]
+    public string? ParentAbililtyId { get; set; }
+
+    /// <summary>
     /// Gets a collection of created units.
     /// </summary>
     [JsonIgnore]
-    public ISet<string> CreateUnits { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> CreateUnits { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a collection of talent ids that represent tooltip appenders.

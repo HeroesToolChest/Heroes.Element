@@ -23,20 +23,20 @@ public class Bundle : HeroesCollectionObject
     /// Gets a unique collection of hero ids that are in this bundle.
     /// </summary>
     [JsonPropertyName("heroes")]
-    public ISet<string> HeroIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> HeroIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a collection of hero skins id by their hero id.
     /// </summary>
     [JsonPropertyName("skins")]
     [JsonConverter(typeof(DictionaryStringHashSetStringConverter))]
-    public IDictionary<string, SortedSet<string>> HeroSkinsByHeroId { get; } = new SortedDictionary<string, SortedSet<string>>(StringComparer.OrdinalIgnoreCase);
+    public IDictionary<string, SortedSet<string>> HeroSkinsByHeroId { get; } = new SortedDictionary<string, SortedSet<string>>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a unique collection of mount ids that are in this bundle.
     /// </summary>
     [JsonPropertyName("mounts")]
-    public ISet<string> MountIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> MountIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets the bundle image.

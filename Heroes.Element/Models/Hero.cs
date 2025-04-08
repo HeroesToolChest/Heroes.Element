@@ -8,7 +8,7 @@ namespace Heroes.Element.Models;
 [DebuggerDisplay("{Id,nq}")]
 public class Hero : Unit, IHeroesCollectionObject, IInfoText
 {
-    private readonly SortedDictionary<TalentTier, IList<Talent>> _talents = [];
+    private readonly SortedDictionary<TalentTier, List<Talent>> _talents = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Hero"/> class.
@@ -119,37 +119,39 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(190)]
-    public ISet<string> SkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> SkinIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(191)]
-    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(192)]
-    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
     /// </summary>
     [JsonPropertyOrder(193)]
-    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.OrdinalIgnoreCase);
+    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a collection of talents.
     /// </summary>
     [JsonPropertyOrder(220)]
-    public IReadOnlyDictionary<TalentTier, IList<Talent>> Talents => _talents.AsReadOnly();
+    public IReadOnlyDictionary<TalentTier, IReadOnlyList<Talent>> Talents => _talents.ToDictionary(
+        x => x.Key,
+        x => (IReadOnlyList<Talent>)[.. x.Value.OrderBy(x => x.Column)]);
 
     /// <summary>
     /// Gets a collection of <see cref="Unit"/>s by their id which represents other hero type units that this hero has control over.
     /// </summary>
     [JsonPropertyOrder(230)]
-    public IDictionary<string, Unit> HeroUnits { get; } = new Dictionary<string, Unit>(StringComparer.OrdinalIgnoreCase);
+    public IDictionary<string, Unit> HeroUnits { get; } = new Dictionary<string, Unit>(StringComparer.Ordinal);
 
     /// <summary>
     /// Adds a talent.
@@ -158,7 +160,7 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     /// <returns><see langword="true"/> if the ability was added, otherwise <see langword="false"/>.</returns>
     public bool AddTalent(Talent talent)
     {
-        if (_talents.TryGetValue(talent.Tier, out IList<Talent>? talents))
+        if (_talents.TryGetValue(talent.Tier, out List<Talent>? talents))
         {
             talents.Add(talent);
 

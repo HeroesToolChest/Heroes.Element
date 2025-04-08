@@ -26,12 +26,6 @@ public class Ability : AbilityTalentBase, IEquatable<Ability>
     [JsonIgnore]
     public AbilityTier Tier { get; set; } = AbilityTier.Unknown;
 
-    /// <summary>
-    /// Gets or sets the parent ability this ability. This is the id of the ability element (the <see cref="AbilityTalentBase.NameId"/>).
-    /// </summary>
-    [JsonIgnore]
-    public string? ParentAbililtyId { get; set; }
-
     /// <inheritdoc/>
     public bool Equals(Ability? other)
     {

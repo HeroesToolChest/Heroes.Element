@@ -21,10 +21,10 @@ public abstract class ElementObject : IEquatable<ElementObject>, IElementObject
     /// <inheritdoc/>
     public bool Equals(ElementObject? other)
     {
-        if (!Id.Equals(other?.Id, StringComparison.OrdinalIgnoreCase))
+        if (!Id.Equals(other?.Id, StringComparison.Ordinal))
             return false;
 
-        return Id.Equals(other.Id, StringComparison.OrdinalIgnoreCase);
+        return Id.Equals(other.Id, StringComparison.Ordinal);
     }
 
     /// <inheritdoc/>

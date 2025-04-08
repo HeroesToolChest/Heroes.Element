@@ -33,9 +33,16 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public int Column { get; set; }
 
     /// <summary>
+    /// Gets a collection of ability and talent ids that the talent affects or upgrades.
+    /// </summary>
+    [JsonPropertyOrder(102)]
+    public ISet<string> AbilityTalentLinkIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+
+    /// <summary>
     /// Gets a collection of prerequisite talent ids.
     /// </summary>
-    public ISet<string> PrerequisiteTalentIds { get; } = new HashSet<string>();
+    [JsonPropertyOrder(103)]
+    public ISet<string> PrerequisiteTalentIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <inheritdoc/>
     public bool Equals(Talent? other)

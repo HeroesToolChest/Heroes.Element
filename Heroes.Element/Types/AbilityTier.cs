@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Types;
 
 /// <summary>
-/// Specifices the tier of an ability.
+/// Specifices the tier of an ability (e.g Basic, Heroic).
 /// </summary>
 public enum AbilityTier
 {

@@ -39,7 +39,7 @@ public class UnitWeapon
     /// Gets a collection of attribute factors. These are the damage value by the attribute.
     /// </summary>
     [JsonPropertyName("damageFactors")]
-    public IDictionary<string, double> AttributeFactors { get; } = new SortedDictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+    public IDictionary<string, double> AttributeFactors { get; } = new SortedDictionary<string, double>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets the unit that is associated with this weapon.
