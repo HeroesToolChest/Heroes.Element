@@ -3,14 +3,21 @@
 /// <summary>
 /// Contains the data for talent data.
 /// </summary>
-[DebuggerDisplay("{Id,nq}")]
+[DebuggerDisplay("{LinkId,nq}")]
 public class Talent : AbilityTalentBase, IEquatable<Talent>
 {
     /// <summary>
-    /// Gets the talent id.
+    /// Gets a unique(ish) id for this talent. Is in the format of TalentElementId|ButtonElementId|AbilityType.
     /// </summary>
-    [JsonIgnore]
-    public TalentId Id => new(NameId, ButtonId);
+    [JsonPropertyOrder(-11)]
+    public TalentLinkId LinkId => new(TalentElementId, ButtonElementId, AbilityType);
+
+    /// <summary>
+    /// Gets or sets the id of the talent element.
+    /// </summary>
+    [JsonPropertyName("talentId")]
+    [JsonPropertyOrder(-10)]
+    public string TalentElementId { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the tier of the talent.
@@ -33,15 +40,26 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public int Column { get; set; }
 
     /// <summary>
-    /// Gets a collection of ability and talent ids that the talent affects or upgrades.
+    /// <para>
+    /// Gets a collection of ability and talent link ids that the talent affects or upgrades.
+    /// </para>
+    /// <para>
+    /// This property is for legacy use with HDP version older than 5.0.0.
+    /// </para>
     /// </summary>
     [JsonPropertyOrder(102)]
     public ISet<string> AbilityTalentLinkIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a collection of prerequisite talent ids.
+    /// Gets the ability and talent link ids that this talent affects or upgrades.
     /// </summary>
     [JsonPropertyOrder(103)]
+    public UpgradeLinkIds UpgradeLinkIds { get; } = new UpgradeLinkIds();
+
+    /// <summary>
+    /// Gets a collection of prerequisite talent ids.
+    /// </summary>
+    [JsonPropertyOrder(104)]
     public ISet<string> PrerequisiteTalentIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <inheritdoc/>
@@ -50,7 +68,7 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
         if (other is null)
             return false;
 
-        return other.Id.Equals(Id);
+        return other.LinkId.Equals(LinkId);
     }
 
     /// <inheritdoc/>
@@ -62,12 +80,12 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     /// <inheritdoc/>
     public override int GetHashCode()
     {
-        return Id.GetHashCode();
+        return LinkId.GetHashCode();
     }
 
     /// <inheritdoc/>
     public override string ToString()
     {
-        return Id.ToString();
+        return LinkId.ToString();
     }
 }

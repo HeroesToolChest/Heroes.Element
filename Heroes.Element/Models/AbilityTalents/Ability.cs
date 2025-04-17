@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the data for ability data.
 /// </summary>
-[DebuggerDisplay("{Id,nq}")]
+[DebuggerDisplay("{LinkId,nq}")]
 public class Ability : AbilityTalentBase, IEquatable<Ability>
 {
     /// <summary>
@@ -15,10 +15,17 @@ public class Ability : AbilityTalentBase, IEquatable<Ability>
     }
 
     /// <summary>
-    /// Gets a unique(ish) id. Is in the format of NameId|ButtonId|AbilityType|IsPassive.
+    /// Gets a unique(ish) id for this ability. Is in the format of AbilityElementId|ButtonElementId|AbilityType.
     /// </summary>
-    [JsonIgnore]
-    public AbilityId Id => new(NameId, ButtonId, AbilityType, IsPassive);
+    [JsonPropertyOrder(-10)]
+    public AbilityLinkId LinkId => new(AbilityElementId, ButtonElementId, AbilityType);
+
+    /// <summary>
+    /// Gets or sets the id of the ability element.
+    /// </summary>
+    [JsonPropertyOrder(-9)]
+    [JsonPropertyName("abilityId")]
+    public override string AbilityElementId { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the tier of the ability (e.g Basic, Heroic).
@@ -32,7 +39,7 @@ public class Ability : AbilityTalentBase, IEquatable<Ability>
         if (other is null)
             return false;
 
-        return other.Id.Equals(Id);
+        return other.LinkId.Equals(LinkId);
     }
 
     /// <inheritdoc/>
@@ -44,12 +51,12 @@ public class Ability : AbilityTalentBase, IEquatable<Ability>
     /// <inheritdoc/>
     public override int GetHashCode()
     {
-        return Id.GetHashCode();
+        return LinkId.GetHashCode();
     }
 
     /// <inheritdoc/>
     public override string ToString()
     {
-        return Id.ToString();
+        return LinkId.ToString();
     }
 }

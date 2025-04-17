@@ -3,18 +3,19 @@
 /// <summary>
 /// Abtract class that contains properties related to both abilities and talents.
 /// </summary>
-[DebuggerDisplay("{Id,nq}")]
 public abstract class AbilityTalentBase
 {
     /// <summary>
-    /// Gets or sets the name id (also an ability or talent id).
+    /// Gets or sets the id of the button element. Usually the "face" value.
     /// </summary>
-    public string NameId { get; set; } = string.Empty;
+    [JsonPropertyName("buttonId")]
+    public string ButtonElementId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the button id. Usually the "face" value.
+    /// Gets or sets the id of the ability element.
     /// </summary>
-    public string ButtonId { get; set; } = string.Empty;
+    [JsonPropertyName("abilityId")]
+    public virtual string AbilityElementId { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the name.
@@ -48,15 +49,10 @@ public abstract class AbilityTalentBase
     public bool IsActive { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this is a passive ability. Either requires no hotkey to be pressed or has an ability that activates automatically (auto cast).
-    /// </summary>
-    public bool IsPassive { get; set; }
-
-    /// <summary>
-    /// Gets or sets the parent ability this ability. This is the id of the ability element (the <see cref="NameId"/>).
+    /// Gets or sets the parent ability of this ability. This is the <see cref="AbilityElementId"/>.
     /// </summary>
     [JsonIgnore]
-    public string? ParentAbililtyId { get; set; }
+    public string? ParentAbilityElementId { get; set; }
 
     /// <summary>
     /// Gets a collection of created units.
@@ -65,11 +61,10 @@ public abstract class AbilityTalentBase
     public ISet<string> CreateUnits { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a collection of talent ids that represent tooltip appenders.
+    /// Gets a collection of id of talent elements that represent tooltip appenders.
     /// These appear ingame on the baseline ability tooltips after the corresponding talent has been selected.
     /// </summary>
-    [JsonIgnore]
-    public ISet<TalentId> TooltipAppenderTalentIds { get; } = new HashSet<TalentId>();
+    internal ISet<string> TooltipAppendersTalentElementIds { get; } = new HashSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets the relative path of the icon that resides in CASC or on file.

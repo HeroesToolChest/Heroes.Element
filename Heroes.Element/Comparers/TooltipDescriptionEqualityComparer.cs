@@ -3,7 +3,7 @@
 namespace Heroes.Element.Comparers;
 
 /// <summary>
-/// A custom comparer for <see cref="TooltipDescription"/>. Compares equality by comparing the raw descriptions.
+/// A custom equality comparer for <see cref="TooltipDescription"/>. Compares equality by comparing the raw descriptions.
 /// </summary>
 public class TooltipDescriptionEqualityComparer : IEqualityComparer<TooltipDescription>
 {

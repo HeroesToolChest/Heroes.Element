@@ -1,6 +1,4 @@
-﻿using Heroes.Element.Comparers;
-
-namespace Heroes.Element.Models;
+﻿namespace Heroes.Element.Models;
 
 /// <summary>
 /// Contains the hero data.
