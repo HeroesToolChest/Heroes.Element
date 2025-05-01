@@ -101,7 +101,12 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     /// Gets or sets the hero portraits.
     /// </summary>
     [JsonPropertyOrder(-6)]
-    public new HeroPortrait Portraits { get; set; } = new HeroPortrait();
+    [JsonPropertyName("portraits")]
+    public HeroPortrait HeroPortraits { get; set; } = new HeroPortrait();
+
+    /// <inheritdoc/>
+    [JsonIgnore]
+    public override UnitPortrait UnitPortraits { get => base.UnitPortraits; set => base.UnitPortraits = value; }
 
     /// <summary>
     /// Gets or sets the info text of the unit.

@@ -31,7 +31,7 @@ public class TooltipCharges
     public bool IsHideCount { get; set; }
 
     /// <summary>
-    /// Gets a value indicating whether charges exists.
+    /// Gets a value indicating whether max charges exists.
     /// </summary>
     [JsonIgnore]
     public bool HasCharges => CountMax.HasValue || (CountMax.HasValue && CountMax.Value > 0);

@@ -80,5 +80,5 @@ public class HeroPortrait : UnitPortrait
     /// <summary>
     /// Gets the relative path of the party frame files that resides in CASC or on file.
     /// </summary>
-    internal ICollection<RelativeFilePath> PartyFramePaths { get; } = [];
+    internal IList<RelativeFilePath> PartyFramePaths { get; } = [];
 }

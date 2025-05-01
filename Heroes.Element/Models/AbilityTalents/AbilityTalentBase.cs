@@ -58,7 +58,7 @@ public abstract class AbilityTalentBase
     /// Gets a collection of created units.
     /// </summary>
     [JsonIgnore]
-    public ISet<string> CreateUnits { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> CreatedUnits { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a collection of id of talent elements that represent tooltip appenders.

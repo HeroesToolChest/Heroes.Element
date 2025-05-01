@@ -8,7 +8,7 @@ public class UnitWeapon
     /// <summary>
     /// Gets or sets the unique id of the weapon.
     /// </summary>
-    public string WeaponNameId { get; set; } = string.Empty;
+    public string NameId { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the name of the weapon.
@@ -33,6 +33,7 @@ public class UnitWeapon
     /// <summary>
     /// Gets or sets the damage scaling per level.
     /// </summary>
+    [JsonPropertyName("damageScale")]
     public double DamageScaling { get; set; }
 
     /// <summary>
@@ -65,6 +66,6 @@ public class UnitWeapon
     /// <inheritdoc/>
     public override string ToString()
     {
-        return WeaponNameId;
+        return NameId;
     }
 }

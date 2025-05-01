@@ -126,7 +126,7 @@ public class Unit : ElementObject, IName, IDescription
     /// </summary>
     [JsonPropertyOrder(117)]
     [JsonPropertyName("portraits")]
-    public UnitPortrait Portraits { get; set; } = new UnitPortrait();
+    public virtual UnitPortrait UnitPortraits { get; set; } = new UnitPortrait();
 
     /// <summary>
     /// Gets a collection of additional units associated with this unit.
