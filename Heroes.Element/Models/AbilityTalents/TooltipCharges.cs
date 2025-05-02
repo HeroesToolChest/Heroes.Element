@@ -28,7 +28,7 @@ public class TooltipCharges
     /// <summary>
     /// Gets or sets a value indicating whether the charge counts are hidden.
     /// </summary>
-    public bool IsHideCount { get; set; }
+    public bool IsCountHidden { get; set; }
 
     /// <summary>
     /// Gets a value indicating whether max charges exists.
@@ -40,7 +40,7 @@ public class TooltipCharges
     public override string ToString()
     {
         if (HasCharges)
-            return $"Max Charges: {CountMax} - Start: {CountStart} - Use: {CountUse} - Hidden: {IsHideCount}";
+            return $"Max Charges: {CountMax} - Start: {CountStart} - Use: {CountUse} - Hidden: {IsCountHidden}";
         else
             return "No charges";
     }
