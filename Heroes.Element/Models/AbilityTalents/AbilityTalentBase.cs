@@ -33,9 +33,34 @@ public abstract class AbilityTalentBase
     public double? ToggleCooldown { get; set; }
 
     /// <summary>
-    /// Gets or sets the tooltip data.
+    /// Gets or sets the charges text.
     /// </summary>
-    public AbilityTalentTooltip Tooltip { get; set; } = new AbilityTalentTooltip();
+    public TooltipCharges? Charges { get; set; }
+
+    /// <summary>
+    /// Gets or sets the energy text.
+    /// </summary>
+    public TooltipDescription? EnergyText { get; set; }
+
+    /// <summary>
+    /// Gets or sets the life text.
+    /// </summary>
+    public TooltipDescription? LifeText { get; set; }
+
+    /// <summary>
+    /// Gets or sets the cooldown text.
+    /// </summary>
+    public TooltipDescription? CooldownText { get; set; }
+
+    /// <summary>
+    /// Gets or sets the short text.
+    /// </summary>
+    public TooltipDescription? ShortText { get; set; }
+
+    /// <summary>
+    /// Gets or sets the full text.
+    /// </summary>
+    public TooltipDescription? FullText { get; set; }
 
     /// <summary>
     /// Gets or sets the abilityType.
@@ -70,4 +95,8 @@ public abstract class AbilityTalentBase
     /// Gets or sets the relative path of the icon that resides in CASC or on file.
     /// </summary>
     internal RelativeFilePath? IconPath { get; set; }
+
+    internal string? EnergyCost { get; set; }
+
+    internal string? LifeCost { get; set; }
 }
