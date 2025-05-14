@@ -14,7 +14,10 @@ public class Unit : ElementObject, IName, IDescription
     private readonly Dictionary<string, AbilityType> _layoutAbilityTypeByNameId = [];
 
     private readonly SortedDictionary<AbilityTier, List<Ability>> _abilities = [];
-    private readonly Dictionary<AbilityLinkId, SortedDictionary<AbilityTier, List<Ability>>> _subAbilities = [];
+    private readonly Dictionary<LinkId, SortedDictionary<AbilityTier, List<Ability>>> _subAbilities = [];
+
+    // for unknown sub abilities, this is for when we don't know the parent ability id yet, most likely for talent abilities
+    private readonly SortedDictionary<AbilityTier, List<Ability>> _unknownSubAbilities = [];
 
     // for the ability tooltip appenders. For an talent element id, we will have a list of abilities that the talent affects
     private readonly Dictionary<string, List<Ability>> _abilitiesByTooltipTalentElementId = new(StringComparer.Ordinal);
@@ -149,11 +152,11 @@ public class Unit : ElementObject, IName, IDescription
         x => (IReadOnlyList<Ability>)[.. x.Value]);
 
     /// <summary>
-    /// Gets a collection of subabilities by their parent's ability's <see cref="AbilityLinkId"/>.
+    /// Gets a collection of subabilities by their parent's ability's <see cref="LinkId"/>.
     /// A subability becomes available after the parent's ability is used.
     /// </summary>
     [JsonPropertyOrder(201)]
-    public IReadOnlyDictionary<AbilityLinkId, IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>>> SubAbilities => _subAbilities.ToDictionary(
+    public IReadOnlyDictionary<LinkId, IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>>> SubAbilities => _subAbilities.ToDictionary(
         outerKvp => outerKvp.Key,
         outerKvp => (IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>>)outerKvp.Value.ToDictionary(
             innerKvp => innerKvp.Key,
@@ -166,6 +169,8 @@ public class Unit : ElementObject, IName, IDescription
     public string? ParentLink { get; set; }
 
     internal int TooltipTalentElementIdCount => _abilitiesByTooltipTalentElementId.Count;
+
+    internal SortedDictionary<AbilityTier, List<Ability>> UnknownSubAbilities => _unknownSubAbilities;
 
     /// <summary>
     /// Adds an ability.
@@ -191,7 +196,7 @@ public class Unit : ElementObject, IName, IDescription
     }
 
     /// <summary>
-    /// Adds a sub ability.
+    /// Adds a sub ability if the parent ability was found as an existing ability or subability.
     /// </summary>
     /// <param name="subAbility">The <see cref="Ability"/>.</param>
     /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
@@ -203,32 +208,49 @@ public class Unit : ElementObject, IName, IDescription
 
         _layoutAbilityTypeByNameId.TryAdd(subAbility.AbilityElementId, subAbility.AbilityType);
 
+        // check both abilites and sub abilities
         IEnumerable<Ability> matchingAbilities = _abilities
             .SelectMany(x => x.Value)
-            .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId);
+            .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId)
+            .Concat(_subAbilities
+                .SelectMany(x => x.Value)
+                .SelectMany(y => y.Value)
+                .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId));
 
         if (!matchingAbilities.Any())
+        {
+            if (UnknownSubAbilities.TryGetValue(subAbility.Tier, out List<Ability>? unknownSubAbilities))
+                unknownSubAbilities.Add(subAbility);
+            else
+                UnknownSubAbilities[subAbility.Tier] = [subAbility];
+
             return false;
+        }
 
         foreach (Ability ability in matchingAbilities)
         {
-            if (_subAbilities.TryGetValue(ability.LinkId, out SortedDictionary<AbilityTier, List<Ability>>? subAbilities))
-            {
-                if (subAbilities.TryGetValue(subAbility.Tier, out List<Ability>? abilities))
-                    abilities.Add(subAbility);
-                else
-                    subAbilities[subAbility.Tier] = [subAbility];
-            }
-            else
-            {
-                _subAbilities[ability.LinkId] = new SortedDictionary<AbilityTier, List<Ability>>()
-                {
-                    [subAbility.Tier] = [subAbility],
-                };
-            }
+            AssignSubAbilityToLink(subAbility, ability.LinkId);
         }
 
         return true;
+    }
+
+    internal void AssignSubAbilityToLink(Ability subAbility, LinkId linkId)
+    {
+        if (_subAbilities.TryGetValue(linkId, out SortedDictionary<AbilityTier, List<Ability>>? subAbilities))
+        {
+            if (subAbilities.TryGetValue(subAbility.Tier, out List<Ability>? abilities))
+                abilities.Add(subAbility);
+            else
+                subAbilities[subAbility.Tier] = [subAbility];
+        }
+        else
+        {
+            _subAbilities[linkId] = new SortedDictionary<AbilityTier, List<Ability>>()
+            {
+                [subAbility.Tier] = [subAbility],
+            };
+        }
     }
 
     /// <summary>
@@ -264,7 +286,7 @@ public class Unit : ElementObject, IName, IDescription
     /// Gets a collection of <see cref="AbilityLinkId"/>s associated with the talent element id.
     /// </summary>
     /// <param name="talentElementId">The talent element id.</param>
-    /// <returns>A collection of <see cref="AbilityLinkId"/>s.</returns>
+    /// <returns>A collection of <see cref="LinkId"/>s.</returns>
     internal List<AbilityLinkId> GetTooltipAbilityLinkIdsByTalentElementId(string talentElementId)
     {
         if (_abilitiesByTooltipTalentElementId.TryGetValue(talentElementId, out List<Ability>? abilities))
