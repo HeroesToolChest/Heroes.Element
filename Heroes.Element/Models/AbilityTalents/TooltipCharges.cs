@@ -34,7 +34,7 @@ public class TooltipCharges
     /// Gets a value indicating whether max charges exists.
     /// </summary>
     [JsonIgnore]
-    public bool HasCharges => CountMax.HasValue || (CountMax.HasValue && CountMax.Value > 0);
+    public bool HasCharges => CountMax.HasValue || CountStart.HasValue;
 
     /// <inheritdoc/>
     public override string ToString()
