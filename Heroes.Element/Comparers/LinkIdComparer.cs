@@ -1,12 +1,12 @@
 ﻿namespace Heroes.Element.Comparers;
 
 /// <summary>
-/// A custom comparer for <see cref="AbilityLinkId"/>. Orders by <see cref="AbilityType"/>.
+/// A custom comparer for <see cref="LinkId"/>. Orders by <see cref="AbilityType"/>.
 /// </summary>
-public class AbilityLinkIdComparer : IComparer<AbilityLinkId>
+public class LinkIdComparer : IComparer<LinkId>
 {
     /// <inheritdoc/>
-    public int Compare(AbilityLinkId? x, AbilityLinkId? y)
+    public int Compare(LinkId? x, LinkId? y)
     {
         if (x is null && y is null)
             return 0;

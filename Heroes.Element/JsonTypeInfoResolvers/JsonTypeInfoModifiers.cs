@@ -1,7 +1,14 @@
 ﻿namespace Heroes.Element.JsonTypeInfoResolvers;
 
+/// <summary>
+/// Custom json type modifiers.
+/// </summary>
 public class JsonTypeInfoModifiers
 {
+    /// <summary>
+    /// The default modifiers.
+    /// </summary>
+    /// <param name="typeInfo">The <see cref="JsonTypeInfo"/>.</param>
     public static void SerialiazationModifiers(JsonTypeInfo typeInfo)
     {
         foreach (JsonPropertyInfo propertyInfo in typeInfo.Properties)
@@ -11,6 +18,7 @@ public class JsonTypeInfoModifiers
             if (typeInfo.Type == typeof(Hero) || typeInfo.Type == typeof(Unit))
             {
                 UnitLifeEnergyShieldModifiers(propertyInfo);
+
             }
         }
     }
@@ -52,8 +60,4 @@ public class JsonTypeInfoModifiers
             };
         }
     }
-
-    //public static void TooltipDescriptionModifier(JsonTypeInfo typeInfo)
-    //{
-    //}
 }

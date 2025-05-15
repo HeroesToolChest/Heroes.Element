@@ -54,7 +54,7 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     /// Gets the ability and talent link ids that this talent affects or upgrades.
     /// </summary>
     [JsonPropertyOrder(103)]
-    public UpgradeLinkIds UpgradeLinkIds { get; } = new UpgradeLinkIds();
+    public ISet<LinkId> UpgradeLinkIds { get; } = new SortedSet<LinkId>(new LinkIdComparer());
 
     /// <summary>
     /// Gets a collection of prerequisite talent ids.
