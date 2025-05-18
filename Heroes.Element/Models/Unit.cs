@@ -19,7 +19,7 @@ public class Unit : ElementObject, IName, IDescription
     // for unknown sub abilities, this is for when we don't know the parent ability id yet, most likely for talent abilities
     private readonly SortedDictionary<AbilityTier, List<Ability>> _unknownSubAbilities = [];
 
-    // for the ability tooltip appenders. For an talent element id, we will have a list of abilities that the talent affects
+    // for the ability tooltip appenders. For a talent element id, we will have a list of abilities that the talent affects
     private readonly Dictionary<string, List<Ability>> _abilitiesByTooltipTalentElementId = new(StringComparer.Ordinal);
 
     /// <summary>
