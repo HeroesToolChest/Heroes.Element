@@ -118,6 +118,15 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     [JsonPropertyOrder(100)]
     public TooltipDescription? SearchText { get; set; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(118)]
+    public override ISet<string> SummonedUnitIds => base.SummonedUnitIds
+        .Concat(_talents
+            .SelectMany(x => x.Value
+                .SelectMany(y => y.SummonedUnitIds)))
+        .Order()
+        .ToHashSet(StringComparer.Ordinal);
+
     /// <summary>
     /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>

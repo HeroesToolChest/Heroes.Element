@@ -74,16 +74,15 @@ public abstract class AbilityTalentBase
     public bool IsActive { get; set; }
 
     /// <summary>
-    /// Gets or sets the parent ability of this ability. This is the <see cref="AbilityElementId"/>.
+    /// Gets or sets the parent ability. This is the <see cref="AbilityElementId"/>.
     /// </summary>
     [JsonIgnore]
     public string? ParentAbilityElementId { get; set; }
 
     /// <summary>
-    /// Gets a collection of created units.
+    /// Gets a collection of summoned units.
     /// </summary>
-    [JsonIgnore]
-    public ISet<string> CreatedUnits { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    internal ISet<string> SummonedUnitIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a collection of id of talent elements that represent tooltip appenders.

@@ -10,7 +10,7 @@ public class Unit : ElementObject, IName, IDescription
 {
     // for keeping track of the ability types by the ability id
     // there may be duplicates of the ability id, but we will only track the first one
-    // this has all abilites including sub abilities
+    // this has all abilities including sub abilities
     private readonly Dictionary<string, AbilityType> _layoutAbilityTypeByNameId = [];
 
     private readonly SortedDictionary<AbilityTier, List<Ability>> _abilities = [];
@@ -132,10 +132,18 @@ public class Unit : ElementObject, IName, IDescription
     public virtual UnitPortrait UnitPortraits { get; set; } = new UnitPortrait();
 
     /// <summary>
-    /// Gets a collection of additional units associated with this unit.
+    /// Gets a collection of summoned units associated with this unit.
     /// </summary>
     [JsonPropertyOrder(118)]
-    public ISet<string> UnitIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public virtual ISet<string> SummonedUnitIds => _abilities
+        .SelectMany(x => x.Value)
+            .SelectMany(x => x.SummonedUnitIds)
+        .Concat(_subAbilities
+            .SelectMany(x => x.Value)
+                .SelectMany(y => y.Value)
+                    .SelectMany(x => x.SummonedUnitIds))
+        .Order()
+        .ToHashSet(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets a collection of basic attack weapons.
