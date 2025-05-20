@@ -108,15 +108,15 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     [JsonIgnore]
     public override UnitPortrait UnitPortraits { get => base.UnitPortraits; set => base.UnitPortraits = value; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(100)]
+    public TooltipDescription? SearchText { get; set; }
+
     /// <summary>
     /// Gets or sets the info text of the unit.
     /// </summary>
     [JsonPropertyOrder(105)]
     public TooltipDescription? InfoText { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(100)]
-    public TooltipDescription? SearchText { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(118)]
