@@ -8,6 +8,7 @@ jobs:
     with:
       dotnet-sdk: |
         8.0.X
+        9.0.X
       main-project: Heroes.Element/Heroes.Element.csproj
       artifact-name-prefix: Heroes.Element
       is-tool: false
