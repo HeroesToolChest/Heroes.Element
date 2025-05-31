@@ -15,6 +15,7 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     public Hero(string id)
         : base(id)
     {
+        Gender = Types.Gender.Male;
     }
 
     /// <inheritdoc/>
