@@ -1,6 +1,4 @@
-﻿using System.Collections.Immutable;
-
-namespace Heroes.Element.Models;
+﻿namespace Heroes.Element.Models;
 
 /// <summary>
 /// Contains the unit data.

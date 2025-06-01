@@ -1,7 +1,4 @@
-﻿using Heroes.Element.Models;
-using System.Diagnostics.CodeAnalysis;
-
-namespace Heroes.Element;
+﻿namespace Heroes.Element;
 
 public class AnnouncerData
 {

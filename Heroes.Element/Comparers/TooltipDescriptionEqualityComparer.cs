@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace Heroes.Element.Comparers;
+﻿namespace Heroes.Element.Comparers;
 
 /// <summary>
 /// A custom equality comparer for <see cref="TooltipDescription"/>. Compares equality by comparing the raw descriptions.
