@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the hero data.
 /// </summary>
-[DebuggerDisplay("{Id,nq}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public class Hero : Unit, IHeroesCollectionObject, IInfoText
 {
     private readonly SortedDictionary<TalentTier, List<Talent>> _talents = [];

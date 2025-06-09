@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the unit data.
 /// </summary>
-[DebuggerDisplay("{Id,nq}")]
+[DebuggerDisplay("{DebuggerDisplay,nq}")]
 public class Unit : ElementObject, IName, IDescription
 {
     // for keeping track of the ability types by the ability id

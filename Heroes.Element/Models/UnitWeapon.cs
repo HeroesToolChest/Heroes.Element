@@ -11,11 +11,6 @@ public class UnitWeapon
     public string NameId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the name of the weapon.
-    /// </summary>
-    public TooltipDescription? Name { get; set; }
-
-    /// <summary>
     /// Gets or sets the distance of the attack.
     /// </summary>
     public double Range { get; set; }

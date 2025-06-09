@@ -85,7 +85,7 @@ public abstract class AbilityTalentBase
     internal ISet<string> SummonedUnitIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a collection of id of talent elements that represent tooltip appenders.
+    /// Gets a collection of ids of talent elements that represent tooltip appenders.
     /// These appear ingame on the baseline ability tooltips after the corresponding talent has been selected.
     /// </summary>
     internal ISet<string> TooltipAppendersTalentElementIds { get; } = new HashSet<string>(StringComparer.Ordinal);

@@ -18,6 +18,19 @@ public abstract class ElementObject : IEquatable<ElementObject>, IElementObject
     [JsonIgnore]
     public string Id { get; internal set; } = string.Empty;
 
+    /// <summary>
+    /// Gets the debugger display.
+    /// </summary>
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    protected string DebuggerDisplay
+    {
+        get
+        {
+            return $"{{{Id}}}";
+        }
+
+    }
+
     /// <inheritdoc/>
     public bool Equals(ElementObject? other)
     {
