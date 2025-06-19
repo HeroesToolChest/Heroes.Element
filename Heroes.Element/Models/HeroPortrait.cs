@@ -45,7 +45,7 @@ public class HeroPortrait : UnitPortrait
     /// Gets the party frame file name.
     /// </summary>
     [JsonPropertyName("partyFrames")]
-    public ICollection<string> PartyFrames { get; } = new List<string>();
+    public ICollection<string> PartyFrames { get; } = [];
 
     /// <summary>
     /// Gets or sets the relative path of the hero select portrait that resides in CASC or on file.

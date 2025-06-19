@@ -204,9 +204,9 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
 
         if (matchingTalents.Any())
         {
-            foreach (Talent matchedtalent in matchingTalents)
+            foreach (Talent matchedTalent in matchingTalents)
             {
-                AssignSubAbilityToLink(subAbility, matchedtalent.LinkId);
+                AssignSubAbilityToLink(subAbility, matchedTalent.LinkId);
             }
 
             return true;

@@ -11,9 +11,19 @@ public class UnitWeapon
     public string NameId { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the distance of the attack.
+    /// Gets or sets a value indicating whether the weapon is disabled.
+    /// </summary>
+    public bool IsDisabled { get; set; }
+
+    /// <summary>
+    /// Gets or sets the maximum distance of the attack.
     /// </summary>
     public double Range { get; set; }
+
+    /// <summary>
+    /// Gets or sets the minimum distance of the attack.
+    /// </summary>
+    public double MinimumRange { get; set; }
 
     /// <summary>
     /// Gets or sets the time between attacks.
@@ -38,9 +48,9 @@ public class UnitWeapon
     public IDictionary<string, double> AttributeFactors { get; } = new SortedDictionary<string, double>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets or sets the unit that is associated with this weapon.
+    /// Gets a collection of vital costs.
     /// </summary>
-    public string? ParentLink { get; set; }
+    public IDictionary<VitalType, double> VitalCost { get; } = new SortedDictionary<VitalType, double>();
 
     /// <summary>
     /// Gets the attacks per second.

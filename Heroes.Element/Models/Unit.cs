@@ -17,7 +17,7 @@ public class Unit : ElementObject, IName, IDescription
     // for unknown sub abilities, this is for when we don't know the parent ability id yet, most likely for talent abilities
     private readonly SortedDictionary<AbilityTier, List<Ability>> _unknownSubAbilities = [];
 
-    // for the ability tooltip appenders. For a talent element id, we will have a list of abilities that the talent affects
+    // for the ability tooltip appenders. For a talent element id, we will have a list of abilities (includes subabilities) that the talent affects
     private readonly Dictionary<string, List<Ability>> _abilitiesByTooltipTalentElementId = new(StringComparer.Ordinal);
 
     /// <summary>
@@ -155,7 +155,7 @@ public class Unit : ElementObject, IName, IDescription
     [JsonPropertyOrder(200)]
     public IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>> Abilities => _abilities.ToDictionary(
         x => x.Key,
-        x => (IReadOnlyList<Ability>)[.. x.Value]);
+        x => (IReadOnlyList<Ability>)[.. x.Value.OrderBy(x => x.AbilityType)]);
 
     /// <summary>
     /// Gets a collection of subabilities by their parent's ability's <see cref="LinkId"/>.
@@ -166,7 +166,7 @@ public class Unit : ElementObject, IName, IDescription
         outerKvp => outerKvp.Key,
         outerKvp => (IReadOnlyDictionary<AbilityTier, IReadOnlyList<Ability>>)outerKvp.Value.ToDictionary(
             innerKvp => innerKvp.Key,
-            innerKvp => (IReadOnlyList<Ability>)[.. innerKvp.Value]));
+            innerKvp => (IReadOnlyList<Ability>)[.. innerKvp.Value.OrderBy(x => x.AbilityType)]));
 
     /// <summary>
     /// Gets or sets the parent link of this unit.
@@ -290,6 +290,7 @@ public class Unit : ElementObject, IName, IDescription
 
     /// <summary>
     /// Gets a collection of <see cref="AbilityLinkId"/>s associated with the talent element id.
+    /// Will only return abilities that are in either abilities or subabilities.
     /// </summary>
     /// <param name="talentElementId">The talent element id.</param>
     /// <returns>A collection of <see cref="LinkId"/>s.</returns>
@@ -297,7 +298,11 @@ public class Unit : ElementObject, IName, IDescription
     {
         if (_abilitiesByTooltipTalentElementId.TryGetValue(talentElementId, out List<Ability>? abilities))
         {
-            return [.. abilities.Select(x => x.LinkId)];
+            return [.. abilities
+                .Where(ability =>
+                    _abilities.Values.Any(x => x.Contains(ability)) ||
+                    _subAbilities.Values.Any(x => x.Values.Any(x => x.Contains(ability))))
+                .Select(x => x.LinkId)];
         }
         else
         {
