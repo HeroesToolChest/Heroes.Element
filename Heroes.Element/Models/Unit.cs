@@ -230,10 +230,12 @@ public class Unit : ElementObject, IName, IDescription
             else
                 UnknownSubAbilities[subAbility.Tier] = [subAbility];
 
-            return false;
+            return true;
         }
 
-        foreach (Ability ability in matchingAbilities)
+        List<Ability> matchingAbilitiesList = [.. matchingAbilities];
+
+        foreach (Ability ability in matchingAbilitiesList)
         {
             AssignSubAbilityToLink(subAbility, ability.LinkId);
         }
