@@ -18,7 +18,6 @@ public class JsonTypeInfoModifiers
             if (typeInfo.Type == typeof(Hero) || typeInfo.Type == typeof(Unit))
             {
                 UnitLifeEnergyShieldModifiers(propertyInfo);
-
             }
         }
     }
@@ -49,7 +48,7 @@ public class JsonTypeInfoModifiers
         {
             propertyInfo.ShouldSerialize = static (_, value) =>
             {
-                return value is not null && value is UnitEnergy unitEnergy && (unitEnergy.EnergyMax > 0 || unitEnergy.EnergyType is not null);
+                return value is not null && value is UnitEnergy unitEnergy && (unitEnergy.EnergyMax > 0);
             };
         }
         else if (propertyInfo.PropertyType == typeof(UnitShield))
