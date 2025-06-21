@@ -69,7 +69,7 @@ public abstract class AbilityTalentBase
     public AbilityType AbilityType { get; set; } = AbilityType.Unknown;
 
     /// <summary>
-    /// Gets or sets a value indicating whether this is activable through a hotkey.
+    /// Gets or sets a value indicating whether this is activable (through hotkey or auto casted).
     /// </summary>
     public bool IsActive { get; set; }
 

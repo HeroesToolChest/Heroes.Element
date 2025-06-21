@@ -214,7 +214,7 @@ public class Unit : ElementObject, IName, IDescription
 
         _layoutAbilityTypeByNameId.TryAdd(subAbility.AbilityElementId, subAbility.AbilityType);
 
-        // check both abilites and sub abilities
+        // check both abilities and sub abilities
         IEnumerable<Ability> matchingAbilities = _abilities
             .SelectMany(x => x.Value)
             .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId)
