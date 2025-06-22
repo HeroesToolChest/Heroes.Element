@@ -209,19 +209,34 @@ public class Unit : ElementObject, IName, IDescription
     public bool AddSubAbility(Ability subAbility)
     {
         // no parent ability id, so no sub ability
-        if (string.IsNullOrEmpty(subAbility.ParentAbilityElementId))
+        if (subAbility.ParentLinkId is null && string.IsNullOrEmpty(subAbility.ParentAbilityElementId))
             return false;
 
         _layoutAbilityTypeByNameId.TryAdd(subAbility.AbilityElementId, subAbility.AbilityType);
 
-        // check both abilities and sub abilities
-        IEnumerable<Ability> matchingAbilities = _abilities
-            .SelectMany(x => x.Value)
-            .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId)
-            .Concat(_subAbilities
+        IEnumerable<Ability> matchingAbilities;
+
+        // check both abilities and sub abilities, first ParentLinkId, then ParentAbilityElementId
+        if (subAbility.ParentLinkId is not null)
+        {
+            matchingAbilities = _abilities
                 .SelectMany(x => x.Value)
-                .SelectMany(y => y.Value)
-                .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId));
+                .Where(x => x.LinkId.Equals(subAbility.ParentLinkId))
+                .Concat(_subAbilities
+                    .SelectMany(x => x.Value)
+                    .SelectMany(y => y.Value)
+                    .Where(x => x.LinkId == subAbility.ParentLinkId));
+        }
+        else
+        {
+            matchingAbilities = _abilities
+                .SelectMany(x => x.Value)
+                .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId)
+                .Concat(_subAbilities
+                    .SelectMany(x => x.Value)
+                    .SelectMany(y => y.Value)
+                    .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId));
+        }
 
         if (!matchingAbilities.Any())
         {
@@ -291,12 +306,12 @@ public class Unit : ElementObject, IName, IDescription
     }
 
     /// <summary>
-    /// Gets a collection of <see cref="AbilityLinkId"/>s associated with the talent element id.
+    /// Gets a collection of <see cref="LinkId"/>s associated with the talent element id.
     /// Will only return abilities that are in either abilities or subabilities.
     /// </summary>
     /// <param name="talentElementId">The talent element id.</param>
     /// <returns>A collection of <see cref="LinkId"/>s.</returns>
-    internal List<AbilityLinkId> GetTooltipAbilityLinkIdsByTalentElementId(string talentElementId)
+    internal List<LinkId> GetTooltipAbilityLinkIdsByTalentElementId(string talentElementId)
     {
         if (_abilitiesByTooltipTalentElementId.TryGetValue(talentElementId, out List<Ability>? abilities))
         {

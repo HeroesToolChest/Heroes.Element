@@ -10,7 +10,7 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     /// Gets a unique(ish) id for this talent. Is in the format of TalentElementId|ButtonElementId|AbilityType.
     /// </summary>
     [JsonPropertyOrder(-11)]
-    public TalentLinkId LinkId => new(TalentElementId, ButtonElementId, AbilityType);
+    public LinkId LinkId => new(TalentElementId, ButtonElementId, AbilityType);
 
     /// <summary>
     /// Gets or sets the id of the talent element.
