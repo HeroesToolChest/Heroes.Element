@@ -103,4 +103,6 @@ public abstract class AbilityTalentBase
     internal string? EnergyCost { get; set; }
 
     internal string? LifeCost { get; set; }
+
+    internal bool IsValid { get; set; } = true;
 }
