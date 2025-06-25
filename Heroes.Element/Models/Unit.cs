@@ -12,7 +12,7 @@ public class Unit : ElementObject, IName, IDescription
     private readonly Dictionary<string, AbilityType> _layoutAbilityTypeByNameId = [];
 
     private readonly SortedDictionary<AbilityTier, List<Ability>> _abilities = [];
-    private readonly Dictionary<LinkId, SortedDictionary<AbilityTier, List<Ability>>> _subAbilities = [];
+    private readonly SortedDictionary<LinkId, SortedDictionary<AbilityTier, List<Ability>>> _subAbilities = new(new LinkIdComparer());
 
     // for unknown sub abilities, this is for when we don't know the parent ability id yet, most likely for talent abilities
     private readonly SortedDictionary<AbilityTier, List<Ability>> _unknownSubAbilities = [];
