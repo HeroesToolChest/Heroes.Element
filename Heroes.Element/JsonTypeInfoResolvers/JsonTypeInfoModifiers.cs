@@ -25,7 +25,9 @@ public class JsonTypeInfoModifiers
     // only serialize collections if they have items
     private static void IEnumerableModifier(JsonPropertyInfo propertyInfo)
     {
-        if (propertyInfo.PropertyType.GetInterface(nameof(IEnumerable)) is not null && propertyInfo.PropertyType != typeof(string))
+        if (propertyInfo.PropertyType.GetInterface(nameof(IEnumerable)) is not null &&
+            propertyInfo.PropertyType != typeof(string) &&
+            !propertyInfo.Name.Equals(nameof(HeroPortrait.PartyFrames), StringComparison.OrdinalIgnoreCase))
         {
             propertyInfo.ShouldSerialize = static (_, value) =>
             {
@@ -48,14 +50,14 @@ public class JsonTypeInfoModifiers
         {
             propertyInfo.ShouldSerialize = static (_, value) =>
             {
-                return value is not null && value is UnitEnergy unitEnergy && (unitEnergy.EnergyMax > 0);
+                return value is not null && value is UnitEnergy unitEnergy && unitEnergy.EnergyMax > 0;
             };
         }
         else if (propertyInfo.PropertyType == typeof(UnitShield))
         {
             propertyInfo.ShouldSerialize = static (_, value) =>
             {
-                return value is not null && value is UnitShield unitShield && (unitShield.ShieldMax > 0);
+                return value is not null && value is UnitShield unitShield && unitShield.ShieldMax > 0;
             };
         }
     }

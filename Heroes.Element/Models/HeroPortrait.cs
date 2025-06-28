@@ -9,40 +9,40 @@ public class HeroPortrait : UnitPortrait
     /// Gets or sets the hero select portrait file name.
     /// </summary>
     [JsonPropertyName("heroSelect")]
-    public string? HeroSelectPortrait { get; set; }
+    public string HeroSelectPortrait { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the score screen portrait file name.
     /// </summary>
     [JsonPropertyName("leaderboard")]
-    public string? LeaderboardPortrait { get; set; }
+    public string LeaderboardPortrait { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the loading screen portrait file name.
     /// </summary>
     [JsonPropertyName("loading")]
-    public string? LoadingScreenPortrait { get; set; }
+    public string LoadingScreenPortrait { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the party panel portrait file name.
     /// </summary>
     [JsonPropertyName("partyPanel")]
-    public string? PartyPanelPortrait { get; set; }
+    public string PartyPanelPortrait { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the target portrait file name.
     /// </summary>
     [JsonPropertyName("target")]
-    public string? TargetPortrait { get; set; }
+    public string TargetPortrait { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the draft screen file name.
     /// </summary>
     [JsonPropertyName("draftScreen")]
-    public string? DraftScreen { get; set; }
+    public string DraftScreen { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets the party frame file name.
+    /// Gets a collection of party frame file names.
     /// </summary>
     [JsonPropertyName("partyFrames")]
     public ICollection<string> PartyFrames { get; } = [];
