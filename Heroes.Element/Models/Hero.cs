@@ -188,42 +188,30 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     }
 
     /// <summary>
-    /// Adds a sub ability if the parent ability was found as an existing talent.
+    /// Adds a subability if the parent ability was found as an existing talent.
     /// </summary>
-    /// <param name="subAbility">The <see cref="Ability"/>.</param>
+    /// <param name="ability">The <see cref="Ability"/>.</param>
     /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
-    public bool AddTalentSubAbility(Ability subAbility)
+    public bool AddAsSubAbilityToTalent(Ability ability)
     {
         // no parent ability id, so no sub ability
-        if (string.IsNullOrEmpty(subAbility.ParentAbilityElementId))
+        if (string.IsNullOrEmpty(ability.ParentAbilityElementId))
             return false;
 
         IEnumerable<Talent> matchingTalents = _talents
             .SelectMany(x => x.Value)
-            .Where(x => x.TalentElementId == subAbility.ParentAbilityElementId);
+            .Where(x => x.TalentElementId == ability.ParentAbilityElementId);
 
         if (matchingTalents.Any())
         {
             foreach (Talent matchedTalent in matchingTalents)
             {
-                AssignSubAbilityToLink(subAbility, matchedTalent.LinkId);
+                AssignSubAbilityToLink(ability, matchedTalent.LinkId);
             }
 
             return true;
         }
 
-        IEnumerable<Ability> matchingSubAbilities = UnknownSubAbilities
-            .SelectMany(x => x.Value)
-            .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId);
-
-        if (!matchingSubAbilities.Any())
-            return false;
-
-        foreach (Ability matchedSubAbility in matchingSubAbilities)
-        {
-            AssignSubAbilityToLink(subAbility, matchedSubAbility.LinkId);
-        }
-
-        return true;
+        return false;
     }
 }

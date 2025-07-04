@@ -14,7 +14,7 @@ public class Unit : ElementObject, IName, IDescription
     private readonly SortedDictionary<AbilityTier, List<Ability>> _abilities = [];
     private readonly SortedDictionary<LinkId, SortedDictionary<AbilityTier, List<Ability>>> _subAbilities = new(new LinkIdComparer());
 
-    // for unknown sub abilities, this is for when we don't know the parent ability id yet, most likely for talent abilities
+    // for unknown subabilities, this is for when we don't know the parent ability id yet, most likely for talent abilities or other subabilities
     private readonly SortedDictionary<AbilityTier, List<Ability>> _unknownSubAbilities = [];
 
     // for the ability tooltip appenders. For a talent element id, we will have a list of abilities (includes subabilities) that the talent affects
@@ -168,12 +168,6 @@ public class Unit : ElementObject, IName, IDescription
             innerKvp => innerKvp.Key,
             innerKvp => (IReadOnlyList<Ability>)[.. innerKvp.Value.OrderBy(x => x.AbilityType)]));
 
-    /// <summary>
-    /// Gets or sets the parent link of this unit.
-    /// </summary>
-    [JsonIgnore]
-    public string? ParentLink { get; set; }
-
     internal int TooltipTalentElementIdCount => _abilitiesByTooltipTalentElementId.Count;
 
     internal SortedDictionary<AbilityTier, List<Ability>> UnknownSubAbilities => _unknownSubAbilities;
@@ -182,35 +176,25 @@ public class Unit : ElementObject, IName, IDescription
     /// Adds an ability.
     /// </summary>
     /// <param name="ability">The <see cref="Ability"/>.</param>
-    /// <returns><see langword="true"/> if the ability was added, otherwise <see langword="false"/>.</returns>
-    public bool AddAbility(Ability ability)
+    public void AddAbility(Ability ability)
     {
         _layoutAbilityTypeByNameId.TryAdd(ability.AbilityElementId, ability.AbilityType);
 
         if (_abilities.TryGetValue(ability.Tier, out List<Ability>? abilities))
-        {
             abilities.Add(ability);
-
-            return true;
-        }
         else
-        {
             _abilities[ability.Tier] = [ability];
-
-            return true;
-        }
     }
 
     /// <summary>
-    /// Adds a sub ability if the parent ability was found as an existing ability or subability.
+    /// Adds a sub ability if the parent ability was found as an existing ability or subability, otherwise adds it to the unknown sub abilities.
     /// </summary>
     /// <param name="subAbility">The <see cref="Ability"/>.</param>
-    /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
-    public bool AddSubAbility(Ability subAbility)
+    public void AddSubAbility(Ability subAbility)
     {
         // no parent ability id, so no sub ability
         if (subAbility.ParentLinkId is null && string.IsNullOrEmpty(subAbility.ParentAbilityElementId))
-            return false;
+            return;
 
         _layoutAbilityTypeByNameId.TryAdd(subAbility.AbilityElementId, subAbility.AbilityType);
 
@@ -245,7 +229,7 @@ public class Unit : ElementObject, IName, IDescription
             else
                 UnknownSubAbilities[subAbility.Tier] = [subAbility];
 
-            return true;
+            return;
         }
 
         List<Ability> matchingAbilitiesList = [.. matchingAbilities];
@@ -254,8 +238,46 @@ public class Unit : ElementObject, IName, IDescription
         {
             AssignSubAbilityToLink(subAbility, ability.LinkId);
         }
+    }
 
-        return true;
+    /// <summary>
+    /// Adds a subability if the parent ability was found as an existing unknown ability or (other) subability.
+    /// </summary>
+    /// <param name="ability">The <see cref="Ability"/>.</param>
+    /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
+    public bool AddAsSubAbilityToSubAbility(Ability ability)
+    {
+        // check other unknown subabilities
+        IEnumerable<Ability> matchingUnknownSubAbilities = UnknownSubAbilities
+            .SelectMany(x => x.Value)
+            .Where(x => !x.Equals(ability) && x.AbilityElementId == ability.ParentAbilityElementId);
+
+        if (matchingUnknownSubAbilities.Any())
+        {
+            foreach (Ability matchedSubAbility in matchingUnknownSubAbilities)
+            {
+                AssignSubAbilityToLink(ability, matchedSubAbility.LinkId);
+            }
+
+            return true;
+        }
+
+        List<Ability> matchingSubAbilities = [.. _subAbilities
+            .SelectMany(x => x.Value)
+            .SelectMany(y => y.Value)
+            .Where(x => !x.Equals(ability) && x.AbilityElementId == ability.ParentAbilityElementId)];
+
+        if (matchingSubAbilities.Count != 0)
+        {
+            foreach (Ability matchedSubAbility in matchingSubAbilities)
+            {
+                AssignSubAbilityToLink(ability, matchedSubAbility.LinkId);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     internal void AssignSubAbilityToLink(Ability subAbility, LinkId linkId)
