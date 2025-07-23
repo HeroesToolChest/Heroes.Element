@@ -19,7 +19,17 @@ public class LinkIdConverter : JsonConverter<LinkId>
             if (!Enum.TryParse(parts[2], out AbilityType abilityType))
                 throw new JsonException();
 
-            return new LinkId(parts[0], parts[1], abilityType);
+            return new AbilityLinkId(parts[0], parts[1], abilityType);
+        }
+
+        if (parts.Length == 4)
+        {
+            if (!Enum.TryParse(parts[2], out AbilityType abilityType))
+                throw new JsonException();
+            if (!Enum.TryParse(parts[3], out TalentTier talentTier))
+                throw new JsonException();
+
+            return new TalentLinkId(parts[0], parts[1], abilityType, talentTier);
         }
 
         throw new JsonException();

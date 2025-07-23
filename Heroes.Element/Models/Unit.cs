@@ -178,8 +178,6 @@ public class Unit : ElementObject, IName, IDescription
     /// <param name="ability">The <see cref="Ability"/>.</param>
     public void AddAbility(Ability ability)
     {
-        _layoutAbilityTypeByNameId.TryAdd(ability.AbilityElementId, ability.AbilityType);
-
         if (_abilities.TryGetValue(ability.Tier, out List<Ability>? abilities))
             abilities.Add(ability);
         else
@@ -187,70 +185,66 @@ public class Unit : ElementObject, IName, IDescription
     }
 
     /// <summary>
-    /// Adds a sub ability if the parent ability was found as an existing ability or subability, otherwise adds it to the unknown sub abilities.
+    /// Adds the ability as a sub ability if the parent ability was found as an existing ability or subability, otherwise adds it to the unknown sub abilities.
     /// </summary>
-    /// <param name="subAbility">The <see cref="Ability"/>.</param>
-    public void AddSubAbility(Ability subAbility)
+    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    public void AddAsSubAbilityToAbility(Ability ability)
     {
         // no parent ability id, so no sub ability
-        if (subAbility.ParentLinkId is null && string.IsNullOrEmpty(subAbility.ParentAbilityElementId))
+        if (ability.ParentAbilityLinkId is null && string.IsNullOrEmpty(ability.ParentAbilityElementId))
             return;
-
-        _layoutAbilityTypeByNameId.TryAdd(subAbility.AbilityElementId, subAbility.AbilityType);
 
         IEnumerable<Ability> matchingAbilities;
 
-        // check both abilities and sub abilities, first ParentLinkId, then ParentAbilityElementId
-        if (subAbility.ParentLinkId is not null)
+        // check both abilities and sub abilities, first ParentAbilityLinkId, then ParentAbilityElementId
+        if (ability.ParentAbilityLinkId is not null)
         {
             matchingAbilities = _abilities
                 .SelectMany(x => x.Value)
-                .Where(x => x.LinkId.Equals(subAbility.ParentLinkId))
+                .Where(x => x.LinkId.Equals(ability.ParentAbilityLinkId))
                 .Concat(_subAbilities
                     .SelectMany(x => x.Value)
                     .SelectMany(y => y.Value)
-                    .Where(x => x.LinkId == subAbility.ParentLinkId));
+                    .Where(x => x.LinkId.Equals(ability.ParentAbilityLinkId)));
         }
         else
         {
             matchingAbilities = _abilities
                 .SelectMany(x => x.Value)
-                .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId)
+                .Where(x => x.AbilityElementId == ability.ParentAbilityElementId)
                 .Concat(_subAbilities
                     .SelectMany(x => x.Value)
                     .SelectMany(y => y.Value)
-                    .Where(x => x.AbilityElementId == subAbility.ParentAbilityElementId));
+                    .Where(x => x.AbilityElementId == ability.ParentAbilityElementId));
         }
 
         if (!matchingAbilities.Any())
         {
-            if (UnknownSubAbilities.TryGetValue(subAbility.Tier, out List<Ability>? unknownSubAbilities))
-                unknownSubAbilities.Add(subAbility);
-            else
-                UnknownSubAbilities[subAbility.Tier] = [subAbility];
+            AddAsUnknownSubAbility(ability);
 
             return;
         }
 
         List<Ability> matchingAbilitiesList = [.. matchingAbilities];
 
-        foreach (Ability ability in matchingAbilitiesList)
+        foreach (Ability matchingAbility in matchingAbilitiesList)
         {
-            AssignSubAbilityToLink(subAbility, ability.LinkId);
+            AssignSubAbilityToLink(ability, matchingAbility.LinkId);
         }
     }
 
     /// <summary>
-    /// Adds a subability if the parent ability was found as an existing unknown ability or (other) subability.
+    /// Adds the ability as a subability if the parent ability was found as an existing unknown ability or (other) subability.
     /// </summary>
-    /// <param name="ability">The <see cref="Ability"/>.</param>
-    /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
-    public bool AddAsSubAbilityToSubAbility(Ability ability)
+    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    public void AddAsSubAbilityToSubAbility(Ability ability)
     {
+        bool MatchAbility(Ability x) => !x.Equals(ability) && (x.AbilityElementId == ability.ParentAbilityElementId || x.LinkId.Equals(ability.ParentAbilityLinkId));
+
         // check other unknown subabilities
         IEnumerable<Ability> matchingUnknownSubAbilities = UnknownSubAbilities
             .SelectMany(x => x.Value)
-            .Where(x => !x.Equals(ability) && x.AbilityElementId == ability.ParentAbilityElementId);
+            .Where(MatchAbility);
 
         if (matchingUnknownSubAbilities.Any())
         {
@@ -259,13 +253,13 @@ public class Unit : ElementObject, IName, IDescription
                 AssignSubAbilityToLink(ability, matchedSubAbility.LinkId);
             }
 
-            return true;
+            return;
         }
 
         List<Ability> matchingSubAbilities = [.. _subAbilities
             .SelectMany(x => x.Value)
             .SelectMany(y => y.Value)
-            .Where(x => !x.Equals(ability) && x.AbilityElementId == ability.ParentAbilityElementId)];
+            .Where(MatchAbility)];
 
         if (matchingSubAbilities.Count != 0)
         {
@@ -274,10 +268,41 @@ public class Unit : ElementObject, IName, IDescription
                 AssignSubAbilityToLink(ability, matchedSubAbility.LinkId);
             }
 
-            return true;
+            return;
         }
+    }
 
-        return false;
+    /// <summary>
+    /// Adds an ability from the layout buttons.
+    /// </summary>
+    /// <param name="ability">The <see cref="Ability"/>.</param>
+    internal void AddLayoutAbility(Ability ability)
+    {
+        _layoutAbilityTypeByNameId.TryAdd(ability.AbilityElementId, ability.AbilityType);
+
+        AddAbility(ability);
+    }
+
+    /// <summary>
+    /// Adds the ability, that is from the layout buttons, as a sub ability if the parent ability was found as an existing ability or subability, otherwise adds it to the unknown sub abilities.
+    /// </summary>
+    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    internal void AddAsLayoutSubAbilityToAbility(Ability ability)
+    {
+        // no parent ability id, so no sub ability
+        if (ability.ParentAbilityLinkId is null && string.IsNullOrEmpty(ability.ParentAbilityElementId))
+            return;
+
+        _layoutAbilityTypeByNameId.TryAdd(ability.AbilityElementId, ability.AbilityType);
+
+        AddAsSubAbilityToAbility(ability);
+    }
+
+    internal void AssignLayoutSubAbilityToLink(Ability subAbility, LinkId linkId)
+    {
+        _layoutAbilityTypeByNameId.TryAdd(subAbility.AbilityElementId, subAbility.AbilityType);
+
+        AssignSubAbilityToLink(subAbility, linkId);
     }
 
     internal void AssignSubAbilityToLink(Ability subAbility, LinkId linkId)
@@ -300,7 +325,7 @@ public class Unit : ElementObject, IName, IDescription
 
     /// <summary>
     /// Returns a value indicating whether the ability type was found by the name id. Based on the layout buttons.
-    /// There may be duplicates of the name id, but we will only get the first one.
+    /// There may have been duplicates of the name id, but we will only save the first one.
     /// </summary>
     /// <param name="nameId">The name id (or ability id).</param>
     /// <param name="abilityType">The <see cref="AbilityType"/>.</param>
@@ -328,12 +353,12 @@ public class Unit : ElementObject, IName, IDescription
     }
 
     /// <summary>
-    /// Gets a collection of <see cref="LinkId"/>s associated with the talent element id.
+    /// Gets a collection of <see cref="AbilityLinkId"/>s associated with the talent element id.
     /// Will only return abilities that are in either abilities or subabilities.
     /// </summary>
     /// <param name="talentElementId">The talent element id.</param>
     /// <returns>A collection of <see cref="LinkId"/>s.</returns>
-    internal List<LinkId> GetTooltipAbilityLinkIdsByTalentElementId(string talentElementId)
+    internal List<AbilityLinkId> GetTooltipAbilityLinkIdsByTalentElementId(string talentElementId)
     {
         if (_abilitiesByTooltipTalentElementId.TryGetValue(talentElementId, out List<Ability>? abilities))
         {
@@ -347,5 +372,28 @@ public class Unit : ElementObject, IName, IDescription
         {
             return [];
         }
+    }
+
+    /// <summary>
+    /// Adds the ability as an unknown subability.
+    /// </summary>
+    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    internal void AddAsUnknownSubAbility(Ability ability)
+    {
+        if (UnknownSubAbilities.TryGetValue(ability.Tier, out List<Ability>? unknownSubAbilities))
+            unknownSubAbilities.Add(ability);
+        else
+            UnknownSubAbilities[ability.Tier] = [ability];
+    }
+
+    /// <summary>
+    /// Adds the ability, that is from the layout buttons, as an unknown subability.
+    /// </summary>
+    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    internal void AddAsLayoutUnknownSubAbility(Ability ability)
+    {
+        _layoutAbilityTypeByNameId.TryAdd(ability.AbilityElementId, ability.AbilityType);
+
+        AddAsUnknownSubAbility(ability);
     }
 }

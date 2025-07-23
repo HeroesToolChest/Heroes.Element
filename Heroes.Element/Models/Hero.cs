@@ -170,37 +170,39 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     /// Adds a talent.
     /// </summary>
     /// <param name="talent">The <see cref="Talent"/>.</param>
-    /// <returns><see langword="true"/> if the ability was added, otherwise <see langword="false"/>.</returns>
-    public bool AddTalent(Talent talent)
+    public void AddTalent(Talent talent)
     {
         if (_talents.TryGetValue(talent.Tier, out List<Talent>? talents))
-        {
             talents.Add(talent);
-
-            return true;
-        }
         else
-        {
             _talents[talent.Tier] = [talent];
-
-            return true;
-        }
     }
 
     /// <summary>
-    /// Adds a subability if the parent ability was found as an existing talent.
+    /// Adds the ability as a subability if the parent ability was found as an existing talent, otherwise adds it to the unknown sub abilities.
     /// </summary>
-    /// <param name="ability">The <see cref="Ability"/>.</param>
-    /// <returns><see langword="true"/> if the subability was added, otherwise <see langword="false"/>.</returns>
-    public bool AddAsSubAbilityToTalent(Ability ability)
+    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    public void AddAsSubAbilityToTalent(Ability ability)
     {
-        // no parent ability id, so no sub ability
-        if (string.IsNullOrEmpty(ability.ParentAbilityElementId))
-            return false;
+        // no parent talent id, so no sub ability
+        if (ability.ParentTalentLinkId is null && string.IsNullOrEmpty(ability.ParentTalentElementId))
+            return;
 
-        IEnumerable<Talent> matchingTalents = _talents
-            .SelectMany(x => x.Value)
-            .Where(x => x.TalentElementId == ability.ParentAbilityElementId);
+        IEnumerable<Talent> matchingTalents;
+
+        // first ParentTalentLinkId, then ParentTalentElementId
+        if (ability.ParentTalentLinkId is not null)
+        {
+            matchingTalents = _talents
+                .SelectMany(x => x.Value)
+                .Where(x => x.LinkId.Equals(ability.ParentTalentLinkId));
+        }
+        else
+        {
+            matchingTalents = _talents
+                .SelectMany(x => x.Value)
+                .Where(x => x.TalentElementId == ability.ParentTalentElementId);
+        }
 
         if (matchingTalents.Any())
         {
@@ -209,9 +211,12 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
                 AssignSubAbilityToLink(ability, matchedTalent.LinkId);
             }
 
-            return true;
+            return;
         }
 
-        return false;
+        if (UnknownSubAbilities.TryGetValue(ability.Tier, out List<Ability>? unknownSubAbilities))
+            unknownSubAbilities.Add(ability);
+        else
+            UnknownSubAbilities[ability.Tier] = [ability];
     }
 }

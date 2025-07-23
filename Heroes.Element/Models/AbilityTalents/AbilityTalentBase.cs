@@ -74,15 +74,20 @@ public abstract class AbilityTalentBase
     public bool IsActive { get; set; }
 
     /// <summary>
-    /// Gets or sets the parent ability or talent. This is the <see cref="AbilityElementId"/>.
-    /// Use <see cref="ParentLinkId"/> for a more specific reference to the parent ability or talent.
+    /// Gets or sets the parent ability. This is the <see cref="Ability.AbilityElementId"/>.
+    /// Use <see cref="ParentAbilityLinkId"/> for a more specific reference to the parent ability.
     /// </summary>
     internal string? ParentAbilityElementId { get; set; }
 
     /// <summary>
-    /// Gets or sets the parent ability or talent.
+    /// Gets or sets the parent talent. This is the <see cref="Talent.TalentElementId"/>.
+    /// Use <see cref="ParentTalentLinkId"/> for a more specific reference to the parent ability.
     /// </summary>
-    internal LinkId? ParentLinkId { get; set; }
+    internal string? ParentTalentElementId { get; set; }
+
+    internal AbilityLinkId? ParentAbilityLinkId { get; set; }
+
+    internal TalentLinkId? ParentTalentLinkId { get; set; }
 
     /// <summary>
     /// Gets a collection of summoned units.

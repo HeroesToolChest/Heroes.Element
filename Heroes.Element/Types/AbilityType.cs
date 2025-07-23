@@ -21,7 +21,7 @@ public enum AbilityType
     W = 2,
 
     /// <summary>
-    /// Indicates am E type.
+    /// Indicates an E type.
     /// </summary>
     E = 3,
 
@@ -31,14 +31,14 @@ public enum AbilityType
     Heroic = 4,
 
     /// <summary>
-    /// Indicates a Z type.
-    /// </summary>
-    Z = 5,
-
-    /// <summary>
     /// Indicates a trait type.
     /// </summary>
-    Trait = 6,
+    Trait = 5,
+
+    /// <summary>
+    /// Indicates a Z type.
+    /// </summary>
+    Z = 6,
 
     /// <summary>
     /// Indicates an active type.

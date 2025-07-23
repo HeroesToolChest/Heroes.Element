@@ -17,10 +17,17 @@ public class LinkIdComparer : IComparer<LinkId>
         if (y is null)
             return 1;
 
-        if (x.AbilityType == y.AbilityType &&
-            x.ButtonElementId.Equals(y.ButtonElementId, StringComparison.Ordinal) &&
-            x.ElementId.Equals(y.ElementId, StringComparison.Ordinal))
-            return 0;
+        if (x is TalentLinkId && y is AbilityLinkId)
+            return 1;
+        else if (x is AbilityLinkId && y is TalentLinkId)
+            return -1;
+
+        if (x is TalentLinkId talentLinkIdX && y is TalentLinkId talentLinkIdY)
+        {
+            int tierComparison = talentLinkIdX.TalentTier.CompareTo(talentLinkIdY.TalentTier);
+            if (tierComparison != 0)
+                return tierComparison;
+        }
 
         int abilityTypeComparison = x.AbilityType.CompareTo(y.AbilityType);
         if (abilityTypeComparison != 0)

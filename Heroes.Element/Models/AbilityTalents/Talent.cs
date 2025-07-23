@@ -7,10 +7,10 @@
 public class Talent : AbilityTalentBase, IEquatable<Talent>
 {
     /// <summary>
-    /// Gets a unique(ish) id for this talent. Is in the format of TalentElementId|ButtonElementId|AbilityType.
+    /// Gets a unique(ish) id for this talent. Is in the format of TalentElementId|ButtonElementId|AbilityType|TalentTier.
     /// </summary>
     [JsonPropertyOrder(-11)]
-    public LinkId LinkId => new(TalentElementId, ButtonElementId, AbilityType);
+    public TalentLinkId LinkId => new(TalentElementId, ButtonElementId, AbilityType, Tier);
 
     /// <summary>
     /// Gets or sets the id of the talent element.
@@ -54,7 +54,7 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     /// Gets the ability and talent link ids that this talent affects or upgrades.
     /// </summary>
     [JsonPropertyOrder(103)]
-    public ISet<LinkId> UpgradeLinkIds { get; } = new SortedSet<LinkId>(new LinkIdComparer());
+    public ISet<AbilityLinkId> UpgradeAbilityLinkIds { get; } = new SortedSet<AbilityLinkId>(new LinkIdComparer());
 
     /// <summary>
     /// Gets a collection of prerequisite talent ids.
