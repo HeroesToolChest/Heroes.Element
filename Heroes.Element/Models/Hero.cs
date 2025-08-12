@@ -185,23 +185,23 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     public void AddAsSubAbilityToTalent(Ability ability)
     {
         // no parent talent id, so no sub ability
-        if (ability.ParentTalentLinkId is null && string.IsNullOrEmpty(ability.ParentTalentElementId))
+        if (ability.ParentTalentLinkIds.Count < 1 && ability.ParentTalentElementIds.Count < 1)
             return;
 
         IEnumerable<Talent> matchingTalents;
 
         // first ParentTalentLinkId, then ParentTalentElementId
-        if (ability.ParentTalentLinkId is not null)
+        if (ability.ParentTalentLinkIds.Count > 0)
         {
             matchingTalents = _talents
                 .SelectMany(x => x.Value)
-                .Where(x => x.LinkId.Equals(ability.ParentTalentLinkId));
+                .Where(x => ability.ParentTalentLinkIds.Contains(x.LinkId));
         }
         else
         {
             matchingTalents = _talents
                 .SelectMany(x => x.Value)
-                .Where(x => x.TalentElementId == ability.ParentTalentElementId);
+                .Where(x => ability.ParentTalentElementIds.Contains(x.TalentElementId));
         }
 
         if (matchingTalents.Any())

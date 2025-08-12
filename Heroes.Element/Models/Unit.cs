@@ -187,35 +187,35 @@ public class Unit : ElementObject, IName, IDescription
     /// <summary>
     /// Adds the ability as a sub ability if the parent ability was found as an existing ability or subability, otherwise adds it to the unknown sub abilities.
     /// </summary>
-    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    /// <param name="ability">The <see cref="Ability"/> to be added as a sub ability.</param>
     public void AddAsSubAbilityToAbility(Ability ability)
     {
         // no parent ability id, so no sub ability
-        if (ability.ParentAbilityLinkId is null && string.IsNullOrEmpty(ability.ParentAbilityElementId))
+        if (ability.ParentAbilityLinkIds.Count < 1 && ability.ParentAbilityElementIds.Count < 1)
             return;
 
         IEnumerable<Ability> matchingAbilities;
 
         // check both abilities and sub abilities, first ParentAbilityLinkId, then ParentAbilityElementId
-        if (ability.ParentAbilityLinkId is not null)
+        if (ability.ParentAbilityLinkIds.Count > 0)
         {
             matchingAbilities = _abilities
                 .SelectMany(x => x.Value)
-                .Where(x => x.LinkId.Equals(ability.ParentAbilityLinkId))
+                .Where(x => ability.ParentAbilityLinkIds.Contains(x.LinkId))
                 .Concat(_subAbilities
                     .SelectMany(x => x.Value)
                     .SelectMany(y => y.Value)
-                    .Where(x => x.LinkId.Equals(ability.ParentAbilityLinkId)));
+                    .Where(x => ability.ParentAbilityLinkIds.Contains(x.LinkId)));
         }
         else
         {
             matchingAbilities = _abilities
                 .SelectMany(x => x.Value)
-                .Where(x => x.AbilityElementId == ability.ParentAbilityElementId)
+                .Where(x => ability.ParentAbilityElementIds.Contains(x.AbilityElementId))
                 .Concat(_subAbilities
                     .SelectMany(x => x.Value)
                     .SelectMany(y => y.Value)
-                    .Where(x => x.AbilityElementId == ability.ParentAbilityElementId));
+                    .Where(x => ability.ParentAbilityElementIds.Contains(x.AbilityElementId)));
         }
 
         if (!matchingAbilities.Any())
@@ -236,10 +236,10 @@ public class Unit : ElementObject, IName, IDescription
     /// <summary>
     /// Adds the ability as a subability if the parent ability was found as an existing unknown ability or (other) subability.
     /// </summary>
-    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
+    /// <param name="ability">The <see cref="Ability"/> to be added as a sub ability.</param>
     public void AddAsSubAbilityToSubAbility(Ability ability)
     {
-        bool MatchAbility(Ability x) => !x.Equals(ability) && (x.AbilityElementId == ability.ParentAbilityElementId || x.LinkId.Equals(ability.ParentAbilityLinkId));
+        bool MatchAbility(Ability x) => !x.Equals(ability) && (ability.ParentAbilityElementIds.Contains(x.AbilityElementId) || ability.ParentAbilityLinkIds.Contains(x.LinkId));
 
         // check other unknown subabilities
         IEnumerable<Ability> matchingUnknownSubAbilities = UnknownSubAbilities
@@ -290,7 +290,7 @@ public class Unit : ElementObject, IName, IDescription
     internal void AddAsLayoutSubAbilityToAbility(Ability ability)
     {
         // no parent ability id, so no sub ability
-        if (ability.ParentAbilityLinkId is null && string.IsNullOrEmpty(ability.ParentAbilityElementId))
+        if (ability.ParentAbilityLinkIds.Count < 1 && ability.ParentAbilityElementIds.Count < 1)
             return;
 
         _layoutAbilityTypeByNameId.TryAdd(ability.AbilityElementId, ability.AbilityType);
