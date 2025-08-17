@@ -71,7 +71,7 @@ public abstract class AbilityTalentBase
     /// <summary>
     /// Gets or sets a value indicating whether this is activable (through hotkey or auto casted).
     /// </summary>
-    public bool IsActive { get; set; }
+    internal bool IsActive { get; set; }
 
     /// <summary>
     /// Gets or sets the parent abilities. This is the <see cref="Ability.AbilityElementId"/>.
