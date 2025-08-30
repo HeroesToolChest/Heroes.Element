@@ -42,10 +42,10 @@ public class HeroPortrait : UnitPortrait
     public string DraftScreen { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets a collection of party frame file names.
+    /// Gets or sets a collection of party frame file names.
     /// </summary>
     [JsonPropertyName("partyFrames")]
-    public ICollection<string> PartyFrames { get; } = [];
+    public IList<string> PartyFrames { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the relative path of the hero select portrait that resides in CASC or on file.
@@ -78,7 +78,7 @@ public class HeroPortrait : UnitPortrait
     internal RelativeFilePath? DraftScreenPath { get; set; }
 
     /// <summary>
-    /// Gets the relative path of the party frame files that resides in CASC or on file.
+    /// Gets or sets the relative path of the party frame files that resides in CASC or on file.
     /// </summary>
-    internal IList<RelativeFilePath> PartyFramePaths { get; } = [];
+    internal IList<RelativeFilePath> PartyFramePaths { get; set; } = [];
 }

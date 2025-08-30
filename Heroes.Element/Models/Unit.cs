@@ -168,6 +168,8 @@ public class Unit : ElementObject, IName, IDescription
             innerKvp => innerKvp.Key,
             innerKvp => (IReadOnlyList<Ability>)[.. innerKvp.Value.OrderBy(x => x.AbilityType)]));
 
+    internal ISet<string> FlagArrayItems { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
+
     internal int TooltipTalentElementIdCount => _abilitiesByTooltipTalentElementId.Count;
 
     internal SortedDictionary<AbilityTier, List<Ability>> UnknownSubAbilities => _unknownSubAbilities;
