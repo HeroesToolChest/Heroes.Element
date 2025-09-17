@@ -15,7 +15,7 @@ public class Map : ElementObject, IName
     }
 
     /// <inheritdoc/>
-    public TooltipDescription? Name { get; set; }
+    public GameStringText? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the map id. This id is found in a replay's tracker events. It is not always set.

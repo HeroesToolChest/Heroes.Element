@@ -33,7 +33,7 @@ public class UnitLife
     /// Gets or sets the life type.
     /// </summary>
     [JsonPropertyName("type")]
-    public TooltipDescription? LifeType { get; set; }
+    public GameStringText? LifeType { get; set; }
 
     /// <inheritdoc/>
     public override string ToString()

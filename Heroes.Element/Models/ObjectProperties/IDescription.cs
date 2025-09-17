@@ -8,5 +8,5 @@ public interface IDescription
     /// <summary>
     /// Gets or sets the description text.
     /// </summary>
-    TooltipDescription? Description { get; set; }
+    GameStringText? Description { get; set; }
 }

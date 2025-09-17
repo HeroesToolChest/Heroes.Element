@@ -28,7 +28,6 @@ public abstract class ElementObject : IEquatable<ElementObject>, IElementObject
         {
             return $"{{{Id}}}";
         }
-
     }
 
     /// <inheritdoc/>
@@ -50,5 +49,10 @@ public abstract class ElementObject : IEquatable<ElementObject>, IElementObject
     public override int GetHashCode()
     {
         return HashCode.Combine(Id.ToUpperInvariant());
+    }
+
+    void IElementObject.SetId(string id)
+    {
+        Id = id;
     }
 }

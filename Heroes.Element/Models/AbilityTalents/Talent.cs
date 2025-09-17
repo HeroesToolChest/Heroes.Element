@@ -48,26 +48,26 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
 
     /// <summary>
     /// <para>
-    /// Gets a collection of ability and talent link ids that the talent affects or upgrades.
+    /// Gets or sets a collection of ability and talent link ids that the talent affects or upgrades.
     /// </para>
     /// <para>
     /// This property is for legacy use with HDP version older than 5.0.0.
     /// </para>
     /// </summary>
     [JsonPropertyOrder(103)]
-    public ISet<string> AbilityTalentLinkIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> AbilityTalentLinkIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets the ability ids that this talent adds to the tooltips.
+    /// Gets or sets a sorted collection of the ability ids that this talent adds to the tooltips.
     /// </summary>
     [JsonPropertyOrder(104)]
-    public ISet<AbilityLinkId> TooltipAbilityLinkIds { get; } = new SortedSet<AbilityLinkId>(new LinkIdComparer());
+    public ISet<AbilityLinkId> TooltipAbilityLinkIds { get; set; } = new SortedSet<AbilityLinkId>(new LinkIdComparer());
 
     /// <summary>
-    /// Gets a collection of prerequisite talent ids.
+    /// Gets or sets a sorted collection of prerequisite talent ids.
     /// </summary>
     [JsonPropertyOrder(105)]
-    public ISet<string> PrerequisiteTalentIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> PrerequisiteTalentIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <inheritdoc/>
     public bool Equals(Talent? other)

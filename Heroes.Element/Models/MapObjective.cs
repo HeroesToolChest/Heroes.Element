@@ -8,12 +8,12 @@ public class MapObjective
     /// <summary>
     /// Gets or sets the title.
     /// </summary>
-    public TooltipDescription? Title { get; set; }
+    public GameStringText? Title { get; set; }
 
     /// <summary>
     /// Gets or sets the description.
     /// </summary>
-    public TooltipDescription? Description { get; set; }
+    public GameStringText? Description { get; set; }
 
     /// <summary>
     /// Gets or sets the icons for this map objective.

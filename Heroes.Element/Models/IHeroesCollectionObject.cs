@@ -8,7 +8,7 @@ public interface IHeroesCollectionObject : IName, IHyperlinkId, IFranchise, IRar
     /// <summary>
     /// Gets or sets the sort name.
     /// </summary>
-    TooltipDescription? SortName { get; set; }
+    GameStringText? SortName { get; set; }
 
     /// <summary>
     /// Gets or sets the attribute id.
@@ -28,5 +28,5 @@ public interface IHeroesCollectionObject : IName, IHyperlinkId, IFranchise, IRar
     /// <summary>
     /// Gets or sets the search texts (should be space delimited).
     /// </summary>
-    TooltipDescription? SearchText { get; set; }
+    GameStringText? SearchText { get; set; }
 }

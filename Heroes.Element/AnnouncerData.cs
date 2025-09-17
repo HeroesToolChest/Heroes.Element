@@ -29,7 +29,7 @@ public class AnnouncerData
                 Converters =
                 {
                     new JsonStringEnumConverter(),
-                    new TooltipDescriptionReadConverter(StormLocale.ENUS),
+                    new GameStringTextConverter(StormLocale.ENUS),
                 },
             });
 

@@ -1,4 +1,4 @@
-﻿namespace Heroes.Element.Types;
+﻿namespace Heroes.Element.Models.Types;
 
 /// <summary>
 /// Specifies the type of rarity.

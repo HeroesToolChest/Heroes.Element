@@ -8,5 +8,5 @@ public interface IName
     /// <summary>
     /// Gets or sets the display name.
     /// </summary>
-    TooltipDescription? Name { get; set; }
+    GameStringText? Name { get; set; }
 }

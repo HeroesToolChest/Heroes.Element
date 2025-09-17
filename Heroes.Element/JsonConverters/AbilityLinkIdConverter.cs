@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.JsonConverters;
 
 /// <summary>
-/// Converter to convert <see cref="AbilityLinkId"/> to and from JSON.
+/// A converter to convert <see cref="AbilityLinkId"/> to and from JSON.
 /// </summary>
 public class AbilityLinkIdConverter : JsonConverter<AbilityLinkId>
 {

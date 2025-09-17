@@ -21,7 +21,7 @@ public class UnitEnergy
     /// Gets or sets the energy type.
     /// </summary>
     [JsonPropertyName("type")]
-    public TooltipDescription? EnergyType { get; set; }
+    public GameStringText? EnergyType { get; set; }
 
     /// <inheritdoc/>
     public override string ToString()

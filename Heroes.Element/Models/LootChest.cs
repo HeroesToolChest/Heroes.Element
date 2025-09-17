@@ -15,7 +15,7 @@ public class LootChest : ElementObject, IName, IHyperlinkId, IRarity, IEventName
     }
 
     /// <inheritdoc/>
-    public TooltipDescription? Name { get; set; }
+    public GameStringText? Name { get; set; }
 
     /// <inheritdoc/>
     public string? HyperlinkId { get; set; }
@@ -38,5 +38,5 @@ public class LootChest : ElementObject, IName, IHyperlinkId, IRarity, IEventName
 
     /// <inheritdoc/>
     [JsonPropertyOrder(101)]
-    public TooltipDescription? Description { get; set; }
+    public GameStringText? Description { get; set; }
 }

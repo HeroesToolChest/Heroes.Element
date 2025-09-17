@@ -42,15 +42,15 @@ public class UnitWeapon
     public double DamageScaling { get; set; }
 
     /// <summary>
-    /// Gets a collection of attribute factors. These are the damage value by the attribute.
+    /// Gets or sets a collection of attribute factors. These are the damage value by the attribute.
     /// </summary>
     [JsonPropertyName("damageFactors")]
-    public IDictionary<string, double> AttributeFactors { get; } = new SortedDictionary<string, double>(StringComparer.Ordinal);
+    public IDictionary<string, double> AttributeFactors { get; set; } = new SortedDictionary<string, double>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a collection of vital costs.
+    /// Gets or sets a collection of vital costs.
     /// </summary>
-    public IDictionary<VitalType, double> VitalCost { get; } = new SortedDictionary<VitalType, double>();
+    public IDictionary<VitalType, double> VitalCost { get; set; } = new SortedDictionary<VitalType, double>();
 
     /// <summary>
     /// Gets the attacks per second.

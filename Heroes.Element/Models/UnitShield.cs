@@ -39,7 +39,7 @@ public class UnitShield
     /// Gets or sets the type of shield.
     /// </summary>
     [JsonPropertyName("type")]
-    public TooltipDescription? ShieldType { get; set; }
+    public GameStringText? ShieldType { get; set; }
 
     /// <inheritdoc/>
     public override string ToString()

@@ -9,4 +9,6 @@ public interface IElementObject
     /// Gets the unique id.
     /// </summary>
     string Id { get; }
+
+    internal void SetId(string id);
 }

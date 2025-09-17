@@ -16,11 +16,11 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-110)]
-    public TooltipDescription? Name { get; set; }
+    public GameStringText? Name { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-100)]
-    public TooltipDescription? SortName { get; set; }
+    public GameStringText? SortName { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-90)]
@@ -52,9 +52,9 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
 
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]
-    public TooltipDescription? SearchText { get; set; }
+    public GameStringText? SearchText { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(101)]
-    public TooltipDescription? Description { get; set; }
+    public GameStringText? Description { get; set; }
 }

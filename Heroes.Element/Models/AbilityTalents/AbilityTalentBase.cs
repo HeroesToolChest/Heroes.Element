@@ -20,7 +20,7 @@ public abstract class AbilityTalentBase
     /// <summary>
     /// Gets or sets the name.
     /// </summary>
-    public TooltipDescription? Name { get; set; }
+    public GameStringText? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the icon.
@@ -40,27 +40,27 @@ public abstract class AbilityTalentBase
     /// <summary>
     /// Gets or sets the energy text.
     /// </summary>
-    public TooltipDescription? EnergyText { get; set; }
+    public GameStringText? EnergyText { get; set; }
 
     /// <summary>
     /// Gets or sets the life text.
     /// </summary>
-    public TooltipDescription? LifeText { get; set; }
+    public GameStringText? LifeText { get; set; }
 
     /// <summary>
     /// Gets or sets the cooldown text.
     /// </summary>
-    public TooltipDescription? CooldownText { get; set; }
+    public GameStringText? CooldownText { get; set; }
 
     /// <summary>
     /// Gets or sets the short text.
     /// </summary>
-    public TooltipDescription? ShortText { get; set; }
+    public GameStringText? ShortText { get; set; }
 
     /// <summary>
     /// Gets or sets the full text.
     /// </summary>
-    public TooltipDescription? FullText { get; set; }
+    public GameStringText? FullText { get; set; }
 
     /// <summary>
     /// Gets or sets the abilityType.

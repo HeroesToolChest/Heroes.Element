@@ -6,8 +6,6 @@
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
 public class Hero : Unit, IHeroesCollectionObject, IInfoText
 {
-    private readonly SortedDictionary<TalentTier, List<Talent>> _talents = [];
-
     /// <summary>
     /// Initializes a new instance of the <see cref="Hero"/> class.
     /// </summary>
@@ -20,7 +18,7 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-100)]
-    public TooltipDescription? SortName { get; set; }
+    public GameStringText? SortName { get; set; }
 
     /// <summary>
     /// Gets or sets the unit id.
@@ -40,7 +38,7 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     /// Gets or sets the hero title.
     /// </summary>
     [JsonPropertyOrder(-79)]
-    public TooltipDescription? Title { get; set; }
+    public GameStringText? Title { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-70)]
@@ -66,7 +64,7 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     /// Gets or sets the difficulty of the hero.
     /// </summary>
     [JsonPropertyOrder(-29)]
-    public TooltipDescription? Difficulty { get; set; }
+    public GameStringText? Difficulty { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this hero is melee.
@@ -81,16 +79,16 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     public string? DefaultMountId { get; set; }
 
     /// <summary>
-    /// Gets a unique collection roles of the hero, multiclass will be first if hero has multiple roles.
+    /// Gets or sets a unique collection roles of the hero.
     /// </summary>
     [JsonPropertyOrder(-9)]
-    public ISet<TooltipDescription> Roles { get; } = new HashSet<TooltipDescription>(new TooltipDescriptionEqualityComparer());
+    public ISet<GameStringText> Roles { get; set; } = new HashSet<GameStringText>(new GameStringTextEqualityComparer());
 
     /// <summary>
     /// Gets or sets the expanded role of the hero.
     /// </summary>
     [JsonPropertyOrder(-8)]
-    public TooltipDescription? ExpandedRole { get; set; }
+    public GameStringText? ExpandedRole { get; set; }
 
     /// <summary>
     /// Gets or sets the ratings of the hero.
@@ -111,112 +109,49 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
 
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]
-    public TooltipDescription? SearchText { get; set; }
+    public GameStringText? SearchText { get; set; }
 
     /// <summary>
     /// Gets or sets the info text of the unit.
     /// </summary>
     [JsonPropertyOrder(105)]
-    public TooltipDescription? InfoText { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(118)]
-    public override ISet<string> SummonedUnitIds => base.SummonedUnitIds
-        .Concat(_talents
-            .SelectMany(x => x.Value
-                .SelectMany(y => y.SummonedUnitIds)))
-        .Order()
-        .ToHashSet(StringComparer.Ordinal);
+    public GameStringText? InfoText { get; set; }
 
     /// <summary>
-    /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
+    /// Gets or sets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(190)]
-    public ISet<string> SkinIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> SkinIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
+    /// Gets or sets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(191)]
-    public ISet<string> VariationSkinIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> VariationSkinIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
+    /// Gets or sets a unique colection of <see cref="VoiceLine"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(192)]
-    public ISet<string> VoiceLineIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> VoiceLineIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
+    /// Gets or sets a unique collection of <see cref="Mount.MountCategory"/> ids that this hero is allowed to use.
     /// </summary>
     [JsonPropertyOrder(193)]
-    public ISet<string> MountCategoryIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> MountCategoryIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a collection of talents.
+    /// Gets or sets a collection of talents.
     /// </summary>
     [JsonPropertyOrder(220)]
-    public IReadOnlyDictionary<TalentTier, IReadOnlyList<Talent>> Talents => _talents.ToDictionary(
-        x => x.Key,
-        x => (IReadOnlyList<Talent>)[.. x.Value.OrderBy(x => x.Column)]);
+    [JsonConverter(typeof(HeroTalentsConverter))]
+    public IDictionary<TalentTier, IList<Talent>> Talents { get; set; } = new SortedDictionary<TalentTier, IList<Talent>>();
 
     /// <summary>
-    /// Gets a collection of <see cref="Unit"/>s by their id which represents other hero type units that this hero has control over.
+    /// Gets or sets a collection of <see cref="Unit"/>s by their id which represents other hero type units that this hero has control over.
     /// </summary>
     [JsonPropertyOrder(230)]
-    public IDictionary<string, Unit> HeroUnits { get; } = new Dictionary<string, Unit>(StringComparer.Ordinal);
-
-    /// <summary>
-    /// Adds a talent.
-    /// </summary>
-    /// <param name="talent">The <see cref="Talent"/>.</param>
-    public void AddTalent(Talent talent)
-    {
-        if (_talents.TryGetValue(talent.Tier, out List<Talent>? talents))
-            talents.Add(talent);
-        else
-            _talents[talent.Tier] = [talent];
-    }
-
-    /// <summary>
-    /// Adds the ability as a subability if the parent ability was found as an existing talent, otherwise adds it to the unknown sub abilities.
-    /// </summary>
-    /// <param name="ability">The <see cref="Ability"/> to be added.</param>
-    public void AddAsSubAbilityToTalent(Ability ability)
-    {
-        // no parent talent id, so no sub ability
-        if (ability.ParentTalentLinkIds.Count < 1 && ability.ParentTalentElementIds.Count < 1)
-            return;
-
-        IEnumerable<Talent> matchingTalents;
-
-        // first ParentTalentLinkId, then ParentTalentElementId
-        if (ability.ParentTalentLinkIds.Count > 0)
-        {
-            matchingTalents = _talents
-                .SelectMany(x => x.Value)
-                .Where(x => ability.ParentTalentLinkIds.Contains(x.LinkId));
-        }
-        else
-        {
-            matchingTalents = _talents
-                .SelectMany(x => x.Value)
-                .Where(x => ability.ParentTalentElementIds.Contains(x.TalentElementId));
-        }
-
-        if (matchingTalents.Any())
-        {
-            foreach (Talent matchedTalent in matchingTalents)
-            {
-                AssignSubAbilityToLink(ability, matchedTalent.LinkId);
-            }
-
-            return;
-        }
-
-        if (UnknownSubAbilities.TryGetValue(ability.Tier, out List<Ability>? unknownSubAbilities))
-            unknownSubAbilities.Add(ability);
-        else
-            UnknownSubAbilities[ability.Tier] = [ability];
-    }
+    [JsonConverter(typeof(HeroUnitsConverter))]
+    public IDictionary<string, Unit> HeroUnits { get; set; } = new Dictionary<string, Unit>(StringComparer.Ordinal);
 }
