@@ -4,13 +4,12 @@
 public class HeroesDataVersionTests
 {
     [TestMethod]
-    [DataRow(0, 0, 0, 00000)]
     [DataRow(-1, -1, -1, -1, false)]
     [DataRow(-567, -324, -23, -234234, false)]
-    public void Ctor_NegativeValues_ReturnsZeroVersion(int major, int minor, int revision, int build, bool isPtr = false)
+    public void Ctor_NegativeValues_ReturnsNegativeVersion(int major, int minor, int revision, int build, bool isPtr = false)
     {
         // arrange
-        HeroesDataVersion expected = new(0, 0, 0, 0, isPtr);
+        HeroesDataVersion expected = new(-1, -1, -1, -1, isPtr);
 
         // act
         HeroesDataVersion heroesVersion = new(major, minor, revision, build, isPtr);
@@ -314,8 +313,8 @@ public class HeroesDataVersionTests
     [TestMethod]
     [DataRow("2.34.3.34567", 2, 34, 3, 34567, false)]
     [DataRow("0.0.0.0", 0, 0, 0, 0, false)]
-    [DataRow("-12.-45.-458.-45787", 0, 0, 0, 0, false)]
-    [DataRow("-12.-45.-458.97", 0, 0, 0, 97, false)]
+    [DataRow("-12.-45.-458.-45787", -1, -1, -1, -1, false)]
+    [DataRow("-12.-45.-458.97", -1, -1, -1, 97, false)]
     [DataRow("2.34.3.34567_ptr", 2, 34, 3, 34567, true)]
     [DataRow("2.34.3.34567_PTr", 2, 34, 3, 34567, true)]
     public void TryParse_WithValidFormat_ReturnsParsedValues(string value, int major, int minor, int revision, int build, bool isPtr)
@@ -367,8 +366,8 @@ public class HeroesDataVersionTests
     [TestMethod]
     [DataRow("2.34.3.34567", 2, 34, 3, 34567, false)]
     [DataRow("0.0.0.0", 0, 0, 0, 0, false)]
-    [DataRow("-12.-45.-458.-45787", 0, 0, 0, 0, false)]
-    [DataRow("-12.-45.-458.97", 0, 0, 0, 97, false)]
+    [DataRow("-12.-45.-458.-45787", -1, -1, -1, -1, false)]
+    [DataRow("-12.-45.-458.97", -1, -1, -1, 97, false)]
     [DataRow("2.34.3.34567_ptr", 2, 34, 3, 34567, true)]
     [DataRow("2.34.3.34567_PTr", 2, 34, 3, 34567, true)]
     public void Parse_WithValidFormat_IsParsed(string value, int major, int minor, int revision, int build, bool isPtr)

@@ -15,10 +15,10 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
     /// <param name="isPtr">Value indicating if the version is a ptr version.</param>
     public HeroesDataVersion(int major, int minor, int revision, int build, bool isPtr = false)
     {
-        if (major < 0) major = 0;
-        if (minor < 0) minor = 0;
-        if (revision < 0) revision = 0;
-        if (build < 0) build = 0;
+        if (major < 0) major = -1;
+        if (minor < 0) minor = -1;
+        if (revision < 0) revision = -1;
+        if (build < 0) build = -1;
 
         Major = major;
         Minor = minor;

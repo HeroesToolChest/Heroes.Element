@@ -11,6 +11,11 @@ public class MetaProperties
     public string DataType { get; set; } = string.Empty;
 
     /// <summary>
+    /// Gets or sets the name of map the data is associated with, if applicable (e.g., "Alterac Pass", "Battlefield of Eternity").
+    /// </summary>
+    public string? MapName { get; set; }
+
+    /// <summary>
     /// Gets or sets the version of the Heroes Data.
     /// </summary>
     public HeroesDataVersion Version { get; set; } = new(-1, -1, -1, -1, true);
