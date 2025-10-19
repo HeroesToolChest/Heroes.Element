@@ -1,7 +1,9 @@
 ﻿global using Heroes.Element.Comparers;
 global using Heroes.Element.JsonConverters;
+global using Heroes.Element.JsonTypeInfoResolvers.GameStringModifier;
 global using Heroes.Element.Models;
 global using Heroes.Element.Models.AbilityTalents;
+global using Heroes.Element.Models.Meta;
 global using Heroes.Element.Models.ObjectProperties;
 global using Heroes.Element.Models.Types;
 global using Heroes.LocaleText;

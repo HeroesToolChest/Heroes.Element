@@ -1,6 +1,4 @@
-﻿using Heroes.Element.Models.Meta;
-
-namespace Heroes.Element;
+﻿namespace Heroes.Element;
 
 /// <summary>
 /// Represents the base class for processing and managing JSON-based data for elements of type <typeparamref name="T"/>.
@@ -52,7 +50,7 @@ public abstract class ElementBaseData<T> : IDisposable
     /// <summary>
     /// Gets the metadata properties associated with the JSON data.
     /// </summary>
-    public MetaProperties MetaProperties { get; }
+    public MetaDataProperties MetaProperties { get; }
 
     /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
@@ -151,15 +149,15 @@ public abstract class ElementBaseData<T> : IDisposable
         }
     }
 
-    private MetaProperties GetMetaProperties()
+    private MetaDataProperties GetMetaProperties()
     {
         if (JsonDocument.RootElement.TryGetProperty("meta", out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty("items", out _))
         {
-            return metaElement.Deserialize<MetaProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
+            return metaElement.Deserialize<MetaDataProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
         }
         else
         {
-            return new MetaProperties()
+            return new MetaDataProperties()
             {
                 IsLegacy = true,
             };

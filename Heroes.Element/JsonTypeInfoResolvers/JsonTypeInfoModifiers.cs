@@ -9,11 +9,14 @@ public class JsonTypeInfoModifiers
     /// The default modifiers.
     /// </summary>
     /// <param name="typeInfo">The <see cref="JsonTypeInfo"/>.</param>
-    public static void SerialiazationModifiers(JsonTypeInfo typeInfo)
+    /// <param name="localizedTextOption">Option to indicate the type of the localized text.</param>
+    /// <param name="gameStringElements">The collection for the saved gamestrings.</param>
+    public static void SerialiazationModifiers(JsonTypeInfo typeInfo, LocalizedTextOption localizedTextOption, GameStringElementName gameStringElements)
     {
         foreach (JsonPropertyInfo propertyInfo in typeInfo.Properties)
         {
             IEnumerableModifier(propertyInfo);
+            GameStringTextModifier(propertyInfo, localizedTextOption, gameStringElements);
 
             if (typeInfo.Type == typeof(Hero) || typeInfo.Type == typeof(Unit))
             {
@@ -58,6 +61,88 @@ public class JsonTypeInfoModifiers
             propertyInfo.ShouldSerialize = static (_, value) =>
             {
                 return value is not null && value is UnitShield unitShield && unitShield.ShieldMax > 0;
+            };
+        }
+    }
+
+    private static void GameStringTextModifier(JsonPropertyInfo propertyInfo, LocalizedTextOption localizedTextOption, GameStringElementName gameStringElements)
+    {
+        if (propertyInfo.PropertyType == typeof(GameStringText))
+        {
+            propertyInfo.ShouldSerialize = (element, value) =>
+            {
+                if (localizedTextOption != LocalizedTextOption.None)
+                {
+                    if (value is GameStringText gst)
+                        AddGameStringText(gameStringElements, element, propertyInfo, gst);
+
+                    return localizedTextOption == LocalizedTextOption.Copy;
+                }
+
+                return true;
+            };
+        }
+    }
+
+    private static void AddGameStringText(GameStringElementName gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gst)
+    {
+        string elementName;
+        string id;
+
+        if (@object is IElementObject elementObject)
+        {
+            if (elementObject is Hero)
+            {
+                elementName = "Hero";
+            }
+            else
+            {
+#if NET9_0_OR_GREATER
+                elementName = propertyInfo.DeclaringType.Name;
+#else
+                elementName = "NotSupportedInNet8";
+#endif
+            }
+
+            id = elementObject.Id;
+        }
+        else if (@object is Ability ability)
+        {
+            elementName = "AbilTalent";
+            id = ability.LinkId.ToString();
+        }
+        else if (@object is Talent talent)
+        {
+            elementName = "AbilTalent";
+            id = talent.LinkId.ToString();
+        }
+        else
+        {
+            return;
+        }
+
+        if (gameStringElements.TryGetValue(elementName, out GameStringPropertyName? gameStringPropertyName))
+        {
+            if (gameStringPropertyName.TryGetValue(propertyInfo.Name, out GameStringPropertyId? gameString))
+            {
+                gameString[id] = gst;
+            }
+            else
+            {
+                gameStringPropertyName[propertyInfo.Name] = new GameStringPropertyId()
+                {
+                    [id] = gst,
+                };
+            }
+        }
+        else
+        {
+            gameStringElements[elementName] = new GameStringPropertyName()
+            {
+                [propertyInfo.Name] = new GameStringPropertyId()
+                {
+                    [id] = gst,
+                },
             };
         }
     }

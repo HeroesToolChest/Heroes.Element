@@ -6,21 +6,21 @@ public class HeroDataTests
     private readonly string _defaultArrangeJson =
     """
     {
-        "meta": {},
-        "items": {
+      "meta": {},
+      "items": {
         "Abathur": {
-            "name": "Abathur",
-            "unitId": "HeroAbathur",
-            "hyperlinkId": "Abathur",
-            "attributeId": "Abat"
+          "name": "Abathur",
+          "unitId": "HeroAbathur",
+          "hyperlinkId": "Abathur",
+          "attributeId": "Abat"
         },
         "Alarak": {
-            "name": "Alarak",
-            "unitId": "HeroAlarak",
-            "hyperlinkId": "HeroAlarak",
-            "attributeId": "Alar"
+          "name": "Alarak",
+          "unitId": "HeroAlarak",
+          "hyperlinkId": "HeroAlarak",
+          "attributeId": "Alar"
         }
-        }
+      }
     }
     """;
 
@@ -87,11 +87,11 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        MetaProperties resultMetaProperties = heroData.MetaProperties;
+        MetaDataProperties resultMetaDataProperties = heroData.MetaProperties;
 
         // assert
-        resultMetaProperties.IsLegacy.Should().BeTrue();
-        resultMetaProperties.DataType.Should().BeEmpty();
+        resultMetaDataProperties.IsLegacy.Should().BeTrue();
+        resultMetaDataProperties.DataType.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -110,11 +110,11 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        MetaProperties resultMetaProperties = heroData.MetaProperties;
+        MetaDataProperties resultMetaDataProperties = heroData.MetaProperties;
 
         // assert
-        resultMetaProperties.IsLegacy.Should().BeTrue();
-        resultMetaProperties.DataType.Should().BeEmpty();
+        resultMetaDataProperties.IsLegacy.Should().BeTrue();
+        resultMetaDataProperties.DataType.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -127,6 +127,7 @@ public class HeroDataTests
         {
           "meta": {
             "dataType": "herodata",
+            "mapName": "map name",
             "version": {
               "major": 1,
               "minor": 2,
@@ -134,7 +135,8 @@ public class HeroDataTests
               "build": 555,
               "isPtr": true
             },
-            "isLocalizedText": true,
+            "hdpVersion": "4.5.6",
+            "localizedText": "Extract",
             "descriptionText": {
               "locale": "DEDE",
               "gameStringTextType": "RawText",
@@ -151,20 +153,23 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        MetaProperties resultMetaProperties = heroData.MetaProperties;
+        MetaDataProperties resultMetaDataProperties = heroData.MetaProperties;
 
         // assert
-        resultMetaProperties.Should().NotBeNull();
-        resultMetaProperties.DataType.Should().Be("herodata");
-        resultMetaProperties.Version.Should().Be(new HeroesDataVersion(1, 2, 33, 555, true));
-        resultMetaProperties.IsLocalizedText.Should().BeTrue();
-        resultMetaProperties.DescriptionText.Should().NotBeNull();
-        resultMetaProperties.DescriptionText!.Locale.Should().Be(StormLocale.DEDE);
-        resultMetaProperties.DescriptionText!.GameStringTextType.Should().Be(GameStringTextType.RawText);
-        resultMetaProperties.DescriptionText!.ReplaceFontStyles.Should().BeTrue();
-        resultMetaProperties.DescriptionText!.PreserveFontStyleConstantVars.Should().BeTrue();
-        resultMetaProperties.DescriptionText!.PreserveFontStyleVars.Should().BeTrue();
-        resultMetaProperties.IsLegacy.Should().BeFalse();
+        resultMetaDataProperties.Should().NotBeNull();
+        resultMetaDataProperties.DataType.Should().Be("herodata");
+        resultMetaDataProperties.MapName.Should().Be("map name");
+        resultMetaDataProperties.Version.Should().Be(new HeroesDataVersion(1, 2, 33, 555, true));
+        resultMetaDataProperties.HdpVersion.Should().Be("4.5.6");
+        resultMetaDataProperties.LocalizedText.Should().Be(LocalizedTextOption.Extract);
+        resultMetaDataProperties.DescriptionText.Should().NotBeNull();
+        resultMetaDataProperties.DescriptionText!.Locale.Should().Be(StormLocale.DEDE);
+        resultMetaDataProperties.DescriptionText!.GameStringTextType.Should().Be(GameStringTextType.RawText);
+        resultMetaDataProperties.DescriptionText!.ReplaceFontStyles.Should().BeTrue();
+        resultMetaDataProperties.DescriptionText!.PreserveFontStyleConstantVars.Should().BeTrue();
+        resultMetaDataProperties.DescriptionText!.PreserveFontStyleVars.Should().BeTrue();
+        resultMetaDataProperties.TotalItems.Should().Be(0);
+        resultMetaDataProperties.IsLegacy.Should().BeFalse();
     }
 
     [TestMethod]
