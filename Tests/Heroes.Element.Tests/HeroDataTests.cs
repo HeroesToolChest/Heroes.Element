@@ -128,13 +128,7 @@ public class HeroDataTests
           "meta": {
             "dataType": "herodata",
             "mapName": "map name",
-            "version": {
-              "major": 1,
-              "minor": 2,
-              "revision": 33,
-              "build": 555,
-              "isPtr": true
-            },
+            "heroesVersion": "1.2.33.555_ptr",
             "hdpVersion": "4.5.6",
             "localizedText": "Extract",
             "descriptionText": {
@@ -159,7 +153,7 @@ public class HeroDataTests
         resultMetaDataProperties.Should().NotBeNull();
         resultMetaDataProperties.DataType.Should().Be("herodata");
         resultMetaDataProperties.MapName.Should().Be("map name");
-        resultMetaDataProperties.Version.Should().Be(new HeroesDataVersion(1, 2, 33, 555, true));
+        resultMetaDataProperties.HeroesVersion.Should().Be("1.2.33.555_ptr");
         resultMetaDataProperties.HdpVersion.Should().Be("4.5.6");
         resultMetaDataProperties.LocalizedText.Should().Be(LocalizedTextOption.Extract);
         resultMetaDataProperties.DescriptionText.Should().NotBeNull();
