@@ -269,25 +269,25 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
         if (value.IsEmpty)
             return false;
 
-        string sString = value.ToString();
+        Span<Range> buffer = stackalloc Range[value.Length];
 
-        string[] values = sString.Split('.', StringSplitOptions.RemoveEmptyEntries);
+        int size = value.Split(buffer, '.', StringSplitOptions.RemoveEmptyEntries);
 
-        if (values.Length != 4)
+        if (size != 4)
             return false;
 
-        if (int.TryParse(values[0], out int major) &&
-            int.TryParse(values[1], out int minor) &&
-            int.TryParse(values[2], out int revision))
+        if (int.TryParse(value[buffer[0]], out int major) &&
+            int.TryParse(value[buffer[1]], out int minor) &&
+            int.TryParse(value[buffer[2]], out int revision))
         {
-            int indexPtr = values[3].IndexOf('_', StringComparison.OrdinalIgnoreCase);
+            ReadOnlySpan<char> buildSpan = value[buffer[3]];
+
+            int indexPtr = buildSpan.IndexOf('_');
 
             int build;
 
             if (indexPtr > 0)
             {
-                ReadOnlySpan<char> buildSpan = values[3].AsSpan();
-
                 if (int.TryParse(buildSpan[..indexPtr], out build) &&
                     buildSpan[(indexPtr + 1)..].Equals("ptr", StringComparison.OrdinalIgnoreCase))
                 {
@@ -295,7 +295,7 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
                     return true;
                 }
             }
-            else if (int.TryParse(values[3], out build))
+            else if (int.TryParse(buildSpan, out build))
             {
                 result = new HeroesDataVersion(major, minor, revision, build);
                 return true;
