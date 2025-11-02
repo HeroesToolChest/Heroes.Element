@@ -71,6 +71,9 @@ public class JsonTypeInfoModifiers
         {
             propertyInfo.ShouldSerialize = (element, value) =>
             {
+                if (value is null)
+                    return false;
+
                 if (localizedTextOption != LocalizedTextOption.None)
                 {
                     if (value is GameStringText gst)
@@ -84,7 +87,7 @@ public class JsonTypeInfoModifiers
         }
     }
 
-    private static void AddGameStringText(GameStringElementName gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gst)
+    private static void AddGameStringText(GameStringElementName gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText)
     {
         string elementName;
         string id;
@@ -125,13 +128,13 @@ public class JsonTypeInfoModifiers
         {
             if (gameStringPropertyName.TryGetValue(propertyInfo.Name, out GameStringPropertyId? gameString))
             {
-                gameString[id] = gst;
+                gameString[id] = gameStringText;
             }
             else
             {
                 gameStringPropertyName[propertyInfo.Name] = new GameStringPropertyId()
                 {
-                    [id] = gst,
+                    [id] = gameStringText,
                 };
             }
         }
@@ -141,7 +144,7 @@ public class JsonTypeInfoModifiers
             {
                 [propertyInfo.Name] = new GameStringPropertyId()
                 {
-                    [id] = gst,
+                    [id] = gameStringText,
                 },
             };
         }
