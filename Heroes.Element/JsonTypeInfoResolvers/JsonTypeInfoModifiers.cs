@@ -95,17 +95,9 @@ public class JsonTypeInfoModifiers
         if (@object is IElementObject elementObject)
         {
             if (elementObject is Hero)
-            {
                 elementName = "Hero";
-            }
             else
-            {
-#if NET9_0_OR_GREATER
                 elementName = propertyInfo.DeclaringType.Name;
-#else
-                elementName = "NotSupportedInNet8";
-#endif
-            }
 
             id = elementObject.Id;
         }

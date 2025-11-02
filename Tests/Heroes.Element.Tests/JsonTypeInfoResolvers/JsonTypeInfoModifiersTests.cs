@@ -229,7 +229,6 @@ public class JsonTypeInfoModifiersTests
         gameStringElements.Should().BeEmpty();
     }
 
-#if NET9_0_OR_GREATER
     [TestMethod]
     public void SerializationModifiers_PropertyIsIElementObject_GameStringElementHasPropertyName()
     {
@@ -248,7 +247,6 @@ public class JsonTypeInfoModifiersTests
         // assert
         gameStringElements["Unit"]["name"]["unitId"].RawText.Should().Be("value");
     }
-#endif
 
     [TestMethod]
     public void SerializationModifiers_PropertyIsHero_GameStringElementHasPropertyName()
@@ -337,7 +335,6 @@ public class JsonTypeInfoModifiersTests
         gameStringElements["AbilTalent"]["name"]["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
     }
 
-#if NET9_0_OR_GREATER
     [TestMethod]
     public void SerializationModifiers_SerializingMultipleElements_SetsGameStringElements()
     {
@@ -364,7 +361,6 @@ public class JsonTypeInfoModifiersTests
         gameStringElements["Unit"]["name"]["unitId2"].RawText.Should().Be("value2");
         gameStringElements["Unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
     }
-#endif
 
     private static JsonSerializerOptions GetExtractSerializerOptions(GameStringElementName gameStringElements, LocalizedTextOption localizedTextOption)
     {
