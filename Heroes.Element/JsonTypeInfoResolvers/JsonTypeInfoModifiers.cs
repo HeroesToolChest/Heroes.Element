@@ -11,7 +11,7 @@ public class JsonTypeInfoModifiers
     /// <param name="typeInfo">The <see cref="JsonTypeInfo"/>.</param>
     /// <param name="localizedTextOption">Option to indicate the type of the localized text.</param>
     /// <param name="gameStringElements">The collection for the saved gamestrings.</param>
-    public static void SerialiazationModifiers(JsonTypeInfo typeInfo, LocalizedTextOption localizedTextOption, GameStringElementName gameStringElements)
+    public static void SerializationModifiers(JsonTypeInfo typeInfo, LocalizedTextOption localizedTextOption, GameStringElementName gameStringElements)
     {
         foreach (JsonPropertyInfo propertyInfo in typeInfo.Properties)
         {

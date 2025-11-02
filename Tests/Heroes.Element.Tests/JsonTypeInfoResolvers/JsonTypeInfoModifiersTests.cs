@@ -4,7 +4,7 @@
 public class JsonTypeInfoModifiersTests
 {
     [TestMethod]
-    public void SerialiazationModifiers_IEnumerableHasValue_PropertyShouldBeSerialized()
+    public void SerializationModifiers_IEnumerableHasValue_PropertyShouldBeSerialized()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -24,7 +24,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_IEnumerableHasNoValue_PropertyShouldNotBeSerialized()
+    public void SerializationModifiers_IEnumerableHasNoValue_PropertyShouldNotBeSerialized()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -43,7 +43,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_HeroProtraitPartyFrames_PropertyShouldBeSerialized()
+    public void SerializationModifiers_HeroProtraitPartyFrames_PropertyShouldBeSerialized()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -64,7 +64,7 @@ public class JsonTypeInfoModifiersTests
     [TestMethod]
     [DataRow(0.0, 0.0, 0.0, false)]
     [DataRow(1, 1, 1, true)]
-    public void SerialiazationModifiers_LifeEnergyShieldModifiers_(double life, double energy, double shield, bool shouldSerialize)
+    public void SerializationModifiers_LifeEnergyShieldModifiers_(double life, double energy, double shield, bool shouldSerialize)
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -98,7 +98,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_ExtractGameStringTextPropertyIsNull_PropertyShouldNotBeExtracted()
+    public void SerializationModifiers_ExtractGameStringTextPropertyIsNull_PropertyShouldNotBeExtracted()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -120,7 +120,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_ExtractGameStringTextPropertyHasValue_PropertyShouldBeExtracted()
+    public void SerializationModifiers_ExtractGameStringTextPropertyHasValue_PropertyShouldBeExtracted()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -142,7 +142,29 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_CopyGameStringTextPropertyIsNull_PropertyShouldNotBeCopied()
+    public void SerializationModifiers_NoneGameStringTextPropertyIsNull_PropertyShouldNotBeCopied()
+    {
+        // arrange
+        GameStringElementName gameStringElements = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.None);
+
+        Hero hero = new("id")
+        {
+            Name = null,
+        };
+
+        string json = JsonSerializer.Serialize(hero, jsonSerializerOptions);
+
+        // act
+        JsonDocument jsonDocument = JsonDocument.Parse(json); // read the result json to verify the SerialiazationModifiers
+
+        // assert
+        jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeFalse();
+        gameStringElements.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_CopyGameStringTextPropertyIsNull_PropertyShouldNotBeCopied()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -159,12 +181,12 @@ public class JsonTypeInfoModifiersTests
         JsonDocument jsonDocument = JsonDocument.Parse(json); // read the result json to verify the SerialiazationModifiers
 
         // assert
-        jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeTrue();
+        jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeFalse();
         gameStringElements.Should().BeEmpty();
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_CopyGameStringTextPropertyHasValue_PropertyShouldBeCopied()
+    public void SerializationModifiers_CopyGameStringTextPropertyHasValue_PropertyShouldBeCopied()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -186,7 +208,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_NoneGameStringTextPropertyHasValue_PropertyShouldNotBeExtracted()
+    public void SerializationModifiers_NoneGameStringTextPropertyHasValue_PropertyShouldNotBeExtracted()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -209,7 +231,7 @@ public class JsonTypeInfoModifiersTests
 
 #if NET9_0_OR_GREATER
     [TestMethod]
-    public void SerialiazationModifiers_PropertyIsIElementObject_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsIElementObject_GameStringElementHasPropertyName()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -229,7 +251,7 @@ public class JsonTypeInfoModifiersTests
 #endif
 
     [TestMethod]
-    public void SerialiazationModifiers_PropertyIsHero_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsHero_GameStringElementHasPropertyName()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -248,7 +270,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_PropertyIsAbility_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsAbility_GameStringElementHasPropertyName()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -281,7 +303,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerialiazationModifiers_PropertyIsTalent_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsTalent_GameStringElementHasPropertyName()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -317,7 +339,7 @@ public class JsonTypeInfoModifiersTests
 
 #if NET9_0_OR_GREATER
     [TestMethod]
-    public void SerialiazationModifiers_SerializingMultipleElements_SetsGameStringElements()
+    public void SerializationModifiers_SerializingMultipleElements_SetsGameStringElements()
     {
         // arrange
         GameStringElementName gameStringElements = [];
@@ -361,7 +383,7 @@ public class JsonTypeInfoModifiersTests
             {
                 Modifiers =
                 {
-                    typeInfo => JsonTypeInfoModifiers.SerialiazationModifiers(typeInfo, localizedTextOption, gameStringElements),
+                    typeInfo => JsonTypeInfoModifiers.SerializationModifiers(typeInfo, localizedTextOption, gameStringElements),
                 },
             },
         };
