@@ -17,7 +17,7 @@ public class HeroDataTests
         "Alarak": {
           "name": "Alarak",
           "unitId": "HeroAlarak",
-          "hyperlinkId": "HeroAlarak",
+          "hyperlinkId": "HeroAlarak(hyperlink)",
           "attributeId": "Alar"
         }
       }
@@ -990,12 +990,148 @@ public class HeroDataTests
         act.Should().Throw<KeyNotFoundException>();
     }
 
+    [TestMethod]
+    public void TryGetHeroByHyperlinkId_Found_ReturnsTrue()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        bool result = heroData.TryGetHeroByHyperlinkId("HeroAlarak(hyperlink)", out Hero? hero);
+
+        // assert
+        result.Should().BeTrue();
+        hero.Should().NotBeNull();
+
+        AlarakBasicAssertions(hero);
+    }
+
+    [TestMethod]
+    public void TryGetHeroByHyperlinkId_NotFound_ReturnsFalse()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        bool result = heroData.TryGetHeroByHyperlinkId("other", out Hero? hero);
+
+        // assert
+        result.Should().BeFalse();
+        hero.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void GetHeroByHyperlinkId_Found_ReturnsObject()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        Hero hero = heroData.GetHeroByHyperlinkId("HeroAlarak(hyperlink)");
+
+        // assert
+        AlarakBasicAssertions(hero);
+    }
+
+    [TestMethod]
+    public void GetHeroByHyperlinkId_NotFound_ThrowsException()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        Action act = () => heroData.GetHeroByHyperlinkId("other");
+
+        // assert
+        act.Should().Throw<KeyNotFoundException>();
+    }
+
+    [TestMethod]
+    public void TryGetHeroByAttributeId_Found_ReturnsTrue()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        bool result = heroData.TryGetHeroByAttributeId("Alar", out Hero? hero);
+
+        // assert
+        result.Should().BeTrue();
+        hero.Should().NotBeNull();
+
+        AlarakBasicAssertions(hero);
+    }
+
+    [TestMethod]
+    public void TryGetHeroByAttributeId_NotFound_ReturnsFalse()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        bool result = heroData.TryGetHeroByAttributeId("other", out Hero? hero);
+
+        // assert
+        result.Should().BeFalse();
+        hero.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void GetHeroByAttributeId_Found_ReturnsObject()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        Hero hero = heroData.GetHeroByAttributeId("Alar");
+
+        // assert
+        AlarakBasicAssertions(hero);
+    }
+
+    [TestMethod]
+    public void GetHeroByAttributeId_NotFound_ThrowsException()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        Action act = () => heroData.GetHeroByAttributeId("other");
+
+        // assert
+        act.Should().Throw<KeyNotFoundException>();
+    }
+
     private static void AlarakBasicAssertions(Hero hero)
     {
         hero.Id.Should().Be("Alarak");
         hero.Name!.RawText.Should().Be("Alarak");
         hero.UnitId.Should().Be("HeroAlarak");
-        hero.HyperlinkId.Should().Be("HeroAlarak");
+        hero.HyperlinkId.Should().Be("HeroAlarak(hyperlink)");
         hero.AttributeId.Should().Be("Alar");
     }
 }

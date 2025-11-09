@@ -119,8 +119,6 @@ public abstract class ElementBaseData<T> : IDisposable
     /// <summary>
     /// Releases the unmanaged resources used by the object and, optionally, releases the managed resources.
     /// </summary>
-    /// <remarks>This method is called by the public <c>Dispose</c> method and the finalizer.
-    /// When <paramref name="disposing"/> is <see langword="true"/>, this method releases all resources held by managed objects that the object references. Override this method in a derived class to release additional resources.</remarks>
     /// <param name="disposing"><see langword="true"/> to release both managed and unmanaged resources; <see langword="false"/> to release only unmanaged resources.</param>
     protected virtual void Dispose(bool disposing)
     {
