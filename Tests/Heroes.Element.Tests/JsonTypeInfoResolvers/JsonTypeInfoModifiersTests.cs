@@ -7,8 +7,8 @@ public class JsonTypeInfoModifiersTests
     public void SerializationModifiers_IEnumerableHasValue_PropertyShouldBeSerialized()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("id");
         hero.Attributes.Add("attr1");
@@ -27,8 +27,8 @@ public class JsonTypeInfoModifiersTests
     public void SerializationModifiers_IEnumerableHasNoValue_PropertyShouldNotBeSerialized()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("id");
         hero.Attributes.Clear();
@@ -46,8 +46,8 @@ public class JsonTypeInfoModifiersTests
     public void SerializationModifiers_HeroProtraitPartyFrames_PropertyShouldBeSerialized()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("id");
         hero.HeroPortraits.PartyFrames.Clear();
@@ -67,8 +67,8 @@ public class JsonTypeInfoModifiersTests
     public void SerializationModifiers_LifeEnergyShieldModifiers_(double life, double energy, double shield, bool shouldSerialize)
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("id");
         {
@@ -101,8 +101,8 @@ public class JsonTypeInfoModifiersTests
     public void SerializationModifiers_ExtractGameStringTextPropertyIsNull_PropertyShouldNotBeExtracted()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("id")
         {
@@ -116,15 +116,15 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeFalse();
-        gameStringElements.Should().BeEmpty();
+        gameStringItemDictionary.Should().BeEmpty();
     }
 
     [TestMethod]
     public void SerializationModifiers_ExtractGameStringTextPropertyHasValue_PropertyShouldBeExtracted()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("id")
         {
@@ -138,15 +138,15 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeFalse();
-        gameStringElements.Should().ContainSingle();
+        gameStringItemDictionary.Should().ContainSingle();
     }
 
     [TestMethod]
     public void SerializationModifiers_NoneGameStringTextPropertyIsNull_PropertyShouldNotBeCopied()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.None);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.None);
 
         Hero hero = new("id")
         {
@@ -160,15 +160,15 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeFalse();
-        gameStringElements.Should().BeEmpty();
+        gameStringItemDictionary.Should().BeEmpty();
     }
 
     [TestMethod]
     public void SerializationModifiers_CopyGameStringTextPropertyIsNull_PropertyShouldNotBeCopied()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Copy);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Copy);
 
         Hero hero = new("id")
         {
@@ -182,15 +182,15 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeFalse();
-        gameStringElements.Should().BeEmpty();
+        gameStringItemDictionary.Should().BeEmpty();
     }
 
     [TestMethod]
     public void SerializationModifiers_CopyGameStringTextPropertyHasValue_PropertyShouldBeCopied()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Copy);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Copy);
 
         Hero hero = new("id")
         {
@@ -204,15 +204,15 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeTrue();
-        gameStringElements.Should().ContainSingle();
+        gameStringItemDictionary.Should().ContainSingle();
     }
 
     [TestMethod]
     public void SerializationModifiers_NoneGameStringTextPropertyHasValue_PropertyShouldNotBeExtracted()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.None);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.None);
 
         Hero hero = new("id")
         {
@@ -226,15 +226,15 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         jsonDocument.RootElement.TryGetProperty("name", out _).Should().BeTrue();
-        gameStringElements.Should().BeEmpty();
+        gameStringItemDictionary.Should().BeEmpty();
     }
 
     [TestMethod]
-    public void SerializationModifiers_PropertyIsIElementObject_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsIElementObject_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Unit unit = new("unitId")
         {
@@ -242,18 +242,18 @@ public class JsonTypeInfoModifiersTests
         };
 
         // act
-        JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringElements
+        JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringElements["Unit"]["name"]["unitId"].RawText.Should().Be("value");
+        gameStringItemDictionary["Unit"]["name"]["unitId"].RawText.Should().Be("value");
     }
 
     [TestMethod]
-    public void SerializationModifiers_PropertyIsHero_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsHero_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("heroId")
         {
@@ -261,18 +261,18 @@ public class JsonTypeInfoModifiersTests
         };
 
         // act
-        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringElements
+        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringElements["Hero"]["name"]["heroId"].RawText.Should().Be("heroName");
+        gameStringItemDictionary["Hero"]["name"]["heroId"].RawText.Should().Be("heroName");
     }
 
     [TestMethod]
-    public void SerializationModifiers_PropertyIsAbility_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsAbility_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Unit unit = new("unitId")
         {
@@ -294,18 +294,18 @@ public class JsonTypeInfoModifiersTests
         };
 
         // act
-        JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringElements
+        JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringElements["AbilTalent"]["name"]["abil1|button1|Q"].RawText.Should().Be("value");
+        gameStringItemDictionary["AbilTalent"]["name"]["abil1|button1|Q"].RawText.Should().Be("value");
     }
 
     [TestMethod]
-    public void SerializationModifiers_PropertyIsTalent_GameStringElementHasPropertyName()
+    public void SerializationModifiers_PropertyIsTalent_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Hero hero = new("heroId")
         {
@@ -329,18 +329,78 @@ public class JsonTypeInfoModifiersTests
         };
 
         // act
-        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringElements
+        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringElements["AbilTalent"]["name"]["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
+        gameStringItemDictionary["AbilTalent"]["name"]["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
     }
 
     [TestMethod]
-    public void SerializationModifiers_SerializingMultipleElements_SetsGameStringElements()
+    public void SerializationModifiers_UnitInnerGameStringTextProperties_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
-        GameStringElementName gameStringElements = [];
-        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringElements, LocalizedTextOption.Extract);
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Hero hero = new("heroId")
+        {
+            Name = new GameStringText("heroName"),
+            Life =
+            {
+                LifeMax = 110,
+                LifeType = new GameStringText("Health"),
+            },
+            Energy =
+            {
+                EnergyMax = 120,
+                EnergyType = new GameStringText("Energy"),
+            },
+            Shield =
+            {
+                ShieldMax = 130,
+                ShieldType = new GameStringText("Shield"),
+            },
+        };
+
+        // act
+        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["Unit"]["lifeType"]["heroId"].RawText.Should().Be("Health");
+        gameStringItemDictionary["Unit"]["energyType"]["heroId"].RawText.Should().Be("Energy");
+        gameStringItemDictionary["Unit"]["shieldType"]["heroId"].RawText.Should().Be("Shield");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_IEnumerableGameStringText_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Hero hero = new("heroId")
+        {
+            Name = new GameStringText("heroName"),
+            Roles =
+            {
+                new GameStringText("Role1"),
+                new GameStringText("Role2"),
+            },
+        };
+
+        // act
+        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["Hero"]["roles"]["heroId"].RawText.Should().Be("Role1,Role2");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_SerializingMultipleElements_SetsGameStringItemDictionary()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
         Unit unit1 = new("unitId1")
         {
@@ -357,12 +417,12 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit2, jsonSerializerOptions);
 
         // assert
-        gameStringElements["Unit"]["name"]["unitId1"].RawText.Should().Be("value1");
-        gameStringElements["Unit"]["name"]["unitId2"].RawText.Should().Be("value2");
-        gameStringElements["Unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
+        gameStringItemDictionary["Unit"]["name"]["unitId1"].RawText.Should().Be("value1");
+        gameStringItemDictionary["Unit"]["name"]["unitId2"].RawText.Should().Be("value2");
+        gameStringItemDictionary["Unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
     }
 
-    private static JsonSerializerOptions GetExtractSerializerOptions(GameStringElementName gameStringElements, LocalizedTextOption localizedTextOption)
+    private static JsonSerializerOptions GetExtractSerializerOptions(GameStringItemDictionary gameStringItemDictionary, LocalizedTextOption localizedTextOption)
     {
         JsonSerializerOptions jsonSerializerOptions = new()
         {
@@ -379,7 +439,7 @@ public class JsonTypeInfoModifiersTests
             {
                 Modifiers =
                 {
-                    typeInfo => JsonTypeInfoModifiers.SerializationModifiers(typeInfo, localizedTextOption, gameStringElements),
+                    typeInfo => JsonTypeInfoModifiers.SerializationModifiers(typeInfo, localizedTextOption, gameStringItemDictionary),
                 },
             },
         };

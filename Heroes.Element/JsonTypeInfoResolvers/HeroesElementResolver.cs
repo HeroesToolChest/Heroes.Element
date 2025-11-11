@@ -1,5 +1,10 @@
-﻿namespace Heroes.Element.JsonTypeInfoResolvers;
+﻿using GstInnerProperty = Heroes.Element.JsonTypeInfoResolvers.GameStringModifier.GameStringTextExtractorProperties;
 
+namespace Heroes.Element.JsonTypeInfoResolvers;
+
+/// <summary>
+/// Class for the custom heroes json type info resolver.
+/// </summary>
 public class HeroesElementResolver : DefaultJsonTypeInfoResolver
 {
     /// <inheritdoc/>
@@ -7,13 +12,30 @@ public class HeroesElementResolver : DefaultJsonTypeInfoResolver
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
-        //if (type == typeof(Hero))
-        //{
-        //    JsonPropertyInfo? propertyToRemove = jsonTypeInfo.Properties.FirstOrDefault(p => p.Name == nameof(Unit.UnitPortraits));
+        // attach owner (Unit/Hero) to nested value objects
+        if (typeof(Unit).IsAssignableFrom(type))
+        {
+            foreach (JsonPropertyInfo p in jsonTypeInfo.Properties)
+            {
+                if (p.PropertyType == GstInnerProperty.UnitLife.Type || p.PropertyType == GstInnerProperty.UnitEnergy.Type || p.PropertyType == GstInnerProperty.UnitShield.Type)
+                {
+                    Func<object, object?>? originalGet = p.Get;
+                    if (originalGet is null)
+                        continue;
 
-        //    if (propertyToRemove != null)
-        //        jsonTypeInfo.Properties.Remove(propertyToRemove);
-        //}
+                    p.Get = obj =>
+                    {
+                        object? value = originalGet(obj);
+                        if (value is not null && obj is IElementObject owner)
+                        {
+                            GameStringTextExtractor.SetOwner(value, owner);
+                        }
+
+                        return value;
+                    };
+                }
+            }
+        }
 
         return jsonTypeInfo;
     }

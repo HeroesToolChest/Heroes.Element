@@ -10,13 +10,13 @@ public class JsonTypeInfoModifiers
     /// </summary>
     /// <param name="typeInfo">The <see cref="JsonTypeInfo"/>.</param>
     /// <param name="localizedTextOption">Option to indicate the type of the localized text.</param>
-    /// <param name="gameStringElements">The collection for the saved gamestrings.</param>
-    public static void SerializationModifiers(JsonTypeInfo typeInfo, LocalizedTextOption localizedTextOption, GameStringElementName gameStringElements)
+    /// <param name="gameStringItemDictionary">The collection for the saved gamestrings.</param>
+    public static void SerializationModifiers(JsonTypeInfo typeInfo, LocalizedTextOption localizedTextOption, GameStringItemDictionary gameStringItemDictionary)
     {
         foreach (JsonPropertyInfo propertyInfo in typeInfo.Properties)
         {
             IEnumerableModifier(propertyInfo);
-            GameStringTextModifier(propertyInfo, localizedTextOption, gameStringElements);
+            GameStringTextModifier(propertyInfo, localizedTextOption, gameStringItemDictionary);
 
             if (typeInfo.Type == typeof(Hero) || typeInfo.Type == typeof(Unit))
             {
@@ -65,80 +65,30 @@ public class JsonTypeInfoModifiers
         }
     }
 
-    private static void GameStringTextModifier(JsonPropertyInfo propertyInfo, LocalizedTextOption localizedTextOption, GameStringElementName gameStringElements)
+    private static void GameStringTextModifier(JsonPropertyInfo propertyInfo, LocalizedTextOption localizedTextOption, GameStringItemDictionary gameStringItemDictionary)
     {
-        if (propertyInfo.PropertyType == typeof(GameStringText))
-        {
-            propertyInfo.ShouldSerialize = (element, value) =>
-            {
-                if (value is null)
-                    return false;
-
-                if (localizedTextOption != LocalizedTextOption.None)
-                {
-                    if (value is GameStringText gst)
-                        AddGameStringText(gameStringElements, element, propertyInfo, gst);
-
-                    return localizedTextOption == LocalizedTextOption.Copy;
-                }
-
-                return true;
-            };
-        }
-    }
-
-    private static void AddGameStringText(GameStringElementName gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText)
-    {
-        string elementName;
-        string id;
-
-        if (@object is IElementObject elementObject)
-        {
-            if (elementObject is Hero)
-                elementName = "Hero";
-            else
-                elementName = propertyInfo.DeclaringType.Name;
-
-            id = elementObject.Id;
-        }
-        else if (@object is Ability ability)
-        {
-            elementName = "AbilTalent";
-            id = ability.LinkId.ToString();
-        }
-        else if (@object is Talent talent)
-        {
-            elementName = "AbilTalent";
-            id = talent.LinkId.ToString();
-        }
-        else
-        {
+        if (propertyInfo.PropertyType != typeof(GameStringText) && propertyInfo.PropertyType != typeof(ISet<GameStringText>))
             return;
-        }
 
-        if (gameStringElements.TryGetValue(elementName, out GameStringPropertyName? gameStringPropertyName))
+        propertyInfo.ShouldSerialize = (element, value) =>
         {
-            if (gameStringPropertyName.TryGetValue(propertyInfo.Name, out GameStringPropertyId? gameString))
+            if (value is null)
+                return false;
+
+            if (localizedTextOption == LocalizedTextOption.None)
+                return true;
+
+            if (value is GameStringText gameStringText)
             {
-                gameString[id] = gameStringText;
+                GameStringTextExtractor.AddGameStringText(gameStringItemDictionary, element, propertyInfo, gameStringText);
             }
-            else
+            else if (value is ISet<GameStringText> gameStringTextCollection)
             {
-                gameStringPropertyName[propertyInfo.Name] = new GameStringPropertyId()
-                {
-                    [id] = gameStringText,
-                };
+                foreach (GameStringText gameStringTextItem in gameStringTextCollection)
+                    GameStringTextExtractor.AddGameStringText(gameStringItemDictionary, element, propertyInfo, gameStringTextItem);
             }
-        }
-        else
-        {
-            gameStringElements[elementName] = new GameStringPropertyName()
-            {
-                [propertyInfo.Name] = new GameStringPropertyId()
-                {
-                    [id] = gameStringText,
-                },
-            };
-        }
+
+            return localizedTextOption == LocalizedTextOption.Copy;
+        };
     }
 }
