@@ -405,11 +405,41 @@ public class JsonTypeInfoModifiersTests
         Unit unit1 = new("unitId1")
         {
             Name = new GameStringText("value1"),
+            Abilities =
+            {
+                {
+                    AbilityTier.Mount,
+                    [
+                        new Ability()
+                        {
+                            AbilityElementId = "Mount",
+                            ButtonElementId = "SummonMount",
+                            AbilityType = AbilityType.Z,
+                            CooldownText = new GameStringText("Cooldown: 4 seconds"),
+                        }
+                    ]
+                },
+            },
         };
         Unit unit2 = new("unitId2")
         {
             Name = new GameStringText("value2"),
             Description = new GameStringText("desc2"),
+            Abilities =
+            {
+                {
+                    AbilityTier.Mount,
+                    [
+                        new Ability()
+                        {
+                            AbilityElementId = "Mount",
+                            ButtonElementId = "SummonMount",
+                            AbilityType = AbilityType.Z,
+                            CooldownText = new GameStringText("Cooldown: 6 seconds"),
+                        }
+                    ]
+                },
+            },
         };
 
         // act
@@ -420,6 +450,7 @@ public class JsonTypeInfoModifiersTests
         gameStringItemDictionary["Unit"]["name"]["unitId1"].RawText.Should().Be("value1");
         gameStringItemDictionary["Unit"]["name"]["unitId2"].RawText.Should().Be("value2");
         gameStringItemDictionary["Unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
+        gameStringItemDictionary["AbilTalent"]["cooldownText"]["Mount|SummonMount|Z"].RawText.Should().Be("Cooldown: 6 seconds");
     }
 
     private static JsonSerializerOptions GetExtractSerializerOptions(GameStringItemDictionary gameStringItemDictionary, LocalizedTextOption localizedTextOption)

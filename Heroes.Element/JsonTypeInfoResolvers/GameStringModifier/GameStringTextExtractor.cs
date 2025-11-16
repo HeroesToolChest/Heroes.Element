@@ -13,7 +13,7 @@ internal static class GameStringTextExtractor
         _ownerByUnitChildObjects.TryAdd(child, owner);
     }
 
-    public static void AddGameStringText(GameStringItemDictionary gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText)
+    public static void AddGameStringText(GameStringItemDictionary gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText, bool appendValue = false)
     {
         string elementName;
         string propertyName;
@@ -53,7 +53,7 @@ internal static class GameStringTextExtractor
             if (gameStringPropertyName.TryGetValue(propertyName, out GameStringFilePropertyId? gameString))
             {
                 // if exists, append to it with comma
-                if (gameString.TryGetValue(id, out GameStringText? existingGameStringText))
+                if (appendValue && gameString.TryGetValue(id, out GameStringText? existingGameStringText))
                     gameStringText = new GameStringText($"{existingGameStringText.RawText},{gameStringText.RawText}");
 
                 gameString[id] = gameStringText;

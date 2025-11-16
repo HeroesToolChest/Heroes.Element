@@ -85,7 +85,7 @@ public class JsonTypeInfoModifiers
             else if (value is ISet<GameStringText> gameStringTextCollection)
             {
                 foreach (GameStringText gameStringTextItem in gameStringTextCollection)
-                    GameStringTextExtractor.AddGameStringText(gameStringItemDictionary, element, propertyInfo, gameStringTextItem);
+                    GameStringTextExtractor.AddGameStringText(gameStringItemDictionary, element, propertyInfo, gameStringTextItem, appendValue: true);
             }
 
             return localizedTextOption == LocalizedTextOption.Copy;
