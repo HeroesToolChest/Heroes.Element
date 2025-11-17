@@ -54,7 +54,7 @@ internal static class GameStringTextExtractor
             {
                 // if exists, append to it with comma
                 if (appendValue && gameString.TryGetValue(id, out GameStringText? existingGameStringText))
-                    gameStringText = new GameStringText($"{existingGameStringText.RawText},{gameStringText.RawText}");
+                    gameStringText = new GameStringText($"{existingGameStringText.RawText}|{gameStringText.RawText}");
 
                 gameString[id] = gameStringText;
             }
