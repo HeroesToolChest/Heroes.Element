@@ -245,7 +245,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["Unit"]["name"]["unitId"].RawText.Should().Be("value");
+        gameStringItemDictionary["unit"]["name"]["unitId"].RawText.Should().Be("value");
     }
 
     [TestMethod]
@@ -264,7 +264,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["Hero"]["name"]["heroId"].RawText.Should().Be("heroName");
+        gameStringItemDictionary["hero"]["name"]["heroId"].RawText.Should().Be("heroName");
     }
 
     [TestMethod]
@@ -297,7 +297,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["AbilTalent"]["name"]["abil1|button1|Q"].RawText.Should().Be("value");
+        gameStringItemDictionary["ability"]["name"]["abil1|button1|Q"].RawText.Should().Be("value");
     }
 
     [TestMethod]
@@ -332,7 +332,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["AbilTalent"]["name"]["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
+        gameStringItemDictionary["talent"]["name"]["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
     }
 
     [TestMethod]
@@ -366,9 +366,9 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["Unit"]["lifeType"]["heroId"].RawText.Should().Be("Health");
-        gameStringItemDictionary["Unit"]["energyType"]["heroId"].RawText.Should().Be("Energy");
-        gameStringItemDictionary["Unit"]["shieldType"]["heroId"].RawText.Should().Be("Shield");
+        gameStringItemDictionary["unit"]["lifeType"]["heroId"].RawText.Should().Be("Health");
+        gameStringItemDictionary["unit"]["energyType"]["heroId"].RawText.Should().Be("Energy");
+        gameStringItemDictionary["unit"]["shieldType"]["heroId"].RawText.Should().Be("Shield");
     }
 
     [TestMethod]
@@ -392,7 +392,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["Hero"]["roles"]["heroId"].RawText.Should().Be("Role1,Role2");
+        gameStringItemDictionary["hero"]["roles"]["heroId"].RawText.Should().Be("Role1|Role2");
     }
 
     [TestMethod]
@@ -447,10 +447,10 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit2, jsonSerializerOptions);
 
         // assert
-        gameStringItemDictionary["Unit"]["name"]["unitId1"].RawText.Should().Be("value1");
-        gameStringItemDictionary["Unit"]["name"]["unitId2"].RawText.Should().Be("value2");
-        gameStringItemDictionary["Unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
-        gameStringItemDictionary["AbilTalent"]["cooldownText"]["Mount|SummonMount|Z"].RawText.Should().Be("Cooldown: 6 seconds");
+        gameStringItemDictionary["unit"]["name"]["unitId1"].RawText.Should().Be("value1");
+        gameStringItemDictionary["unit"]["name"]["unitId2"].RawText.Should().Be("value2");
+        gameStringItemDictionary["unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
+        gameStringItemDictionary["ability"]["cooldownText"]["Mount|SummonMount|Z"].RawText.Should().Be("Cooldown: 6 seconds");
     }
 
     private static JsonSerializerOptions GetExtractSerializerOptions(GameStringItemDictionary gameStringItemDictionary, LocalizedTextOption localizedTextOption)

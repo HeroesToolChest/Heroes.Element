@@ -22,23 +22,23 @@ internal static class GameStringTextExtractor
         if (@object is IElementObject elementObject)
         {
             if (elementObject is Hero)
-                elementName = "Hero";
+                elementName = "hero";
             else
-                elementName = propertyInfo.DeclaringType.Name;
+                elementName = JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name);
 
-            propertyName = propertyInfo.Name;
+            propertyName = JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.Name);
             id = elementObject.Id;
         }
         else if (@object is Ability ability)
         {
-            elementName = "AbilTalent";
-            propertyName = propertyInfo.Name;
+            elementName = "ability";
+            propertyName = JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.Name);
             id = ability.LinkId.ToString();
         }
         else if (@object is Talent talent)
         {
-            elementName = "AbilTalent";
-            propertyName = propertyInfo.Name;
+            elementName = "talent";
+            propertyName = JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.Name);
             id = talent.LinkId.ToString();
         }
         else
@@ -82,10 +82,10 @@ internal static class GameStringTextExtractor
     {
         if (_ownerByUnitChildObjects.TryGetValue(@object, out IElementObject? owner))
         {
-            return ("Unit", GetPropertyName(propertyInfo), owner.Id);
+            return ("unit", GetPropertyName(propertyInfo), owner.Id);
         }
 
-        return ("Unknown", GetPropertyName(propertyInfo), @object.GetHashCode().ToString());
+        return ("unknown", GetPropertyName(propertyInfo), @object.GetHashCode().ToString());
     }
 
     private static string GetPropertyName(JsonPropertyInfo propertyInfo)
