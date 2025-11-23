@@ -158,14 +158,14 @@ public class GameStringDocumentTests
           },
           "gamestrings": {
             "unit": {
+            },
+            "hero": {
               "description": {
                 "Abathur": "A unique Hero who can manipulate the battle from anywhere on the map."
               },
               "name": {
                 "Abathur": "Abathur"
-              }
-            },
-            "hero": {
+              },
               "difficulty": {
                 "Abathur": "Very Hard"
               },
@@ -186,6 +186,15 @@ public class GameStringDocumentTests
               },
               "roles": {
                 "Abathur": "Support,Specialist"
+              },
+              "energyType": {
+                "Abathur": "mana"
+              },
+              "lifeType": {
+                "Abathur": "health"
+              },
+              "shieldType": {
+                "Abathur": "shield"
               }
             },
             "talent": {
@@ -243,6 +252,9 @@ public class GameStringDocumentTests
         hero.Title!.RawText.Should().Be("The Evolution Master");
         hero.Roles.Should().HaveCount(2);
         hero.Roles.Select(r => r.RawText).Should().Contain(new[] { "Support", "Specialist" });
+        hero.Energy.EnergyType!.RawText.Should().Be("mana");
+        hero.Life.LifeType!.RawText.Should().Be("health");
+        hero.Shield.ShieldType!.RawText.Should().Be("shield");
 
         hero.Talents[TalentTier.Level1][0].CooldownText!.RawText.Should().Be("Cooldown: 5 seconds");
         hero.Talents[TalentTier.Level1][0].EnergyText!.RawText.Should().Be("Costs 50 Mana");

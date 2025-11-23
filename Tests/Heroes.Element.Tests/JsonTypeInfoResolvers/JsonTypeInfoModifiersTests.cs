@@ -407,7 +407,6 @@ public class JsonTypeInfoModifiersTests
         gameStringItemDictionary["unit"]["shieldType"]["unitId"].RawText.Should().Be("Shield");
     }
 
-
     [TestMethod]
     public void SerializationModifiers_IEnumerableGameStringText_GameStringItemDictionaryHasPropertyName()
     {

@@ -81,10 +81,10 @@ public abstract class ElementBaseData<T> : IDisposable
     }
 
     /// <summary>
-    /// Updates the gamestrings for the specified element.
+    /// Updates the <see cref="GameStringText"/> properties for the specified element.
     /// </summary>
     /// <param name="element">The type of element.</param>
-    protected abstract void UpdateGameStrings(T element);
+    protected abstract void UpdateGameStringTexts(T element);
 
     /// <summary>
     /// Retrieves the data for a specific element based on its identifier and JSON representation.
@@ -113,7 +113,7 @@ public abstract class ElementBaseData<T> : IDisposable
             return null;
 
         element.SetId(id);
-        UpdateGameStrings(element);
+        UpdateGameStringTexts(element);
 
         return element;
     }

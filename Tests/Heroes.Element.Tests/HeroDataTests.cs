@@ -884,12 +884,10 @@ public class HeroDataTests
             }
           },
           "gamestrings": {
-            "unit": {
+            "hero": {
               "name": {
                 "Alarak": "Alarak Localized"
-              }
-            },
-            "hero": {
+              },
               "searchText": {
                 "Alarak": "Localized Search Terms"
               },

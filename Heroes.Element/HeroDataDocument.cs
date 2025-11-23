@@ -130,7 +130,7 @@ public class HeroDataDocument : ElementBaseData<Hero>
     }
 
     /// <inheritdoc/>
-    protected override void UpdateGameStrings(Hero element)
+    protected override void UpdateGameStringTexts(Hero element)
     {
         GameStringDocument?.UpdateGameStrings(element);
     }

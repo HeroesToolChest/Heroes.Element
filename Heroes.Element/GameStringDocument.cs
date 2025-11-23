@@ -59,13 +59,15 @@ public class GameStringDocument : IDisposable
     /// <param name="hero">The <see cref="Hero"/> to update <see cref="GameStringText"/>s.</param>
     public void UpdateGameStrings(Hero hero)
     {
-        UpdateGameStrings(unit: hero);
-
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("hero", out JsonElement unitElement))
             return;
 
-        if (TryGetElement(unitElement, "difficulty", hero.Id, out JsonElement element))
+        if (TryGetElement(unitElement, "description", hero.Id, out JsonElement element))
+            hero.Description = GetGameStringText(element.GetString());
+        if (TryGetElement(unitElement, "name", hero.Id, out element))
+            hero.Name = GetGameStringText(element.GetString());
+        if (TryGetElement(unitElement, "difficulty", hero.Id, out element))
             hero.Difficulty = GetGameStringText(element.GetString());
         if (TryGetElement(unitElement, "expandedRole", hero.Id, out element))
             hero.ExpandedRole = GetGameStringText(element.GetString());
@@ -77,6 +79,12 @@ public class GameStringDocument : IDisposable
             hero.SortName = GetGameStringText(element.GetString());
         if (TryGetElement(unitElement, "title", hero.Id, out element))
             hero.Title = GetGameStringText(element.GetString());
+        if (TryGetElement(unitElement, "energyType", hero.Id, out element))
+            hero.Energy.EnergyType = GetGameStringText(element.GetString());
+        if (TryGetElement(unitElement, "lifeType", hero.Id, out element))
+            hero.Life.LifeType = GetGameStringText(element.GetString());
+        if (TryGetElement(unitElement, "shieldType", hero.Id, out element))
+            hero.Shield.ShieldType = GetGameStringText(element.GetString());
 
         if (TryGetElement(unitElement, "roles", hero.Id, out element))
         {
@@ -101,6 +109,8 @@ public class GameStringDocument : IDisposable
                 SetAbilityTalentBaseData(talentElement, talent, talent.LinkId.Id);
             }
         }
+
+        SetAbilities(hero, gameStringElement);
     }
 
     /// <summary>
@@ -124,15 +134,7 @@ public class GameStringDocument : IDisposable
         if (TryGetElement(unitElement, "shieldType", unit.Id, out element))
             unit.Shield.ShieldType = GetGameStringText(element.GetString());
 
-        IEnumerable<Ability> abilities = unit.Abilities.SelectMany(x => x.Value);
-
-        if (gameStringElement.TryGetProperty("ability", out JsonElement abilityElement))
-        {
-            foreach (Ability ability in abilities)
-            {
-                SetAbilityTalentBaseData(abilityElement, ability, ability.LinkId.Id);
-            }
-        }
+        SetAbilities(unit, gameStringElement);
     }
 
     /// <summary>
@@ -184,6 +186,19 @@ public class GameStringDocument : IDisposable
         }
 
         throw new JsonException("No 'meta' and/or 'gamestrings' property found");
+    }
+
+    private void SetAbilities(Unit unit, JsonElement gameStringElement)
+    {
+        IEnumerable<Ability> abilities = unit.Abilities.SelectMany(x => x.Value);
+
+        if (gameStringElement.TryGetProperty("ability", out JsonElement abilityElement))
+        {
+            foreach (Ability ability in abilities)
+            {
+                SetAbilityTalentBaseData(abilityElement, ability, ability.LinkId.Id);
+            }
+        }
     }
 
     private void SetAbilityTalentBaseData(JsonElement abilityElement, AbilityTalentBase abilityTalentBase, string id)

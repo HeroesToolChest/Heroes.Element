@@ -510,7 +510,7 @@ public class ElementBaseDataTests
             return DeserializeElement(jsonElement, id);
         }
 
-        protected override void UpdateGameStrings(TestElementObject element)
+        protected override void UpdateGameStringTexts(TestElementObject element)
         {
             UpdateGameStringsCalled = true;
         }
