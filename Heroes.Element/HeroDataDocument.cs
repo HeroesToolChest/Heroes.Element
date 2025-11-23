@@ -5,8 +5,8 @@
 /// </summary>
 public class HeroDataDocument : ElementBaseData<Hero>
 {
-    private HeroDataDocument(JsonDocument document)
-        : base(document)
+    private HeroDataDocument(JsonDocument document, GameStringDocument? gameStringDocument = null)
+        : base(document, gameStringDocument)
     {
         JsonSerializerOptions.Converters.Add(new LinkIdConverter());
         JsonSerializerOptions.Converters.Add(new AbilityLinkIdConverter());
@@ -15,11 +15,12 @@ public class HeroDataDocument : ElementBaseData<Hero>
     /// <summary>
     /// Creates a new instance of <see cref="HeroDataDocument"/> from the specified JSON document.
     /// </summary>
-    /// <param name="jsonDocument">The JSON document containing the data to initialize the <see cref="HeroDataDocument"/> instance.</param>
+    /// <param name="dataDocument">The JSON document containing the data.</param>
+    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="HeroDataDocument"/> object initialized with the data from the provided JSON document.</returns>
-    public static HeroDataDocument Load(JsonDocument jsonDocument)
+    public static HeroDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
     {
-        return new HeroDataDocument(jsonDocument);
+        return new HeroDataDocument(dataDocument, gameStringDocument);
     }
 
     /// <summary>
@@ -126,5 +127,11 @@ public class HeroDataDocument : ElementBaseData<Hero>
             return hero;
 
         throw new KeyNotFoundException($"The given attributeId '{attributeId}' was not present in items.");
+    }
+
+    /// <inheritdoc/>
+    protected override void UpdateGameStrings(Hero element)
+    {
+        GameStringDocument?.UpdateGameStrings(element);
     }
 }

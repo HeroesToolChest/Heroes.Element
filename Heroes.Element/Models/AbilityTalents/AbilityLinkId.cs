@@ -12,6 +12,11 @@
 public sealed class AbilityLinkId(string elementId, string buttonElementId, AbilityType abilityType)
     : LinkId(elementId, buttonElementId, abilityType), IEquatable<AbilityLinkId>
 {
+    /// <summary>
+    /// Gets the id in the format of ElementId|ButtonElementId|AbilityType.
+    /// </summary>
+    public override string Id => $"{ElementId}|{ButtonElementId}|{AbilityType}";
+
     /// <inheritdoc/>
     public bool Equals(AbilityLinkId? other)
     {
@@ -39,8 +44,5 @@ public sealed class AbilityLinkId(string elementId, string buttonElementId, Abil
     }
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"{ElementId}|{ButtonElementId}|{AbilityType}";
-    }
+    public override string ToString() => Id;
 }

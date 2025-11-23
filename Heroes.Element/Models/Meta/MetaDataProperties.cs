@@ -31,10 +31,4 @@ public class MetaDataProperties : MetaProperties
     /// Gets or sets the total number of items.
     /// </summary>
     public int TotalItems { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether this is data is created from Heroes Data Parser version 4.x or earlier.
-    /// </summary>
-    [JsonIgnore]
-    public bool IsLegacy { get; set; }
 }

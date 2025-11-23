@@ -15,9 +15,11 @@ public abstract class ElementBaseData<T> : IDisposable
     /// Initializes a new instance of the <see cref="ElementBaseData{T}"/> class using the specified JSON document and serializer options.
     /// </summary>
     /// <param name="jsonDocument">The <see cref="JsonDocument"/> containing the JSON data to be processed.</param>
-    protected ElementBaseData(JsonDocument jsonDocument)
+    /// <param name="gameStringDocument">The <see cref="JsonDocument"/> containing the JSON gamestrings to be processed.</param>
+    protected ElementBaseData(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
     {
         JsonDocument = jsonDocument;
+        GameStringDocument = gameStringDocument;
 
         // do not serialize with this options in this constructor
         JsonSerializerOptions = new()
@@ -26,6 +28,7 @@ public abstract class ElementBaseData<T> : IDisposable
             Converters =
             {
                 new JsonStringEnumConverter(),
+                new HeroesDataVersionConverter(),
             },
         };
 
@@ -38,19 +41,35 @@ public abstract class ElementBaseData<T> : IDisposable
     }
 
     /// <summary>
-    /// Gets the JSON document associated with the current instance.
+    /// Gets the underlying JSON document. This is only the data document and not the optional gamestring document.
     /// </summary>
     public JsonDocument JsonDocument { get; }
 
     /// <summary>
-    /// Gets the options used to configure JSON serialization and deserialization.
+    /// Gets the optional underlying JSON gamestring document.
     /// </summary>
-    public JsonSerializerOptions JsonSerializerOptions { get; }
+    public GameStringDocument? GameStringDocument { get; }
 
     /// <summary>
-    /// Gets the metadata properties associated with the JSON data.
+    /// Gets the metadata properties associated with the JSON data. This includes properties overridden from the optional gamestring document.
     /// </summary>
     public MetaDataProperties MetaProperties { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the HeroesVersion in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
+    /// This returns <see langword="false"/> if there is no <see cref="GameStringDocument"/>.
+    /// </summary>
+    public bool MismatchedHeroesVersion => GameStringDocument is not null && MetaProperties.HeroesVersion != GameStringDocument.MetaGameStringProperties.HeroesVersion;
+
+    /// <summary>
+    /// Gets a value indicating whether the HDP version in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
+    /// </summary>
+    public bool MismatchedHdpVersion => GameStringDocument is not null && !MetaProperties.HdpVersion.Equals(GameStringDocument.MetaGameStringProperties.HdpVersion, StringComparison.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// Gets the options used to configure JSON serialization and deserialization.
+    /// </summary>
+    protected JsonSerializerOptions JsonSerializerOptions { get; }
 
     /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
@@ -60,6 +79,12 @@ public abstract class ElementBaseData<T> : IDisposable
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
     }
+
+    /// <summary>
+    /// Updates the gamestrings for the specified element.
+    /// </summary>
+    /// <param name="element">The type of element.</param>
+    protected abstract void UpdateGameStrings(T element);
 
     /// <summary>
     /// Retrieves the data for a specific element based on its identifier and JSON representation.
@@ -79,12 +104,16 @@ public abstract class ElementBaseData<T> : IDisposable
     /// </summary>
     /// <param name="jsonElement">The JSON element to deserialize.</param>
     /// <param name="id">The identifier to assign to the deserialized object.</param>
-    /// <returns>An instance of type <typeparamref name="T"/> populated with data from the JSON element,  or <see langword="null"/> if the deserialization fails.</returns>
+    /// <returns>An instance of type <typeparamref name="T"/> populated with data from the JSON element, or <see langword="null"/> if the deserialization fails.</returns>
     protected virtual T? DeserializeElement(JsonElement jsonElement, string id)
     {
         T? element = jsonElement.Deserialize<T>(JsonSerializerOptions);
 
-        element?.SetId(id);
+        if (element is null)
+            return null;
+
+        element.SetId(id);
+        UpdateGameStrings(element);
 
         return element;
     }
@@ -133,32 +162,18 @@ public abstract class ElementBaseData<T> : IDisposable
         }
     }
 
-    protected bool Test()
-    {
-        if (MetaProperties.IsLegacy is false)
-        {
-            return false;
-        }
-        else
-        {
-            // legacy handling
-
-            return true;
-        }
-    }
-
     private MetaDataProperties GetMetaProperties()
     {
         if (JsonDocument.RootElement.TryGetProperty("meta", out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty("items", out _))
         {
-            return metaElement.Deserialize<MetaDataProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
+            MetaDataProperties metaDataProperties = metaElement.Deserialize<MetaDataProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
+
+            if (GameStringDocument is not null)
+                metaDataProperties.DescriptionText = GameStringDocument.MetaGameStringProperties.DescriptionText;
+
+            return metaDataProperties;
         }
-        else
-        {
-            return new MetaDataProperties()
-            {
-                IsLegacy = true,
-            };
-        }
+
+        throw new JsonException("No 'meta' and/or 'items' property found");
     }
 }

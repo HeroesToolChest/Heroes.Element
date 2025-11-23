@@ -23,12 +23,14 @@ public class HeroesElementResolver : DefaultJsonTypeInfoResolver
                     if (originalGet is null)
                         continue;
 
+                    string typeName = type.Name.ToLowerInvariant();
+
                     p.Get = obj =>
                     {
                         object? value = originalGet(obj);
                         if (value is not null && obj is IElementObject owner)
                         {
-                            GameStringTextExtractor.SetOwner(value, owner);
+                            GameStringTextExtractor.SetOwner(value, owner, typeName);
                         }
 
                         return value;

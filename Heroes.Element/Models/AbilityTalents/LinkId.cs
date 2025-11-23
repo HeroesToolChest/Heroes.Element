@@ -26,6 +26,11 @@ public abstract class LinkId(string elementId, string buttonElementId, AbilityTy
     /// </summary>
     public AbilityType AbilityType { get; init; } = abilityType;
 
+    /// <summary>
+    /// Gets the id.
+    /// </summary>
+    public abstract string Id { get; }
+
     /// <inheritdoc/>
     public abstract override bool Equals(object? obj);
 

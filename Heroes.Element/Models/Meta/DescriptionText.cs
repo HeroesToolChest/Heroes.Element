@@ -8,7 +8,7 @@ public class DescriptionText
     /// <summary>
     /// Gets or sets the locale of the data (e.g., "enUS", "frFR").
     /// </summary>
-    public StormLocale? Locale { get; set; } = StormLocale.ENUS;
+    public StormLocale Locale { get; set; } = StormLocale.ENUS;
 
     /// <summary>
     /// Gets or sets the type of gamestrings used in the data (e.g., "RawText", "ColoredText").

@@ -25,30 +25,6 @@ public class HeroDataTests
     """;
 
     [TestMethod]
-    [TestCategory("Base")]
-    public void TryGetHeroByUnitId_ItemsPropertyNotFound_ReturnsFalse()
-    {
-        // arrange
-        string json =
-        """
-        {
-          "meta": {}
-        }
-        """;
-
-        using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
-
-        // act
-        bool result = heroData.TryGetHeroByUnitId("other", out Hero? hero);
-
-        // assert
-        result.Should().BeFalse();
-        hero.Should().BeNull();
-    }
-
-    [TestMethod]
-    [TestCategory("Base")]
     public void TryGetHeroByUnitId_ItemsPropertyIsEmpty_ReturnsFalse()
     {
         // arrange
@@ -72,125 +48,7 @@ public class HeroDataTests
     }
 
     [TestMethod]
-    [TestCategory("Base")]
-    public void TryGetMetaProperties_MetaPropertyNotFound_ReturnsFalse()
-    {
-        // arrange
-        string json =
-        """
-        {
-          "items": {}
-        }
-        """;
-
-        using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
-
-        // act
-        MetaDataProperties resultMetaDataProperties = heroData.MetaProperties;
-
-        // assert
-        resultMetaDataProperties.IsLegacy.Should().BeTrue();
-        resultMetaDataProperties.DataType.Should().BeEmpty();
-    }
-
-    [TestMethod]
-    [TestCategory("Base")]
-    public void TryGetMetaProperties_ItemsPropertyNotFound_ReturnsFalse()
-    {
-        // arrange
-        string json =
-        """
-        {
-          "meta": {}
-        }
-        """;
-
-        using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
-
-        // act
-        MetaDataProperties resultMetaDataProperties = heroData.MetaProperties;
-
-        // assert
-        resultMetaDataProperties.IsLegacy.Should().BeTrue();
-        resultMetaDataProperties.DataType.Should().BeEmpty();
-    }
-
-    [TestMethod]
-    [TestCategory("Base")]
-    public void GetMetaProperties_MetaPropertyFound_ReturnsMetaProperties()
-    {
-        // arrange
-        string json =
-        """
-        {
-          "meta": {
-            "dataType": "herodata",
-            "mapName": "map name",
-            "heroesVersion": "1.2.33.555_ptr",
-            "hdpVersion": "4.5.6",
-            "localizedText": "Extract",
-            "descriptionText": {
-              "locale": "DEDE",
-              "gameStringTextType": "RawText",
-              "replaceFontStyles": true,
-              "preserveFontStyleConstantVars": true,
-              "preserveFontStyleVars": true
-            }
-          },
-          "items": {}
-        }
-        """;
-
-        using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
-
-        // act
-        MetaDataProperties resultMetaDataProperties = heroData.MetaProperties;
-
-        // assert
-        resultMetaDataProperties.Should().NotBeNull();
-        resultMetaDataProperties.DataType.Should().Be("herodata");
-        resultMetaDataProperties.MapName.Should().Be("map name");
-        resultMetaDataProperties.HeroesVersion.Should().Be("1.2.33.555_ptr");
-        resultMetaDataProperties.HdpVersion.Should().Be("4.5.6");
-        resultMetaDataProperties.LocalizedText.Should().Be(LocalizedTextOption.Extract);
-        resultMetaDataProperties.DescriptionText.Should().NotBeNull();
-        resultMetaDataProperties.DescriptionText!.Locale.Should().Be(StormLocale.DEDE);
-        resultMetaDataProperties.DescriptionText!.GameStringTextType.Should().Be(GameStringTextType.RawText);
-        resultMetaDataProperties.DescriptionText!.ReplaceFontStyles.Should().BeTrue();
-        resultMetaDataProperties.DescriptionText!.PreserveFontStyleConstantVars.Should().BeTrue();
-        resultMetaDataProperties.DescriptionText!.PreserveFontStyleVars.Should().BeTrue();
-        resultMetaDataProperties.TotalItems.Should().Be(0);
-        resultMetaDataProperties.IsLegacy.Should().BeFalse();
-    }
-
-    [TestMethod]
-    [TestCategory("Base")]
-    public void Dispose_DisposedTheDocument_JsonDocumentThrowsException()
-    {
-        // arrange
-        string json =
-        """
-        {
-          "meta": {},
-          "items": {}
-        }
-        """;
-
-        JsonDocument jsonDocument = JsonDocument.Parse(json);
-        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
-
-        // act
-        heroData.Dispose();
-
-        // assert
-        Action act = () => heroData.JsonDocument.RootElement.GetString();
-        act.Should().Throw<ObjectDisposedException>();
-    }
-
-    [TestMethod]
+    [TestCategory("FullRead")]
     public void TryGetHeroById_Abathur_ReturnsProperties()
     {
         // arrange
@@ -773,7 +631,7 @@ public class HeroDataTests
 
         // abilities
         Ability ability1 = hero.Abilities[AbilityTier.Basic][0];
-        ability1.LinkId.ToString().Should().Be("AbathurSymbiote|AbathurSymbiote|Q");
+        ability1.LinkId.Id.Should().Be("AbathurSymbiote|AbathurSymbiote|Q");
         ability1.AbilityElementId.Should().Be("AbathurSymbiote");
         ability1.AbilityType.Should().Be(AbilityType.Q);
         ability1.ButtonElementId.Should().Be("AbathurSymbiote");
@@ -789,7 +647,7 @@ public class HeroDataTests
         ability1.ToggleCooldown.Should().BeNull();
 
         Ability ability2 = hero.Abilities[AbilityTier.Basic][1];
-        ability2.LinkId.ToString().Should().Be("AbathurToxicNest|AbathurToxicNest|W");
+        ability2.LinkId.Id.Should().Be("AbathurToxicNest|AbathurToxicNest|W");
         ability2.Charges!.CountMax.Should().Be(3);
         ability2.Charges.CountStart.Should().Be(3);
         ability2.Charges.CountUse.Should().Be(1);
@@ -849,7 +707,8 @@ public class HeroDataTests
         talentLevel1.FullText!.RawText.Should().Be("Increases the range of Symbiote's Spike Burst by <c val=\"#TooltipNumbers\">25%</c> and decreases the cooldown by <c val=\"#TooltipNumbers\">1</c> second.");
         talentLevel1.Icon.Should().Be("storm_ui_icon_abathur_spikeburst.png");
         talentLevel1.LifeText.Should().BeNull();
-        talentLevel1.LinkId.ToString().Should().Be("AbathurMasteryPressurizedGlands|AbathurSymbiotePressurizedGlandsTalent|W|Level1");
+        talentLevel1.LinkId.Id.Should().Be("AbathurMasteryPressurizedGlands|AbathurSymbiotePressurizedGlandsTalent|W|Level1");
+        talentLevel1.LinkId.ToString().Should().Be(talentLevel1.LinkId.Id);
         talentLevel1.Tier.Should().Be(TalentTier.Level1);
         talentLevel1.ToggleCooldown.Should().BeNull();
         talentLevel1.UpgradesAbilityType.Should().BeTrue();
@@ -988,6 +847,76 @@ public class HeroDataTests
 
         // assert
         act.Should().Throw<KeyNotFoundException>();
+    }
+
+    [TestMethod]
+    public void GetHeroById_WithGameStringDocument_UpdatesGameStrings()
+    {
+        // arrange
+        string jsonData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0"
+          },
+          "items": {
+            "Alarak": {
+              "name": "Alarak",
+              "unitId": "HeroAlarak",
+              "searchText": "Search terms",
+              "sortName": "Sort Alarak"
+            }
+          }
+        }
+        """;
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "unit": {
+              "name": {
+                "Alarak": "Alarak Localized"
+              }
+            },
+            "hero": {
+              "searchText": {
+                "Alarak": "Localized Search Terms"
+              },
+              "sortName": {
+                "Alarak": "Localized Sort Name"
+              }
+            }
+          }
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument, gameStringDocument);
+
+        // act
+        Hero hero = heroData.GetHeroById("Alarak");
+
+        // assert
+        hero.Should().NotBeNull();
+        hero.Name!.RawText.Should().Be("Alarak Localized");
+        hero.Name.GameStringLocale.Should().Be(StormLocale.FRFR);
+        hero.SearchText!.RawText.Should().Be("Localized Search Terms");
+        hero.SearchText.GameStringLocale.Should().Be(StormLocale.FRFR);
+        hero.SortName!.RawText.Should().Be("Localized Sort Name");
+        hero.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
     [TestMethod]

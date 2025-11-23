@@ -13,7 +13,7 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
     /// <param name="revision">The third number of the version.</param>
     /// <param name="build">The fourth number of the version.</param>
     /// <param name="isPtr">Value indicating if the version is a ptr version.</param>
-    public HeroesDataVersion(int major, int minor, int revision, int build, bool isPtr = false)
+    public HeroesDataVersion(int major = -1, int minor = -1, int revision = -1, int build = -1, bool isPtr = false)
     {
         if (major < 0) major = -1;
         if (minor < 0) minor = -1;
@@ -178,6 +178,18 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
             throw new FormatException("Invalid format");
     }
 
+    /// <summary>
+    /// Gets the version in string format.
+    /// </summary>
+    /// <returns>The version as a string.</returns>
+    public string GetAsVersionString()
+    {
+        if (IsPtr)
+            return $"{Major}.{Minor}.{Revision}.{Build}_ptr";
+        else
+            return $"{Major}.{Minor}.{Revision}.{Build}";
+    }
+
     /// <inheritdoc/>
     public int CompareTo([AllowNull] HeroesDataVersion other)
     {
@@ -256,13 +268,7 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
     }
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        if (IsPtr)
-            return $"{Major}.{Minor}.{Revision}.{Build}_ptr";
-        else
-            return $"{Major}.{Minor}.{Revision}.{Build}";
-    }
+    public override string ToString() => GetAsVersionString();
 
     private static bool ParseVersionString(ReadOnlySpan<char> value, [NotNullWhen(true)] ref HeroesDataVersion? result)
     {

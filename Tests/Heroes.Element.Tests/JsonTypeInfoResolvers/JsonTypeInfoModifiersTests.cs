@@ -336,7 +336,7 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerializationModifiers_UnitInnerGameStringTextProperties_GameStringItemDictionaryHasPropertyName()
+    public void SerializationModifiers_HeroInnerGameStringTextProperties_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
         GameStringItemDictionary gameStringItemDictionary = [];
@@ -366,10 +366,47 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["unit"]["lifeType"]["heroId"].RawText.Should().Be("Health");
-        gameStringItemDictionary["unit"]["energyType"]["heroId"].RawText.Should().Be("Energy");
-        gameStringItemDictionary["unit"]["shieldType"]["heroId"].RawText.Should().Be("Shield");
+        gameStringItemDictionary["hero"]["lifeType"]["heroId"].RawText.Should().Be("Health");
+        gameStringItemDictionary["hero"]["energyType"]["heroId"].RawText.Should().Be("Energy");
+        gameStringItemDictionary["hero"]["shieldType"]["heroId"].RawText.Should().Be("Shield");
     }
+
+    [TestMethod]
+    public void SerializationModifiers_UnitInnerGameStringTextProperties_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Unit unit = new("unitId")
+        {
+            Name = new GameStringText("unitName"),
+            Life =
+            {
+                LifeMax = 110,
+                LifeType = new GameStringText("Health"),
+            },
+            Energy =
+            {
+                EnergyMax = 120,
+                EnergyType = new GameStringText("Energy"),
+            },
+            Shield =
+            {
+                ShieldMax = 130,
+                ShieldType = new GameStringText("Shield"),
+            },
+        };
+
+        // act
+        JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["unit"]["lifeType"]["unitId"].RawText.Should().Be("Health");
+        gameStringItemDictionary["unit"]["energyType"]["unitId"].RawText.Should().Be("Energy");
+        gameStringItemDictionary["unit"]["shieldType"]["unitId"].RawText.Should().Be("Shield");
+    }
+
 
     [TestMethod]
     public void SerializationModifiers_IEnumerableGameStringText_GameStringItemDictionaryHasPropertyName()

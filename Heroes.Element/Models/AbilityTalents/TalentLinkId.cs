@@ -18,6 +18,11 @@ public sealed class TalentLinkId(string elementId, string buttonElementId, Abili
     /// </summary>
     public TalentTier TalentTier { get; init; } = talentTier;
 
+    /// <summary>
+    /// Gets the id in the format of ElementId|ButtonElementId|AbilityType|TalentTier.
+    /// </summary>
+    public override string Id => $"{ElementId}|{ButtonElementId}|{AbilityType}|{TalentTier}";
+
     /// <inheritdoc/>
     public bool Equals(TalentLinkId? other)
     {
@@ -46,8 +51,5 @@ public sealed class TalentLinkId(string elementId, string buttonElementId, Abili
     }
 
     /// <inheritdoc/>
-    public override string ToString()
-    {
-        return $"{ElementId}|{ButtonElementId}|{AbilityType}|{TalentTier}";
-    }
+    public override string ToString() => Id;
 }

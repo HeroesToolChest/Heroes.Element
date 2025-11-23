@@ -19,6 +19,19 @@ public class HeroesDataVersionTests
     }
 
     [TestMethod]
+    public void Ctor_DefaultValues_ReturnsNegativeVersion()
+    {
+        // arrange
+        HeroesDataVersion expected = new(-1, -1, -1, -1, false);
+
+        // act
+        HeroesDataVersion heroesVersion = new();
+
+        // assert
+        heroesVersion.Should().Be(expected);
+    }
+
+    [TestMethod]
     [DataRow(1, 1, 1, 11111)]
     [DataRow(1, 1, 1, 11111, false)]
     public void Equals_SameValues_ReturnsTrue(int major, int minor, int revision, int build, bool isPtr = false)
@@ -423,5 +436,77 @@ public class HeroesDataVersionTests
 
         // assert
         act.Should().ThrowExactly<ArgumentNullException>();
+    }
+
+    [TestMethod]
+    [DataRow(2, 34, 3, 34567, false, "2.34.3.34567")]
+    [DataRow(0, 0, 0, 0, false, "0.0.0.0")]
+    [DataRow(-1, -1, -1, -1, false, "-1.-1.-1.-1")]
+    [DataRow(1, 2, 3, 4, false, "1.2.3.4")]
+    [DataRow(10, 20, 30, 40000, false, "10.20.30.40000")]
+    public void GetAsVersionString_WithNonPtrVersions_ReturnsExpectedFormat(int major, int minor, int revision, int build, bool isPtr, string expected)
+    {
+        // arrange
+        HeroesDataVersion version = new(major, minor, revision, build, isPtr);
+
+        // act
+        string result = version.GetAsVersionString();
+
+        // assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    [DataRow(2, 34, 3, 34567, true, "2.34.3.34567_ptr")]
+    [DataRow(0, 0, 0, 0, true, "0.0.0.0_ptr")]
+    [DataRow(-1, -1, -1, -1, true, "-1.-1.-1.-1_ptr")]
+    [DataRow(1, 2, 3, 4, true, "1.2.3.4_ptr")]
+    [DataRow(10, 20, 30, 40000, true, "10.20.30.40000_ptr")]
+    public void GetAsVersionString_WithPtrVersions_ReturnsExpectedFormat(int major, int minor, int revision, int build, bool isPtr, string expected)
+    {
+        // arrange
+        HeroesDataVersion version = new(major, minor, revision, build, isPtr);
+
+        // act
+        string result = version.GetAsVersionString();
+
+        // assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    [DataRow(2, 34, 3, 34567, false, "2.34.3.34567")]
+    [DataRow(0, 0, 0, 0, false, "0.0.0.0")]
+    [DataRow(-1, -1, -1, -1, false, "-1.-1.-1.-1")]
+    [DataRow(1, 2, 3, 4, false, "1.2.3.4")]
+    [DataRow(10, 20, 30, 40000, false, "10.20.30.40000")]
+    public void ToString_WithNonPtrVersions_ReturnsExpectedFormat(int major, int minor, int revision, int build, bool isPtr, string expected)
+    {
+        // arrange
+        HeroesDataVersion version = new(major, minor, revision, build, isPtr);
+
+        // act
+        string result = version.ToString();
+
+        // assert
+        result.Should().Be(expected);
+    }
+
+    [TestMethod]
+    [DataRow(2, 34, 3, 34567, true, "2.34.3.34567_ptr")]
+    [DataRow(0, 0, 0, 0, true, "0.0.0.0_ptr")]
+    [DataRow(-1, -1, -1, -1, true, "-1.-1.-1.-1_ptr")]
+    [DataRow(1, 2, 3, 4, true, "1.2.3.4_ptr")]
+    [DataRow(10, 20, 30, 40000, true, "10.20.30.40000_ptr")]
+    public void ToString_WithPtrVersions_ReturnsExpectedFormat(int major, int minor, int revision, int build, bool isPtr, string expected)
+    {
+        // arrange
+        HeroesDataVersion version = new(major, minor, revision, build, isPtr);
+
+        // act
+        string result = version.ToString();
+
+        // assert
+        result.Should().Be(expected);
     }
 }

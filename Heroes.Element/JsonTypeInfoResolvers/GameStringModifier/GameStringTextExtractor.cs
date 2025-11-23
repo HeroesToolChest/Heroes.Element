@@ -7,10 +7,12 @@ internal static class GameStringTextExtractor
 {
     // child (e.g., UnitLife/UnitEnergy/UnitShield) -> owning element (Unit/Hero)
     private static readonly ConditionalWeakTable<object, IElementObject> _ownerByUnitChildObjects = [];
+    private static readonly ConditionalWeakTable<object, string> _typeNameByUnitChildObjects = [];
 
-    public static void SetOwner(object child, IElementObject owner)
+    public static void SetOwner(object child, IElementObject owner, string typeName)
     {
         _ownerByUnitChildObjects.TryAdd(child, owner);
+        _typeNameByUnitChildObjects.TryAdd(child, typeName);
     }
 
     public static void AddGameStringText(GameStringItemDictionary gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText, bool appendValue = false)
@@ -80,9 +82,9 @@ internal static class GameStringTextExtractor
 
     private static (string ElementName, string PropertyName, string Id) GetPropertyNames(object @object, JsonPropertyInfo propertyInfo)
     {
-        if (_ownerByUnitChildObjects.TryGetValue(@object, out IElementObject? owner))
+        if (_ownerByUnitChildObjects.TryGetValue(@object, out IElementObject? owner) && _typeNameByUnitChildObjects.TryGetValue(@object, out string? declaringTypeName))
         {
-            return ("unit", GetPropertyName(propertyInfo), owner.Id);
+            return (declaringTypeName, GetPropertyName(propertyInfo), owner.Id);
         }
 
         return ("unknown", GetPropertyName(propertyInfo), @object.GetHashCode().ToString());
