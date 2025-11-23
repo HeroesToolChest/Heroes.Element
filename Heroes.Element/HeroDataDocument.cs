@@ -24,43 +24,6 @@ public class HeroDataDocument : ElementBaseData<Hero>
     }
 
     /// <summary>
-    /// Attempts to retrieve a hero by its <paramref name="id"/>.
-    /// </summary>
-    /// <param name="id">The unique identifier of the hero to retrieve.</param>
-    /// <param name="value">When this method returns, contains the <see cref="Hero"/> associated with the specified <paramref name="id"/> if the operation succeeds; otherwise, <see langword="null"/>.</param>
-    /// <returns><see langword="true"/> if a hero with the specified <paramref name="id"/> is found; otherwise, <see langword="false"/>.</returns>
-    public bool TryGetHeroById(string id, [NotNullWhen(true)] out Hero? value)
-    {
-        value = null;
-
-        if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
-            return false;
-
-        if (itemsElement.TryGetProperty(id, out JsonElement element))
-        {
-            value = DeserializeElement(element, id);
-
-            return value is not null;
-        }
-
-        return false;
-    }
-
-    /// <summary>
-    /// Retrieves a hero by its <paramref name="id"/>.
-    /// </summary>
-    /// <param name="id">The unique identifier of the hero to retrieve.</param>
-    /// <returns>The <see cref="Hero"/> associated with the specified <paramref name="id"/>.</returns>
-    /// <exception cref="KeyNotFoundException"><paramref name="id"/> property value was not found.</exception>
-    public Hero GetHeroById(string id)
-    {
-        if (TryGetHeroById(id, out Hero? hero))
-            return hero;
-
-        throw new KeyNotFoundException($"The given id '{id}' was not present in items.");
-    }
-
-    /// <summary>
     /// Attempts to retrieve a <see cref="Hero"/> based on the specified <paramref name="unitId"/>.
     /// </summary>
     /// <param name="unitId">The unit id of a hero.</param>

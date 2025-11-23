@@ -72,6 +72,43 @@ public abstract class ElementBaseData<T> : IDisposable
     protected JsonSerializerOptions JsonSerializerOptions { get; }
 
     /// <summary>
+    /// Attempts to retrieve a type of <typeparamref name="T"/> by it's <paramref name="id"/>.
+    /// </summary>
+    /// <param name="id">The unique identifier of the element to retrieve.</param>
+    /// <param name="value">When this method returns, contains the <typeparamref name="T"/> associated with the specified <paramref name="id"/> if the operation succeeds; otherwise, <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if an element with the specified <paramref name="id"/> is found; otherwise, <see langword="false"/>.</returns>
+    public bool TryGetElementById(string id, [NotNullWhen(true)] out T? value)
+    {
+        value = null;
+
+        if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
+            return false;
+
+        if (itemsElement.TryGetProperty(id, out JsonElement element))
+        {
+            value = DeserializeElement(element, id);
+
+            return value is not null;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Retrieves a type of <typeparamref name="T"/> by it's <paramref name="id"/>.
+    /// </summary>
+    /// <param name="id">The unique identifier of the element to retrieve.</param>
+    /// <returns>The <typeparamref name="T"/> associated with the specified <paramref name="id"/>.</returns>
+    /// <exception cref="KeyNotFoundException"><paramref name="id"/> property value was not found.</exception>
+    public T GetElementById(string id)
+    {
+        if (TryGetElementById(id, out T? element))
+            return element;
+
+        throw new KeyNotFoundException($"The given id '{id}' was not present in items.");
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Tests;
 
 [TestClass]
-public class HeroDataTests
+public class HeroDataDocumentTests
 {
     private readonly string _defaultArrangeJson =
     """
@@ -49,7 +49,7 @@ public class HeroDataTests
 
     [TestMethod]
     [TestCategory("FullRead")]
-    public void TryGetHeroById_Abathur_ReturnsProperties()
+    public void TryGetElementById_Abathur_ReturnsProperties()
     {
         // arrange
         string json =
@@ -128,6 +128,13 @@ public class HeroDataTests
                 "regenScale": 0.04,
                 "regenDelay": 5,
                 "type": "Shields"
+              },
+              "armor": {
+                "Hero": {
+                  "basic": 10,
+                  "ability": 5,
+                  "splash": 2
+                }
               },
               "playstyles": [
                 "Ganker",
@@ -538,13 +545,16 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // assert
-        bool returnResult = heroData.TryGetHeroById("Abathur", out Hero? hero);
+        bool returnResult = heroData.TryGetElementById("Abathur", out Hero? hero);
 
         // act
         returnResult.Should().BeTrue();
         hero.Should().NotBeNull();
         hero.AttributeId.Should().Be("Abat");
         hero.Attributes.Should().ContainInConsecutiveOrder("Heroic");
+        hero.Armor[ArmorSet.Hero].BasicArmor.Should().Be(10);
+        hero.Armor[ArmorSet.Hero].AbilityArmor.Should().Be(5);
+        hero.Armor[ArmorSet.Hero].SplashArmor.Should().Be(2);
         hero.Category.Should().Be("none");
         hero.DamageType.Should().BeNull();
         hero.DefaultMountId.Should().Be("slime");
@@ -733,7 +743,7 @@ public class HeroDataTests
     }
 
     [TestMethod]
-    public void TryGetHeroById_NotFound_ReturnsFalse()
+    public void TryGetElementByIdd_NotFound_ReturnsFalse()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -742,7 +752,7 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        bool result = heroData.TryGetHeroById("other", out Hero? hero);
+        bool result = heroData.TryGetElementById("other", out Hero? hero);
 
         // assert
         result.Should().BeFalse();
@@ -750,7 +760,7 @@ public class HeroDataTests
     }
 
     [TestMethod]
-    public void GetHeroById_Found_ReturnsObject()
+    public void GetElementById_Found_ReturnsObject()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -759,14 +769,14 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        Hero hero = heroData.GetHeroById("Alarak");
+        Hero hero = heroData.GetElementById("Alarak");
 
         // assert
         AlarakBasicAssertions(hero);
     }
 
     [TestMethod]
-    public void GetHeroById_NotFound_ThrowsException()
+    public void GetElementById_NotFound_ThrowsException()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -775,7 +785,7 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        Action act = () => heroData.GetHeroById("other");
+        Action act = () => heroData.GetElementById("other");
 
         // assert
         act.Should().Throw<KeyNotFoundException>();
@@ -905,7 +915,7 @@ public class HeroDataTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument, gameStringDocument);
 
         // act
-        Hero hero = heroData.GetHeroById("Alarak");
+        Hero hero = heroData.GetElementById("Alarak");
 
         // assert
         hero.Should().NotBeNull();
