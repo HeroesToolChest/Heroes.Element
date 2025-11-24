@@ -56,37 +56,29 @@ public class GameStringDocument : IDisposable
     /// <summary>
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Hero"/>.
     /// </summary>
-    /// <param name="hero">The <see cref="Hero"/> to update <see cref="GameStringText"/>s.</param>
+    /// <param name="hero">The <see cref="Hero"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Hero hero)
     {
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
-            !gameStringElement.TryGetProperty("hero", out JsonElement unitElement))
+            !gameStringElement.TryGetProperty("hero", out JsonElement heroElement))
             return;
 
-        if (TryGetElement(unitElement, "description", hero.Id, out JsonElement element))
-            hero.Description = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "name", hero.Id, out element))
-            hero.Name = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "difficulty", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "difficulty", hero.Id, out JsonElement element))
             hero.Difficulty = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "expandedRole", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "expandedRole", hero.Id, out element))
             hero.ExpandedRole = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "infoText", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "infoText", hero.Id, out element))
             hero.InfoText = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "searchText", hero.Id, out element))
-            hero.SearchText = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "sortName", hero.Id, out element))
-            hero.SortName = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "title", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "title", hero.Id, out element))
             hero.Title = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "energyType", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "energyType", hero.Id, out element))
             hero.Energy.EnergyType = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "lifeType", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "lifeType", hero.Id, out element))
             hero.Life.LifeType = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "shieldType", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "shieldType", hero.Id, out element))
             hero.Shield.ShieldType = GetGameStringText(element.GetString());
 
-        if (TryGetElement(unitElement, "roles", hero.Id, out element))
+        if (TryGetJsonElement(heroElement, "roles", hero.Id, out element))
         {
             string? roleElementValue = element.GetString();
             if (!string.IsNullOrWhiteSpace(roleElementValue))
@@ -99,6 +91,8 @@ public class GameStringDocument : IDisposable
                 }
             }
         }
+
+        SetHeroesCollectionObjectProperties(hero.Id, hero, heroElement);
 
         IEnumerable<Talent> talents = hero.Talents.SelectMany(x => x.Value);
 
@@ -116,25 +110,38 @@ public class GameStringDocument : IDisposable
     /// <summary>
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Unit"/>.
     /// </summary>
-    /// <param name="unit">The <see cref="Unit"/> to update <see cref="GameStringText"/>s.</param>
+    /// <param name="unit">The <see cref="Unit"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Unit unit)
     {
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("unit", out JsonElement unitElement))
             return;
 
-        if (TryGetElement(unitElement, "description", unit.Id, out JsonElement element))
+        if (TryGetJsonElement(unitElement, "description", unit.Id, out JsonElement element))
             unit.Description = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "energyType", unit.Id, out element))
+        if (TryGetJsonElement(unitElement, "energyType", unit.Id, out element))
             unit.Energy.EnergyType = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "lifeType", unit.Id, out element))
+        if (TryGetJsonElement(unitElement, "lifeType", unit.Id, out element))
             unit.Life.LifeType = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "name", unit.Id, out element))
+        if (TryGetJsonElement(unitElement, "name", unit.Id, out element))
             unit.Name = GetGameStringText(element.GetString());
-        if (TryGetElement(unitElement, "shieldType", unit.Id, out element))
+        if (TryGetJsonElement(unitElement, "shieldType", unit.Id, out element))
             unit.Shield.ShieldType = GetGameStringText(element.GetString());
 
         SetAbilities(unit, gameStringElement);
+    }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Announcer"/>.
+    /// </summary>
+    /// <param name="announcer">The <see cref="Announcer"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Announcer announcer)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("announcer", out JsonElement announcerElement))
+            return;
+
+        SetHeroesCollectionObjectProperties(announcer.Id, announcer, announcerElement);
     }
 
     /// <summary>
@@ -163,7 +170,7 @@ public class GameStringDocument : IDisposable
         }
     }
 
-    private static bool TryGetElement(JsonElement currentElement, string jsonPropertyName, string id, out JsonElement element)
+    private static bool TryGetJsonElement(JsonElement currentElement, string jsonPropertyName, string id, out JsonElement element)
     {
         element = default;
 
@@ -203,17 +210,29 @@ public class GameStringDocument : IDisposable
 
     private void SetAbilityTalentBaseData(JsonElement abilityElement, AbilityTalentBase abilityTalentBase, string id)
     {
-        if (TryGetElement(abilityElement, "cooldownText", id, out JsonElement value))
+        if (TryGetJsonElement(abilityElement, "cooldownText", id, out JsonElement value))
             abilityTalentBase.CooldownText = GetGameStringText(value.GetString());
-        if (TryGetElement(abilityElement, "energyText", id, out value))
+        if (TryGetJsonElement(abilityElement, "energyText", id, out value))
             abilityTalentBase.EnergyText = GetGameStringText(value.GetString());
-        if (TryGetElement(abilityElement, "fullText", id, out value))
+        if (TryGetJsonElement(abilityElement, "fullText", id, out value))
             abilityTalentBase.FullText = GetGameStringText(value.GetString());
-        if (TryGetElement(abilityElement, "lifeText", id, out value))
+        if (TryGetJsonElement(abilityElement, "lifeText", id, out value))
             abilityTalentBase.LifeText = GetGameStringText(value.GetString());
-        if (TryGetElement(abilityElement, "name", id, out value))
+        if (TryGetJsonElement(abilityElement, "name", id, out value))
             abilityTalentBase.Name = GetGameStringText(value.GetString());
-        if (TryGetElement(abilityElement, "shortText", id, out value))
+        if (TryGetJsonElement(abilityElement, "shortText", id, out value))
             abilityTalentBase.ShortText = GetGameStringText(value.GetString());
+    }
+
+    private void SetHeroesCollectionObjectProperties(string id, IHeroesCollectionObject heroesCollectionObject, JsonElement heroesCollectionElement)
+    {
+        if (TryGetJsonElement(heroesCollectionElement, "name", id, out JsonElement element))
+            heroesCollectionObject.Name = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(heroesCollectionElement, "sortName", id, out element))
+            heroesCollectionObject.SortName = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(heroesCollectionElement, "searchText", id, out element))
+            heroesCollectionObject.SearchText = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(heroesCollectionElement, "description", id, out element))
+            heroesCollectionObject.Description = GetGameStringText(element.GetString());
     }
 }

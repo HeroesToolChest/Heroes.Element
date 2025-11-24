@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Tests;
 
 [TestClass]
-public class ElementBaseDataTests
+public class ElementDocumentTests
 {
     [TestMethod]
     public void MismatchedHeroesVersion_WithNullGameStringDocument_ReturnsFalse()
@@ -496,7 +496,7 @@ public class ElementBaseDataTests
     }
 
     // Test implementation of ElementBaseData for testing purposes
-    private class TestElementBaseData : ElementBaseData<TestElementObject>
+    private class TestElementBaseData : ElementDocument<TestElementObject>
     {
         public TestElementBaseData(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
             : base(jsonDocument, gameStringDocument)

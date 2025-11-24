@@ -4,7 +4,7 @@
 /// Represents the base class for processing and managing JSON-based data for elements of type <typeparamref name="T"/>.
 /// </summary>
 /// <typeparam name="T">The type of the element data, which must implement the <see cref="IElementObject"/> interface.</typeparam>
-public abstract class ElementBaseData<T> : IDisposable
+public abstract class ElementDocument<T> : IDisposable
     where T : class, IElementObject
 {
     private readonly JsonSerializerOptions _metaJsonSerializerOptions;
@@ -12,11 +12,11 @@ public abstract class ElementBaseData<T> : IDisposable
     private bool _disposed;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="ElementBaseData{T}"/> class using the specified JSON document and serializer options.
+    /// Initializes a new instance of the <see cref="ElementDocument{T}"/> class using the specified JSON document and serializer options.
     /// </summary>
     /// <param name="jsonDocument">The <see cref="JsonDocument"/> containing the JSON data to be processed.</param>
     /// <param name="gameStringDocument">The <see cref="JsonDocument"/> containing the JSON gamestrings to be processed.</param>
-    protected ElementBaseData(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
+    protected ElementDocument(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
     {
         JsonDocument = jsonDocument;
         GameStringDocument = gameStringDocument;
@@ -72,7 +72,7 @@ public abstract class ElementBaseData<T> : IDisposable
     protected JsonSerializerOptions JsonSerializerOptions { get; }
 
     /// <summary>
-    /// Attempts to retrieve a type of <typeparamref name="T"/> by it's <paramref name="id"/>.
+    /// Attempts to retrieve an element of <typeparamref name="T"/> by it's <paramref name="id"/>.
     /// </summary>
     /// <param name="id">The unique identifier of the element to retrieve.</param>
     /// <param name="value">When this method returns, contains the <typeparamref name="T"/> associated with the specified <paramref name="id"/> if the operation succeeds; otherwise, <see langword="null"/>.</param>
@@ -95,7 +95,7 @@ public abstract class ElementBaseData<T> : IDisposable
     }
 
     /// <summary>
-    /// Retrieves a type of <typeparamref name="T"/> by it's <paramref name="id"/>.
+    /// Retrieves an element of <typeparamref name="T"/> by it's <paramref name="id"/>.
     /// </summary>
     /// <param name="id">The unique identifier of the element to retrieve.</param>
     /// <returns>The <typeparamref name="T"/> associated with the specified <paramref name="id"/>.</returns>

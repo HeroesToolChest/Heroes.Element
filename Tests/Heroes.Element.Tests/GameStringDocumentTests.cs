@@ -390,4 +390,61 @@ public class GameStringDocumentTests
         unit.Abilities[AbilityTier.Heroic][1].ShortText.Should().BeNull();
         unit.Abilities[AbilityTier.Heroic][1].FullText.Should().BeNull();
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Announcer_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "announcerdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "announcer": {
+              "description": {
+                "AbathurAnnouncer": "The Evolution Master will guide you to victory."
+              },
+              "name": {
+                "AbathurAnnouncer": "Abathur Announcer"
+              },
+              "sortName": {
+                "AbathurAnnouncer": "Abathur"
+              },
+              "searchText": {
+                "AbathurAnnouncer": "Abathur Evolution Master Announcer Pack"
+              }
+            }
+          }
+        }
+        """;
+        Announcer announcer = new("AbathurAnnouncer")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(announcer);
+
+        // assert
+        announcer.Description!.RawText.Should().Be("The Evolution Master will guide you to victory.");
+        announcer.Name!.RawText.Should().Be("Abathur Announcer");
+        announcer.SortName!.RawText.Should().Be("Abathur");
+        announcer.SearchText!.RawText.Should().Be("Abathur Evolution Master Announcer Pack");
+    }
 }

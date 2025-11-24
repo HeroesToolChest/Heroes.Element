@@ -928,7 +928,7 @@ public class HeroDataDocumentTests
     }
 
     [TestMethod]
-    public void TryGetHeroByHyperlinkId_Found_ReturnsTrue()
+    public void TryGetElementByHyperlinkId_Found_ReturnsTrue()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -937,7 +937,7 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        bool result = heroData.TryGetHeroByHyperlinkId("HeroAlarak(hyperlink)", out Hero? hero);
+        bool result = heroData.TryGetElementByHyperlinkId("HeroAlarak(hyperlink)", out Hero? hero);
 
         // assert
         result.Should().BeTrue();
@@ -947,7 +947,7 @@ public class HeroDataDocumentTests
     }
 
     [TestMethod]
-    public void TryGetHeroByHyperlinkId_NotFound_ReturnsFalse()
+    public void TryGetElementByHyperlinkId_NotFound_ReturnsFalse()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -956,7 +956,7 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        bool result = heroData.TryGetHeroByHyperlinkId("other", out Hero? hero);
+        bool result = heroData.TryGetElementByHyperlinkId("other", out Hero? hero);
 
         // assert
         result.Should().BeFalse();
@@ -964,7 +964,7 @@ public class HeroDataDocumentTests
     }
 
     [TestMethod]
-    public void GetHeroByHyperlinkId_Found_ReturnsObject()
+    public void GetElementByHyperlinkId_Found_ReturnsObject()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -973,14 +973,14 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        Hero hero = heroData.GetHeroByHyperlinkId("HeroAlarak(hyperlink)");
+        Hero hero = heroData.GetElementByHyperlinkId("HeroAlarak(hyperlink)");
 
         // assert
         AlarakBasicAssertions(hero);
     }
 
     [TestMethod]
-    public void GetHeroByHyperlinkId_NotFound_ThrowsException()
+    public void GetElementByHyperlinkId_NotFound_ThrowsException()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -989,14 +989,14 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        Action act = () => heroData.GetHeroByHyperlinkId("other");
+        Action act = () => heroData.GetElementByHyperlinkId("other");
 
         // assert
         act.Should().Throw<KeyNotFoundException>();
     }
 
     [TestMethod]
-    public void TryGetHeroByAttributeId_Found_ReturnsTrue()
+    public void TryGetElementByAttributeId_Found_ReturnsTrue()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -1005,7 +1005,7 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        bool result = heroData.TryGetHeroByAttributeId("Alar", out Hero? hero);
+        bool result = heroData.TryGetElementByAttributeId("Alar", out Hero? hero);
 
         // assert
         result.Should().BeTrue();
@@ -1015,7 +1015,7 @@ public class HeroDataDocumentTests
     }
 
     [TestMethod]
-    public void TryGetHeroByAttributeId_NotFound_ReturnsFalse()
+    public void TryGetElementByAttributeId_NotFound_ReturnsFalse()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -1024,7 +1024,7 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        bool result = heroData.TryGetHeroByAttributeId("other", out Hero? hero);
+        bool result = heroData.TryGetElementByAttributeId("other", out Hero? hero);
 
         // assert
         result.Should().BeFalse();
@@ -1032,7 +1032,7 @@ public class HeroDataDocumentTests
     }
 
     [TestMethod]
-    public void GetHeroByAttributeId_Found_ReturnsObject()
+    public void GetElementByAttributeId_Found_ReturnsObject()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -1041,14 +1041,14 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        Hero hero = heroData.GetHeroByAttributeId("Alar");
+        Hero hero = heroData.GetElementByAttributeId("Alar");
 
         // assert
         AlarakBasicAssertions(hero);
     }
 
     [TestMethod]
-    public void GetHeroByAttributeId_NotFound_ThrowsException()
+    public void GetElementByAttributeId_NotFound_ThrowsException()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -1057,7 +1057,7 @@ public class HeroDataDocumentTests
         HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
 
         // act
-        Action act = () => heroData.GetHeroByAttributeId("other");
+        Action act = () => heroData.GetElementByAttributeId("other");
 
         // assert
         act.Should().Throw<KeyNotFoundException>();

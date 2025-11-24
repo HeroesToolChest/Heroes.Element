@@ -27,6 +27,7 @@ internal static class GameStringTextExtractor
             {
                 Hero => "hero",
                 Announcer => "announcer",
+                Banner => "banner",
                 _ => JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name),
             };
 

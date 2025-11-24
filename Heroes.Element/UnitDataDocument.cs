@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="Unit"/> objects from a JSON document.
 /// </summary>
-public class UnitDataDocument : ElementBaseData<Unit>
+public class UnitDataDocument : ElementDocument<Unit>
 {
     private UnitDataDocument(JsonDocument document, GameStringDocument? gameStringDocument = null)
     : base(document, gameStringDocument)
