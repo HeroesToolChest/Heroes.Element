@@ -23,10 +23,12 @@ internal static class GameStringTextExtractor
 
         if (@object is IElementObject elementObject)
         {
-            if (elementObject is Hero)
-                elementName = "hero";
-            else
-                elementName = JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name);
+            elementName = elementObject switch
+            {
+                Hero => "hero",
+                Announcer => "announcer",
+                _ => JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name),
+            };
 
             propertyName = JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.Name);
             id = elementObject.Id;
