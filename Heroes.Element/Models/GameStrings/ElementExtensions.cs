@@ -44,4 +44,14 @@ public static class ElementExtensions
     {
         gameStringDocument.UpdateGameStrings(banner);
     }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// </summary>
+    /// <param name="boost">.</param>
+    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Boost boost, GameStringDocument gameStringDocument)
+    {
+        gameStringDocument.UpdateGameStrings(boost);
+    }
 }

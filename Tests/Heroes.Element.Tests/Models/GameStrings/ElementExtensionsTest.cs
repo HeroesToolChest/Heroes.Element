@@ -166,4 +166,45 @@ public class ElementExtensionsTest
         // assert
         banner.Description.RawText.Should().Be("updated description");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_Boost_UpdatesGameStringTexts()
+    {
+        // arrange
+        Boost boost = new("boostId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "boost": {
+              "description": {
+                "boostId1": "updated description"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        boost.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        boost.Description.RawText.Should().Be("updated description");
+    }
 }

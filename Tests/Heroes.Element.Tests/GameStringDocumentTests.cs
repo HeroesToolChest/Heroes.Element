@@ -504,4 +504,61 @@ public class GameStringDocumentTests
         banner.SortName!.RawText.Should().Be("Imperius");
         banner.SearchText!.RawText.Should().Be("Imperius Banner Diablo Archangel Valor");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Boost_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "boostdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "boost": {
+              "description": {
+                "BoostStimpak": "Increases experience gain by 50% for 3 days."
+              },
+              "name": {
+                "BoostStimpak": "3-Day Stimpack"
+              },
+              "sortName": {
+                "BoostStimpak": "Stimpack"
+              },
+              "searchText": {
+                "BoostStimpak": "Stimpack Boost Experience XP"
+              }
+            }
+          }
+        }
+        """;
+        Boost boost = new("BoostStimpak")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(boost);
+
+        // assert
+        boost.Description!.RawText.Should().Be("Increases experience gain by 50% for 3 days.");
+        boost.Name!.RawText.Should().Be("3-Day Stimpack");
+        boost.SortName!.RawText.Should().Be("Stimpack");
+        boost.SearchText!.RawText.Should().Be("Stimpack Boost Experience XP");
+    }
 }
