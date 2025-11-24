@@ -447,4 +447,61 @@ public class GameStringDocumentTests
         announcer.SortName!.RawText.Should().Be("Abathur");
         announcer.SearchText!.RawText.Should().Be("Abathur Evolution Master Announcer Pack");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Banner_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "bannerdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "banner": {
+              "description": {
+                "BannerD3Imperius": "Banner celebrating the Archangel of Valor."
+              },
+              "name": {
+                "BannerD3Imperius": "Imperius Banner"
+              },
+              "sortName": {
+                "BannerD3Imperius": "Imperius"
+              },
+              "searchText": {
+                "BannerD3Imperius": "Imperius Banner Diablo Archangel Valor"
+              }
+            }
+          }
+        }
+        """;
+        Banner banner = new("BannerD3Imperius")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(banner);
+
+        // assert
+        banner.Description!.RawText.Should().Be("Banner celebrating the Archangel of Valor.");
+        banner.Name!.RawText.Should().Be("Imperius Banner");
+        banner.SortName!.RawText.Should().Be("Imperius");
+        banner.SearchText!.RawText.Should().Be("Imperius Banner Diablo Archangel Valor");
+    }
 }

@@ -34,4 +34,14 @@ public static class ElementExtensions
     {
         gameStringDocument.UpdateGameStrings(announcer);
     }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// </summary>
+    /// <param name="banner">.</param>
+    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Banner banner, GameStringDocument gameStringDocument)
+    {
+        gameStringDocument.UpdateGameStrings(banner);
+    }
 }

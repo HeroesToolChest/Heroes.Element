@@ -145,6 +145,19 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Banner"/>.
+    /// </summary>
+    /// <param name="banner">The <see cref="Banner"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Banner banner)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("banner", out JsonElement bannerElement))
+            return;
+
+        SetHeroesCollectionObjectProperties(banner.Id, banner, bannerElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()
