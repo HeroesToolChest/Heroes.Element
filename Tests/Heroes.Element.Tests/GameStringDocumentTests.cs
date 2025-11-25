@@ -561,4 +561,61 @@ public class GameStringDocumentTests
         boost.SortName!.RawText.Should().Be("Stimpack");
         boost.SearchText!.RawText.Should().Be("Stimpack Boost Experience XP");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Bundle_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "bundledata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "bundle": {
+              "description": {
+                "MegaBundleStarterPack": "Get started with this amazing bundle pack!"
+              },
+              "name": {
+                "MegaBundleStarterPack": "Mega Starter Bundle"
+              },
+              "sortName": {
+                "MegaBundleStarterPack": "Starter Bundle"
+              },
+              "searchText": {
+                "MegaBundleStarterPack": "Mega Starter Bundle Pack Heroes Skins"
+              }
+            }
+          }
+        }
+        """;
+        Bundle bundle = new("MegaBundleStarterPack")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(bundle);
+
+        // assert
+        bundle.Description!.RawText.Should().Be("Get started with this amazing bundle pack!");
+        bundle.Name!.RawText.Should().Be("Mega Starter Bundle");
+        bundle.SortName!.RawText.Should().Be("Starter Bundle");
+        bundle.SearchText!.RawText.Should().Be("Mega Starter Bundle Pack Heroes Skins");
+    }
 }

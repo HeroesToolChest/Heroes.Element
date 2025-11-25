@@ -171,6 +171,19 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Bundle"/>.
+    /// </summary>
+    /// <param name="bundle">The <see cref="Bundle"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Bundle bundle)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("bundle", out JsonElement bundleElement))
+            return;
+
+        SetHeroesCollectionObjectProperties(bundle.Id, bundle, bundleElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

@@ -20,23 +20,22 @@ public class Bundle : HeroesCollectionObject
     public bool IsDynamicContent { get; set; }
 
     /// <summary>
-    /// Gets a unique collection of hero ids that are in this bundle.
+    /// Gets or sets a unique collection of hero ids that are in this bundle.
     /// </summary>
     [JsonPropertyName("heroes")]
-    public ISet<string> HeroIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> HeroIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a collection of hero skins id by their hero id.
+    /// Gets or sets a collection of hero skins id by their hero id.
     /// </summary>
     [JsonPropertyName("skins")]
-    [JsonConverter(typeof(DictionaryStringHashSetStringConverter))]
-    public IDictionary<string, SortedSet<string>> HeroSkinsByHeroId { get; } = new SortedDictionary<string, SortedSet<string>>(StringComparer.Ordinal);
+    public IDictionary<string, ISet<string>> HeroSkinsByHeroId { get; set; } = new SortedDictionary<string, ISet<string>>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a unique collection of mount ids that are in this bundle.
+    /// Gets or sets a unique collection of mount ids that are in this bundle.
     /// </summary>
     [JsonPropertyName("mounts")]
-    public ISet<string> MountIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> MountIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets the bundle image.
