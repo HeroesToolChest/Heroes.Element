@@ -59,7 +59,7 @@ public class LootChestDataDocumentTests
               "rarity": "Rare",
               "event": "no",
               "maxRerolls": 3,
-              "typeDescription": "rare_chest",
+              "typeDescriptionId": "rare_chest",
               "description": "Contains four random items. Guaranteed to contain at least one Rare item."
             }
           }
@@ -80,7 +80,7 @@ public class LootChestDataDocumentTests
         lootChest.Rarity.Should().Be(Rarity.Rare);
         lootChest.Event.Should().Be("no");
         lootChest.MaxRerolls.Should().Be(3);
-        lootChest.TypeDescription.Should().Be("rare_chest");
+        lootChest.TypeDescriptionId.Should().Be("rare_chest");
         lootChest.Description!.RawText.Should().Be("Contains four random items. Guaranteed to contain at least one Rare item.");
     }
 

@@ -34,7 +34,7 @@ public class LootChest : ElementObject, IName, IHyperlinkId, IRarity, IEventName
     /// <summary>
     /// Gets or sets the type description id.
     /// </summary>
-    public string? TypeDescription { get; set; } = string.Empty;
+    public string? TypeDescriptionId { get; set; } = string.Empty;
 
     /// <inheritdoc/>
     [JsonPropertyOrder(101)]

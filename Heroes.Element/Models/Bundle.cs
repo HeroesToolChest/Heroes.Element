@@ -22,19 +22,17 @@ public class Bundle : HeroesCollectionObject
     /// <summary>
     /// Gets or sets a unique collection of hero ids that are in this bundle.
     /// </summary>
-    [JsonPropertyName("heroes")]
     public ISet<string> HeroIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets a collection of hero skins id by their hero id.
     /// </summary>
-    [JsonPropertyName("skins")]
-    public IDictionary<string, ISet<string>> HeroSkinsByHeroId { get; set; } = new SortedDictionary<string, ISet<string>>(StringComparer.Ordinal);
+    [JsonPropertyName("skinIds")]
+    public IDictionary<string, ISet<string>> HeroSkinIdsByHeroId { get; set; } = new SortedDictionary<string, ISet<string>>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets a unique collection of mount ids that are in this bundle.
     /// </summary>
-    [JsonPropertyName("mounts")]
     public ISet<string> MountIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
@@ -61,6 +59,7 @@ public class Bundle : HeroesCollectionObject
     /// <summary>
     /// Gets or sets the loot chest id that is in this bundle.
     /// </summary>
+    [JsonPropertyName("lootChestId")]
     public string? LootChestBonus { get; set; }
 
     /// <summary>

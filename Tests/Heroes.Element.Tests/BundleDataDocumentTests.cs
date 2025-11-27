@@ -68,12 +68,12 @@ public class BundleDataDocumentTests
               "description": "Get started with this amazing bundle pack!",
               "searchText": "Mega Starter Bundle Pack Heroes Skins",
               "isDynamicContent": true,
-              "heroes": [
+              "heroIds": [
                 "Arthas",
                 "Jaina",
                 "Thrall"
               ],
-              "skins": {
+              "skinIds": {
                 "Arthas": [
                   "ArthasCrownPrince"
                 ],
@@ -82,7 +82,7 @@ public class BundleDataDocumentTests
                   "JainaTheramore"
                 ]
               },
-              "mounts": [
+              "mountIds": [
                 "CloudSerpentMount",
                 "MechanicalSheepMount"
               ],
@@ -90,7 +90,7 @@ public class BundleDataDocumentTests
               "boostId": "BoostStimpak",
               "goldBonus": 1000,
               "gemsBonus": 500,
-              "lootChestBonus": "LootChestRare"
+              "lootChestId": "LootChestRare"
             }
           }
         }
@@ -119,10 +119,10 @@ public class BundleDataDocumentTests
         bundle.IsDynamicContent.Should().BeTrue();
         bundle.HeroIds.Should().HaveCount(3)
             .And.ContainInConsecutiveOrder("Arthas", "Jaina", "Thrall");
-        bundle.HeroSkinsByHeroId.Should().HaveCount(2);
-        bundle.HeroSkinsByHeroId["Arthas"].Should().ContainSingle()
+        bundle.HeroSkinIdsByHeroId.Should().HaveCount(2);
+        bundle.HeroSkinIdsByHeroId["Arthas"].Should().ContainSingle()
             .And.Contain("ArthasCrownPrince");
-        bundle.HeroSkinsByHeroId["Jaina"].Should().HaveCount(2)
+        bundle.HeroSkinIdsByHeroId["Jaina"].Should().HaveCount(2)
             .And.ContainInConsecutiveOrder("JainaDreadlord", "JainaTheramore");
         bundle.MountIds.Should().HaveCount(2)
             .And.ContainInConsecutiveOrder("CloudSerpentMount", "MechanicalSheepMount");
