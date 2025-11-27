@@ -4,8 +4,8 @@
 /// Represents the base class for processing and managing JSON-based data for elements of type <typeparamref name="T"/>.
 /// </summary>
 /// <typeparam name="T">The type of the element data, which must implement the <see cref="IElementObject"/> interface.</typeparam>
-public abstract class ElementDocument<T> : IDisposable
-    where T : class, IElementObject
+public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IDisposable
+    where T : IElementObject
 {
     private readonly JsonSerializerOptions _metaJsonSerializerOptions;
 
@@ -71,15 +71,10 @@ public abstract class ElementDocument<T> : IDisposable
     /// </summary>
     protected JsonSerializerOptions JsonSerializerOptions { get; }
 
-    /// <summary>
-    /// Attempts to retrieve an element of <typeparamref name="T"/> by it's <paramref name="id"/>.
-    /// </summary>
-    /// <param name="id">The unique identifier of the element to retrieve.</param>
-    /// <param name="value">When this method returns, contains the <typeparamref name="T"/> associated with the specified <paramref name="id"/> if the operation succeeds; otherwise, <see langword="null"/>.</param>
-    /// <returns><see langword="true"/> if an element with the specified <paramref name="id"/> is found; otherwise, <see langword="false"/>.</returns>
+    /// <inheritdoc/>
     public bool TryGetElementById(string id, [NotNullWhen(true)] out T? value)
     {
-        value = null;
+        value = default;
 
         if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
             return false;
@@ -94,12 +89,7 @@ public abstract class ElementDocument<T> : IDisposable
         return false;
     }
 
-    /// <summary>
-    /// Retrieves an element of <typeparamref name="T"/> by it's <paramref name="id"/>.
-    /// </summary>
-    /// <param name="id">The unique identifier of the element to retrieve.</param>
-    /// <returns>The <typeparamref name="T"/> associated with the specified <paramref name="id"/>.</returns>
-    /// <exception cref="KeyNotFoundException"><paramref name="id"/> property value was not found.</exception>
+    /// <inheritdoc/>
     public T GetElementById(string id)
     {
         if (TryGetElementById(id, out T? element))
@@ -115,6 +105,52 @@ public abstract class ElementDocument<T> : IDisposable
     {
         Dispose(disposing: true);
         GC.SuppressFinalize(this);
+    }
+
+    /// <summary>
+    /// Attempts to retrieve a type of <typeparamref name="T"/> based on the specified <paramref name="hyperlinkId"/>.
+    /// </summary>
+    /// <param name="hyperlinkId">The hyperlink id of the element to retrieve.</param>
+    /// <param name="value">When this method returns, contains the <typeparamref name="T"/> associated with the specified <paramref name="hyperlinkId"/> if the operation succeeds; otherwise, <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if an element with the specified <paramref name="hyperlinkId"/> is found; otherwise, <see langword="false"/>.</returns>
+    public virtual bool TryGetElementByHyperlinkId(string hyperlinkId, [NotNullWhen(true)] out T? value)
+        => PropertyLookup(JsonNamingPolicy.CamelCase.ConvertName(nameof(Hero.HyperlinkId)), hyperlinkId, out value);
+
+    /// <summary>
+    /// Retrieves an element <typeparamref name="T"/> associated with the specified <paramref name="hyperlinkId"/>.
+    /// </summary>
+    /// <param name="hyperlinkId">The hyperlink id of the element to retrieve.</param>
+    /// <returns>The <typeparamref name="T"/> associated with the specified <paramref name="hyperlinkId"/>.</returns>
+    /// <exception cref="KeyNotFoundException"><paramref name="hyperlinkId"/> property value was not found.</exception>
+    public virtual T GetElementByHyperlinkId(string hyperlinkId)
+    {
+        if (TryGetElementByHyperlinkId(hyperlinkId, out T? element))
+            return element;
+
+        throw new KeyNotFoundException($"The given hyperlinkId '{hyperlinkId}' was not present in items.");
+    }
+
+    /// <summary>
+    /// Attempts to retrieve an element of <typeparamref name="T"/> based on the specified <paramref name="attributeId"/>.
+    /// </summary>
+    /// <param name="attributeId">The attribute id of the element.</param>
+    /// <param name="value">When this method returns, contains the element associated with the specified <paramref name="attributeId"/> if the operation succeeds; otherwise, <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if an element with the specified <paramref name="attributeId"/> is found; otherwise, <see langword="false"/>.</returns>
+    public virtual bool TryGetElementByAttributeId(string attributeId, [NotNullWhen(true)] out T? value)
+        => PropertyLookup(JsonNamingPolicy.CamelCase.ConvertName(nameof(Hero.AttributeId)), attributeId, out value);
+
+    /// <summary>
+    /// Retrieves an element of <typeparamref name="T"/> associated with the specified <paramref name="attributeId"/>.
+    /// </summary>
+    /// <param name="attributeId">The attribute id of the element.</param>
+    /// <returns>The element of <typeparamref name="T"/> associated with the specified <paramref name="attributeId"/>.</returns>
+    /// <exception cref="KeyNotFoundException"><paramref name="attributeId"/> property value was not found.</exception>
+    public virtual T GetElementByAttributeId(string attributeId)
+    {
+        if (TryGetElementByAttributeId(attributeId, out T? element))
+            return element;
+
+        throw new KeyNotFoundException($"The given attributeId '{attributeId}' was not present in items.");
     }
 
     /// <summary>
@@ -147,7 +183,7 @@ public abstract class ElementDocument<T> : IDisposable
         T? element = jsonElement.Deserialize<T>(JsonSerializerOptions);
 
         if (element is null)
-            return null;
+            return default;
 
         element.SetId(id);
         UpdateGameStringTexts(element);

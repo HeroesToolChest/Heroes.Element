@@ -248,4 +248,49 @@ public class ElementExtensionsTest
         // assert
         bundle.Description.RawText.Should().Be("updated description");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_LootChest_UpdatesGameStringTexts()
+    {
+        // arrange
+        LootChest lootChest = new("lootChestId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "lootchest": {
+              "description": {
+                "lootChestId1": "updated description"
+              },
+              "name": {
+                "lootChestId1": "updated name"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        lootChest.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        lootChest.Description.RawText.Should().Be("updated description");
+        lootChest.Name!.RawText.Should().Be("updated name");
+    }
 }

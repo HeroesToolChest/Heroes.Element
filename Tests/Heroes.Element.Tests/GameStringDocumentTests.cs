@@ -618,4 +618,53 @@ public class GameStringDocumentTests
         bundle.SortName!.RawText.Should().Be("Starter Bundle");
         bundle.SearchText!.RawText.Should().Be("Mega Starter Bundle Pack Heroes Skins");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_LootChest_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "lootchestdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "lootchest": {
+              "description": {
+                "LootChestRare": "Contains four random items. Guaranteed to contain at least one Rare item."
+              },
+              "name": {
+                "LootChestRare": "Rare Loot Chest"
+              }
+            }
+          }
+        }
+        """;
+        LootChest lootChest = new("LootChestRare")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(lootChest);
+
+        // assert
+        lootChest.Description!.RawText.Should().Be("Contains four random items. Guaranteed to contain at least one Rare item.");
+        lootChest.Name!.RawText.Should().Be("Rare Loot Chest");
+    }
 }

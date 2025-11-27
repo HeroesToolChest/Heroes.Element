@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="Bundle"/> objects from a JSON document.
 /// </summary>
-public class BundleDataDocument : HeroesCollectionDocument<Bundle>
+public class BundleDataDocument : ElementDocument<Bundle>, IHeroesCollectionRetrieval<Bundle>
 {
     private BundleDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
     : base(dataDocument, gameStringDocument)

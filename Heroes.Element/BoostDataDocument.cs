@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="Banner"/> objects from a JSON document.
 /// </summary>
-public class BoostDataDocument : HeroesCollectionDocument<Boost>
+public class BoostDataDocument : ElementDocument<Boost>, IHeroesCollectionRetrieval<Boost>
 {
     private BoostDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
         : base(dataDocument, gameStringDocument)

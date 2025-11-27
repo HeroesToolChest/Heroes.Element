@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="Hero"/> objects from a JSON document.
 /// </summary>
-public class HeroDataDocument : HeroesCollectionDocument<Hero>
+public class HeroDataDocument : ElementDocument<Hero>, IHeroesCollectionRetrieval<Hero>
 {
     private HeroDataDocument(JsonDocument document, GameStringDocument? gameStringDocument = null)
         : base(document, gameStringDocument)

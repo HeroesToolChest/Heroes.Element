@@ -64,4 +64,14 @@ public static class ElementExtensions
     {
         gameStringDocument.UpdateGameStrings(bundle);
     }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// </summary>
+    /// <param name="lootChest">.</param>
+    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
+    public static void UpdateGameStringTexts(this LootChest lootChest, GameStringDocument gameStringDocument)
+    {
+        gameStringDocument.UpdateGameStrings(lootChest);
+    }
 }

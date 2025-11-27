@@ -184,6 +184,20 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="LootChest"/>.
+    /// </summary>
+    /// <param name="lootchest">The <see cref="LootChest"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(LootChest lootchest)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("lootchest", out JsonElement lootChestElement))
+            return;
+
+        SetNameProperty(lootchest.Id, lootchest, lootChestElement);
+        SetDescriptionProperty(lootchest.Id, lootchest, lootChestElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()
@@ -265,13 +279,24 @@ public class GameStringDocument : IDisposable
 
     private void SetHeroesCollectionObjectProperties(string id, IHeroesCollectionObject heroesCollectionObject, JsonElement heroesCollectionElement)
     {
-        if (TryGetJsonElement(heroesCollectionElement, "name", id, out JsonElement element))
-            heroesCollectionObject.Name = GetGameStringText(element.GetString());
-        if (TryGetJsonElement(heroesCollectionElement, "sortName", id, out element))
+        SetNameProperty(id, heroesCollectionObject, heroesCollectionElement);
+        SetDescriptionProperty(id, heroesCollectionObject, heroesCollectionElement);
+
+        if (TryGetJsonElement(heroesCollectionElement, "sortName", id, out JsonElement element))
             heroesCollectionObject.SortName = GetGameStringText(element.GetString());
         if (TryGetJsonElement(heroesCollectionElement, "searchText", id, out element))
             heroesCollectionObject.SearchText = GetGameStringText(element.GetString());
-        if (TryGetJsonElement(heroesCollectionElement, "description", id, out element))
-            heroesCollectionObject.Description = GetGameStringText(element.GetString());
+    }
+
+    private void SetNameProperty(string id, IName name, JsonElement nameElement)
+    {
+        if (TryGetJsonElement(nameElement, "name", id, out JsonElement element))
+            name.Name = GetGameStringText(element.GetString());
+    }
+
+    private void SetDescriptionProperty(string id, IDescription description, JsonElement descriptionElement)
+    {
+        if (TryGetJsonElement(descriptionElement, "description", id, out JsonElement element))
+            description.Description = GetGameStringText(element.GetString());
     }
 }
