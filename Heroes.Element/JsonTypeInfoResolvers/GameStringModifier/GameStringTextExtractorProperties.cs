@@ -7,4 +7,8 @@ internal static class GameStringTextExtractorProperties
     public static (Type Type, string PropertyName) UnitEnergy => (typeof(UnitEnergy), "energyType");
 
     public static (Type Type, string PropertyName) UnitShield => (typeof(UnitShield), "shieldType");
+
+    public static (Type Type, string PropertyName) MapObjectiveTitle => (typeof(IList<MapObjective>), "objectiveTitle");
+
+    public static (Type Type, string PropertyName) MapObjectiveDescription => (typeof(IList<MapObjective>), "objectiveDescription");
 }

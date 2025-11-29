@@ -245,7 +245,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["unit"]["name"]["unitId"].RawText.Should().Be("value");
+        gameStringItemDictionary["unit"]["name"].KeyValuePairs["unitId"].RawText.Should().Be("value");
     }
 
     [TestMethod]
@@ -264,7 +264,119 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["hero"]["name"]["heroId"].RawText.Should().Be("heroName");
+        gameStringItemDictionary["hero"]["name"].KeyValuePairs["heroId"].RawText.Should().Be("heroName");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_PropertyIsAnnouncer_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Announcer announcer = new("announcerId")
+        {
+            Name = new GameStringText("Announcer name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(announcer, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["announcer"]["name"].KeyValuePairs["announcerId"].RawText.Should().Be("Announcer name");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_PropertyIsBanner_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Banner banner = new("bannerId")
+        {
+            Name = new GameStringText("Banner name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(banner, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["banner"]["name"].KeyValuePairs["bannerId"].RawText.Should().Be("Banner name");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_PropertyIsBundle_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Bundle bundle = new("bundleId")
+        {
+            Name = new GameStringText("Bundle name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(bundle, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["bundle"]["name"].KeyValuePairs["bundleId"].RawText.Should().Be("Bundle name");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_PropertyIsLootChest_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        LootChest lootChest = new("lootChestId")
+        {
+            Name = new GameStringText("Loot Chest name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(lootChest, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["lootChest"]["name"].KeyValuePairs["lootChestId"].RawText.Should().Be("Loot Chest name");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_PropertyIsMap_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Map map = new("mapId")
+        {
+            Name = new GameStringText("Map name"),
+            MapObjectives =
+            {
+                new MapObjective()
+                {
+                    Title = new GameStringText("Map Objective name 1"),
+                    Description = new GameStringText("Map Objective description 1"),
+                },
+                new MapObjective()
+                {
+                    Title = new GameStringText("Map Objective name 2"),
+                    Description = new GameStringText("Map Objective description 2"),
+                },
+            },
+        };
+
+        // act
+        JsonSerializer.Serialize(map, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["map"]["name"].KeyValuePairs["mapId"].RawText.Should().Be("Map name");
+        gameStringItemDictionary["map"]["mapObjectiveTitle"].KeyArrayPairs["mapId"][0].RawText.Should().Be("Map Objective name 1");
+        gameStringItemDictionary["map"]["mapObjectiveTitle"].KeyArrayPairs["mapId"][1].RawText.Should().Be("Map Objective name 2");
+        gameStringItemDictionary["map"]["mapObjectiveDescription"].KeyArrayPairs["mapId"][0].RawText.Should().Be("Map Objective description 1");
+        gameStringItemDictionary["map"]["mapObjectiveDescription"].KeyArrayPairs["mapId"][1].RawText.Should().Be("Map Objective description 2");
     }
 
     [TestMethod]
@@ -297,7 +409,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["ability"]["name"]["abil1|button1|Q"].RawText.Should().Be("value");
+        gameStringItemDictionary["ability"]["name"].KeyValuePairs["abil1|button1|Q"].RawText.Should().Be("value");
     }
 
     [TestMethod]
@@ -332,7 +444,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["talent"]["name"]["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
+        gameStringItemDictionary["talent"]["name"].KeyValuePairs["talent1|button1|Q|Level4"].RawText.Should().Be("talentName");
     }
 
     [TestMethod]
@@ -366,9 +478,9 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["hero"]["lifeType"]["heroId"].RawText.Should().Be("Health");
-        gameStringItemDictionary["hero"]["energyType"]["heroId"].RawText.Should().Be("Energy");
-        gameStringItemDictionary["hero"]["shieldType"]["heroId"].RawText.Should().Be("Shield");
+        gameStringItemDictionary["hero"]["lifeType"].KeyValuePairs["heroId"].RawText.Should().Be("Health");
+        gameStringItemDictionary["hero"]["energyType"].KeyValuePairs["heroId"].RawText.Should().Be("Energy");
+        gameStringItemDictionary["hero"]["shieldType"].KeyValuePairs["heroId"].RawText.Should().Be("Shield");
     }
 
     [TestMethod]
@@ -402,9 +514,9 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["unit"]["lifeType"]["unitId"].RawText.Should().Be("Health");
-        gameStringItemDictionary["unit"]["energyType"]["unitId"].RawText.Should().Be("Energy");
-        gameStringItemDictionary["unit"]["shieldType"]["unitId"].RawText.Should().Be("Shield");
+        gameStringItemDictionary["unit"]["lifeType"].KeyValuePairs["unitId"].RawText.Should().Be("Health");
+        gameStringItemDictionary["unit"]["energyType"].KeyValuePairs["unitId"].RawText.Should().Be("Energy");
+        gameStringItemDictionary["unit"]["shieldType"].KeyValuePairs["unitId"].RawText.Should().Be("Shield");
     }
 
     [TestMethod]
@@ -414,21 +526,36 @@ public class JsonTypeInfoModifiersTests
         GameStringItemDictionary gameStringItemDictionary = [];
         JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
-        Hero hero = new("heroId")
+        Hero hero1 = new("heroId1")
         {
             Name = new GameStringText("heroName"),
             Roles =
             {
                 new GameStringText("Role1"),
-                new GameStringText("Role2"),
+            },
+        };
+
+        Hero hero2 = new("heroId2")
+        {
+            Name = new GameStringText("heroName"),
+            Roles =
+            {
+                new GameStringText("Role11"),
+                new GameStringText("Role22"),
             },
         };
 
         // act
-        JsonSerializer.Serialize(hero, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+        JsonSerializer.Serialize(hero1, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+        JsonSerializer.Serialize(hero2, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["hero"]["roles"]["heroId"].RawText.Should().Be("Role1|Role2");
+        gameStringItemDictionary["hero"]["roles"].KeyArrayPairs["heroId1"].Should().ContainSingle();
+        gameStringItemDictionary["hero"]["roles"].KeyArrayPairs["heroId1"][0].RawText.Should().Be("Role1");
+
+        gameStringItemDictionary["hero"]["roles"].KeyArrayPairs["heroId2"].Should().HaveCount(2);
+        gameStringItemDictionary["hero"]["roles"].KeyArrayPairs["heroId2"][0].RawText.Should().Be("Role11");
+        gameStringItemDictionary["hero"]["roles"].KeyArrayPairs["heroId2"][1].RawText.Should().Be("Role22");
     }
 
     [TestMethod]
@@ -483,10 +610,10 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(unit2, jsonSerializerOptions);
 
         // assert
-        gameStringItemDictionary["unit"]["name"]["unitId1"].RawText.Should().Be("value1");
-        gameStringItemDictionary["unit"]["name"]["unitId2"].RawText.Should().Be("value2");
-        gameStringItemDictionary["unit"]["description"]["unitId2"].RawText.Should().Be("desc2");
-        gameStringItemDictionary["ability"]["cooldownText"]["Mount|SummonMount|Z"].RawText.Should().Be("Cooldown: 6 seconds");
+        gameStringItemDictionary["unit"]["name"].KeyValuePairs["unitId1"].RawText.Should().Be("value1");
+        gameStringItemDictionary["unit"]["name"].KeyValuePairs["unitId2"].RawText.Should().Be("value2");
+        gameStringItemDictionary["unit"]["description"].KeyValuePairs["unitId2"].RawText.Should().Be("desc2");
+        gameStringItemDictionary["ability"]["cooldownText"].KeyValuePairs["Mount|SummonMount|Z"].RawText.Should().Be("Cooldown: 6 seconds");
     }
 
     private static JsonSerializerOptions GetExtractSerializerOptions(GameStringItemDictionary gameStringItemDictionary, LocalizedTextOption localizedTextOption)

@@ -15,7 +15,7 @@ internal static class GameStringTextExtractor
         _typeNameByUnitChildObjects.TryAdd(child, typeName);
     }
 
-    public static void AddGameStringText(GameStringItemDictionary gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText, bool appendValue = false)
+    public static void AddGameStringText(GameStringItemDictionary gameStringElements, object @object, JsonPropertyInfo propertyInfo, GameStringText gameStringText, bool isArray = false)
     {
         string elementName;
         string propertyName;
@@ -28,6 +28,8 @@ internal static class GameStringTextExtractor
                 Hero => "hero",
                 Announcer => "announcer",
                 Banner => "banner",
+                Bundle => "bundle",
+                Boost => "boost",
                 _ => JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name),
             };
 
@@ -50,25 +52,43 @@ internal static class GameStringTextExtractor
         {
             // inner object property
             (elementName, propertyName, id) = GetPropertyNames(@object, propertyInfo);
+
+            if (elementName == "map" && (propertyName == GstInnerProperty.MapObjectiveTitle.PropertyName || propertyName == GstInnerProperty.MapObjectiveDescription.PropertyName))
+                isArray = true;
         }
 
         // set the gamestring text in the collection
+        AddOrUpdateGameStringText(gameStringElements, gameStringText, id, elementName, propertyName, isArray);
+    }
+
+    private static void AddOrUpdateGameStringText(GameStringItemDictionary gameStringElements, GameStringText gameStringText, string id, string elementName, string propertyName, bool isArray)
+    {
         if (gameStringElements.TryGetValue(elementName, out GameStringFilePropertyName? gameStringPropertyName))
         {
-            if (gameStringPropertyName.TryGetValue(propertyName, out GameStringFilePropertyId? gameString))
+            if (gameStringPropertyName.TryGetValue(propertyName, out GameStringFilePropertyId? gameStringFilePropertyId))
             {
-                // if exists, append to it with comma
-                if (appendValue && gameString.TryGetValue(id, out GameStringText? existingGameStringText))
-                    gameStringText = new GameStringText($"{existingGameStringText.RawText}|{gameStringText.RawText}");
-
-                gameString[id] = gameStringText;
+                if (gameStringFilePropertyId.KeyArrayPairs.Count > 0)
+                {
+                    if (gameStringFilePropertyId.KeyArrayPairs.TryGetValue(id, out List<GameStringText>? existingGstList))
+                        existingGstList.Add(gameStringText);
+                    else
+                        gameStringFilePropertyId.KeyArrayPairs[id] = [gameStringText];
+                }
+                else
+                {
+                    gameStringFilePropertyId.KeyValuePairs[id] = gameStringText;
+                }
             }
             else
             {
-                gameStringPropertyName[propertyName] = new GameStringFilePropertyId()
-                {
-                    [id] = gameStringText,
-                };
+                gameStringFilePropertyId = new();
+
+                if (isArray)
+                    gameStringFilePropertyId.KeyArrayPairs[id] = [gameStringText];
+                else
+                    gameStringFilePropertyId.KeyValuePairs[id] = gameStringText;
+
+                gameStringPropertyName[propertyName] = gameStringFilePropertyId;
             }
         }
         else
@@ -77,7 +97,10 @@ internal static class GameStringTextExtractor
             {
                 [propertyName] = new GameStringFilePropertyId()
                 {
-                    [id] = gameStringText,
+                    KeyValuePairs =
+                    {
+                        [id] = gameStringText,
+                    },
                 },
             };
         }
@@ -100,6 +123,8 @@ internal static class GameStringTextExtractor
             "UnitLife" => GstInnerProperty.UnitLife.PropertyName,
             "UnitEnergy" => GstInnerProperty.UnitEnergy.PropertyName,
             "UnitShield" => GstInnerProperty.UnitShield.PropertyName,
+            "MapObjective" when propertyInfo.Name == "title" => GstInnerProperty.MapObjectiveTitle.PropertyName,
+            "MapObjective" when propertyInfo.Name == "description" => GstInnerProperty.MapObjectiveDescription.PropertyName,
             _ => "Unknown",
         };
     }
