@@ -25,11 +25,11 @@ internal static class GameStringTextExtractor
         {
             elementName = elementObject switch
             {
-                Hero => "hero",
-                Announcer => "announcer",
-                Banner => "banner",
-                Bundle => "bundle",
-                Boost => "boost",
+                Hero => JsonNamingPolicy.CamelCase.ConvertName(nameof(Hero)),
+                Announcer => JsonNamingPolicy.CamelCase.ConvertName(nameof(Announcer)),
+                Banner => JsonNamingPolicy.CamelCase.ConvertName(nameof(Banner)),
+                Bundle => JsonNamingPolicy.CamelCase.ConvertName(nameof(Bundle)),
+                Boost => JsonNamingPolicy.CamelCase.ConvertName(nameof(Boost)),
                 _ => JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name),
             };
 

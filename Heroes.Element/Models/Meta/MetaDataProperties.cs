@@ -13,7 +13,7 @@ public class MetaDataProperties : MetaProperties
     public string DataType { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the name of map the data is associated with, if applicable (e.g., "Alterac Pass", "Battlefield of Eternity").
+    /// Gets or sets the map name associated with the data, if applicable (e.g., "Alterac Pass", "Battlefield of Eternity").
     /// </summary>
     public string? MapName { get; set; }
 

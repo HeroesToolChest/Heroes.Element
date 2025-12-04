@@ -5,10 +5,9 @@
 /// </summary>
 public class RootGameStrings
 {
-    internal const string GameStringItemPropertyName = "gamestrings";
-
     /// <summary>
     /// Gets or sets the meta properties.
     /// </summary>
+    [JsonPropertyName(Constants.RootMetaPropertyName)]
     public MetaGameStringProperties Meta { get; set; } = new();
 }

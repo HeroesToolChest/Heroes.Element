@@ -10,10 +10,12 @@ public class RootDataElement<TElement>
     /// <summary>
     /// Gets or sets the meta properties.
     /// </summary>
+    [JsonPropertyName(Constants.RootMetaPropertyName)]
     public MetaDataProperties Meta { get; set; } = new();
 
     /// <summary>
     /// Gets or sets the items, sorted by their unique identifier.
     /// </summary>
+    [JsonPropertyName(Constants.ItemsPropertyName)]
     public SortedDictionary<string, TElement> Items { get; set; } = new(StringComparer.Ordinal);
 }
