@@ -373,10 +373,10 @@ public class JsonTypeInfoModifiersTests
 
         // assert
         gameStringItemDictionary["map"]["name"].KeyValuePairs["mapId"].RawText.Should().Be("Map name");
-        gameStringItemDictionary["map"]["mapObjectiveTitle"].KeyArrayPairs["mapId"][0].RawText.Should().Be("Map Objective name 1");
-        gameStringItemDictionary["map"]["mapObjectiveTitle"].KeyArrayPairs["mapId"][1].RawText.Should().Be("Map Objective name 2");
-        gameStringItemDictionary["map"]["mapObjectiveDescription"].KeyArrayPairs["mapId"][0].RawText.Should().Be("Map Objective description 1");
-        gameStringItemDictionary["map"]["mapObjectiveDescription"].KeyArrayPairs["mapId"][1].RawText.Should().Be("Map Objective description 2");
+        gameStringItemDictionary["map"]["objectiveTitle"].KeyArrayPairs["mapId"][0].RawText.Should().Be("Map Objective name 1");
+        gameStringItemDictionary["map"]["objectiveTitle"].KeyArrayPairs["mapId"][1].RawText.Should().Be("Map Objective name 2");
+        gameStringItemDictionary["map"]["objectiveDescription"].KeyArrayPairs["mapId"][0].RawText.Should().Be("Map Objective description 1");
+        gameStringItemDictionary["map"]["objectiveDescription"].KeyArrayPairs["mapId"][1].RawText.Should().Be("Map Objective description 2");
     }
 
     [TestMethod]
