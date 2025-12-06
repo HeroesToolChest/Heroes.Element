@@ -185,7 +185,10 @@ public class GameStringDocumentTests
                 "Abathur": "The Evolution Master"
               },
               "roles": {
-                "Abathur": "Support,Specialist"
+                "Abathur": [
+                  "Support",
+                  "Specialist"
+                ]
               },
               "energyType": {
                 "Abathur": "mana"
@@ -666,5 +669,66 @@ public class GameStringDocumentTests
         // assert
         lootChest.Description!.RawText.Should().Be("Contains four random items. Guaranteed to contain at least one Rare item.");
         lootChest.Name!.RawText.Should().Be("Rare Loot Chest");
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_Map_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "mapdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "map": {
+              "name": {
+                "Battlefield of Eternity": "Battlefield of Eternity"
+              },
+              "objectiveTitle": {
+                "Battlefield of Eternity": [
+                  "Immortals",
+                  "Defeat the Enemy Immortal"
+                ]
+              },
+              "objectiveDescription": {
+                "Battlefield of Eternity": [
+                  "Two Immortals fight at the center of the map. Help yours prevail, and it will march with your team.",
+                  "Defeat the enemy's Immortal and yours will march down a lane to aid your team in battle."
+                ]
+              }
+            }
+          }
+        }
+        """;
+        Map map = new("Battlefield of Eternity");
+        map.MapObjectives.Add(new MapObjective { Title = new GameStringText("temp1"), Description = new GameStringText("temp1 desc") });
+        map.MapObjectives.Add(new MapObjective { Title = new GameStringText("temp2"), Description = new GameStringText("temp2 desc") });
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(map);
+
+        // assert
+        map.Name!.RawText.Should().Be("Battlefield of Eternity");
+        map.MapObjectives.Should().HaveCount(2);
+        map.MapObjectives[0].Title!.RawText.Should().Be("Immortals");
+        map.MapObjectives[0].Description!.RawText.Should().Be("Two Immortals fight at the center of the map. Help yours prevail, and it will march with your team.");
+        map.MapObjectives[1].Title!.RawText.Should().Be("Defeat the Enemy Immortal");
+        map.MapObjectives[1].Description!.RawText.Should().Be("Defeat the enemy's Immortal and yours will march down a lane to aid your team in battle.");
     }
 }

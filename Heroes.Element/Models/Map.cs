@@ -18,14 +18,17 @@ public class Map : ElementObject, IName
     public GameStringText? Name { get; set; }
 
     /// <summary>
-    /// Gets or sets the map id. This id is found in a replay's tracker events. It is not always set.
+    /// Gets or sets the map id. This id is found in a replay's tracker events, but it is not always set.
+    /// <para>
+    /// This is not unique. e.g. Snow Brawl has the same map id as Cursed Hollow.
+    /// </para>
     /// </summary>
     public string? MapId { get; set; }
 
     /// <summary>
     /// Gets or sets the map link id. This is the id found in the xml files for CMap.
     /// <para>
-    /// This is not unique (unless you exclude the sandbox maps). Cursed Hollow and Cursed Hollow (Sandbox) share the same map link.
+    /// This is not unique (unless you exclude the sandbox maps). e.g. Cursed Hollow and Cursed Hollow (Sandbox) have the same map link.
     /// </para>
     /// </summary>
     public string? MapLink { get; set; }

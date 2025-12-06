@@ -80,15 +80,11 @@ public class GameStringDocument : IDisposable
 
         if (TryGetJsonElement(heroElement, "roles", hero.Id, out element))
         {
-            string? roleElementValue = element.GetString();
-            if (!string.IsNullOrWhiteSpace(roleElementValue))
+            foreach (JsonElement roleElement in element.EnumerateArray())
             {
-                foreach (string roleValue in roleElementValue.Split(',', StringSplitOptions.RemoveEmptyEntries))
-                {
-                    GameStringText? gameStringText = GetGameStringText(roleValue);
-                    if (gameStringText is not null)
-                        hero.Roles.Add(gameStringText);
-                }
+                GameStringText? gameStringText = GetGameStringText(roleElement.GetString());
+                if (gameStringText is not null)
+                    hero.Roles.Add(gameStringText);
             }
         }
 
@@ -195,6 +191,43 @@ public class GameStringDocument : IDisposable
 
         SetNameProperty(lootchest.Id, lootchest, lootChestElement);
         SetDescriptionProperty(lootchest.Id, lootchest, lootChestElement);
+    }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Map"/>.
+    /// </summary>
+    /// <param name="map">The <see cref="Map"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Map map)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("map", out JsonElement mapElement))
+            return;
+
+        if (TryGetJsonElement(mapElement, "objectiveTitle", map.Id, out JsonElement element))
+        {
+            int index = 0;
+
+            foreach (JsonElement titleElement in element.EnumerateArray())
+            {
+                map.MapObjectives[index].Title = GetGameStringText(titleElement.GetString());
+
+                index++;
+            }
+        }
+
+        if (TryGetJsonElement(mapElement, "objectiveDescription", map.Id, out element))
+        {
+            int index = 0;
+
+            foreach (JsonElement descriptionElement in element.EnumerateArray())
+            {
+                map.MapObjectives[index].Description = GetGameStringText(descriptionElement.GetString());
+
+                index++;
+            }
+        }
+
+        SetNameProperty(map.Id, map, mapElement);
     }
 
     /// <summary>

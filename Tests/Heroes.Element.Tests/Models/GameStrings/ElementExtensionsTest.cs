@@ -293,4 +293,63 @@ public class ElementExtensionsTest
         lootChest.Description.RawText.Should().Be("updated description");
         lootChest.Name!.RawText.Should().Be("updated name");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_Map_UpdatesGameStringTexts()
+    {
+        // arrange
+        Map map = new("BattlefieldOfEternity")
+        {
+            Name = new GameStringText("old name"),
+        };
+        map.MapObjectives.Add(new MapObjective { Title = new GameStringText("old title 1"), Description = new GameStringText("old description 1") });
+        map.MapObjectives.Add(new MapObjective { Title = new GameStringText("old title 2"), Description = new GameStringText("old description 2") });
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "map": {
+              "name": {
+                "BattlefieldOfEternity": "Battlefield of Eternity"
+              },
+              "objectiveTitle": {
+                "BattlefieldOfEternity": [
+                  "Immortals",
+                  "Defeat the Enemy Immortal"
+                ]
+              },
+              "objectiveDescription": {
+                "BattlefieldOfEternity": [
+                  "Two Immortals fight at the center of the map.",
+                  "Defeat the enemy's Immortal and yours will march down a lane."
+                ]
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        map.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        map.Name!.RawText.Should().Be("Battlefield of Eternity");
+        map.MapObjectives[0].Title!.RawText.Should().Be("Immortals");
+        map.MapObjectives[0].Description!.RawText.Should().Be("Two Immortals fight at the center of the map.");
+        map.MapObjectives[1].Title!.RawText.Should().Be("Defeat the Enemy Immortal");
+        map.MapObjectives[1].Description!.RawText.Should().Be("Defeat the enemy's Immortal and yours will march down a lane.");
+    }
 }
