@@ -65,6 +65,7 @@ public class AnnouncerDataDocumentTests
               "releaseDate": "2014-03-13",
               "category": "announcer",
               "event": "no",
+              "showInStore": true,
               "gender": "Neutral",
               "heroId": "Abathur",
               "image": "storm_ui_announcer_abathur.png",
@@ -93,6 +94,7 @@ public class AnnouncerDataDocumentTests
         announcer.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
         announcer.Category.Should().Be("announcer");
         announcer.Event.Should().Be("no");
+        announcer.ShowInStore.Should().BeTrue();
         announcer.Gender.Should().Be("Neutral");
         announcer.HeroId.Should().Be("Abathur");
         announcer.Image.Should().Be("storm_ui_announcer_abathur.png");
