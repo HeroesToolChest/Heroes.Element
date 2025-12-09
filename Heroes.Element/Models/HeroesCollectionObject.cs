@@ -51,6 +51,10 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
     public string? Event { get; set; }
 
     /// <inheritdoc/>
+    [JsonPropertyOrder(-20)]
+    public bool ShowInStore { get; set; }
+
+    /// <inheritdoc/>
     [JsonPropertyOrder(100)]
     public GameStringText? SearchText { get; set; }
 
