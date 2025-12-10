@@ -52,7 +52,7 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-20)]
-    public bool ShowInStore { get; set; }
+    public bool IsShownInStore { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(100)]

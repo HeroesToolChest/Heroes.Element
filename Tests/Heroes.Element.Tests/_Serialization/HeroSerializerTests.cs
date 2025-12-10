@@ -46,7 +46,7 @@ public class HeroSerializerTests
                 TargetInfoPanel = "target_info.dds",
                 PartyFrames = ["party_frame1.dds", "party_frame2.dds"],
             },
-            ShowInStore = true,
+            IsShownInStore = true,
             SearchText = new GameStringText("search keywords"),
             InfoText = new GameStringText("Info about hero"),
             SkinIds = new SortedSet<string> { "skin1", "skin2" },
@@ -245,7 +245,7 @@ public class HeroSerializerTests
                 "minimap": "minimap_icon.dds",
                 "targetInfo": "target_info.dds"
               },
-              "showInStore": true,
+              "isShownInStore": true,
               "searchText": "search keywords",
               "description": "Hero Description",
               "infoText": "Info about hero",

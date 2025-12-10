@@ -33,5 +33,5 @@ public interface IHeroesCollectionObject : IName, IHyperlinkId, IFranchise, IRar
     /// <summary>
     /// Gets or sets a value indicating whether this item should be shown in the store.
     /// </summary>
-    bool ShowInStore { get; set; }
+    bool IsShownInStore { get; set; }
 }

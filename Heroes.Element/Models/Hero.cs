@@ -104,7 +104,7 @@ public class Hero : Unit, IHeroesCollectionObject, IInfoText
     public HeroPortrait HeroPortraits { get; set; } = new HeroPortrait();
 
     /// <inheritdoc/>
-    public bool ShowInStore { get; set; }
+    public bool IsShownInStore { get; set; }
 
     /// <inheritdoc/>
     [JsonIgnore]
