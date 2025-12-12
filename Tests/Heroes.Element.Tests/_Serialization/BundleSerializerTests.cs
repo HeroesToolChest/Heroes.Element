@@ -33,7 +33,6 @@ public class BundleSerializerTests
             ReleaseDate = new DateOnly(2024, 12, 1),
             Category = "Bundle Category",
             Event = "Holiday Event",
-            IsShownInStore = true,
             SearchText = new GameStringText("bundle search keywords"),
             Description = new GameStringText("Bundle Description Text"),
         };
@@ -53,7 +52,6 @@ public class BundleSerializerTests
               "releaseDate": "2024-12-01",
               "category": "Bundle Category",
               "event": "Holiday Event",
-              "isShownInStore": true,
               "isDynamicContent": true,
               "heroIds": [
                 "hero1",

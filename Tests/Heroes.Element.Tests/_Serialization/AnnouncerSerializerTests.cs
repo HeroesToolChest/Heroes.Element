@@ -23,7 +23,6 @@ public class AnnouncerSerializerTests
             Franchise = Franchise.Starcraft,
             HeroId = "AI",
             SearchText = new GameStringText("item1 item2"),
-            IsShownInStore = true,
         };
 
         // act
@@ -42,7 +41,6 @@ public class AnnouncerSerializerTests
               "releaseDate": "2024-01-01",
               "category": "category",
               "event": "an event",
-              "isShownInStore": true,
               "gender": "Male",
               "heroId": "AI",
               "image": "test.png",

@@ -24,9 +24,4 @@ public interface IStoreItem : IName, IHyperlinkId, IFranchise, IRarity, IEventNa
     /// Gets or sets the search texts (should be space delimited).
     /// </summary>
     GameStringText? SearchText { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating whether this item should be shown in the store.
-    /// </summary>
-    bool IsShownInStore { get; set; }
 }

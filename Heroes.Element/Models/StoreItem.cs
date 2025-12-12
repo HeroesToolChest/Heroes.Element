@@ -47,10 +47,6 @@ public abstract class StoreItem : ElementObject, IStoreItem
     public string? Event { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(-20)]
-    public bool IsShownInStore { get; set; }
-
-    /// <inheritdoc/>
     [JsonPropertyOrder(100)]
     public GameStringText? SearchText { get; set; }
 
