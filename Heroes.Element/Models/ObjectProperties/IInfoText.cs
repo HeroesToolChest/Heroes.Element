@@ -1,5 +1,8 @@
 ﻿namespace Heroes.Element.Models.ObjectProperties;
 
+/// <summary>
+/// An interface for an info text property.
+/// </summary>
 public interface IInfoText
 {
     /// <summary>

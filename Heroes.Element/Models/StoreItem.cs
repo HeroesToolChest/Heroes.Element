@@ -3,13 +3,13 @@
 /// <summary>
 /// An abstract class for an element object found in the in-game store collection.
 /// </summary>
-public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionObject
+public abstract class StoreItem : ElementObject, IStoreItem
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="HeroesCollectionObject"/> class.
+    /// Initializes a new instance of the <see cref="StoreItem"/> class.
     /// </summary>
     /// <param name="id">A unique identifier.</param>
-    public HeroesCollectionObject(string id)
+    public StoreItem(string id)
         : base(id)
     {
     }
@@ -25,10 +25,6 @@ public abstract class HeroesCollectionObject : ElementObject, IHeroesCollectionO
     /// <inheritdoc/>
     [JsonPropertyOrder(-90)]
     public string? HyperlinkId { get; set; }
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(-80)]
-    public string? AttributeId { get; set; }
 
     /// <inheritdoc/>
     [JsonPropertyOrder(-70)]

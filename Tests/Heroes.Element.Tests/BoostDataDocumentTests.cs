@@ -59,7 +59,6 @@ public class BoostDataDocumentTests
               "name": "3-Day Stimpack",
               "sortName": "Stimpack 3",
               "hyperlinkId": "BoostStimpak",
-              "attributeId": "Stim",
               "franchise": "Starcraft",
               "rarity": "Common",
               "releaseDate": "2015-06-02",
@@ -84,7 +83,6 @@ public class BoostDataDocumentTests
         boost.Name!.RawText.Should().Be("3-Day Stimpack");
         boost.SortName!.RawText.Should().Be("Stimpack 3");
         boost.HyperlinkId.Should().Be("BoostStimpak");
-        boost.AttributeId.Should().Be("Stim");
         boost.Franchise.Should().Be(Franchise.Starcraft);
         boost.Rarity.Should().Be(Rarity.Common);
         boost.ReleaseDate.Should().Be(new DateOnly(2015, 6, 2));
@@ -357,6 +355,5 @@ public class BoostDataDocumentTests
         boost.Id.Should().Be("BoostMegaStimpak");
         boost.Name!.RawText.Should().Be("7-Day Stimpack");
         boost.HyperlinkId.Should().Be("BoostMegaStimpak(hyperlink)");
-        boost.AttributeId.Should().Be("Mega");
     }
 }

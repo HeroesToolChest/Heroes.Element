@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the boost data.
 /// </summary>
-public class Boost : HeroesCollectionObject
+public class Boost : StoreItem
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Boost"/> class.

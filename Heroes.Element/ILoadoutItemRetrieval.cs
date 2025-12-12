@@ -1,11 +1,11 @@
 ﻿namespace Heroes.Element;
 
 /// <summary>
-/// Represents an interface for retrieving elements by their collection type ids.
+/// Represents an interface for retrieving elements by their loadout item type ids.
 /// </summary>
-/// <typeparam name="T">The type of the element, which must implement the <see cref="IHeroesCollectionObject"/> and <see cref="IElementObject"/> interfaces.</typeparam>
-public interface IHeroesCollectionRetrieval<T> : IHyperlinkIdRetrieval<T>
-    where T : class, IHeroesCollectionObject, IElementObject
+/// <typeparam name="T">The type of the element, which must implement the <see cref="IStoreItem"/> and <see cref="IElementObject"/> interfaces.</typeparam>
+public interface ILoadoutItemRetrieval<T> : IStoreItemRetrieval<T>
+    where T : class, ILoadoutItem, IElementObject
 {
     /// <summary>
     /// Attempts to retrieve an element of <typeparamref name="T"/> based on the specified <paramref name="attributeId"/>.

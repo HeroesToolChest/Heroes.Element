@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the banner data.
 /// </summary>
-public class Banner : HeroesCollectionObject
+public class Banner : LoadoutItem
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Banner"/> class.

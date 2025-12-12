@@ -1,19 +1,14 @@
 ﻿namespace Heroes.Element.Models;
 
 /// <summary>
-/// An interface for an element object found in the in-game store collection.
+/// An interface for an in-game store collection item.
 /// </summary>
-public interface IHeroesCollectionObject : IName, IHyperlinkId, IFranchise, IRarity, IEventName, IDescription
+public interface IStoreItem : IName, IHyperlinkId, IFranchise, IRarity, IEventName, IDescription
 {
     /// <summary>
     /// Gets or sets the sort name.
     /// </summary>
     GameStringText? SortName { get; set; }
-
-    /// <summary>
-    /// Gets or sets the attribute id.
-    /// </summary>
-    string? AttributeId { get; set; }
 
     /// <summary>
     /// Gets or sets the release date.

@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the bundle data.
 /// </summary>
-public class Bundle : HeroesCollectionObject
+public class Bundle : StoreItem
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Bundle"/> class.

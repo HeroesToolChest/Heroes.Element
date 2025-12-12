@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="Banner"/> objects from a JSON document.
 /// </summary>
-public class BannerDataDocument : ElementDocument<Banner>, IHeroesCollectionRetrieval<Banner>
+public class BannerDataDocument : ElementDocument<Banner>, ILoadoutItemRetrieval<Banner>
 {
     private BannerDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
     : base(dataDocument, gameStringDocument)

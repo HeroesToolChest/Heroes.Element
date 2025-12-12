@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the announcer data.
 /// </summary>
-public class Announcer : HeroesCollectionObject
+public class Announcer : LoadoutItem
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Announcer"/> class.

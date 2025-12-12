@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="Announcer"/> objects from a JSON document.
 /// </summary>
-public class AnnouncerDataDocument : ElementDocument<Announcer>, IHeroesCollectionRetrieval<Announcer>
+public class AnnouncerDataDocument : ElementDocument<Announcer>, ILoadoutItemRetrieval<Announcer>
 {
     private AnnouncerDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
         : base(dataDocument, gameStringDocument)

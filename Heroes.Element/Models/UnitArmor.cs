@@ -6,7 +6,7 @@
 public class UnitArmor
 {
     /// <summary>
-    /// Gets or sets the physical (basic) armor.
+    /// Gets or sets the Physical (basic) armor.
     /// </summary>
     [JsonPropertyName("basic")]
     public double BasicArmor { get; set; }

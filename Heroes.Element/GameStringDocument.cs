@@ -310,7 +310,7 @@ public class GameStringDocument : IDisposable
             abilityTalentBase.ShortText = GetGameStringText(value.GetString());
     }
 
-    private void SetHeroesCollectionObjectProperties(string id, IHeroesCollectionObject heroesCollectionObject, JsonElement heroesCollectionElement)
+    private void SetHeroesCollectionObjectProperties(string id, IStoreItem heroesCollectionObject, JsonElement heroesCollectionElement)
     {
         SetNameProperty(id, heroesCollectionObject, heroesCollectionElement);
         SetDescriptionProperty(id, heroesCollectionObject, heroesCollectionElement);

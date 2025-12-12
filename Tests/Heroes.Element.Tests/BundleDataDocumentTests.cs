@@ -59,7 +59,6 @@ public class BundleDataDocumentTests
               "name": "Mega Starter Bundle",
               "sortName": "Starter Pack",
               "hyperlinkId": "MegaBundleStarterPack",
-              "attributeId": "Mega",
               "franchise": "Nexus",
               "rarity": "Epic",
               "releaseDate": "2016-04-12",
@@ -108,7 +107,6 @@ public class BundleDataDocumentTests
         bundle.Name!.RawText.Should().Be("Mega Starter Bundle");
         bundle.SortName!.RawText.Should().Be("Starter Pack");
         bundle.HyperlinkId.Should().Be("MegaBundleStarterPack");
-        bundle.AttributeId.Should().Be("Mega");
         bundle.Franchise.Should().Be(Franchise.Nexus);
         bundle.Rarity.Should().Be(Rarity.Epic);
         bundle.ReleaseDate.Should().Be(new DateOnly(2016, 4, 12));
@@ -396,6 +394,5 @@ public class BundleDataDocumentTests
         bundle.Id.Should().Be("BundleHeroesOfTheStorm");
         bundle.Name!.RawText.Should().Be("Heroes of the Storm Bundle");
         bundle.HyperlinkId.Should().Be("BundleHeroesOfTheStorm(hyperlink)");
-        bundle.AttributeId.Should().Be("Hots");
     }
 }

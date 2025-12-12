@@ -68,7 +68,7 @@ public class Unit : ElementObject, IName, IDescription
     public ISet<string> Attributes { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets or sets a collection of scaling link ids. This is the <see cref="BehaviorVeterancy"/>.
+    /// Gets or sets a collection of scaling link ids. This is the <see cref="Veterancy"/>.
     /// </summary>
     [JsonPropertyOrder(-12)]
     public ISet<string> ScalingLinkIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
