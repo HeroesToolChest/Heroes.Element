@@ -20,7 +20,7 @@ public class Bundle : StoreItem
     public bool IsDynamicContent { get; set; }
 
     /// <summary>
-    /// Gets or sets a unique collection of hero ids that are in this bundle.
+    /// Gets or sets a unique collection of <see cref="Hero"/>s that are in this bundle.
     /// </summary>
     public ISet<string> HeroIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
@@ -41,7 +41,7 @@ public class Bundle : StoreItem
     public string? Image { get; set; }
 
     /// <summary>
-    /// Gets or sets the boost id that is in this bundle.
+    /// Gets or sets the <see cref="Boost"/> that is in this bundle.
     /// </summary>
     [JsonPropertyName("boostId")]
     public string? BoostBonusId { get; set; }
