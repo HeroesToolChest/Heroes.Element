@@ -20,7 +20,7 @@ public class LootChestSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(lootChest, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(lootChest, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(

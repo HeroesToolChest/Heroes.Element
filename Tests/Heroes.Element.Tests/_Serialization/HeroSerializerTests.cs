@@ -46,7 +46,6 @@ public class HeroSerializerTests
                 TargetInfoPanel = "target_info.dds",
                 PartyFrames = ["party_frame1.dds", "party_frame2.dds"],
             },
-            IsShownInStore = true,
             SearchText = new GameStringText("search keywords"),
             InfoText = new GameStringText("Info about hero"),
             SkinIds = new SortedSet<string> { "skin1", "skin2" },
@@ -185,7 +184,7 @@ public class HeroSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(hero, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(hero, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(
@@ -245,7 +244,6 @@ public class HeroSerializerTests
                 "minimap": "minimap_icon.dds",
                 "targetInfo": "target_info.dds"
               },
-              "isShownInStore": true,
               "searchText": "search keywords",
               "description": "Hero Description",
               "infoText": "Info about hero",

@@ -26,7 +26,7 @@ public class BannerSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(banner, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(banner, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(

@@ -2,7 +2,7 @@
 
 public static class SerializerSettings
 {
-    public static JsonSerializerOptions SetJsonSerializerDataOptions()
+    public static JsonSerializerOptions GetJsonSerializerDataOptions()
     {
         return new JsonSerializerOptions()
         {

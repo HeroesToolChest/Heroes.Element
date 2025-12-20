@@ -38,7 +38,7 @@ public class BundleSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(bundle, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(bundle, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(

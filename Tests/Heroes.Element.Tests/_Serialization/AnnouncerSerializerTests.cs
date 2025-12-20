@@ -26,7 +26,7 @@ public class AnnouncerSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(announcer, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(announcer, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(

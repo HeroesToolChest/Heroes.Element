@@ -157,7 +157,7 @@ public class UnitSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(unit, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(unit, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(

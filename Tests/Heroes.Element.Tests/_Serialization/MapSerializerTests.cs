@@ -56,7 +56,7 @@ public class MapSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(map, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(map, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(

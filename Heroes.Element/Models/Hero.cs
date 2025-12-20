@@ -104,9 +104,6 @@ public class Hero : Unit, ILoadoutItem, IInfoText
     public HeroPortrait HeroPortraits { get; set; } = new HeroPortrait();
 
     /// <inheritdoc/>
-    public bool IsShownInStore { get; set; }
-
-    /// <inheritdoc/>
     [JsonIgnore]
     public override UnitPortrait UnitPortraits { get => base.UnitPortraits; set => base.UnitPortraits = value; }
 

@@ -23,7 +23,7 @@ public class BoostSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(boost, SerializerSettings.SetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(boost, SerializerSettings.GetJsonSerializerDataOptions());
 
         // assert
         json.Should().Be(
