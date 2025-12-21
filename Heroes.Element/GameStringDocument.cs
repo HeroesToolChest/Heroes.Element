@@ -67,8 +67,6 @@ public class GameStringDocument : IDisposable
             hero.Difficulty = GetGameStringText(element.GetString());
         if (TryGetJsonElement(heroElement, "expandedRole", hero.Id, out element))
             hero.ExpandedRole = GetGameStringText(element.GetString());
-        if (TryGetJsonElement(heroElement, "infoText", hero.Id, out element))
-            hero.InfoText = GetGameStringText(element.GetString());
         if (TryGetJsonElement(heroElement, "title", hero.Id, out element))
             hero.Title = GetGameStringText(element.GetString());
         if (TryGetJsonElement(heroElement, "energyType", hero.Id, out element))
@@ -88,7 +86,8 @@ public class GameStringDocument : IDisposable
             }
         }
 
-        SetHeroesCollectionObjectProperties(hero.Id, hero, heroElement);
+        SetStoreItemProperties(hero.Id, hero, heroElement);
+        SetInfoTextProperty(hero.Id, hero, heroElement);
 
         IEnumerable<Talent> talents = hero.Talents.SelectMany(x => x.Value);
 
@@ -137,7 +136,7 @@ public class GameStringDocument : IDisposable
             !gameStringElement.TryGetProperty("announcer", out JsonElement announcerElement))
             return;
 
-        SetHeroesCollectionObjectProperties(announcer.Id, announcer, announcerElement);
+        SetStoreItemProperties(announcer.Id, announcer, announcerElement);
     }
 
     /// <summary>
@@ -150,7 +149,7 @@ public class GameStringDocument : IDisposable
             !gameStringElement.TryGetProperty("banner", out JsonElement bannerElement))
             return;
 
-        SetHeroesCollectionObjectProperties(banner.Id, banner, bannerElement);
+        SetStoreItemProperties(banner.Id, banner, bannerElement);
     }
 
     /// <summary>
@@ -163,7 +162,7 @@ public class GameStringDocument : IDisposable
             !gameStringElement.TryGetProperty("boost", out JsonElement boostElement))
             return;
 
-        SetHeroesCollectionObjectProperties(boost.Id, boost, boostElement);
+        SetStoreItemProperties(boost.Id, boost, boostElement);
     }
 
     /// <summary>
@@ -176,7 +175,7 @@ public class GameStringDocument : IDisposable
             !gameStringElement.TryGetProperty("bundle", out JsonElement bundleElement))
             return;
 
-        SetHeroesCollectionObjectProperties(bundle.Id, bundle, bundleElement);
+        SetStoreItemProperties(bundle.Id, bundle, bundleElement);
     }
 
     /// <summary>
@@ -228,6 +227,20 @@ public class GameStringDocument : IDisposable
         }
 
         SetNameProperty(map.Id, map, mapElement);
+    }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Skin"/>.
+    /// </summary>
+    /// <param name="skin">The <see cref="Skin"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Skin skin)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("skin", out JsonElement skinElement))
+            return;
+
+        SetStoreItemProperties(skin.Id, skin, skinElement);
+        SetInfoTextProperty(skin.Id, skin, skinElement);
     }
 
     /// <summary>
@@ -310,7 +323,7 @@ public class GameStringDocument : IDisposable
             abilityTalentBase.ShortText = GetGameStringText(value.GetString());
     }
 
-    private void SetHeroesCollectionObjectProperties(string id, IStoreItem heroesCollectionObject, JsonElement heroesCollectionElement)
+    private void SetStoreItemProperties(string id, IStoreItem heroesCollectionObject, JsonElement heroesCollectionElement)
     {
         SetNameProperty(id, heroesCollectionObject, heroesCollectionElement);
         SetDescriptionProperty(id, heroesCollectionObject, heroesCollectionElement);
@@ -331,5 +344,11 @@ public class GameStringDocument : IDisposable
     {
         if (TryGetJsonElement(descriptionElement, "description", id, out JsonElement element))
             description.Description = GetGameStringText(element.GetString());
+    }
+
+    private void SetInfoTextProperty(string id, IInfoText infoText, JsonElement infoTextElement)
+    {
+        if (TryGetJsonElement(infoTextElement, "infoText", id, out JsonElement element))
+            infoText.InfoText = GetGameStringText(element.GetString());
     }
 }

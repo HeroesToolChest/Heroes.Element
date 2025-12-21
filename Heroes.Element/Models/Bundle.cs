@@ -20,18 +20,18 @@ public class Bundle : StoreItem
     public bool IsDynamicContent { get; set; }
 
     /// <summary>
-    /// Gets or sets a unique collection of <see cref="Hero"/>s that are in this bundle.
+    /// Gets or sets a unique collection of <see cref="Hero"/> ids that are in this bundle.
     /// </summary>
     public ISet<string> HeroIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets or sets a collection of hero skins id by their hero id.
+    /// Gets or sets a collection of <see cref="Skin"/> ids by their hero id.
     /// </summary>
     [JsonPropertyName("skinIds")]
     public IDictionary<string, ISet<string>> HeroSkinIdsByHeroId { get; set; } = new SortedDictionary<string, ISet<string>>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets or sets a unique collection of mount ids that are in this bundle.
+    /// Gets or sets a unique collection of <see cref="Mount"/> ids that are in this bundle.
     /// </summary>
     public ISet<string> MountIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
@@ -41,7 +41,7 @@ public class Bundle : StoreItem
     public string? Image { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Boost"/> that is in this bundle.
+    /// Gets or sets the <see cref="Boost"/> id that is in this bundle.
     /// </summary>
     [JsonPropertyName("boostId")]
     public string? BoostBonusId { get; set; }
@@ -57,7 +57,7 @@ public class Bundle : StoreItem
     public int? GemsBonus { get; set; }
 
     /// <summary>
-    /// Gets or sets the loot chest id that is in this bundle.
+    /// Gets or sets the <see cref="LootChest"/> id that is in this bundle.
     /// </summary>
     [JsonPropertyName("lootChestId")]
     public string? LootChestBonus { get; set; }

@@ -731,4 +731,65 @@ public class GameStringDocumentTests
         map.MapObjectives[1].Title!.RawText.Should().Be("Defeat the Enemy Immortal");
         map.MapObjectives[1].Description!.RawText.Should().Be("Defeat the enemy's Immortal and yours will march down a lane to aid your team in battle.");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Skin_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "skindata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "skin": {
+              "description": {
+                "AbathurMechaVar1": "An alternate skin for the Evolution Master."
+              },
+              "name": {
+                "AbathurMechaVar1": "Mecha Abathur"
+              },
+              "sortName": {
+                "AbathurMechaVar1": "Abathur Mecha"
+              },
+              "searchText": {
+                "AbathurMechaVar1": "Mecha Abathur Robot Mechanical"
+              },
+              "infoText": {
+                "AbathurMechaVar1": "Legendary Skin from the Mecha universe"
+              }
+            }
+          }
+        }
+        """;
+        Skin skin = new("AbathurMechaVar1")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        gameStringDocument.UpdateGameStrings(skin);
+
+        // assert
+        skin.Description!.RawText.Should().Be("An alternate skin for the Evolution Master.");
+        skin.Name!.RawText.Should().Be("Mecha Abathur");
+        skin.SortName!.RawText.Should().Be("Abathur Mecha");
+        skin.SearchText!.RawText.Should().Be("Mecha Abathur Robot Mechanical");
+        skin.InfoText!.RawText.Should().Be("Legendary Skin from the Mecha universe");
+    }
 }

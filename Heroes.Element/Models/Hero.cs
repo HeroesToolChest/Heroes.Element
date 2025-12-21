@@ -118,13 +118,13 @@ public class Hero : Unit, ILoadoutItem, IInfoText
     public GameStringText? InfoText { get; set; }
 
     /// <summary>
-    /// Gets or sets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
+    /// Gets or sets a unique collection of <see cref="Skin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(190)]
     public ISet<string> SkinIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets or sets a unique collection of <see cref="HeroSkin"/> ids that are associated with this hero.
+    /// Gets or sets a unique collection of <see cref="Skin"/> ids that are associated with this hero.
     /// </summary>
     [JsonPropertyOrder(191)]
     public ISet<string> VariationSkinIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);

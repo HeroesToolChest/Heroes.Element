@@ -84,4 +84,14 @@ public static class ElementExtensions
     {
         gameStringDocument.UpdateGameStrings(map);
     }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// </summary>
+    /// <param name="skin">.</param>
+    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Skin skin, GameStringDocument gameStringDocument)
+    {
+        gameStringDocument.UpdateGameStrings(skin);
+    }
 }

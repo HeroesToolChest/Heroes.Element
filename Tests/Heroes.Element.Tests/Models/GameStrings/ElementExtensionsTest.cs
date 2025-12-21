@@ -352,4 +352,61 @@ public class ElementExtensionsTest
         map.MapObjectives[1].Title!.RawText.Should().Be("Defeat the Enemy Immortal");
         map.MapObjectives[1].Description!.RawText.Should().Be("Defeat the enemy's Immortal and yours will march down a lane.");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_Skin_UpdatesGameStringTexts()
+    {
+        // arrange
+        Skin skin = new("skinId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "skin": {
+              "description": {
+                "skinId1": "updated description"
+              },
+              "name": {
+                "skinId1": "updated name"
+              },
+              "sortName": {
+                "skinId1": "updated sort name"
+              },
+              "searchText": {
+                "skinId1": "updated search text"
+              },
+              "infoText": {
+                "skinId1": "updated info text"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        skin.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        skin.Description!.RawText.Should().Be("updated description");
+        skin.Name!.RawText.Should().Be("updated name");
+        skin.SortName!.RawText.Should().Be("updated sort name");
+        skin.SearchText!.RawText.Should().Be("updated search text");
+        skin.InfoText!.RawText.Should().Be("updated info text");
+    }
 }
