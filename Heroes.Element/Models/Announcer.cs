@@ -12,7 +12,7 @@ public class Announcer : LoadoutItem
     public Announcer(string id)
         : base(id)
     {
-        Rarity = Types.Rarity.None;
+        Rarity = Types.Rarity.Common;
     }
 
     /// <summary>

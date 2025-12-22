@@ -12,7 +12,7 @@ public class Skin : LoadoutItem, IInfoText
     public Skin(string id)
         : base(id)
     {
-        Rarity = Types.Rarity.None;
+        Rarity = Types.Rarity.Common;
     }
 
     /// <inheritdoc/>

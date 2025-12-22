@@ -12,6 +12,6 @@ public class Banner : LoadoutItem
     public Banner(string id)
         : base(id)
     {
-        Rarity = Types.Rarity.None;
+        Rarity = Types.Rarity.Common;
     }
 }
