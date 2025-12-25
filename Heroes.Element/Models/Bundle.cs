@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the bundle data.
 /// </summary>
-public class Bundle : StoreItem
+public class Bundle : StoreItem, IImage, IImagePath
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Bundle"/> class.
@@ -36,9 +36,7 @@ public class Bundle : StoreItem
     /// </summary>
     public ISet<string> MountIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
-    /// <summary>
-    /// Gets or sets the bundle image.
-    /// </summary>
+    /// <inheritdoc/>
     public string? Image { get; set; }
 
     /// <summary>
@@ -63,8 +61,5 @@ public class Bundle : StoreItem
     [JsonPropertyName("lootChestId")]
     public string? LootChestBonus { get; set; }
 
-    /// <summary>
-    /// Gets or sets the relative path of the image that resides in CASC or on file.
-    /// </summary>
-    internal RelativeFilePath? ImagePath { get; set; }
+    RelativeFilePath? IImagePath.ImagePath { get; set; }
 }

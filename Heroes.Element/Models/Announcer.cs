@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the announcer data.
 /// </summary>
-public class Announcer : LoadoutItem
+public class Announcer : LoadoutItem, IImage, IImagePath
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Announcer"/> class.
@@ -25,13 +25,8 @@ public class Announcer : LoadoutItem
     /// </summary>
     public string? HeroId { get; set; }
 
-    /// <summary>
-    /// Gets or sets the file name of the image.
-    /// </summary>
+    /// <inheritdoc/>
     public string? Image { get; set; }
 
-    /// <summary>
-    /// Gets or sets the relative path of the image that resides in CASC or on file.
-    /// </summary>
-    internal RelativeFilePath? ImagePath { get; set; }
+    RelativeFilePath? IImagePath.ImagePath { get; set; }
 }
