@@ -20,17 +20,17 @@ public class Skin : LoadoutItem, IInfoText
     public GameStringText? InfoText { get; set; }
 
     /// <summary>
-    /// Gets a unique collection of features.
+    /// Gets or sets a unique collection of features.
     /// </summary>
     public ISet<string> Features { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a unique collection of <see cref="Skin"/>s. This are usually just texture variations of the same model.
+    /// Gets or sets a unique collection of <see cref="Skin"/> ids. This are usually just texture variations of the same model.
     /// </summary>
     public ISet<string> VariationSkinIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets a unique collection of <see cref="VoiceLine"/> ids that are associated with this skin.
+    /// Gets or sets a unique collection of <see cref="VoiceLine"/> ids that are associated with this skin.
     /// </summary>
     public ISet<string> VoiceLineIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
