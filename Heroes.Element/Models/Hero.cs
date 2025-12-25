@@ -14,6 +14,7 @@ public class Hero : Unit, ILoadoutItem, IInfoText
         : base(id)
     {
         Gender = Types.Gender.Male;
+        Franchise = Types.Franchise.Starcraft;
     }
 
     /// <inheritdoc/>

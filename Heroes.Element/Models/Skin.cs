@@ -13,6 +13,7 @@ public class Skin : LoadoutItem, IInfoText
         : base(id)
     {
         Rarity = Types.Rarity.Common;
+        Franchise = Types.Franchise.Starcraft;
     }
 
     /// <inheritdoc/>

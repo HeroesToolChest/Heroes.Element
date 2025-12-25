@@ -12,6 +12,7 @@ public class Bundle : StoreItem
     public Bundle(string id)
         : base(id)
     {
+        Franchise = Types.Franchise.Starcraft;
     }
 
     /// <summary>
