@@ -244,6 +244,19 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="VoiceLine"/>.
+    /// </summary>
+    /// <param name="voiceLine">The <see cref="VoiceLine"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(VoiceLine voiceLine)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("voiceline", out JsonElement voiceLineElement))
+            return;
+
+        SetStoreItemProperties(voiceLine.Id, voiceLine, voiceLineElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

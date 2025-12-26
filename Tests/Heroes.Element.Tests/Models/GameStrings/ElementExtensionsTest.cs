@@ -409,4 +409,57 @@ public class ElementExtensionsTest
         skin.SearchText!.RawText.Should().Be("updated search text");
         skin.InfoText!.RawText.Should().Be("updated info text");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_VoiceLine_UpdatesGameStringTexts()
+    {
+        // arrange
+        VoiceLine voiceLine = new("voiceLineId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "voiceline": {
+              "description": {
+                "voiceLineId1": "updated description"
+              },
+              "name": {
+                "voiceLineId1": "updated name"
+              },
+              "sortName": {
+                "voiceLineId1": "updated sort name"
+              },
+              "searchText": {
+                "voiceLineId1": "updated search text"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        voiceLine.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        voiceLine.Description!.RawText.Should().Be("updated description");
+        voiceLine.Name!.RawText.Should().Be("updated name");
+        voiceLine.SortName!.RawText.Should().Be("updated sort name");
+        voiceLine.SearchText!.RawText.Should().Be("updated search text");
+    }
 }
