@@ -30,5 +30,4 @@ public class Skin : LoadoutItem
     /// Gets or sets a unique collection of <see cref="VoiceLine"/> ids that are associated with this skin.
     /// </summary>
     public ISet<string> VoiceLineIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
-
 }

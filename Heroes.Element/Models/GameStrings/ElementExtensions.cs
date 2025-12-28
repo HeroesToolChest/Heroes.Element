@@ -104,4 +104,14 @@ public static class ElementExtensions
     {
         gameStringDocument.UpdateGameStrings(voiceLine);
     }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// </summary>
+    /// <param name="mount">.</param>
+    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Mount mount, GameStringDocument gameStringDocument)
+    {
+        gameStringDocument.UpdateGameStrings(mount);
+    }
 }

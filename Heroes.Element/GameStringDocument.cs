@@ -257,6 +257,19 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Mount"/>.
+    /// </summary>
+    /// <param name="mount">The <see cref="Mount"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Mount mount)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("mount", out JsonElement mountElement))
+            return;
+
+        SetStoreItemProperties(mount.Id, mount, mountElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

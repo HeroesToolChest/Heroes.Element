@@ -792,4 +792,61 @@ public class GameStringDocumentTests
         skin.SearchText!.RawText.Should().Be("Mecha Abathur Robot Mechanical");
         skin.InfoText!.RawText.Should().Be("Legendary Skin from the Mecha universe");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Mount_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "mountdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "mount": {
+              "description": {
+                "CloudSerpentMount": "A mystical serpent from the clouds of Pandaria."
+              },
+              "name": {
+                "CloudSerpentMount": "Cloud Serpent"
+              },
+              "sortName": {
+                "CloudSerpentMount": "Serpent Cloud"
+              },
+              "searchText": {
+                "CloudSerpentMount": "Cloud Serpent Mount Flying Dragon"
+              }
+            }
+          }
+        }
+        """;
+        Mount mount = new("CloudSerpentMount")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(mount);
+
+        // assert
+        mount.Description!.RawText.Should().Be("A mystical serpent from the clouds of Pandaria.");
+        mount.Name!.RawText.Should().Be("Cloud Serpent");
+        mount.SortName!.RawText.Should().Be("Serpent Cloud");
+        mount.SearchText!.RawText.Should().Be("Cloud Serpent Mount Flying Dragon");
+    }
 }

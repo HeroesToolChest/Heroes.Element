@@ -22,7 +22,7 @@ public class Mount : LoadoutItem
     public string? MountCategory { get; set; }
 
     /// <summary>
-    /// Gets a unique collection of <see cref="Mount"/> ids. This are usually just texture variations of the same model.
+    /// Gets or sets a unique collection of <see cref="Mount"/> ids. This are usually just texture variations of the same model.
     /// </summary>
-    public ISet<string> VariationMountIds { get; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> VariationMountIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 }

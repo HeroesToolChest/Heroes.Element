@@ -462,4 +462,57 @@ public class ElementExtensionsTest
         voiceLine.SortName!.RawText.Should().Be("updated sort name");
         voiceLine.SearchText!.RawText.Should().Be("updated search text");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_Mount_UpdatesGameStringTexts()
+    {
+        // arrange
+        Mount mount = new("mountId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "mount": {
+              "description": {
+                "mountId1": "updated description"
+              },
+              "name": {
+                "mountId1": "updated name"
+              },
+              "sortName": {
+                "mountId1": "updated sort name"
+              },
+              "searchText": {
+                "mountId1": "updated search text"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        mount.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        mount.Description!.RawText.Should().Be("updated description");
+        mount.Name!.RawText.Should().Be("updated name");
+        mount.SortName!.RawText.Should().Be("updated sort name");
+        mount.SearchText!.RawText.Should().Be("updated search text");
+    }
 }

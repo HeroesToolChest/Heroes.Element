@@ -9,6 +9,4 @@ public interface IImage
     /// Gets or sets the file name of the image.
     /// </summary>
     string? Image { get; set; }
-
-
 }
