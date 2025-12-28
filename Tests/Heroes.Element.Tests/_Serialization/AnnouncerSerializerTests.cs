@@ -7,6 +7,8 @@ public class AnnouncerSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Announcer announcer = new("id")
         {
             Name = new GameStringText("Test Announcer"),
@@ -23,12 +25,15 @@ public class AnnouncerSerializerTests
             Franchise = Franchise.Starcraft,
             HeroId = "AI",
             SearchText = new GameStringText("item1 item2"),
+            InfoText = new GameStringText("info text"),
         };
 
         // act
-        string json = JsonSerializer.Serialize(announcer, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(announcer, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["announcer"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {
@@ -45,7 +50,8 @@ public class AnnouncerSerializerTests
               "heroId": "AI",
               "image": "test.png",
               "searchText": "item1 item2",
-              "description": "Test Description"
+              "description": "Test Description",
+              "infoText": "info text"
             }
             """);
     }

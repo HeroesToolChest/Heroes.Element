@@ -7,6 +7,8 @@ public class MapSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Map map = new("map_id")
         {
             // Map properties
@@ -56,9 +58,11 @@ public class MapSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(map, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(map, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["map"].Should().HaveCount(3, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {

@@ -7,6 +7,8 @@ public class UnitSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Unit unit = new("unit_id")
         {
             Name = new GameStringText("Unit Name"),
@@ -157,9 +159,12 @@ public class UnitSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(unit, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(unit, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["ability"].Should().HaveCount(6);
+        serializerSettings.ItemDictionary["unit"].Should().HaveCount(5);
+
         json.Should().Be(
             """
             {

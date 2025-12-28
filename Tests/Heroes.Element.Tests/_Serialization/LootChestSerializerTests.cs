@@ -7,6 +7,8 @@ public class LootChestSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         LootChest lootChest = new("lootchest_id")
         {
             // LootChest properties
@@ -20,9 +22,11 @@ public class LootChestSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(lootChest, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(lootChest, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["lootChest"].Should().HaveCount(2, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {

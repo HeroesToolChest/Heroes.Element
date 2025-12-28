@@ -7,6 +7,8 @@ public class VeterancySerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Veterancy veterancy = new("veterancy_id")
         {
             // Veterancy properties
@@ -150,9 +152,11 @@ public class VeterancySerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(veterancy, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(veterancy, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary.Should().NotContainKey("veterancy");
+
         json.Should().Be(
             """
             {

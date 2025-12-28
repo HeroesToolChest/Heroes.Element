@@ -644,7 +644,7 @@ public class GameStringDocumentTests
             }
           },
           "gamestrings": {
-            "lootchest": {
+            "lootChest": {
               "description": {
                 "LootChestRare": "Contains four random items. Guaranteed to contain at least one Rare item."
               },

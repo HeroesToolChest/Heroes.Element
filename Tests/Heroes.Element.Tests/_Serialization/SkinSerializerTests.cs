@@ -7,6 +7,8 @@ public class SkinSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Skin skin = new("skin_id")
         {
             // StoreItem properties
@@ -20,12 +22,10 @@ public class SkinSerializerTests
             Event = "Mecha Event",
             SearchText = new GameStringText("Mecha Abathur Robot Mechanical"),
             Description = new GameStringText("An alternate skin for the Evolution Master."),
+            InfoText = new GameStringText("Legendary Skin from the Mecha universe"),
 
             // LoadoutItem properties
             AttributeId = "MechaA",
-
-            // Skin properties
-            InfoText = new GameStringText("Legendary Skin from the Mecha universe"),
         };
 
         skin.Features.Add("ThemedAbilities");
@@ -37,9 +37,11 @@ public class SkinSerializerTests
         skin.VoiceLineIds.Add("AbathurMecha_VoiceLine02");
 
         // act
-        string json = JsonSerializer.Serialize(skin, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(skin, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["skin"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {

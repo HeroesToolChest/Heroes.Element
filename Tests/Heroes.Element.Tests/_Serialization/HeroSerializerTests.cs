@@ -9,6 +9,8 @@ public class HeroSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Hero hero = new("hero_id")
         {
             // Hero properties
@@ -184,9 +186,13 @@ public class HeroSerializerTests
         };
 
         // act
-        string json = JsonSerializer.Serialize(hero, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(hero, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["ability"].Should().HaveCount(6);
+        serializerSettings.ItemDictionary["hero"].Should().HaveCount(12);
+        serializerSettings.ItemDictionary["talent"].Should().HaveCount(6);
+
         json.Should().Be(
             """
             {

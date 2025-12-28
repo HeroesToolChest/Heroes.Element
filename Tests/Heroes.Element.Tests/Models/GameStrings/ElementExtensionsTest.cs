@@ -272,7 +272,7 @@ public class ElementExtensionsTest
             }
           },
           "gamestrings": {
-            "lootchest": {
+            "lootChest": {
               "description": {
                 "lootChestId1": "updated description"
               },

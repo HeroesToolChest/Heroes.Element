@@ -234,7 +234,7 @@ public class LootChestDataDocumentTests
             }
           },
           "gamestrings": {
-            "lootchest": {
+            "lootChest": {
               "name": {
                 "LootChestEpic": "Epic Loot Chest Localized"
               },

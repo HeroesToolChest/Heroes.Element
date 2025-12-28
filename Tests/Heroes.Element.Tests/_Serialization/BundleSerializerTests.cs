@@ -7,6 +7,8 @@ public class BundleSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Bundle bundle = new("bundle_id")
         {
             // Bundle properties
@@ -35,12 +37,15 @@ public class BundleSerializerTests
             Event = "Holiday Event",
             SearchText = new GameStringText("bundle search keywords"),
             Description = new GameStringText("Bundle Description Text"),
+            InfoText = new GameStringText("Bundle Info Text"),
         };
 
         // act
-        string json = JsonSerializer.Serialize(bundle, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(bundle, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["bundle"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {
@@ -78,7 +83,8 @@ public class BundleSerializerTests
               "gemsBonus": 1000,
               "lootChestId": "lootchest1",
               "searchText": "bundle search keywords",
-              "description": "Bundle Description Text"
+              "description": "Bundle Description Text",
+              "infoText": "Bundle Info Text"
             }
             """);
     }

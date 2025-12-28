@@ -7,6 +7,8 @@ public class BoostSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Boost boost = new("boost_id")
         {
             // StoreItem properties (inherited)
@@ -20,12 +22,15 @@ public class BoostSerializerTests
             Event = "Anniversary Event",
             SearchText = new GameStringText("boost search keywords"),
             Description = new GameStringText("Boost Description Text"),
+            InfoText = new GameStringText("Boost Info Text"),
         };
 
         // act
-        string json = JsonSerializer.Serialize(boost, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(boost, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["boost"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {
@@ -38,7 +43,8 @@ public class BoostSerializerTests
               "category": "Boost Category",
               "event": "Anniversary Event",
               "searchText": "boost search keywords",
-              "description": "Boost Description Text"
+              "description": "Boost Description Text",
+              "infoText": "Boost Info Text"
             }
             """);
     }

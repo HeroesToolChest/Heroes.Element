@@ -185,7 +185,7 @@ public class GameStringDocument : IDisposable
     public void UpdateGameStrings(LootChest lootchest)
     {
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
-            !gameStringElement.TryGetProperty("lootchest", out JsonElement lootChestElement))
+            !gameStringElement.TryGetProperty("lootChest", out JsonElement lootChestElement))
             return;
 
         SetNameProperty(lootchest.Id, lootchest, lootChestElement);

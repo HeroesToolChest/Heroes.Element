@@ -7,6 +7,8 @@ public class MountSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         Mount mount = new("id")
         {
             Name = new GameStringText("Cloud Serpent"),
@@ -21,14 +23,17 @@ public class MountSerializerTests
             Event = "an event",
             SearchText = new GameStringText("Cloud Serpent Mount Flying Dragon"),
             MountCategory = "Flying",
+            InfoText = new GameStringText("Cloud Serpent mount"),
         };
         mount.VariationMountIds.Add("CloudSerpentMountVar1");
         mount.VariationMountIds.Add("CloudSerpentMountVar2");
 
         // act
-        string json = JsonSerializer.Serialize(mount, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(mount, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["mount"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {
@@ -47,7 +52,8 @@ public class MountSerializerTests
                 "CloudSerpentMountVar2"
               ],
               "searchText": "Cloud Serpent Mount Flying Dragon",
-              "description": "A mystical serpent from the clouds of Pandaria."
+              "description": "A mystical serpent from the clouds of Pandaria.",
+              "infoText": "Cloud Serpent mount"
             }
             """);
     }

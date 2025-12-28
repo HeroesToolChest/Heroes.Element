@@ -7,6 +7,8 @@ public class VoiceLineSerializerTests
     public void Serialize_AllPropertiesSet_ReturnsJson()
     {
         // arrange
+        SerializerSettings serializerSettings = SerializerSettings.Create();
+
         VoiceLine voiceLine = new("id")
         {
             Name = new GameStringText("Test Voice Line"),
@@ -22,12 +24,15 @@ public class VoiceLineSerializerTests
             SearchText = new GameStringText("item1 item2"),
             HeroId = "Abathur",
             Image = "test.png",
+            InfoText = new GameStringText("Info text"),
         };
 
         // act
-        string json = JsonSerializer.Serialize(voiceLine, SerializerSettings.GetJsonSerializerDataOptions());
+        string json = JsonSerializer.Serialize(voiceLine, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
+        serializerSettings.ItemDictionary["voiceLine"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+
         json.Should().Be(
             """
             {
@@ -43,7 +48,8 @@ public class VoiceLineSerializerTests
               "heroId": "Abathur",
               "image": "test.png",
               "searchText": "item1 item2",
-              "description": "Test Description"
+              "description": "Test Description",
+              "infoText": "Info text"
             }
             """);
     }

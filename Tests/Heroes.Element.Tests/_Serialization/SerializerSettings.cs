@@ -1,8 +1,19 @@
 ﻿namespace Heroes.Element.Serialization.Tests;
 
-public static class SerializerSettings
+public class SerializerSettings
 {
-    public static JsonSerializerOptions GetJsonSerializerDataOptions()
+    internal SerializerSettings()
+    {
+    }
+
+    public GameStringItemDictionary ItemDictionary { get; } = [];
+
+    public static SerializerSettings Create()
+    {
+        return new SerializerSettings();
+    }
+
+    public JsonSerializerOptions GetJsonSerializerDataOptions()
     {
         return new JsonSerializerOptions()
         {
@@ -24,7 +35,7 @@ public static class SerializerSettings
             {
                 Modifiers =
                 {
-                    typeInfo => JsonTypeInfoModifiers.SerializationModifiers(typeInfo, LocalizedTextOption.None, []),
+                    typeInfo => JsonTypeInfoModifiers.SerializationModifiers(typeInfo, LocalizedTextOption.Copy, ItemDictionary),
                 },
             },
         };
