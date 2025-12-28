@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the skin data.
 /// </summary>
-public class Skin : LoadoutItem, IInfoText
+public class Skin : LoadoutItem
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Skin"/> class.
@@ -15,9 +15,6 @@ public class Skin : LoadoutItem, IInfoText
         Rarity = Types.Rarity.Common;
         Franchise = Types.Franchise.Starcraft;
     }
-
-    /// <inheritdoc/>
-    public GameStringText? InfoText { get; set; }
 
     /// <summary>
     /// Gets or sets a unique collection of features.

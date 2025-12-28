@@ -52,7 +52,6 @@ public class SkinSerializerTests
               "releaseDate": "2018-05-22",
               "category": "skin",
               "event": "Mecha Event",
-              "infoText": "Legendary Skin from the Mecha universe",
               "features": [
                 "AlternateMountForm",
                 "ThemedAbilities",
@@ -67,7 +66,8 @@ public class SkinSerializerTests
                 "AbathurMecha_VoiceLine02"
               ],
               "searchText": "Mecha Abathur Robot Mechanical",
-              "description": "An alternate skin for the Evolution Master."
+              "description": "An alternate skin for the Evolution Master.",
+              "infoText": "Legendary Skin from the Mecha universe"
             }
             """);
     }

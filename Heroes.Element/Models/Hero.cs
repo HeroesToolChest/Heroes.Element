@@ -4,7 +4,7 @@
 /// Contains the hero data.
 /// </summary>
 [DebuggerDisplay("{DebuggerDisplay,nq}")]
-public class Hero : Unit, ILoadoutItem, IInfoText
+public class Hero : Unit, ILoadoutItem
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Hero"/> class.
