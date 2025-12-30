@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Models.ObjectProperties;
 
 /// <summary>
-/// An interface for a (basic) image.
+/// An interface for a single basic image.
 /// </summary>
 public interface IImage
 {
