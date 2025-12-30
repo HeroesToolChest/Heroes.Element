@@ -185,7 +185,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IDisposable
         if (element is null)
             return default;
 
-        element.SetId(id);
+        (element as IElementObjectSetter)?.SetId(id);
         UpdateGameStringTexts(element);
 
         return element;

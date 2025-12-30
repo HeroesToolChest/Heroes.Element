@@ -3,7 +3,7 @@
 /// <summary>
 /// An abstract class for all the game data models.
 /// </summary>
-public abstract class ElementObject : IEquatable<ElementObject>, IElementObject
+public abstract class ElementObject : IEquatable<ElementObject>, IElementObject, IElementObjectSetter
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ElementObject"/> class.
@@ -51,7 +51,7 @@ public abstract class ElementObject : IEquatable<ElementObject>, IElementObject
         return HashCode.Combine(Id.ToUpperInvariant());
     }
 
-    void IElementObject.SetId(string id)
+    void IElementObjectSetter.SetId(string id)
     {
         Id = id;
     }
