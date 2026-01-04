@@ -344,6 +344,44 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
+    public void SerializationModifiers_PropertyIsVoiceLine_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        VoiceLine voiceLine = new("voiceLineId")
+        {
+            Name = new GameStringText("Voice Line name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(voiceLine, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["voiceLine"]["name"].KeyValuePairs["voiceLineId"].RawText.Should().Be("Voice Line name");
+    }
+
+    [TestMethod]
+    public void SerializationModifiers_PropertyIsMatchAward_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        MatchAward matchAward = new("matchAwardId")
+        {
+            ScoreScreenName = new GameStringText("Match Award name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(matchAward, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["matchAward"]["scoreScreenName"].KeyValuePairs["matchAwardId"].RawText.Should().Be("Match Award name");
+    }
+
+    [TestMethod]
     public void SerializationModifiers_PropertyIsMap_GameStringItemDictionaryHasPropertyName()
     {
         // arrange

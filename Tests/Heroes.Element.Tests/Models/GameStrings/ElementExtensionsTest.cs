@@ -433,7 +433,7 @@ public class ElementExtensionsTest
             }
           },
           "gamestrings": {
-            "voiceline": {
+            "voiceLine": {
               "description": {
                 "voiceLineId1": "updated description"
               },

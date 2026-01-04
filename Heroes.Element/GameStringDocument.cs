@@ -250,7 +250,7 @@ public class GameStringDocument : IDisposable
     public void UpdateGameStrings(VoiceLine voiceLine)
     {
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
-            !gameStringElement.TryGetProperty("voiceline", out JsonElement voiceLineElement))
+            !gameStringElement.TryGetProperty("voiceLine", out JsonElement voiceLineElement))
             return;
 
         SetStoreItemProperties(voiceLine.Id, voiceLine, voiceLineElement);

@@ -910,4 +910,61 @@ public class GameStringDocumentTests
         matchAward.EndOfMatchDescription!.RawText.Should().Be("Most Valuable Player");
         matchAward.EndOfMatchTooltipText!.RawText.Should().Be("You were the most valuable player in this match!");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_VoiceLine_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "voicelinedata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "voiceLine": {
+              "name": {
+                "AbathurBase_VoiceLine01": "Acceptable"
+              },
+              "sortName": {
+                "AbathurBase_VoiceLine01": "Acceptable Abathur"
+              },
+              "description": {
+                "AbathurBase_VoiceLine01": "Voice line from the Evolution Master."
+              },
+              "searchText": {
+                "AbathurBase_VoiceLine01": "Abathur Acceptable Voice Line Slug"
+              }
+            }
+          }
+        }
+        """;
+        VoiceLine voiceLine = new("AbathurBase_VoiceLine01")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(voiceLine);
+
+        // assert
+        voiceLine.Name!.RawText.Should().Be("Acceptable");
+        voiceLine.SortName!.RawText.Should().Be("Acceptable Abathur");
+        voiceLine.Description!.RawText.Should().Be("Voice line from the Evolution Master.");
+        voiceLine.SearchText!.RawText.Should().Be("Abathur Acceptable Voice Line Slug");
+    }
 }
