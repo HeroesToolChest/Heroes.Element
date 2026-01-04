@@ -270,6 +270,28 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Mount"/>.
+    /// </summary>
+    /// <param name="matchAward">The <see cref="MatchAward"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(MatchAward matchAward)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("matchAward", out JsonElement matchAwardElement))
+            return;
+
+        if (TryGetJsonElement(matchAwardElement, "endOfMatchDescription", matchAward.Id, out JsonElement element))
+            matchAward.EndOfMatchDescription = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(matchAwardElement, "endOfMatchName", matchAward.Id, out element))
+            matchAward.EndOfMatchName = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(matchAwardElement, "endOfMatchTooltipText", matchAward.Id, out element))
+            matchAward.EndOfMatchTooltipText = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(matchAwardElement, "scoreScreenDescription", matchAward.Id, out element))
+            matchAward.ScoreScreenDescription = GetGameStringText(element.GetString());
+        if (TryGetJsonElement(matchAwardElement, "scoreScreenName", matchAward.Id, out element))
+            matchAward.ScoreScreenName = GetGameStringText(element.GetString());
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

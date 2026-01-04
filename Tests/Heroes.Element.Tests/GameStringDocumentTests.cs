@@ -849,4 +849,65 @@ public class GameStringDocumentTests
         mount.SortName!.RawText.Should().Be("Serpent Cloud");
         mount.SearchText!.RawText.Should().Be("Cloud Serpent Mount Flying Dragon");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_MatchAward_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "matchawarddata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "matchAward": {
+              "scoreScreenName": {
+                "EndOfMatchAwardMVPBoolean": "Most Valuable Player"
+              },
+              "scoreScreenDescription": {
+                "EndOfMatchAwardMVPBoolean": "Awarded to the player with the highest overall performance."
+              },
+              "endOfMatchName": {
+                "EndOfMatchAwardMVPBoolean": "MVP"
+              },
+              "endOfMatchDescription": {
+                "EndOfMatchAwardMVPBoolean": "Most Valuable Player"
+              },
+              "endOfMatchTooltipText": {
+                "EndOfMatchAwardMVPBoolean": "You were the most valuable player in this match!"
+              }
+            }
+          }
+        }
+        """;
+        MatchAward matchAward = new("EndOfMatchAwardMVPBoolean")
+        {
+            ScoreScreenName = new GameStringText("temporary score screen name"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(matchAward);
+
+        // assert
+        matchAward.ScoreScreenName!.RawText.Should().Be("Most Valuable Player");
+        matchAward.ScoreScreenDescription!.RawText.Should().Be("Awarded to the player with the highest overall performance.");
+        matchAward.EndOfMatchName!.RawText.Should().Be("MVP");
+        matchAward.EndOfMatchDescription!.RawText.Should().Be("Most Valuable Player");
+        matchAward.EndOfMatchTooltipText!.RawText.Should().Be("You were the most valuable player in this match!");
+    }
 }

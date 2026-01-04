@@ -515,4 +515,61 @@ public class ElementExtensionsTest
         mount.SortName!.RawText.Should().Be("updated sort name");
         mount.SearchText!.RawText.Should().Be("updated search text");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_MatchAward_UpdatesGameStringTexts()
+    {
+        // arrange
+        MatchAward matchAward = new("matchAwardId1")
+        {
+            ScoreScreenName = new GameStringText("a score screen name"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "matchAward": {
+              "scoreScreenName": {
+                "matchAwardId1": "updated score screen name"
+              },
+              "scoreScreenDescription": {
+                "matchAwardId1": "updated score screen description"
+              },
+              "endOfMatchName": {
+                "matchAwardId1": "updated end of match name"
+              },
+              "endOfMatchDescription": {
+                "matchAwardId1": "updated end of match description"
+              },
+              "endOfMatchTooltipText": {
+                "matchAwardId1": "updated end of match tooltip text"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        matchAward.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        matchAward.ScoreScreenName!.RawText.Should().Be("updated score screen name");
+        matchAward.ScoreScreenDescription!.RawText.Should().Be("updated score screen description");
+        matchAward.EndOfMatchName!.RawText.Should().Be("updated end of match name");
+        matchAward.EndOfMatchDescription!.RawText.Should().Be("updated end of match description");
+        matchAward.EndOfMatchTooltipText!.RawText.Should().Be("updated end of match tooltip text");
+    }
 }
