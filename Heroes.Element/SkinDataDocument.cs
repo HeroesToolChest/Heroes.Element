@@ -6,7 +6,7 @@
 public class SkinDataDocument : ElementDocument<Skin>, ILoadoutItemRetrieval<Skin>
 {
     private SkinDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(dataDocument, gameStringDocument)
+        : base(dataDocument, gameStringDocument)
     {
     }
 

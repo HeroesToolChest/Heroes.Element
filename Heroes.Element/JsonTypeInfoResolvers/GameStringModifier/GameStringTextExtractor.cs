@@ -31,6 +31,7 @@ internal static class GameStringTextExtractor
                 Bundle => JsonNamingPolicy.CamelCase.ConvertName(nameof(Bundle)),
                 Boost => JsonNamingPolicy.CamelCase.ConvertName(nameof(Boost)),
                 Mount => JsonNamingPolicy.CamelCase.ConvertName(nameof(Mount)),
+                Spray => JsonNamingPolicy.CamelCase.ConvertName(nameof(Spray)),
                 Skin => JsonNamingPolicy.CamelCase.ConvertName(nameof(Skin)),
                 VoiceLine => JsonNamingPolicy.CamelCase.ConvertName(nameof(VoiceLine)),
                 _ => JsonNamingPolicy.CamelCase.ConvertName(propertyInfo.DeclaringType.Name),

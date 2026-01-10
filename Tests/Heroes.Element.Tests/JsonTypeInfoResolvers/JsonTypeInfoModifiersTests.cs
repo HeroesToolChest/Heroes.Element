@@ -363,6 +363,25 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
+    public void SerializationModifiers_PropertyIsSpray_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Spray spray = new("sprayId")
+        {
+            Name = new GameStringText("Spray name"),
+        };
+
+        // act
+        JsonSerializer.Serialize(spray, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["spray"]["name"].KeyValuePairs["sprayId"].RawText.Should().Be("Spray name");
+    }
+
+    [TestMethod]
     public void SerializationModifiers_PropertyIsMatchAward_GameStringItemDictionaryHasPropertyName()
     {
         // arrange

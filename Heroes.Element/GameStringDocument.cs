@@ -292,6 +292,19 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Spray"/>.
+    /// </summary>
+    /// <param name="spray">The <see cref="Spray"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Spray spray)
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("spray", out JsonElement sprayElement))
+            return;
+
+        SetStoreItemProperties(spray.Id, spray, sprayElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

@@ -572,4 +572,57 @@ public class ElementExtensionsTest
         matchAward.EndOfMatchDescription!.RawText.Should().Be("updated end of match description");
         matchAward.EndOfMatchTooltipText!.RawText.Should().Be("updated end of match tooltip text");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_Spray_UpdatesGameStringTexts()
+    {
+        // arrange
+        Spray spray = new("sprayId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "spray": {
+              "description": {
+                "sprayId1": "updated description"
+              },
+              "name": {
+                "sprayId1": "updated name"
+              },
+              "sortName": {
+                "sprayId1": "updated sort name"
+              },
+              "searchText": {
+                "sprayId1": "updated search text"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        spray.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        spray.Description!.RawText.Should().Be("updated description");
+        spray.Name!.RawText.Should().Be("updated name");
+        spray.SortName!.RawText.Should().Be("updated sort name");
+        spray.SearchText!.RawText.Should().Be("updated search text");
+    }
 }
