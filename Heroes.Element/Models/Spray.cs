@@ -21,7 +21,6 @@ public class Spray : LoadoutItem, IImage, IImagePath
     /// <summary>
     /// Gets or sets the animation properties.
     /// </summary>
-    [JsonPropertyName("animation")]
     public SprayAnimation? Animation { get; set; }
 
     RelativeFilePath? IImagePath.ImagePath { get; set; }

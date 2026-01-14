@@ -967,4 +967,67 @@ public class GameStringDocumentTests
         voiceLine.Description!.RawText.Should().Be("Voice line from the Evolution Master.");
         voiceLine.SearchText!.RawText.Should().Be("Abathur Acceptable Voice Line Slug");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_Emoticon_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "emoticondata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "emoticon": {
+              "description": {
+                "AbathurEmoticon": "Emoticon featuring Abathur, the Evolution Master."
+              },
+              "searchText": {
+                "AbathurEmoticon": "Abathur Slug Evolution Master Emoticon"
+              },
+              "localizedAliases": {
+                "AbathurEmoticon": [
+                  "abathur",
+                  "slug",
+                  "evolution"
+                ]
+              }
+            }
+          }
+        }
+        """;
+        Emoticon emoticon = new("AbathurEmoticon")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+        emoticon.LocalizedAliases.Add(new GameStringText("temp1"));
+        emoticon.LocalizedAliases.Add(new GameStringText("temp2"));
+        emoticon.LocalizedAliases.Add(new GameStringText("temp3"));
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(emoticon);
+
+        // assert
+        emoticon.Description!.RawText.Should().Be("Emoticon featuring Abathur, the Evolution Master.");
+        emoticon.SearchText!.RawText.Should().Be("Abathur Slug Evolution Master Emoticon");
+        emoticon.LocalizedAliases.Should().HaveCount(3);
+        emoticon.LocalizedAliases.ElementAt(0).RawText.Should().Be("abathur");
+        emoticon.LocalizedAliases.ElementAt(1).RawText.Should().Be("slug");
+        emoticon.LocalizedAliases.ElementAt(2).RawText.Should().Be("evolution");
+    }
 }

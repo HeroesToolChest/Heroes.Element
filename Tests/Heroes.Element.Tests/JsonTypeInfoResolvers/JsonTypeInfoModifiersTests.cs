@@ -437,6 +437,32 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
+    public void SerializationModifiers_PropertyIsEmoticon_GameStringItemDictionaryHasPropertyName()
+    {
+        // arrange
+        GameStringItemDictionary gameStringItemDictionary = [];
+        JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
+
+        Emoticon emoticon = new("emoticonId")
+        {
+            Description = new GameStringText("Emoticon description"),
+            SearchText = new GameStringText("Emoticon search"),
+        };
+        emoticon.LocalizedAliases.Add(new GameStringText("alias1"));
+        emoticon.LocalizedAliases.Add(new GameStringText("alias2"));
+
+        // act
+        JsonSerializer.Serialize(emoticon, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
+
+        // assert
+        gameStringItemDictionary["emoticon"]["description"].KeyValuePairs["emoticonId"].RawText.Should().Be("Emoticon description");
+        gameStringItemDictionary["emoticon"]["searchText"].KeyValuePairs["emoticonId"].RawText.Should().Be("Emoticon search");
+        gameStringItemDictionary["emoticon"]["localizedAliases"].KeyArrayPairs["emoticonId"].Should().HaveCount(2);
+        gameStringItemDictionary["emoticon"]["localizedAliases"].KeyArrayPairs["emoticonId"][0].RawText.Should().Be("alias1");
+        gameStringItemDictionary["emoticon"]["localizedAliases"].KeyArrayPairs["emoticonId"][1].RawText.Should().Be("alias2");
+    }
+
+    [TestMethod]
     public void SerializationModifiers_PropertyIsAbility_GameStringItemDictionaryHasPropertyName()
     {
         // arrange

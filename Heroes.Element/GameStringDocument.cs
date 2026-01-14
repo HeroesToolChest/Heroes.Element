@@ -305,6 +305,36 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Emoticon"/>.
+    /// </summary>
+    /// <param name="emoticon">The <see cref="Emoticon"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(Emoticon emoticon)
+    {
+        emoticon.Description = null;
+        emoticon.SearchText = null;
+        emoticon.LocalizedAliases.Clear();
+
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("emoticon", out JsonElement emoticonElement))
+            return;
+
+        SetDescriptionProperty(emoticon.Id, emoticon, emoticonElement);
+
+        if (TryGetJsonElement(emoticonElement, "searchText", emoticon.Id, out JsonElement element))
+            emoticon.SearchText = GetGameStringText(element.GetString());
+
+        if (TryGetJsonElement(emoticonElement, "localizedAliases", emoticon.Id, out element))
+        {
+            foreach (JsonElement roleElement in element.EnumerateArray())
+            {
+                GameStringText? gameStringText = GetGameStringText(roleElement.GetString());
+                if (gameStringText is not null)
+                    emoticon.LocalizedAliases.Add(gameStringText);
+            }
+        }
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

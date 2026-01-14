@@ -625,4 +625,61 @@ public class ElementExtensionsTest
         spray.SortName!.RawText.Should().Be("updated sort name");
         spray.SearchText!.RawText.Should().Be("updated search text");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_Emoticon_UpdatesGameStringTexts()
+    {
+        // arrange
+        Emoticon emoticon = new("emoticonId1")
+        {
+            Description = new GameStringText("old description"),
+            SearchText = new GameStringText("old search text"),
+        };
+        emoticon.LocalizedAliases.Add(new GameStringText("old alias 1"));
+        emoticon.LocalizedAliases.Add(new GameStringText("old alias 2"));
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "emoticon": {
+              "description": {
+                "emoticonId1": "updated description"
+              },
+              "searchText": {
+                "emoticonId1": "updated search text"
+              },
+              "localizedAliases": {
+                "emoticonId1": [
+                  "updated alias 1",
+                  "updated alias 2"
+                ]
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        emoticon.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        emoticon.Description!.RawText.Should().Be("updated description");
+        emoticon.SearchText!.RawText.Should().Be("updated search text");
+        emoticon.LocalizedAliases.Should().HaveCount(2);
+        emoticon.LocalizedAliases.ElementAt(0).RawText.Should().Be("updated alias 1");
+        emoticon.LocalizedAliases.ElementAt(1).RawText.Should().Be("updated alias 2");
+    }
 }
