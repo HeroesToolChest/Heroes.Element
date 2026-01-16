@@ -29,13 +29,14 @@ public class SpraySerializerTests
                 Frames = 30,
                 Duration = 1000,
             },
+            InfoText = new GameStringText("Info Text"),
         };
 
         // act
         string json = JsonSerializer.Serialize(spray, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
-        serializerSettings.ItemDictionary["spray"].Should().HaveCount(4, "it's the total number of gamestringtext properties");
+        serializerSettings.ItemDictionary["spray"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
 
         json.Should().Be(
             """
@@ -56,7 +57,8 @@ public class SpraySerializerTests
                 "duration": 1000
               },
               "searchText": "item1 item2",
-              "description": "Test Description"
+              "description": "Test Description",
+              "infoText": "Info Text"
             }
             """);
     }

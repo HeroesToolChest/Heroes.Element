@@ -136,6 +136,86 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_HeroPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "herodata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Hero hero = new("Abathur");
+        hero.Talents.Add(
+            TalentTier.Level1,
+            [
+                new Talent() { TalentElementId = "AbathurPressurizedGlands", ButtonElementId = "AbathurPressurizedGlands", AbilityType = AbilityType.Heroic, Tier = TalentTier.Level1 }
+            ]);
+        hero.Talents.Add(
+            TalentTier.Level4,
+            [
+                new Talent() { TalentElementId = "AbathurSurvivalInstincts", ButtonElementId = "AbathurSurvivalInstincts", AbilityType = AbilityType.Active, Tier = TalentTier.Level4 },
+                new Talent() { TalentElementId = "AbathurRegenBioSteel", ButtonElementId = "AbathurRegenBioSteel", AbilityType = AbilityType.Passive, Tier = TalentTier.Level4, Name = new GameStringText("Bio") }
+            ]);
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(hero);
+
+        // assert
+        hero.Description.Should().BeNull();
+        hero.Name.Should().BeNull();
+        hero.Difficulty.Should().BeNull();
+        hero.ExpandedRole.Should().BeNull();
+        hero.InfoText.Should().BeNull();
+        hero.SearchText.Should().BeNull();
+        hero.SortName.Should().BeNull();
+        hero.Title.Should().BeNull();
+        hero.Roles.Should().BeEmpty();
+        hero.Energy.EnergyType.Should().BeNull();
+        hero.Life.LifeType.Should().BeNull();
+        hero.Shield.ShieldType.Should().BeNull();
+
+        hero.Talents[TalentTier.Level1][0].CooldownText.Should().BeNull();
+        hero.Talents[TalentTier.Level1][0].EnergyText.Should().BeNull();
+        hero.Talents[TalentTier.Level1][0].LifeText.Should().BeNull();
+        hero.Talents[TalentTier.Level1][0].Name.Should().BeNull();
+        hero.Talents[TalentTier.Level1][0].ShortText.Should().BeNull();
+        hero.Talents[TalentTier.Level1][0].FullText.Should().BeNull();
+
+        hero.Talents[TalentTier.Level4][0].CooldownText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][0].EnergyText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][0].LifeText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][0].Name.Should().BeNull();
+        hero.Talents[TalentTier.Level4][0].ShortText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][0].FullText.Should().BeNull();
+
+        hero.Talents[TalentTier.Level4][1].CooldownText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][1].EnergyText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][1].LifeText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][1].Name.Should().BeNull();
+        hero.Talents[TalentTier.Level4][1].ShortText.Should().BeNull();
+        hero.Talents[TalentTier.Level4][1].FullText.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_Hero_ReturnsUpdatedObject()
     {
         // arrange
@@ -276,9 +356,80 @@ public class GameStringDocumentTests
         hero.Talents[TalentTier.Level4][1].CooldownText.Should().BeNull();
         hero.Talents[TalentTier.Level4][1].EnergyText.Should().BeNull();
         hero.Talents[TalentTier.Level4][1].LifeText.Should().BeNull();
-        hero.Talents[TalentTier.Level4][1].Name!.RawText.Should().Be("Bio");
+        hero.Talents[TalentTier.Level4][1].Name.Should().BeNull();
         hero.Talents[TalentTier.Level4][1].ShortText.Should().BeNull();
         hero.Talents[TalentTier.Level4][1].FullText.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_UnitPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "unitdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Unit unit = new("AbathurSymbiote")
+        {
+            Description = new GameStringText("hello world"),
+        };
+        unit.Abilities.Add(AbilityTier.Basic, [new Ability() { AbilityElementId = "AbathurDeepTunnel", ButtonElementId = "AbathurDeepTunnel", AbilityType = AbilityType.Z, FullText = new GameStringText("temp") }]);
+        unit.Abilities.Add(
+            AbilityTier.Heroic,
+            [
+                new Ability() { AbilityElementId = "AbathurEvolveMonstrosity", ButtonElementId = "AbathurEvolveMonstrosityHotbar", AbilityType = AbilityType.Heroic },
+                new Ability() { AbilityElementId = "AbathurSpawnLocusts", ButtonElementId = "AbathurLocustStrain", AbilityType = AbilityType.Q },
+            ]);
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(unit);
+
+        // assert
+        unit.Description.Should().BeNull();
+        unit.Name.Should().BeNull();
+        unit.Energy.EnergyType.Should().BeNull();
+        unit.Life.LifeType.Should().BeNull();
+        unit.Shield.ShieldType.Should().BeNull();
+        unit.Abilities[AbilityTier.Basic][0].CooldownText.Should().BeNull();
+        unit.Abilities[AbilityTier.Basic][0].EnergyText.Should().BeNull();
+        unit.Abilities[AbilityTier.Basic][0].LifeText.Should().BeNull();
+        unit.Abilities[AbilityTier.Basic][0].Name.Should().BeNull();
+        unit.Abilities[AbilityTier.Basic][0].ShortText.Should().BeNull();
+        unit.Abilities[AbilityTier.Basic][0].FullText.Should().BeNull();
+
+        unit.Abilities[AbilityTier.Heroic][0].CooldownText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][0].EnergyText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][0].LifeText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][0].Name.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][0].ShortText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][0].FullText.Should().BeNull();
+
+        unit.Abilities[AbilityTier.Heroic][1].CooldownText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][1].EnergyText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][1].LifeText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][1].Name.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][1].ShortText.Should().BeNull();
+        unit.Abilities[AbilityTier.Heroic][1].FullText.Should().BeNull();
     }
 
     [TestMethod]
@@ -395,6 +546,49 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_AnnouncerPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "announcerdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Announcer announcer = new("AbathurAnnouncer")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(announcer);
+
+        // assert
+        announcer.Description.Should().BeNull();
+        announcer.Name.Should().BeNull();
+        announcer.SortName.Should().BeNull();
+        announcer.SearchText.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_Announcer_ReturnsUpdatedObject()
     {
         // arrange
@@ -449,6 +643,49 @@ public class GameStringDocumentTests
         announcer.Name!.RawText.Should().Be("Abathur Announcer");
         announcer.SortName!.RawText.Should().Be("Abathur");
         announcer.SearchText!.RawText.Should().Be("Abathur Evolution Master Announcer Pack");
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_BannerPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "bannerdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Banner banner = new("BannerD3Imperius")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(banner);
+
+        // assert
+        banner.Description.Should().BeNull();
+        banner.Name.Should().BeNull();
+        banner.SortName.Should().BeNull();
+        banner.SearchText.Should().BeNull();
     }
 
     [TestMethod]
@@ -509,6 +746,49 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_BoostPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "boostdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Boost boost = new("BoostStimpak")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(boost);
+
+        // assert
+        boost.Description.Should().BeNull();
+        boost.Name.Should().BeNull();
+        boost.SortName.Should().BeNull();
+        boost.SearchText.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_Boost_ReturnsUpdatedObject()
     {
         // arrange
@@ -563,6 +843,49 @@ public class GameStringDocumentTests
         boost.Name!.RawText.Should().Be("3-Day Stimpack");
         boost.SortName!.RawText.Should().Be("Stimpack");
         boost.SearchText!.RawText.Should().Be("Stimpack Boost Experience XP");
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_BundlePropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "bundledata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Bundle bundle = new("MegaBundleStarterPack")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(bundle);
+
+        // assert
+        bundle.Description.Should().BeNull();
+        bundle.Name.Should().BeNull();
+        bundle.SortName.Should().BeNull();
+        bundle.SearchText.Should().BeNull();
     }
 
     [TestMethod]
@@ -623,6 +946,47 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_LootChestPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "lootchestdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        LootChest lootChest = new("LootChestRare")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(lootChest);
+
+        // assert
+        lootChest.Description.Should().BeNull();
+        lootChest.Name.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_LootChest_ReturnsUpdatedObject()
     {
         // arrange
@@ -669,6 +1033,50 @@ public class GameStringDocumentTests
         // assert
         lootChest.Description!.RawText.Should().Be("Contains four random items. Guaranteed to contain at least one Rare item.");
         lootChest.Name!.RawText.Should().Be("Rare Loot Chest");
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_MapPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "mapdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Map map = new("Battlefield of Eternity");
+        map.MapObjectives.Add(new MapObjective { Title = new GameStringText("temp1"), Description = new GameStringText("temp1 desc") });
+        map.MapObjectives.Add(new MapObjective { Title = new GameStringText("temp2"), Description = new GameStringText("temp2 desc") });
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(map);
+
+        // assert
+        map.Name.Should().BeNull();
+        map.MapObjectives.Should().HaveCount(2);
+        map.MapObjectives[0].Title.Should().BeNull();
+        map.MapObjectives[0].Description.Should().BeNull();
+        map.MapObjectives[1].Title.Should().BeNull();
+        map.MapObjectives[1].Description.Should().BeNull();
     }
 
     [TestMethod]
@@ -733,6 +1141,50 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_SkinPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "skindata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Skin skin = new("AbathurMechaVar1")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        gameStringDocument.UpdateGameStrings(skin);
+
+        // assert
+        skin.Description.Should().BeNull();
+        skin.Name.Should().BeNull();
+        skin.SortName.Should().BeNull();
+        skin.SearchText.Should().BeNull();
+        skin.InfoText.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_Skin_ReturnsUpdatedObject()
     {
         // arrange
@@ -794,6 +1246,50 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_MountPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "mountdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Mount mount = new("CloudSerpentMount")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(mount);
+
+        // assert
+        mount.Description.Should().BeNull();
+        mount.Name.Should().BeNull();
+        mount.SortName.Should().BeNull();
+        mount.SearchText.Should().BeNull();
+        mount.InfoText.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_Mount_ReturnsUpdatedObject()
     {
         // arrange
@@ -827,6 +1323,9 @@ public class GameStringDocumentTests
               },
               "searchText": {
                 "CloudSerpentMount": "Cloud Serpent Mount Flying Dragon"
+              },
+              "infoText": {
+                "CloudSerpentMount": "Epic Mount from the Pandaria universe"
               }
             }
           }
@@ -848,6 +1347,51 @@ public class GameStringDocumentTests
         mount.Name!.RawText.Should().Be("Cloud Serpent");
         mount.SortName!.RawText.Should().Be("Serpent Cloud");
         mount.SearchText!.RawText.Should().Be("Cloud Serpent Mount Flying Dragon");
+        mount.InfoText!.RawText.Should().Be("Epic Mount from the Pandaria universe");
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_MatchAwardPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "matchawarddata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        MatchAward matchAward = new("EndOfMatchAwardMVPBoolean")
+        {
+            ScoreScreenName = new GameStringText("temporary score screen name"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(matchAward);
+
+        // assert
+        matchAward.ScoreScreenName.Should().BeNull();
+        matchAward.ScoreScreenDescription.Should().BeNull();
+        matchAward.EndOfMatchName.Should().BeNull();
+        matchAward.EndOfMatchDescription.Should().BeNull();
+        matchAward.EndOfMatchTooltipText.Should().BeNull();
     }
 
     [TestMethod]
@@ -912,6 +1456,50 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void UpdateGameStrings_VoiceLinePropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "voicelinedata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        VoiceLine voiceLine = new("AbathurBase_VoiceLine01")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(voiceLine);
+
+        // assert
+        voiceLine.Name.Should().BeNull();
+        voiceLine.SortName.Should().BeNull();
+        voiceLine.Description.Should().BeNull();
+        voiceLine.SearchText.Should().BeNull();
+        voiceLine.InfoText.Should().BeNull();
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_VoiceLine_ReturnsUpdatedObject()
     {
         // arrange
@@ -945,6 +1533,9 @@ public class GameStringDocumentTests
               },
               "searchText": {
                 "AbathurBase_VoiceLine01": "Abathur Acceptable Voice Line Slug"
+              },
+              "infoText": {
+                "AbathurBase_VoiceLine01": "Common Voice Line from the Evolution Master"
               }
             }
           }
@@ -966,6 +1557,52 @@ public class GameStringDocumentTests
         voiceLine.SortName!.RawText.Should().Be("Acceptable Abathur");
         voiceLine.Description!.RawText.Should().Be("Voice line from the Evolution Master.");
         voiceLine.SearchText!.RawText.Should().Be("Abathur Acceptable Voice Line Slug");
+        voiceLine.InfoText!.RawText.Should().Be("Common Voice Line from the Evolution Master");
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_EmoticonPropertyNotFound_ReturnsWithClearedProperties()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "emoticondata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Emoticon emoticon = new("AbathurEmoticon")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+        emoticon.LocalizedAliases.Add(new GameStringText("temp1"));
+        emoticon.LocalizedAliases.Add(new GameStringText("temp2"));
+        emoticon.LocalizedAliases.Add(new GameStringText("temp3"));
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(emoticon);
+
+        // assert
+        emoticon.Description.Should().BeNull();
+        emoticon.SearchText.Should().BeNull();
+        emoticon.LocalizedAliases.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -1030,4 +1667,110 @@ public class GameStringDocumentTests
         emoticon.LocalizedAliases.ElementAt(1).RawText.Should().Be("slug");
         emoticon.LocalizedAliases.ElementAt(2).RawText.Should().Be("evolution");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_SprayPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "spraydata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        Spray spray = new("SprayAnimatedBWAhhhh")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(spray);
+
+        // assert
+        spray.Name.Should().BeNull();
+        spray.SortName.Should().BeNull();
+        spray.Description.Should().BeNull();
+        spray.SearchText.Should().BeNull();
+        spray.InfoText.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_Spray_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "spraydata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "spray": {
+              "name": {
+                "SprayAnimatedBWAhhhh": "Ahhhh!"
+              },
+              "sortName": {
+                "SprayAnimatedBWAhhhh": "Ahhhh Blackheart"
+              },
+              "description": {
+                "SprayAnimatedBWAhhhh": "An animated spray featuring Blackheart's Bay."
+              },
+              "searchText": {
+                "SprayAnimatedBWAhhhh": "Ahhhh Spray Animated Blackheart"
+              },
+              "infoText": {
+                "SprayAnimatedBWAhhhh": "Animated Spray from the Blackheart's Bay universe"
+              }
+            }
+          }
+        }
+        """;
+        Spray spray = new("SprayAnimatedBWAhhhh")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(spray);
+
+        // assert
+        spray.Name!.RawText.Should().Be("Ahhhh!");
+        spray.SortName!.RawText.Should().Be("Ahhhh Blackheart");
+        spray.Description!.RawText.Should().Be("An animated spray featuring Blackheart's Bay.");
+        spray.SearchText!.RawText.Should().Be("Ahhhh Spray Animated Blackheart");
+        spray.InfoText!.RawText.Should().Be("Animated Spray from the Blackheart's Bay universe");
+    }
 }
+

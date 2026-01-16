@@ -59,6 +59,27 @@ public class GameStringDocument : IDisposable
     /// <param name="hero">The <see cref="Hero"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Hero hero)
     {
+        ClearStoreItemProperties(hero);
+        hero.ExpandedRole = null;
+        hero.Difficulty = null;
+        hero.Title = null;
+        hero.Energy.EnergyType = null;
+        hero.Life.LifeType = null;
+        hero.Shield.ShieldType = null;
+        hero.Roles.Clear();
+
+        IEnumerable<Ability> abilities = hero.Abilities.SelectMany(x => x.Value);
+        foreach (Ability ability in abilities)
+        {
+            ClearAbilityTalentBaseData(ability);
+        }
+
+        IEnumerable<Talent> talents = hero.Talents.SelectMany(x => x.Value);
+        foreach (Talent talent in talents)
+        {
+            ClearAbilityTalentBaseData(talent);
+        }
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("hero", out JsonElement heroElement))
             return;
@@ -87,9 +108,6 @@ public class GameStringDocument : IDisposable
         }
 
         SetStoreItemProperties(hero.Id, hero, heroElement);
-        SetInfoTextProperty(hero.Id, hero, heroElement);
-
-        IEnumerable<Talent> talents = hero.Talents.SelectMany(x => x.Value);
 
         if (gameStringElement.TryGetProperty("talent", out JsonElement talentElement))
         {
@@ -99,7 +117,7 @@ public class GameStringDocument : IDisposable
             }
         }
 
-        SetAbilities(hero, gameStringElement);
+        SetAbilities(abilities, gameStringElement);
     }
 
     /// <summary>
@@ -108,6 +126,19 @@ public class GameStringDocument : IDisposable
     /// <param name="unit">The <see cref="Unit"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Unit unit)
     {
+        unit.Name = null;
+        unit.Description = null;
+        unit.Energy.EnergyType = null;
+        unit.Life.LifeType = null;
+        unit.Shield.ShieldType = null;
+
+        IEnumerable<Ability> abilities = unit.Abilities.SelectMany(x => x.Value);
+
+        foreach (Ability ability in abilities)
+        {
+            ClearAbilityTalentBaseData(ability);
+        }
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("unit", out JsonElement unitElement))
             return;
@@ -123,7 +154,7 @@ public class GameStringDocument : IDisposable
         if (TryGetJsonElement(unitElement, "shieldType", unit.Id, out element))
             unit.Shield.ShieldType = GetGameStringText(element.GetString());
 
-        SetAbilities(unit, gameStringElement);
+        SetAbilities(abilities, gameStringElement);
     }
 
     /// <summary>
@@ -132,6 +163,8 @@ public class GameStringDocument : IDisposable
     /// <param name="announcer">The <see cref="Announcer"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Announcer announcer)
     {
+        ClearStoreItemProperties(announcer);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("announcer", out JsonElement announcerElement))
             return;
@@ -145,6 +178,8 @@ public class GameStringDocument : IDisposable
     /// <param name="banner">The <see cref="Banner"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Banner banner)
     {
+        ClearStoreItemProperties(banner);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("banner", out JsonElement bannerElement))
             return;
@@ -158,6 +193,8 @@ public class GameStringDocument : IDisposable
     /// <param name="boost">The <see cref="Boost"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Boost boost)
     {
+        ClearStoreItemProperties(boost);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("boost", out JsonElement boostElement))
             return;
@@ -171,6 +208,8 @@ public class GameStringDocument : IDisposable
     /// <param name="bundle">The <see cref="Bundle"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Bundle bundle)
     {
+        ClearStoreItemProperties(bundle);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("bundle", out JsonElement bundleElement))
             return;
@@ -184,6 +223,9 @@ public class GameStringDocument : IDisposable
     /// <param name="lootchest">The <see cref="LootChest"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(LootChest lootchest)
     {
+        lootchest.Name = null;
+        lootchest.Description = null;
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("lootChest", out JsonElement lootChestElement))
             return;
@@ -198,6 +240,14 @@ public class GameStringDocument : IDisposable
     /// <param name="map">The <see cref="Map"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Map map)
     {
+        map.Name = null;
+
+        foreach (MapObjective mapObjective in map.MapObjectives)
+        {
+            mapObjective.Title = null;
+            mapObjective.Description = null;
+        }
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("map", out JsonElement mapElement))
             return;
@@ -235,12 +285,13 @@ public class GameStringDocument : IDisposable
     /// <param name="skin">The <see cref="Skin"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Skin skin)
     {
+        ClearStoreItemProperties(skin);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("skin", out JsonElement skinElement))
             return;
 
         SetStoreItemProperties(skin.Id, skin, skinElement);
-        SetInfoTextProperty(skin.Id, skin, skinElement);
     }
 
     /// <summary>
@@ -249,6 +300,8 @@ public class GameStringDocument : IDisposable
     /// <param name="voiceLine">The <see cref="VoiceLine"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(VoiceLine voiceLine)
     {
+        ClearStoreItemProperties(voiceLine);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("voiceLine", out JsonElement voiceLineElement))
             return;
@@ -262,6 +315,8 @@ public class GameStringDocument : IDisposable
     /// <param name="mount">The <see cref="Mount"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Mount mount)
     {
+        ClearStoreItemProperties(mount);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("mount", out JsonElement mountElement))
             return;
@@ -275,6 +330,12 @@ public class GameStringDocument : IDisposable
     /// <param name="matchAward">The <see cref="MatchAward"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(MatchAward matchAward)
     {
+        matchAward.ScoreScreenName = null;
+        matchAward.ScoreScreenDescription = null;
+        matchAward.EndOfMatchName = null;
+        matchAward.EndOfMatchDescription = null;
+        matchAward.EndOfMatchTooltipText = null;
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("matchAward", out JsonElement matchAwardElement))
             return;
@@ -297,6 +358,8 @@ public class GameStringDocument : IDisposable
     /// <param name="spray">The <see cref="Spray"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(Spray spray)
     {
+        ClearStoreItemProperties(spray);
+
         if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("spray", out JsonElement sprayElement))
             return;
@@ -367,6 +430,25 @@ public class GameStringDocument : IDisposable
         return currentElement.TryGetProperty(jsonPropertyName, out JsonElement innerElement) && innerElement.TryGetProperty(id, out element);
     }
 
+    private static void ClearStoreItemProperties(IStoreItem heroesCollectionObject)
+    {
+        heroesCollectionObject.Name = null;
+        heroesCollectionObject.SortName = null;
+        heroesCollectionObject.SearchText = null;
+        heroesCollectionObject.Description = null;
+        heroesCollectionObject.InfoText = null;
+    }
+
+    private static void ClearAbilityTalentBaseData(AbilityTalentBase abilityTalentBase)
+    {
+        abilityTalentBase.CooldownText = null;
+        abilityTalentBase.EnergyText = null;
+        abilityTalentBase.FullText = null;
+        abilityTalentBase.LifeText = null;
+        abilityTalentBase.Name = null;
+        abilityTalentBase.ShortText = null;
+    }
+
     private GameStringText? GetGameStringText(string? value)
     {
         if (value is null)
@@ -385,10 +467,8 @@ public class GameStringDocument : IDisposable
         throw new JsonException("No 'meta' and/or 'gamestrings' property found");
     }
 
-    private void SetAbilities(Unit unit, JsonElement gameStringElement)
+    private void SetAbilities(IEnumerable<Ability> abilities, JsonElement gameStringElement)
     {
-        IEnumerable<Ability> abilities = unit.Abilities.SelectMany(x => x.Value);
-
         if (gameStringElement.TryGetProperty("ability", out JsonElement abilityElement))
         {
             foreach (Ability ability in abilities)
@@ -418,6 +498,7 @@ public class GameStringDocument : IDisposable
     {
         SetNameProperty(id, heroesCollectionObject, heroesCollectionElement);
         SetDescriptionProperty(id, heroesCollectionObject, heroesCollectionElement);
+        SetInfoTextProperty(id, heroesCollectionObject, heroesCollectionElement);
 
         if (TryGetJsonElement(heroesCollectionElement, "sortName", id, out JsonElement element))
             heroesCollectionObject.SortName = GetGameStringText(element.GetString());
