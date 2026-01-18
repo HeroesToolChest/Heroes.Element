@@ -1772,5 +1772,105 @@ public class GameStringDocumentTests
         spray.SearchText!.RawText.Should().Be("Ahhhh Spray Animated Blackheart");
         spray.InfoText!.RawText.Should().Be("Animated Spray from the Blackheart's Bay universe");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_EmoticonPackPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "emoticonpackdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        EmoticonPack emoticonPack = new("AbathurEmoticonPack1")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(emoticonPack);
+
+        // assert
+        emoticonPack.Description.Should().BeNull();
+        emoticonPack.Name.Should().BeNull();
+        emoticonPack.SortName.Should().BeNull();
+        emoticonPack.SearchText.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_EmoticonPack_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "emoticonpackdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "emoticonPack": {
+              "name": {
+                "AbathurEmoticonPack1": "Abathur Pack 1"
+              },
+              "sortName": {
+                "AbathurEmoticonPack1": "Abathur 1"
+              },
+              "description": {
+                "AbathurEmoticonPack1": "A pack of Abathur-themed emoticons."
+              },
+              "searchText": {
+                "AbathurEmoticonPack1": "Abathur Emoticon Pack Evolution Master Slug"
+              }
+            }
+          }
+        }
+        """;
+        EmoticonPack emoticonPack = new("AbathurEmoticonPack1")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(emoticonPack);
+
+        // assert
+        emoticonPack.Name!.RawText.Should().Be("Abathur Pack 1");
+        emoticonPack.SortName!.RawText.Should().Be("Abathur 1");
+        emoticonPack.Description!.RawText.Should().Be("A pack of Abathur-themed emoticons.");
+        emoticonPack.SearchText!.RawText.Should().Be("Abathur Emoticon Pack Evolution Master Slug");
+    }
 }
 

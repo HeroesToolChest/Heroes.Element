@@ -682,4 +682,57 @@ public class ElementExtensionsTest
         emoticon.LocalizedAliases.ElementAt(0).RawText.Should().Be("updated alias 1");
         emoticon.LocalizedAliases.ElementAt(1).RawText.Should().Be("updated alias 2");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_EmoticonPack_UpdatesGameStringTexts()
+    {
+        // arrange
+        EmoticonPack emoticonPack = new("emoticonPackId1")
+        {
+            Description = new GameStringText("a description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "emoticonPack": {
+              "description": {
+                "emoticonPackId1": "updated description"
+              },
+              "name": {
+                "emoticonPackId1": "updated name"
+              },
+              "sortName": {
+                "emoticonPackId1": "updated sort name"
+              },
+              "searchText": {
+                "emoticonPackId1": "updated search text"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        emoticonPack.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        emoticonPack.Description!.RawText.Should().Be("updated description");
+        emoticonPack.Name!.RawText.Should().Be("updated name");
+        emoticonPack.SortName!.RawText.Should().Be("updated sort name");
+        emoticonPack.SearchText!.RawText.Should().Be("updated search text");
+    }
 }

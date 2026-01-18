@@ -398,6 +398,21 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Emoticon"/>.
+    /// </summary>
+    /// <param name="emoticonPack">The <see cref="EmoticonPack"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(EmoticonPack emoticonPack)
+    {
+        ClearStoreItemProperties(emoticonPack);
+
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("emoticonPack", out JsonElement emoticonPackElement))
+            return;
+
+        SetStoreItemProperties(emoticonPack.Id, emoticonPack, emoticonPackElement);
+    }
+
+    /// <summary>
     /// Releases the <see cref="JsonDocument"/> from memory.
     /// </summary>
     public void Dispose()

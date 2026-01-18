@@ -30,6 +30,7 @@ internal static class GameStringTextExtractor
                 Banner => JsonNamingPolicy.CamelCase.ConvertName(nameof(Banner)),
                 Bundle => JsonNamingPolicy.CamelCase.ConvertName(nameof(Bundle)),
                 Boost => JsonNamingPolicy.CamelCase.ConvertName(nameof(Boost)),
+                EmoticonPack => JsonNamingPolicy.CamelCase.ConvertName(nameof(EmoticonPack)),
                 Mount => JsonNamingPolicy.CamelCase.ConvertName(nameof(Mount)),
                 Spray => JsonNamingPolicy.CamelCase.ConvertName(nameof(Spray)),
                 Skin => JsonNamingPolicy.CamelCase.ConvertName(nameof(Skin)),
