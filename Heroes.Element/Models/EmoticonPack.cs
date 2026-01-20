@@ -18,5 +18,5 @@ public class EmoticonPack : StoreItem
     /// <summary>
     /// Gets or sets a unique collection of <see cref="Emoticon"/> ids that are in this emoticon pack.
     /// </summary>
-    public ISet<string> EmoticonIds { get; set; } = new HashSet<string>();
+    public ISet<string> EmoticonIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 }

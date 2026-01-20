@@ -1872,5 +1872,105 @@ public class GameStringDocumentTests
         emoticonPack.Description!.RawText.Should().Be("A pack of Abathur-themed emoticons.");
         emoticonPack.SearchText!.RawText.Should().Be("Abathur Emoticon Pack Evolution Master Slug");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_PortraitPackPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "portraitpackdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        PortraitPack portraitPack = new("PortraitPackStarcraftLegacy1")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(portraitPack);
+
+        // assert
+        portraitPack.Description.Should().BeNull();
+        portraitPack.Name.Should().BeNull();
+        portraitPack.SortName.Should().BeNull();
+        portraitPack.SearchText.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_PortraitPack_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "portraitpackdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "portraitPack": {
+              "name": {
+                "PortraitPackStarcraftLegacy1": "StarCraft Legacy Pack 1"
+              },
+              "sortName": {
+                "PortraitPackStarcraftLegacy1": "Legacy StarCraft 1"
+              },
+              "description": {
+                "PortraitPackStarcraftLegacy1": "A collection of StarCraft legacy portraits."
+              },
+              "searchText": {
+                "PortraitPackStarcraftLegacy1": "StarCraft Legacy Portrait Pack Terran Zerg Protoss"
+              }
+            }
+          }
+        }
+        """;
+        PortraitPack portraitPack = new("PortraitPackStarcraftLegacy1")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(portraitPack);
+
+        // assert
+        portraitPack.Name!.RawText.Should().Be("StarCraft Legacy Pack 1");
+        portraitPack.SortName!.RawText.Should().Be("Legacy StarCraft 1");
+        portraitPack.Description!.RawText.Should().Be("A collection of StarCraft legacy portraits.");
+        portraitPack.SearchText!.RawText.Should().Be("StarCraft Legacy Portrait Pack Terran Zerg Protoss");
+    }
 }
 
