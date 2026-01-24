@@ -55,6 +55,6 @@ public abstract class StoreItem : ElementObject, IStoreItem
     public GameStringText? Description { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(102)]
+    [JsonPropertyOrder(105)]
     public GameStringText? InfoText { get; set; }
 }

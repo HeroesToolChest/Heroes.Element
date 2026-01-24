@@ -33,6 +33,7 @@ internal static class GameStringTextExtractor
                 EmoticonPack => JsonNamingPolicy.CamelCase.ConvertName(nameof(EmoticonPack)),
                 Mount => JsonNamingPolicy.CamelCase.ConvertName(nameof(Mount)),
                 PortraitPack => JsonNamingPolicy.CamelCase.ConvertName(nameof(PortraitPack)),
+                RewardPortrait => JsonNamingPolicy.CamelCase.ConvertName(nameof(RewardPortrait)),
                 Spray => JsonNamingPolicy.CamelCase.ConvertName(nameof(Spray)),
                 Skin => JsonNamingPolicy.CamelCase.ConvertName(nameof(Skin)),
                 VoiceLine => JsonNamingPolicy.CamelCase.ConvertName(nameof(VoiceLine)),

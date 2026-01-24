@@ -788,4 +788,62 @@ public class ElementExtensionsTest
         portraitPack.SortName!.RawText.Should().Be("updated sort name");
         portraitPack.SearchText!.RawText.Should().Be("updated search text");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_RewardPortrait_UpdatesGameStringTexts()
+    {
+        // arrange
+        RewardPortrait rewardPortrait = new("rewardPortraitId1")
+        {
+            Description = new GameStringText("a description"),
+            DescriptionUnearned = new GameStringText("an unearned description"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "rewardPortrait": {
+              "description": {
+                "rewardPortraitId1": "updated description"
+              },
+              "name": {
+                "rewardPortraitId1": "updated name"
+              },
+              "sortName": {
+                "rewardPortraitId1": "updated sort name"
+              },
+              "searchText": {
+                "rewardPortraitId1": "updated search text"
+              },
+              "descriptionUnearned": {
+                "rewardPortraitId1": "updated unearned description"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        rewardPortrait.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        rewardPortrait.Description!.RawText.Should().Be("updated description");
+        rewardPortrait.Name!.RawText.Should().Be("updated name");
+        rewardPortrait.SortName!.RawText.Should().Be("updated sort name");
+        rewardPortrait.SearchText!.RawText.Should().Be("updated search text");
+        rewardPortrait.DescriptionUnearned!.RawText.Should().Be("updated unearned description");
+    }
 }

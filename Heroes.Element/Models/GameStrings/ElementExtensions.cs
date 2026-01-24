@@ -164,4 +164,14 @@ public static class ElementExtensions
     {
         gameStringDocument.UpdateGameStrings(portraitPack);
     }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// </summary>
+    /// <param name="rewardPortrait">.</param>
+    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
+    public static void UpdateGameStringTexts(this RewardPortrait rewardPortrait, GameStringDocument gameStringDocument)
+    {
+        gameStringDocument.UpdateGameStrings(rewardPortrait);
+    }
 }

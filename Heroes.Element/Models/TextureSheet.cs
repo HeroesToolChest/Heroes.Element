@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the texture sheet data.
 /// </summary>
-internal class TextureSheet
+public class TextureSheet
 {
     /// <summary>
     /// Gets or sets the original image file name with path (as .dds).

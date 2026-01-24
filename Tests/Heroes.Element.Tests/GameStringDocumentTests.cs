@@ -1972,5 +1972,110 @@ public class GameStringDocumentTests
         portraitPack.Description!.RawText.Should().Be("A collection of StarCraft legacy portraits.");
         portraitPack.SearchText!.RawText.Should().Be("StarCraft Legacy Portrait Pack Terran Zerg Protoss");
     }
-}
 
+    [TestMethod]
+    public void UpdateGameStrings_RewardPortraitPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "rewardportraitdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        RewardPortrait rewardPortrait = new("RewardPortraitRaynor001")
+        {
+            Description = new GameStringText("temporary description"),
+            DescriptionUnearned = new GameStringText("temporary unearned description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(rewardPortrait);
+
+        // assert
+        rewardPortrait.Description.Should().BeNull();
+        rewardPortrait.Name.Should().BeNull();
+        rewardPortrait.SortName.Should().BeNull();
+        rewardPortrait.SearchText.Should().BeNull();
+        rewardPortrait.DescriptionUnearned.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_RewardPortrait_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "rewardportraitdata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "rewardPortrait": {
+              "name": {
+                "RewardPortraitRaynor001": "Raynor Portrait 001"
+              },
+              "sortName": {
+                "RewardPortraitRaynor001": "Portrait Raynor 001"
+              },
+              "description": {
+                "RewardPortraitRaynor001": "Portrait of Jim Raynor, Marshal of Mar Sara."
+              },
+              "searchText": {
+                "RewardPortraitRaynor001": "Raynor Portrait Marshal Terran"
+              },
+              "descriptionUnearned": {
+                "RewardPortraitRaynor001": "Complete 10 games as Raynor to unlock this portrait."
+              }
+            }
+          }
+        }
+        """;
+        RewardPortrait rewardPortrait = new("RewardPortraitRaynor001")
+        {
+            Description = new GameStringText("temporary description"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(rewardPortrait);
+
+        // assert
+        rewardPortrait.Name!.RawText.Should().Be("Raynor Portrait 001");
+        rewardPortrait.SortName!.RawText.Should().Be("Portrait Raynor 001");
+        rewardPortrait.Description!.RawText.Should().Be("Portrait of Jim Raynor, Marshal of Mar Sara.");
+        rewardPortrait.SearchText!.RawText.Should().Be("Raynor Portrait Marshal Terran");
+        rewardPortrait.DescriptionUnearned!.RawText.Should().Be("Complete 10 games as Raynor to unlock this portrait.");
+    }
+}
