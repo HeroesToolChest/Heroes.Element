@@ -846,4 +846,45 @@ public class ElementExtensionsTest
         rewardPortrait.SearchText!.RawText.Should().Be("updated search text");
         rewardPortrait.DescriptionUnearned!.RawText.Should().Be("updated unearned description");
     }
+
+    [TestMethod]
+    public void UpdateGameStringTexts_TypeDescription_UpdatesGameStringTexts()
+    {
+        // arrange
+        TypeDescription typeDescription = new("typeDescriptionId1")
+        {
+            Name = new GameStringText("a name"),
+        };
+
+        string gameStringData = """
+        {
+          "meta": {
+            "heroesVersion": "2.55.1.88122",
+            "hdpVersion": "5.0.0",
+            "descriptionText": {
+              "locale": "FRFR",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "typeDescription": {
+              "name": {
+                "typeDescriptionId1": "updated name"
+              }
+            }
+          }
+        }
+        """;
+        using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+
+        // act
+        typeDescription.UpdateGameStringTexts(gameStringDocument);
+
+        // assert
+        typeDescription.Name!.RawText.Should().Be("updated name");
+    }
 }

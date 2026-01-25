@@ -2078,4 +2078,89 @@ public class GameStringDocumentTests
         rewardPortrait.SearchText!.RawText.Should().Be("Raynor Portrait Marshal Terran");
         rewardPortrait.DescriptionUnearned!.RawText.Should().Be("Complete 10 games as Raynor to unlock this portrait.");
     }
+
+    [TestMethod]
+    public void UpdateGameStrings_TypeDescriptionPropertyNotFound_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "typedescriptiondata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+          }
+        }
+        """;
+        TypeDescription typeDescription = new("TypeDescriptionHero")
+        {
+            Name = new GameStringText("temporary name"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(typeDescription);
+
+        // assert
+        typeDescription.Name.Should().BeNull();
+    }
+
+    [TestMethod]
+    public void UpdateGameStrings_TypeDescription_ReturnsUpdatedObject()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "heroesVersion": "2.55.14.95623_ptr",
+            "hdpVersion": "5.0.0",
+            "dataTypes": [
+              "typedescriptiondata"
+            ],
+            "descriptionText": {
+              "locale": "ENUS",
+              "gameStringTextType": "RawText",
+              "replaceFontStyles": true,
+              "preserveFontStyleConstantVars": false,
+              "preserveFontStyleVars": false
+            }
+          },
+          "gamestrings": {
+            "typeDescription": {
+              "name": {
+                "TypeDescriptionHero": "Hero"
+              }
+            }
+          }
+        }
+        """;
+        TypeDescription typeDescription = new("TypeDescriptionHero")
+        {
+            Name = new GameStringText("temporary name"),
+        };
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        document.UpdateGameStrings(typeDescription);
+
+        // assert
+        typeDescription.Name!.RawText.Should().Be("Hero");
+    }
 }

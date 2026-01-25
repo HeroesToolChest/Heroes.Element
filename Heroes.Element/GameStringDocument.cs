@@ -325,7 +325,7 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Mount"/>.
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="MatchAward"/>.
     /// </summary>
     /// <param name="matchAward">The <see cref="MatchAward"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(MatchAward matchAward)
@@ -398,7 +398,7 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Emoticon"/>.
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="EmoticonPack"/>.
     /// </summary>
     /// <param name="emoticonPack">The <see cref="EmoticonPack"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(EmoticonPack emoticonPack)
@@ -413,7 +413,7 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Emoticon"/>.
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="PortraitPack"/>.
     /// </summary>
     /// <param name="portraitPack">The <see cref="PortraitPack"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(PortraitPack portraitPack)
@@ -428,7 +428,7 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Emoticon"/>.
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="RewardPortrait"/>.
     /// </summary>
     /// <param name="rewardPortrait">The <see cref="RewardPortrait"/> whose <see cref="GameStringText"/>s to update.</param>
     public void UpdateGameStrings(RewardPortrait rewardPortrait)
@@ -444,6 +444,21 @@ public class GameStringDocument : IDisposable
 
         if (TryGetJsonElement(rewardPortraitElement, "descriptionUnearned", rewardPortrait.Id, out JsonElement element))
             rewardPortrait.DescriptionUnearned = GetGameStringText(element.GetString());
+    }
+
+    /// <summary>
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="TypeDescription"/>.
+    /// </summary>
+    /// <param name="typeDescription">The <see cref="TypeDescription"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(TypeDescription typeDescription)
+    {
+        typeDescription.Name = null;
+
+        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+            !gameStringElement.TryGetProperty("typeDescription", out JsonElement typeDescriptionElement))
+            return;
+
+        SetNameProperty(typeDescription.Id, typeDescription, typeDescriptionElement);
     }
 
     /// <summary>
