@@ -316,9 +316,9 @@ public class SprayDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
-            "descriptionText": {
+            "gameStringText": {
               "locale": "FRFR",
-              "gameStringTextType": "RawText",
+              "textType": "RawText",
               "replaceFontStyles": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false

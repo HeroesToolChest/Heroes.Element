@@ -19,5 +19,6 @@ public class MetaGameStringProperties : MetaProperties
     /// <summary>
     /// Gets or sets the description text for the gamestrings.
     /// </summary>
+    [JsonPropertyName(Constants.DescriptionTextPropertyName)]
     public DescriptionText DescriptionText { get; set; } = new();
 }

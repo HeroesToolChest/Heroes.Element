@@ -13,6 +13,7 @@ public class DescriptionText
     /// <summary>
     /// Gets or sets the type of gamestrings used in the data (e.g., "RawText", "ColoredText").
     /// </summary>
+    [JsonPropertyName("textType")]
     public GameStringTextType? GameStringTextType { get; set; }
 
     /// <summary>
