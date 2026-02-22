@@ -340,7 +340,7 @@ public class UnitDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -349,7 +349,7 @@ public class UnitDataDocumentTests
         UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
 
         // act
-        List<Unit> result = [.. unitData.GetAllElements()];
+        List<Unit> result = [.. unitData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -358,7 +358,7 @@ public class UnitDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -373,7 +373,7 @@ public class UnitDataDocumentTests
         UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
 
         // act
-        List<Unit> result = [.. unitData.GetAllElements()];
+        List<Unit> result = [.. unitData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

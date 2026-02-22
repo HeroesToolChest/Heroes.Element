@@ -288,7 +288,7 @@ public class PortraitPackDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -297,7 +297,7 @@ public class PortraitPackDataDocumentTests
         PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
 
         // act
-        List<PortraitPack> result = [.. portraitPackData.GetAllElements()];
+        List<PortraitPack> result = [.. portraitPackData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -306,7 +306,7 @@ public class PortraitPackDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -321,7 +321,7 @@ public class PortraitPackDataDocumentTests
         PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
 
         // act
-        List<PortraitPack> result = [.. portraitPackData.GetAllElements()];
+        List<PortraitPack> result = [.. portraitPackData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

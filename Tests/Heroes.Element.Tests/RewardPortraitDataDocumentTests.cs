@@ -306,7 +306,7 @@ public class RewardPortraitDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -315,7 +315,7 @@ public class RewardPortraitDataDocumentTests
         RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
 
         // act
-        List<RewardPortrait> result = [.. rewardPortraitData.GetAllElements()];
+        List<RewardPortrait> result = [.. rewardPortraitData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -324,7 +324,7 @@ public class RewardPortraitDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -339,7 +339,7 @@ public class RewardPortraitDataDocumentTests
         RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
 
         // act
-        List<RewardPortrait> result = [.. rewardPortraitData.GetAllElements()];
+        List<RewardPortrait> result = [.. rewardPortraitData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

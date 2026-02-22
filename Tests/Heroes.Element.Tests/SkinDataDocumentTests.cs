@@ -380,7 +380,7 @@ public class SkinDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -389,7 +389,7 @@ public class SkinDataDocumentTests
         SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
 
         // act
-        List<Skin> result = [.. skinData.GetAllElements()];
+        List<Skin> result = [.. skinData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -398,7 +398,7 @@ public class SkinDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -413,7 +413,7 @@ public class SkinDataDocumentTests
         SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
 
         // act
-        List<Skin> result = [.. skinData.GetAllElements()];
+        List<Skin> result = [.. skinData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

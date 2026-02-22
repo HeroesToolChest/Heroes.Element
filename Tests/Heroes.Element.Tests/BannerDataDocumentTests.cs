@@ -353,7 +353,7 @@ public class BannerDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -362,7 +362,7 @@ public class BannerDataDocumentTests
         BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
 
         // act
-        List<Banner> result = [.. bannerData.GetAllElements()];
+        List<Banner> result = [.. bannerData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -371,7 +371,7 @@ public class BannerDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -386,7 +386,7 @@ public class BannerDataDocumentTests
         BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
 
         // act
-        List<Banner> result = [.. bannerData.GetAllElements()];
+        List<Banner> result = [.. bannerData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

@@ -263,7 +263,7 @@ public class LootChestDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -272,7 +272,7 @@ public class LootChestDataDocumentTests
         LootChestDataDocument lootChestData = LootChestDataDocument.Load(jsonDocument);
 
         // act
-        List<LootChest> result = [.. lootChestData.GetAllElements()];
+        List<LootChest> result = [.. lootChestData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -281,7 +281,7 @@ public class LootChestDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -296,7 +296,7 @@ public class LootChestDataDocumentTests
         LootChestDataDocument lootChestData = LootChestDataDocument.Load(jsonDocument);
 
         // act
-        List<LootChest> result = [.. lootChestData.GetAllElements()];
+        List<LootChest> result = [.. lootChestData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

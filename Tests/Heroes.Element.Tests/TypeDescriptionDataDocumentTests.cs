@@ -179,7 +179,7 @@ public class TypeDescriptionDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -188,7 +188,7 @@ public class TypeDescriptionDataDocumentTests
         TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument);
 
         // act
-        List<TypeDescription> result = [.. typeDescriptionData.GetAllElements()];
+        List<TypeDescription> result = [.. typeDescriptionData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -197,7 +197,7 @@ public class TypeDescriptionDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -212,7 +212,7 @@ public class TypeDescriptionDataDocumentTests
         TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument);
 
         // act
-        List<TypeDescription> result = [.. typeDescriptionData.GetAllElements()];
+        List<TypeDescription> result = [.. typeDescriptionData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

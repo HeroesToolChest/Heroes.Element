@@ -351,7 +351,7 @@ public class BoostDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -360,7 +360,7 @@ public class BoostDataDocumentTests
         BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
 
         // act
-        List<Boost> result = [.. boostData.GetAllElements()];
+        List<Boost> result = [.. boostData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -369,7 +369,7 @@ public class BoostDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -384,7 +384,7 @@ public class BoostDataDocumentTests
         BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
 
         // act
-        List<Boost> result = [.. boostData.GetAllElements()];
+        List<Boost> result = [.. boostData.GetElements()];
 
         // assert
         result.Should().BeEmpty();

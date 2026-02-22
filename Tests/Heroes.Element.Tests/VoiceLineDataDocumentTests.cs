@@ -357,7 +357,7 @@ public class VoiceLineDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithItems_ReturnsAllElements()
+    public void GetElements_WithItems_ReturnsAllElements()
     {
         // arrange
         string json = _defaultArrangeJson;
@@ -366,7 +366,7 @@ public class VoiceLineDataDocumentTests
         VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
 
         // act
-        List<VoiceLine> result = [.. voiceLineData.GetAllElements()];
+        List<VoiceLine> result = [.. voiceLineData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -375,7 +375,7 @@ public class VoiceLineDataDocumentTests
     }
 
     [TestMethod]
-    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    public void GetElements_WithEmptyItems_ReturnsEmpty()
     {
         // arrange
         string json =
@@ -390,7 +390,7 @@ public class VoiceLineDataDocumentTests
         VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
 
         // act
-        List<VoiceLine> result = [.. voiceLineData.GetAllElements()];
+        List<VoiceLine> result = [.. voiceLineData.GetElements()];
 
         // assert
         result.Should().BeEmpty();
