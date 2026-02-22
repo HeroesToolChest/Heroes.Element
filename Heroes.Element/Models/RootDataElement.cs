@@ -17,5 +17,5 @@ public class RootDataElement<TElement>
     /// Gets or sets the items, sorted by their unique identifier.
     /// </summary>
     [JsonPropertyName(Constants.ItemsPropertyName)]
-    public SortedDictionary<string, TElement> Items { get; set; } = new(StringComparer.Ordinal);
+    public SortedDictionary<string, TElement> Items { get; set; } = new(StringComparer.OrdinalIgnoreCase);
 }
