@@ -370,6 +370,46 @@ public class MapDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("No 'meta' and/or 'items' property found");
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MapDataDocument mapData = MapDataDocument.Load(jsonDocument);
+
+        // act
+        List<Map> result = [.. mapData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(m => m.Id == "BattlefieldOfEternity");
+        result.Should().Contain(m => m.Id == "CursedHollow");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MapDataDocument mapData = MapDataDocument.Load(jsonDocument);
+
+        // act
+        List<Map> result = [.. mapData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void CursedHollowBasicAssertions(Map map)
     {
         map.Id.Should().Be("CursedHollow");

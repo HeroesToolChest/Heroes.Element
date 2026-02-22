@@ -363,6 +363,46 @@ public class SprayDataDocumentTests
         spray.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SprayDataDocument sprayData = SprayDataDocument.Load(jsonDocument);
+
+        // act
+        List<Spray> result = [.. sprayData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(s => s.Id == "SprayAnimatedBWAhhhh");
+        result.Should().Contain(s => s.Id == "SprayStaticPackHappy");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SprayDataDocument sprayData = SprayDataDocument.Load(jsonDocument);
+
+        // act
+        List<Spray> result = [.. sprayData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void HappyFaceBasicAssertions(Spray spray)
     {
         spray.Id.Should().Be("SprayStaticPackHappy");

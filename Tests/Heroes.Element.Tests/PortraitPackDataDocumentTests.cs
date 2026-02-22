@@ -287,6 +287,46 @@ public class PortraitPackDataDocumentTests
         portraitPack.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<PortraitPack> result = [.. portraitPackData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(p => p.Id == "PortraitPackStarcraftLegacy1");
+        result.Should().Contain(p => p.Id == "PortraitPackStarcraftLegacy2");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<PortraitPack> result = [.. portraitPackData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void Pack2BasicAssertions(PortraitPack portraitPack)
     {
         portraitPack.Id.Should().Be("PortraitPackStarcraftLegacy2");

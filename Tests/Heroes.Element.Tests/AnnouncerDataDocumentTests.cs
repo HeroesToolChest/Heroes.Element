@@ -358,6 +358,46 @@ public class AnnouncerDataDocumentTests
         announcer.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+
+        // act
+        List<Announcer> result = [.. announcerData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(a => a.Id == "AbathurAnnouncer");
+        result.Should().Contain(a => a.Id == "AlarakAnnouncer");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+
+        // act
+        List<Announcer> result = [.. announcerData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void AlarakBasicAssertions(Announcer announcer)
     {
         announcer.Id.Should().Be("AlarakAnnouncer");

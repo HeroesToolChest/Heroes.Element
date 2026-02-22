@@ -218,6 +218,46 @@ public class MatchAwardDataDocumentTests
         matchAward.EndOfMatchTooltipText.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MatchAwardDataDocument matchAwardData = MatchAwardDataDocument.Load(jsonDocument);
+
+        // act
+        List<MatchAward> result = [.. matchAwardData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(m => m.Id == "EndOfMatchAwardMVPBoolean");
+        result.Should().Contain(m => m.Id == "EndOfMatchAwardMostXPContributionValue");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MatchAwardDataDocument matchAwardData = MatchAwardDataDocument.Load(jsonDocument);
+
+        // act
+        List<MatchAward> result = [.. matchAwardData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void MostXPBasicAssertions(MatchAward matchAward)
     {
         matchAward.Id.Should().Be("EndOfMatchAwardMostXPContributionValue");

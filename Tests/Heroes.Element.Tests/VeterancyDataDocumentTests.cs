@@ -202,6 +202,46 @@ public class VeterancyDataDocumentTests
         act.Should().Throw<KeyNotFoundException>();
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VeterancyDataDocument veterancyData = VeterancyDataDocument.Load(jsonDocument);
+
+        // act
+        List<Veterancy> result = [.. veterancyData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(v => v.Id == "TestVeterancy");
+        result.Should().Contain(v => v.Id == "BasicVeterancy");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VeterancyDataDocument veterancyData = VeterancyDataDocument.Load(jsonDocument);
+
+        // act
+        List<Veterancy> result = [.. veterancyData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void BasicVeterancyAssertions(Veterancy veterancy)
     {
         veterancy.Id.Should().Be("BasicVeterancy");

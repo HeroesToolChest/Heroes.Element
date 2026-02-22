@@ -339,6 +339,46 @@ public class UnitDataDocumentTests
         unit.Description.GameStringLocale.Should().Be(StormLocale.DEDE);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
+
+        // act
+        List<Unit> result = [.. unitData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(u => u.Id == "FootmanUnit");
+        result.Should().Contain(u => u.Id == "ArcherUnit");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
+
+        // act
+        List<Unit> result = [.. unitData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void ArcherUnitBasicAssertions(Unit unit)
     {
         unit.Id.Should().Be("ArcherUnit");

@@ -305,6 +305,46 @@ public class RewardPortraitDataDocumentTests
         rewardPortrait.DescriptionUnearned.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
+
+        // act
+        List<RewardPortrait> result = [.. rewardPortraitData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(r => r.Id == "RewardPortraitRaynor001");
+        result.Should().Contain(r => r.Id == "RewardPortraitRaynor002");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
+
+        // act
+        List<RewardPortrait> result = [.. rewardPortraitData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void Portrait002BasicAssertions(RewardPortrait rewardPortrait)
     {
         rewardPortrait.Id.Should().Be("RewardPortraitRaynor002");

@@ -379,6 +379,46 @@ public class SkinDataDocumentTests
         skin.InfoText.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
+
+        // act
+        List<Skin> result = [.. skinData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(s => s.Id == "AbathurMechaVar1");
+        result.Should().Contain(s => s.Id == "AbathurMechaVar2");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
+
+        // act
+        List<Skin> result = [.. skinData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void MechaVar2BasicAssertions(Skin skin)
     {
         skin.Id.Should().Be("AbathurMechaVar2");

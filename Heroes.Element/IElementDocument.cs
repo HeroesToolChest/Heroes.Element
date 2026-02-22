@@ -3,8 +3,13 @@
 /// <summary>
 /// An interface representing a json document containing elements, such as heroes, units, announcers, etc.
 /// </summary>
-public interface IElementDocument
+public interface IElementDocument : IDisposable
 {
+    /// <summary>
+    /// Gets the element type that this data document represents.
+    /// </summary>
+    Type GetElementType { get; }
+
     /// <summary>
     /// Gets the underlying JSON document. This is only the data document and not the optional gamestring document.
     /// </summary>
@@ -30,9 +35,4 @@ public interface IElementDocument
     /// Gets a value indicating whether the HDP version in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
     /// </summary>
     bool MismatchedHdpVersion { get; }
-
-    /// <summary>
-    /// Releases the <see cref="JsonDocument"/> from memory.
-    /// </summary>
-    void Dispose();
 }

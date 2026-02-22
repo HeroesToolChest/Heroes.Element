@@ -389,6 +389,46 @@ public class BundleDataDocumentTests
         bundle.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument);
+
+        // act
+        List<Bundle> result = [.. bundleData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(b => b.Id == "MegaBundleStarterPack");
+        result.Should().Contain(b => b.Id == "BundleHeroesOfTheStorm");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument);
+
+        // act
+        List<Bundle> result = [.. bundleData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void HeroesOfTheStormBasicAssertions(Bundle bundle)
     {
         bundle.Id.Should().Be("BundleHeroesOfTheStorm");

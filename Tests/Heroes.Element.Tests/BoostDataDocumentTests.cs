@@ -350,6 +350,46 @@ public class BoostDataDocumentTests
         boost.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
+
+        // act
+        List<Boost> result = [.. boostData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(b => b.Id == "BoostStimpak");
+        result.Should().Contain(b => b.Id == "BoostMegaStimpak");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
+
+        // act
+        List<Boost> result = [.. boostData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void MegaStimpakBasicAssertions(Boost boost)
     {
         boost.Id.Should().Be("BoostMegaStimpak");

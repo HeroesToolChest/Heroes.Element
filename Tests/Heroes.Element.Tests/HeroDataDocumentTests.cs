@@ -1063,6 +1063,46 @@ public class HeroDataDocumentTests
         act.Should().Throw<KeyNotFoundException>();
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        List<Hero> result = [.. heroData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(h => h.Id == "Abathur");
+        result.Should().Contain(h => h.Id == "Alarak");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        List<Hero> result = [.. heroData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void AlarakBasicAssertions(Hero hero)
     {
         hero.Id.Should().Be("Alarak");

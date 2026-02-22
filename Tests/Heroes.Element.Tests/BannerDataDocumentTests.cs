@@ -352,6 +352,46 @@ public class BannerDataDocumentTests
         banner.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
+
+        // act
+        List<Banner> result = [.. bannerData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(b => b.Id == "BannerD3Imperius");
+        result.Should().Contain(b => b.Id == "BannerD3Tyrael");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
+
+        // act
+        List<Banner> result = [.. bannerData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void TyraelBasicAssertions(Banner banner)
     {
         banner.Id.Should().Be("BannerD3Tyrael");

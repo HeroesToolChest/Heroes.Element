@@ -4,7 +4,7 @@
 /// Represents the base class for processing and managing JSON-based data for elements of type <typeparamref name="T"/>.
 /// </summary>
 /// <typeparam name="T">The type of the element data, which must implement the <see cref="IElementObject"/> interface.</typeparam>
-public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocument, IDisposable
+public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocument
     where T : IElementObject
 {
     private readonly JsonSerializerOptions _metaJsonSerializerOptions;
@@ -39,6 +39,9 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
 
         JsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaProperties.DescriptionText?.Locale));
     }
+
+    /// <inheritdoc/>
+    public Type GetElementType => typeof(T);
 
     /// <inheritdoc/>
     public JsonDocument JsonDocument { get; }
@@ -85,6 +88,23 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
             return element;
 
         throw new KeyNotFoundException($"The given id '{id}' was not present in items.");
+    }
+
+    /// <summary>
+    /// Gets all elements of type <typeparamref name="T"/> from the JSON document. If the "items" property is not found, an empty collection is returned.
+    /// </summary>
+    /// <returns>An <see cref="IEnumerable{T}"/> containing all elements of type <typeparamref name="T"/>.</returns>
+    public IEnumerable<T> GetAllElements()
+    {
+        if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
+            yield break;
+
+        foreach (JsonProperty property in itemsElement.EnumerateObject())
+        {
+            T? element = DeserializeElement(property.Value, property.Name);
+            if (element is not null)
+                yield return element;
+        }
     }
 
     /// <inheritdoc/>

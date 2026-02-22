@@ -289,6 +289,46 @@ public class EmotionPackDataDocumentTests
         emoticonPack.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonPackDataDocument emoticonPackData = EmoticonPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<EmoticonPack> result = [.. emoticonPackData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(e => e.Id == "AbathurEmoticonPack1");
+        result.Should().Contain(e => e.Id == "AbathurEmoticonPack2");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonPackDataDocument emoticonPackData = EmoticonPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<EmoticonPack> result = [.. emoticonPackData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void Pack2BasicAssertions(EmoticonPack emoticonPack)
     {
         emoticonPack.Id.Should().Be("AbathurEmoticonPack2");

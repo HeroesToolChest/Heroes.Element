@@ -356,6 +356,46 @@ public class VoiceLineDataDocumentTests
         voiceLine.SortName.GameStringLocale.Should().Be(StormLocale.FRFR);
     }
 
+    [TestMethod]
+    public void GetAllElements_WithItems_ReturnsAllElements()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
+
+        // act
+        List<VoiceLine> result = [.. voiceLineData.GetAllElements()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().Contain(v => v.Id == "AbathurBase_VoiceLine01");
+        result.Should().Contain(v => v.Id == "AbathurBase_VoiceLine02");
+    }
+
+    [TestMethod]
+    public void GetAllElements_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {},
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
+
+        // act
+        List<VoiceLine> result = [.. voiceLineData.GetAllElements()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
     private static void VoiceLine02BasicAssertions(VoiceLine voiceLine)
     {
         voiceLine.Id.Should().Be("AbathurBase_VoiceLine02");
