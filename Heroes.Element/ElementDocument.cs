@@ -4,7 +4,7 @@
 /// Represents the base class for processing and managing JSON-based data for elements of type <typeparamref name="T"/>.
 /// </summary>
 /// <typeparam name="T">The type of the element data, which must implement the <see cref="IElementObject"/> interface.</typeparam>
-public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IDisposable
+public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocument, IDisposable
     where T : IElementObject
 {
     private readonly JsonSerializerOptions _metaJsonSerializerOptions;
@@ -40,30 +40,19 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IDisposable
         JsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaProperties.DescriptionText?.Locale));
     }
 
-    /// <summary>
-    /// Gets the underlying JSON document. This is only the data document and not the optional gamestring document.
-    /// </summary>
+    /// <inheritdoc/>
     public JsonDocument JsonDocument { get; }
 
-    /// <summary>
-    /// Gets the optional underlying JSON gamestring document.
-    /// </summary>
+    /// <inheritdoc/>
     public GameStringDocument? GameStringDocument { get; }
 
-    /// <summary>
-    /// Gets the metadata properties associated with the JSON data. This includes properties overridden from the optional gamestring document.
-    /// </summary>
+    /// <inheritdoc/>
     public MetaDataProperties MetaProperties { get; }
 
-    /// <summary>
-    /// Gets a value indicating whether the HeroesVersion in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
-    /// This returns <see langword="false"/> if there is no <see cref="GameStringDocument"/>.
-    /// </summary>
+    /// <inheritdoc/>
     public bool MismatchedHeroesVersion => GameStringDocument is not null && MetaProperties.HeroesVersion != GameStringDocument.MetaGameStringProperties.HeroesVersion;
 
-    /// <summary>
-    /// Gets a value indicating whether the HDP version in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
-    /// </summary>
+    /// <inheritdoc/>
     public bool MismatchedHdpVersion => GameStringDocument is not null && !MetaProperties.HdpVersion.Equals(GameStringDocument.MetaGameStringProperties.HdpVersion, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
@@ -98,9 +87,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IDisposable
         throw new KeyNotFoundException($"The given id '{id}' was not present in items.");
     }
 
-    /// <summary>
-    /// Releases the <see cref="JsonDocument"/> from memory.
-    /// </summary>
+    /// <inheritdoc/>
     public void Dispose()
     {
         Dispose(disposing: true);

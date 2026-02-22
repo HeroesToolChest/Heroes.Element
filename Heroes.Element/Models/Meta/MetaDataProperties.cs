@@ -10,7 +10,7 @@ public class MetaDataProperties : MetaProperties
     /// <summary>
     /// Gets or sets the type of data contained in the file (e.g., "HeroData", "AnnouncerData").
     /// </summary>
-    public string DataType { get; set; } = string.Empty;
+    public DataType DataType { get; set; } = DataType.Unknown;
 
     /// <summary>
     /// Gets or sets the map name associated with the data, if applicable (e.g., "Alterac Pass", "Battlefield of Eternity").

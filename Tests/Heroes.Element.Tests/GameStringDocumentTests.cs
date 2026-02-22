@@ -116,7 +116,7 @@ public class GameStringDocumentTests
             "hdpVersion": "5.0.0",
             "dataTypes": [
               "unitdata",
-              "abilitydata",
+              "unknown",
               "herodata"
             ]
           },
@@ -132,7 +132,7 @@ public class GameStringDocumentTests
 
         // assert
         meta.DataTypes.Should().HaveCount(3).And
-            .ContainInOrder("abilitydata", "herodata", "unitdata");
+            .ContainInOrder(DataType.Unknown, DataType.HeroData, DataType.UnitData);
     }
 
     [TestMethod]

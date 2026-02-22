@@ -333,7 +333,7 @@ public class ElementDocumentTests
         result.Should().NotBeNull();
         result.HeroesVersion.Should().Be(HeroesDataVersion.Parse("2.55.1.88122"));
         result.HdpVersion.Should().Be("5.0.0");
-        result.DataType.Should().Be("HeroData");
+        result.DataType.Should().Be(DataType.HeroData);
         result.LocalizedText.Should().Be(LocalizedTextOption.None);
         result.IsLegacy.Should().BeFalse();
     }

@@ -9,7 +9,7 @@ public class MetaGameStringProperties : MetaProperties
     /// Gets or sets the type(s) of data contained in the file (e.g., "HeroData", "AnnouncerData").
     /// </summary>
     [JsonPropertyName(Constants.MetaDataTypesPropertyName)]
-    public SortedSet<string> DataTypes { get; set; } = new(StringComparer.Ordinal);
+    public SortedSet<DataType> DataTypes { get; set; } = new SortedSet<DataType>();
 
     /// <summary>
     /// Gets or sets the map name associated with the gamestrings, if applicable (e.g., "Alterac Pass", "Battlefield of Eternity").
