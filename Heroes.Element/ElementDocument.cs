@@ -68,7 +68,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     {
         value = default;
 
-        if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement itemsElement))
             return false;
 
         if (itemsElement.TryGetProperty(id, out JsonElement element))
@@ -96,7 +96,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     /// <returns>An <see cref="IEnumerable{T}"/> containing all elements of type <typeparamref name="T"/>.</returns>
     public IEnumerable<T> GetElements()
     {
-        if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement itemsElement))
             yield break;
 
         foreach (JsonProperty property in itemsElement.EnumerateObject())
@@ -209,7 +209,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     {
         value = default;
 
-        if (!JsonDocument.RootElement.TryGetProperty("items", out JsonElement itemsElement))
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement itemsElement))
             return false;
 
         foreach (JsonProperty property in itemsElement.EnumerateObject())
@@ -244,7 +244,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
 
     private MetaDataProperties GetMetaProperties()
     {
-        if (JsonDocument.RootElement.TryGetProperty("meta", out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty("items", out _))
+        if (JsonDocument.RootElement.TryGetProperty(Constants.RootMetaPropertyName, out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out _))
         {
             MetaDataProperties metaDataProperties = metaElement.Deserialize<MetaDataProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
 

@@ -174,7 +174,7 @@ public class MatchAwardDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "matchAward": {
               "scoreScreenName": {
                 "EndOfMatchAwardMostXPContributionValue": "Top XP Contributor Localized"

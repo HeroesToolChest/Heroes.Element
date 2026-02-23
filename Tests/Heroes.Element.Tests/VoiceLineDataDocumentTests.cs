@@ -317,7 +317,7 @@ public class VoiceLineDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "voiceLine": {
               "name": {
                 "AbathurBase_VoiceLine02": "Evolution Complete Localized"

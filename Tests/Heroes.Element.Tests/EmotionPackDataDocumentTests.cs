@@ -250,7 +250,7 @@ public class EmotionPackDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "emoticonPack": {
               "name": {
                 "AbathurEmoticonPack2": "Abathur Pack 2 Localized"

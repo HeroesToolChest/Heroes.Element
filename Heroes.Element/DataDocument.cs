@@ -23,7 +23,7 @@ public static class DataDocument
 
     private static DataType GetDataType(JsonDocument dataDocument)
     {
-        if (!dataDocument.RootElement.TryGetProperty("meta", out JsonElement metaElement))
+        if (!dataDocument.RootElement.TryGetProperty(Constants.RootMetaPropertyName, out JsonElement metaElement))
             throw new JsonException("No 'meta' property found in the JSON document.");
 
         if (!metaElement.TryGetProperty("dataType", out JsonElement dataTypeElement))

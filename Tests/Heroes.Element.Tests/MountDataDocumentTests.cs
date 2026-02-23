@@ -321,7 +321,7 @@ public class MountDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "mount": {
               "name": {
                 "MechanicalSpiderMount": "Mechanospider Localized"

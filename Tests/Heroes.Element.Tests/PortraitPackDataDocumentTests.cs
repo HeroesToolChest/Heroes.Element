@@ -248,7 +248,7 @@ public class PortraitPackDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "portraitPack": {
               "name": {
                 "PortraitPackStarcraftLegacy2": "StarCraft Legacy Pack 2 Localized"

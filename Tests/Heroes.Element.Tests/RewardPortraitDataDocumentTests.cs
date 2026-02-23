@@ -261,7 +261,7 @@ public class RewardPortraitDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "rewardPortrait": {
               "name": {
                 "RewardPortraitRaynor002": "Raynor Portrait 002 Localized"

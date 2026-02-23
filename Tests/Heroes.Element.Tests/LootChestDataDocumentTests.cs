@@ -233,7 +233,7 @@ public class LootChestDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "lootChest": {
               "name": {
                 "LootChestEpic": "Epic Loot Chest Localized"

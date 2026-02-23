@@ -90,7 +90,7 @@ public class DataDocumentTests
             "meta": {
                 "hdpVersion": "5.0.0"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 

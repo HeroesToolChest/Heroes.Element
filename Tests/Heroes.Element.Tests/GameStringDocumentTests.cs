@@ -13,7 +13,7 @@ public class GameStringDocumentTests
           "meta": {
             "hdpVersion": "5.0.0"
           },
-          "gamestrings": {}
+          "items": {}
         }
         """;
 
@@ -39,7 +39,7 @@ public class GameStringDocumentTests
         string json =
         """
         {
-          "gamestrings": {}
+          "items": {}
         }
         """;
 
@@ -88,7 +88,7 @@ public class GameStringDocumentTests
               "textType": "ColoredText"
             }
           },
-          "gamestrings": {}
+          "items": {}
         }
         """;
 
@@ -120,7 +120,7 @@ public class GameStringDocumentTests
               "herodata"
             ]
           },
-          "gamestrings": {}
+          "items": {}
         }
         """;
 
@@ -156,7 +156,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -236,7 +236,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "unit": {
             },
             "hero": {
@@ -382,7 +382,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -453,7 +453,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "unit": {
               "description": {
                 "AbathurSymbiote": "Spawn and attach a Symbiote to a target ally or Structure. While active, Abathur controls the Symbiote, gaining access to new Abilities. The Symbiote is able to gain XP from nearby enemy deaths.",
@@ -566,7 +566,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -609,7 +609,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "announcer": {
               "description": {
                 "AbathurAnnouncer": "The Evolution Master will guide you to victory."
@@ -666,7 +666,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -709,7 +709,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "banner": {
               "description": {
                 "BannerD3Imperius": "Banner celebrating the Archangel of Valor."
@@ -766,7 +766,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -809,7 +809,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "boost": {
               "description": {
                 "BoostStimpak": "Increases experience gain by 50% for 3 days."
@@ -866,7 +866,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -909,7 +909,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "bundle": {
               "description": {
                 "MegaBundleStarterPack": "Get started with this amazing bundle pack!"
@@ -966,7 +966,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1007,7 +1007,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "lootChest": {
               "description": {
                 "LootChestRare": "Contains four random items. Guaranteed to contain at least one Rare item."
@@ -1056,7 +1056,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1100,7 +1100,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "map": {
               "name": {
                 "Battlefield of Eternity": "Battlefield of Eternity"
@@ -1161,7 +1161,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1205,7 +1205,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "skin": {
               "description": {
                 "AbathurMechaVar1": "An alternate skin for the Evolution Master."
@@ -1266,7 +1266,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1310,7 +1310,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "mount": {
               "description": {
                 "CloudSerpentMount": "A mystical serpent from the clouds of Pandaria."
@@ -1371,7 +1371,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1415,7 +1415,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "matchAward": {
               "scoreScreenName": {
                 "EndOfMatchAwardMVPBoolean": "Most Valuable Player"
@@ -1476,7 +1476,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1520,7 +1520,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "voiceLine": {
               "name": {
                 "AbathurBase_VoiceLine01": "Acceptable"
@@ -1581,7 +1581,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1626,7 +1626,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "emoticon": {
               "description": {
                 "AbathurEmoticon": "Emoticon featuring Abathur, the Evolution Master."
@@ -1689,7 +1689,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1733,7 +1733,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "spray": {
               "name": {
                 "SprayAnimatedBWAhhhh": "Ahhhh!"
@@ -1794,7 +1794,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1837,7 +1837,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "emoticonPack": {
               "name": {
                 "AbathurEmoticonPack1": "Abathur Pack 1"
@@ -1894,7 +1894,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -1937,7 +1937,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "portraitPack": {
               "name": {
                 "PortraitPackStarcraftLegacy1": "StarCraft Legacy Pack 1"
@@ -1994,7 +1994,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -2039,7 +2039,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "rewardPortrait": {
               "name": {
                 "RewardPortraitRaynor001": "Raynor Portrait 001"
@@ -2100,7 +2100,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
           }
         }
         """;
@@ -2140,7 +2140,7 @@ public class GameStringDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "typeDescription": {
               "name": {
                 "TypeDescriptionHero": "Hero"

@@ -285,7 +285,7 @@ public class MapDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "map": {
               "name": {
                 "BattlefieldOfEternity": "Champ de bataille de l'éternité"

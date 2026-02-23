@@ -311,7 +311,7 @@ public class BoostDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "boost": {
               "name": {
                 "BoostMegaStimpak": "7-Day Stimpack Localized"

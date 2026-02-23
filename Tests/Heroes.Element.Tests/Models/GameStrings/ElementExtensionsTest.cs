@@ -25,7 +25,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "hero": {
               "description": {
                 "heroId1": "updated description"
@@ -66,7 +66,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "unit": {
               "description": {
                 "unitId1": "updated description"
@@ -107,7 +107,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "announcer": {
               "description": {
                 "announcerId1": "updated description"
@@ -148,7 +148,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "banner": {
               "description": {
                 "bannerId1": "updated description"
@@ -189,7 +189,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "boost": {
               "description": {
                 "boostId1": "updated description"
@@ -230,7 +230,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "bundle": {
               "description": {
                 "bundleId1": "updated description"
@@ -271,7 +271,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "lootChest": {
               "description": {
                 "lootChestId1": "updated description"
@@ -318,7 +318,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "map": {
               "name": {
                 "BattlefieldOfEternity": "Battlefield of Eternity"
@@ -375,7 +375,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "skin": {
               "description": {
                 "skinId1": "updated description"
@@ -432,7 +432,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "voiceLine": {
               "description": {
                 "voiceLineId1": "updated description"
@@ -485,7 +485,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "mount": {
               "description": {
                 "mountId1": "updated description"
@@ -538,7 +538,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "matchAward": {
               "scoreScreenName": {
                 "matchAwardId1": "updated score screen name"
@@ -595,7 +595,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "spray": {
               "description": {
                 "sprayId1": "updated description"
@@ -651,7 +651,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "emoticon": {
               "description": {
                 "emoticonId1": "updated description"
@@ -705,7 +705,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "emoticonPack": {
               "description": {
                 "emoticonPackId1": "updated description"
@@ -758,7 +758,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "portraitPack": {
               "description": {
                 "portraitPackId1": "updated description"
@@ -812,7 +812,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "rewardPortrait": {
               "description": {
                 "rewardPortraitId1": "updated description"
@@ -869,7 +869,7 @@ public class ElementExtensionsTest
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "typeDescription": {
               "name": {
                 "typeDescriptionId1": "updated name"

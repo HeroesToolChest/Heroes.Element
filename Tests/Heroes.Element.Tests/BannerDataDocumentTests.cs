@@ -313,7 +313,7 @@ public class BannerDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "banner": {
               "name": {
                 "BannerD3Tyrael": "Tyrael Banner Localized"

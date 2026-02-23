@@ -319,7 +319,7 @@ public class AnnouncerDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "announcer": {
               "name": {
                 "AlarakAnnouncer": "Alarak Announcer Localized"

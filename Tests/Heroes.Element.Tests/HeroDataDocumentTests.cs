@@ -893,7 +893,7 @@ public class HeroDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "hero": {
               "name": {
                 "Alarak": "Alarak Localized"

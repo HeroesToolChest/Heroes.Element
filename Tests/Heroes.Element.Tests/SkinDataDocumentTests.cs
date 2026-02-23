@@ -335,7 +335,7 @@ public class SkinDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "skin": {
               "name": {
                 "AbathurMechaVar2": "Mecha Abathur Blue Localized"

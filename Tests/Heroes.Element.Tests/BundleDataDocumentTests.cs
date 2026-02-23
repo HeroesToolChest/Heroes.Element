@@ -350,7 +350,7 @@ public class BundleDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "bundle": {
               "name": {
                 "BundleHeroesOfTheStorm": "Heroes of the Storm Bundle Localized"

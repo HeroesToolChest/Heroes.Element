@@ -193,7 +193,7 @@ public class EmoticonDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "emoticon": {
               "description": {
                 "abathur_pack_2": "Localized Description"

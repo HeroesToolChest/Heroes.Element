@@ -80,7 +80,7 @@ public class GameStringDocument : IDisposable
             ClearAbilityTalentBaseData(talent);
         }
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("hero", out JsonElement heroElement))
             return;
 
@@ -139,7 +139,7 @@ public class GameStringDocument : IDisposable
             ClearAbilityTalentBaseData(ability);
         }
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("unit", out JsonElement unitElement))
             return;
 
@@ -165,7 +165,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(announcer);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("announcer", out JsonElement announcerElement))
             return;
 
@@ -180,7 +180,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(banner);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("banner", out JsonElement bannerElement))
             return;
 
@@ -195,7 +195,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(boost);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("boost", out JsonElement boostElement))
             return;
 
@@ -210,7 +210,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(bundle);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("bundle", out JsonElement bundleElement))
             return;
 
@@ -226,7 +226,7 @@ public class GameStringDocument : IDisposable
         lootchest.Name = null;
         lootchest.Description = null;
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("lootChest", out JsonElement lootChestElement))
             return;
 
@@ -248,7 +248,7 @@ public class GameStringDocument : IDisposable
             mapObjective.Description = null;
         }
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("map", out JsonElement mapElement))
             return;
 
@@ -287,7 +287,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(skin);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("skin", out JsonElement skinElement))
             return;
 
@@ -302,7 +302,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(voiceLine);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("voiceLine", out JsonElement voiceLineElement))
             return;
 
@@ -317,7 +317,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(mount);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("mount", out JsonElement mountElement))
             return;
 
@@ -336,7 +336,7 @@ public class GameStringDocument : IDisposable
         matchAward.EndOfMatchDescription = null;
         matchAward.EndOfMatchTooltipText = null;
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("matchAward", out JsonElement matchAwardElement))
             return;
 
@@ -360,7 +360,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(spray);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("spray", out JsonElement sprayElement))
             return;
 
@@ -377,7 +377,7 @@ public class GameStringDocument : IDisposable
         emoticon.SearchText = null;
         emoticon.LocalizedAliases.Clear();
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("emoticon", out JsonElement emoticonElement))
             return;
 
@@ -405,7 +405,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(emoticonPack);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("emoticonPack", out JsonElement emoticonPackElement))
             return;
 
@@ -420,7 +420,7 @@ public class GameStringDocument : IDisposable
     {
         ClearStoreItemProperties(portraitPack);
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("portraitPack", out JsonElement portraitPackElement))
             return;
 
@@ -436,7 +436,7 @@ public class GameStringDocument : IDisposable
         ClearStoreItemProperties(rewardPortrait);
         rewardPortrait.DescriptionUnearned = null;
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("rewardPortrait", out JsonElement rewardPortraitElement))
             return;
 
@@ -454,7 +454,7 @@ public class GameStringDocument : IDisposable
     {
         typeDescription.Name = null;
 
-        if (!JsonDocument.RootElement.TryGetProperty("gamestrings", out JsonElement gameStringElement) ||
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("typeDescription", out JsonElement typeDescriptionElement))
             return;
 
@@ -523,12 +523,12 @@ public class GameStringDocument : IDisposable
 
     private MetaGameStringProperties GetMetaGameStringProperties()
     {
-        if (JsonDocument.RootElement.TryGetProperty("meta", out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty("gamestrings", out _))
+        if (JsonDocument.RootElement.TryGetProperty(Constants.RootMetaPropertyName, out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out _))
         {
             return metaElement.Deserialize<MetaGameStringProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
         }
 
-        throw new JsonException("No 'meta' and/or 'gamestrings' property found");
+        throw new JsonException("No 'meta' and/or 'items' property found");
     }
 
     private void SetAbilities(IEnumerable<Ability> abilities, JsonElement gameStringElement)

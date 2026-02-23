@@ -324,7 +324,7 @@ public class SprayDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "spray": {
               "name": {
                 "SprayStaticPackHappy": "Happy Face Localized"

@@ -154,7 +154,7 @@ public class TypeDescriptionDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "typeDescription": {
               "name": {
                 "TypeDescriptionSkin": "Skin Localized"

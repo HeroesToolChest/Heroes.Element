@@ -310,7 +310,7 @@ public class UnitDataDocumentTests
               "preserveFontStyleVars": false
             }
           },
-          "gamestrings": {
+          "items": {
             "unit": {
               "name": {
                 "FootmanUnit": "Fußsoldat"

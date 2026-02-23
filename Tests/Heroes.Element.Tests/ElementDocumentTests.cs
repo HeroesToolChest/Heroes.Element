@@ -47,7 +47,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.0.0"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -83,7 +83,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.56.0.88988",
                 "hdpVersion": "5.0.0"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -119,7 +119,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122_ptr",
                 "hdpVersion": "5.0.0"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -179,7 +179,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.0.0"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -215,7 +215,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.1.0"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -252,7 +252,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "{{version2}}"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -291,7 +291,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "{{version2}}"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -409,7 +409,7 @@ public class ElementDocumentTests
                 "hdpVersion": "5.0.0",
                 "locale": "enus"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
@@ -473,7 +473,7 @@ public class ElementDocumentTests
                 "hdpVersion": "5.0.0",
                 "locale": "enus"
             },
-            "gamestrings": {}
+            "items": {}
         }
         """;
 
