@@ -316,6 +316,7 @@ public class ElementDocumentTests
             "meta": {
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "HeroData",
                 "localizedText": "none"
             },
@@ -333,6 +334,7 @@ public class ElementDocumentTests
         result.Should().NotBeNull();
         result.HeroesVersion.Should().Be(HeroesDataVersion.Parse("2.55.1.88122"));
         result.HdpVersion.Should().Be("5.0.0");
+        result.ItemsType.Should().Be(ItemsType.Data);
         result.DataType.Should().Be(DataType.HeroData);
         result.LocalizedText.Should().Be(LocalizedTextOption.None);
         result.IsLegacy.Should().BeFalse();

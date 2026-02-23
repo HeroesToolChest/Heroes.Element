@@ -18,6 +18,12 @@ public class MetaProperties
     public string HdpVersion { get; set; } = string.Empty;
 
     /// <summary>
+    /// Gets or sets the type of the items contained in the json file.
+    /// </summary>
+    [JsonPropertyOrder(-997)]
+    public ItemsType ItemsType { get; set; } = ItemsType.Other;
+
+    /// <summary>
     /// Gets or sets a value indicating whether this is data is created from Heroes Data Parser version 4.x or earlier.
     /// </summary>
     [JsonIgnore]
