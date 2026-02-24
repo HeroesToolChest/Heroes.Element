@@ -8,10 +8,10 @@ public class GameStringFilePropertyId
     /// <summary>
     /// Gets or sets the key-value pairs of <see cref="GameStringText"/>s.
     /// </summary>
-    public SortedDictionary<string, GameStringText> KeyValuePairs { get; set; } = [];
+    public SortedDictionary<string, GameStringText> KeyValuePairs { get; set; } = new SortedDictionary<string, GameStringText>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets or sets the key-array pairs of <see cref="GameStringText"/>s.
     /// </summary>
-    public SortedDictionary<string, List<GameStringText>> KeyArrayPairs { get; set; } = [];
+    public SortedDictionary<string, List<GameStringText>> KeyArrayPairs { get; set; } = new SortedDictionary<string, List<GameStringText>>(StringComparer.OrdinalIgnoreCase);
 }
