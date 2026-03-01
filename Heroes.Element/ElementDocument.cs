@@ -37,7 +37,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
 
         MetaProperties = GetMetaProperties();
 
-        JsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaProperties.DescriptionText?.Locale));
+        JsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaProperties.GameStringTextProperties?.Locale));
     }
 
     /// <inheritdoc/>
@@ -249,7 +249,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
             MetaDataProperties metaDataProperties = metaElement.Deserialize<MetaDataProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
 
             if (GameStringDocument is not null)
-                metaDataProperties.DescriptionText = GameStringDocument.MetaGameStringProperties.DescriptionText;
+                metaDataProperties.GameStringTextProperties = GameStringDocument.MetaGameStringProperties.GameStringTextProperties;
 
             return metaDataProperties;
         }

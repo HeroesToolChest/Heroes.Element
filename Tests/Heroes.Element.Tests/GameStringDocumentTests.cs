@@ -28,7 +28,7 @@ public class GameStringDocumentTests
         meta.HdpVersion.Should().Be("5.0.0");
         meta.DataTypes.Should().NotBeNull();
         meta.DataTypes.Should().BeEmpty();
-        meta.DescriptionText.Should().NotBeNull();
+        meta.GameStringTextProperties.Should().NotBeNull();
         meta.IsLegacy.Should().BeFalse();
     }
 
@@ -100,9 +100,9 @@ public class GameStringDocumentTests
 
         // assert
         meta.Should().NotBeNull();
-        meta.DescriptionText.Should().NotBeNull();
-        meta.DescriptionText!.Locale.Should().Be(StormLocale.FRFR);
-        meta.DescriptionText.GameStringTextType.Should().Be(GameStringTextType.ColoredText);
+        meta.GameStringTextProperties.Should().NotBeNull();
+        meta.GameStringTextProperties!.Locale.Should().Be(StormLocale.FRFR);
+        meta.GameStringTextProperties.GameStringTextType.Should().Be(GameStringTextType.ColoredText);
     }
 
     [TestMethod]

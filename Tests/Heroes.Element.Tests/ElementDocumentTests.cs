@@ -423,8 +423,8 @@ public class ElementDocumentTests
 
         // assert
         result.Should().NotBeNull();
-        result.DescriptionText.Should().NotBeNull();
-        result.DescriptionText!.Locale.Should().Be(StormLocale.ENUS);
+        result.GameStringTextProperties.Should().NotBeNull();
+        result.GameStringTextProperties!.Locale.Should().Be(StormLocale.ENUS);
     }
 
     [TestMethod]

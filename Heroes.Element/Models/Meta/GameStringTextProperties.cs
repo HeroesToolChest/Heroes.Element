@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains information about the gamestring text.
 /// </summary>
-public class DescriptionText
+public class GameStringTextProperties
 {
     /// <summary>
     /// Gets or sets the locale of the data (e.g., "enUS", "frFR").

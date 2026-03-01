@@ -30,7 +30,7 @@ public class GameStringDocument : IDisposable
 
         MetaGameStringProperties = GetMetaGameStringProperties();
 
-        _jsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaGameStringProperties.DescriptionText?.Locale));
+        _jsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaGameStringProperties.GameStringTextProperties?.Locale));
     }
 
     /// <summary>
@@ -518,7 +518,7 @@ public class GameStringDocument : IDisposable
         if (value is null)
             return null;
 
-        return new GameStringText(value, MetaGameStringProperties.DescriptionText.Locale);
+        return new GameStringText(value, MetaGameStringProperties.GameStringTextProperties.Locale);
     }
 
     private MetaGameStringProperties GetMetaGameStringProperties()
