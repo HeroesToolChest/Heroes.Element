@@ -21,6 +21,7 @@ public class MetaProperties
     /// Gets or sets the type of the items contained in the json file.
     /// </summary>
     [JsonPropertyOrder(-997)]
+    [JsonPropertyName(Constants.ItemsTypePropertyName)]
     public ItemsType ItemsType { get; set; } = ItemsType.Other;
 
     /// <summary>

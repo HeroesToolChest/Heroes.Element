@@ -20,6 +20,7 @@ public class MetaDataProperties : MetaProperties
     /// <summary>
     /// Gets or sets a value indicating the serialization of the <see cref="GameStringText"/> properties.
     /// </summary>
+    [JsonPropertyName(Constants.LocalizedTextPropertyName)]
     public LocalizedTextOption LocalizedText { get; set; } = LocalizedTextOption.None;
 
     /// <summary>
