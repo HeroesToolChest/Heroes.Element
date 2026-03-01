@@ -41,7 +41,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     }
 
     /// <inheritdoc/>
-    public Type GetElementType => typeof(T);
+    public Type ElementType => typeof(T);
 
     /// <inheritdoc/>
     public JsonDocument JsonDocument { get; }

@@ -8,7 +8,7 @@ public interface IElementDocument : IDisposable
     /// <summary>
     /// Gets the element type that this data document represents.
     /// </summary>
-    Type GetElementType { get; }
+    Type ElementType { get; }
 
     /// <summary>
     /// Gets the underlying JSON document. This is only the data document and not the optional gamestring document.
