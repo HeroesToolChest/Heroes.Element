@@ -22,7 +22,7 @@ public class AbilityLinkIdConverter : JsonConverter<AbilityLinkId>
             return new AbilityLinkId(parts[0], parts[1], abilityType);
         }
 
-        throw new JsonException();
+        throw new JsonException("Not exactly three parts");
     }
 
     /// <inheritdoc/>

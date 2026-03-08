@@ -11,7 +11,7 @@ public class GameStringItemDictionaryConverter : JsonConverter<GameStringItemDic
         if (reader.TokenType != JsonTokenType.StartObject)
             throw new JsonException();
 
-        GameStringItemDictionary dictionary = new();
+        GameStringItemDictionary dictionary = [];
 
         while (reader.Read())
         {

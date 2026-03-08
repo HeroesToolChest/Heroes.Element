@@ -8,17 +8,34 @@ public class HeroTalentsConverter : JsonConverter<IDictionary<TalentTier, IList<
     /// <inheritdoc/>
     public override IDictionary<TalentTier, IList<Talent>>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        IDictionary<TalentTier, IList<Talent>>? talentsByTier = JsonSerializer.Deserialize<IDictionary<TalentTier, IList<Talent>>>(ref reader, options);
-
-        if (talentsByTier is null)
+        if (reader.TokenType == JsonTokenType.Null)
             return null;
 
-        foreach (KeyValuePair<TalentTier, IList<Talent>> tierTalents in talentsByTier)
+        if (reader.TokenType != JsonTokenType.StartObject)
+            throw new JsonException("Expected StartObject token.");
+
+        Dictionary<TalentTier, IList<Talent>> talentsByTier = [];
+
+        while (reader.Read())
         {
-            foreach (Talent talent in tierTalents.Value)
+            if (reader.TokenType == JsonTokenType.EndObject)
+                break;
+
+            if (reader.TokenType != JsonTokenType.PropertyName)
+                throw new JsonException("Expected PropertyName token.");
+
+            TalentTier tier = Enum.Parse<TalentTier>(reader.GetString()!);
+
+            reader.Read();
+
+            IList<Talent> talents = JsonSerializer.Deserialize<IList<Talent>>(ref reader, options) ?? [];
+
+            foreach (Talent talent in talents)
             {
-                talent.Tier = tierTalents.Key;
+                talent.Tier = tier;
             }
+
+            talentsByTier[tier] = talents;
         }
 
         return talentsByTier;

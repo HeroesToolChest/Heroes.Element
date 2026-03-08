@@ -19,12 +19,10 @@ public class GameStringTextConverter : JsonConverter<GameStringText>
     /// <inheritdoc/>
     public override GameStringText? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TokenType == JsonTokenType.String)
-        {
-            return new GameStringText(reader.GetString() ?? string.Empty, _gameStringTextConverterOptions.StormLocale);
-        }
+        if (reader.TokenType != JsonTokenType.String)
+            throw new JsonException("Expected string type");
 
-        throw new JsonException("Expected string type");
+        return new GameStringText(reader.GetString() ?? string.Empty, _gameStringTextConverterOptions.StormLocale);
     }
 
     /// <inheritdoc/>
