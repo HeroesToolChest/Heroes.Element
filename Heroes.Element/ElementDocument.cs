@@ -37,7 +37,10 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
 
         MetaProperties = GetMetaProperties();
 
-        JsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaProperties.GameStringTextProperties?.Locale));
+        JsonSerializerOptions.Converters.Add(new GameStringTextConverter(new GameStringTextConverterOptions()
+        {
+            StormLocale = MetaProperties.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
+        }));
     }
 
     /// <inheritdoc/>

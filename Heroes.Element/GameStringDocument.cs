@@ -30,7 +30,10 @@ public class GameStringDocument : IDisposable
 
         MetaGameStringProperties = GetMetaGameStringProperties();
 
-        _jsonSerializerOptions.Converters.Add(new GameStringTextConverter(MetaGameStringProperties.GameStringTextProperties?.Locale));
+        _jsonSerializerOptions.Converters.Add(new GameStringTextConverter(new GameStringTextConverterOptions()
+        {
+            StormLocale = MetaGameStringProperties.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
+        }));
     }
 
     /// <summary>

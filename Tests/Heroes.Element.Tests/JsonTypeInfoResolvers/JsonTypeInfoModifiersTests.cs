@@ -710,7 +710,7 @@ public class JsonTypeInfoModifiersTests
             Converters =
             {
                 new JsonStringEnumConverter(),
-                new GameStringTextConverter(gameStringTextType: GameStringTextType.RawText),
+                new GameStringTextConverter(new GameStringTextConverterOptions() { GameStringTextType = GameStringTextType.RawText }),
             },
             TypeInfoResolver = new HeroesElementResolver()
             {

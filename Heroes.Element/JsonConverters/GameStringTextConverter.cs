@@ -5,21 +5,15 @@
 /// </summary>
 public class GameStringTextConverter : JsonConverter<GameStringText>
 {
-    private readonly StormLocale _stormLocale = StormLocale.ENUS;
-    private readonly GameStringTextType _gameStringTextType = GameStringTextType.RawText;
+    private readonly GameStringTextConverterOptions _gameStringTextConverterOptions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GameStringTextConverter"/> class.
     /// </summary>
-    /// <param name="stormLocale">The localization of the text (only for reading). Defaults to <see cref="StormLocale.ENUS"/>.</param>
-    /// <param name="gameStringTextType">The type of text to convert to (only for writing). Defaults to <see cref="GameStringTextType.RawText"/>.</param>
-    public GameStringTextConverter(StormLocale? stormLocale = null, GameStringTextType? gameStringTextType = null)
+    /// <param name="gameStringTextConverterOptions">The options for the converter. Defaults to a new instance of <see cref="GameStringTextConverterOptions"/>.</param>
+    public GameStringTextConverter(GameStringTextConverterOptions? gameStringTextConverterOptions = null)
     {
-        if (stormLocale is not null)
-            _stormLocale = stormLocale.Value;
-
-        if (gameStringTextType is not null)
-            _gameStringTextType = gameStringTextType.Value;
+        _gameStringTextConverterOptions = gameStringTextConverterOptions ?? new GameStringTextConverterOptions();
     }
 
     /// <inheritdoc/>
@@ -27,7 +21,7 @@ public class GameStringTextConverter : JsonConverter<GameStringText>
     {
         if (reader.TokenType == JsonTokenType.String)
         {
-            return new GameStringText(reader.GetString() ?? string.Empty, _stormLocale);
+            return new GameStringText(reader.GetString() ?? string.Empty, _gameStringTextConverterOptions.StormLocale);
         }
 
         throw new JsonException("Expected string type");
@@ -36,19 +30,31 @@ public class GameStringTextConverter : JsonConverter<GameStringText>
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, GameStringText value, JsonSerializerOptions options)
     {
-        if (_gameStringTextType == GameStringTextType.RawText)
+        if (_gameStringTextConverterOptions.RemoveHltForConstantTags == GameStringTextHltRemoveMode.Remove)
+            value.RemoveHltNameForConstantTags(false);
+        else if (_gameStringTextConverterOptions.RemoveHltForConstantTags == GameStringTextHltRemoveMode.RemoveAndUndo)
+            value.RemoveHltNameForConstantTags(true);
+
+        if (_gameStringTextConverterOptions.RemoveHltForStyleTags == GameStringTextHltRemoveMode.Remove)
+            value.RemoveHltNameForStyleTags(false);
+        else if (_gameStringTextConverterOptions.RemoveHltForStyleTags == GameStringTextHltRemoveMode.RemoveAndUndo)
+            value.RemoveHltNameForStyleTags(true);
+
+        GameStringTextType gameStringTextType = _gameStringTextConverterOptions.GameStringTextType;
+
+        if (gameStringTextType == GameStringTextType.RawText)
             writer.WriteStringValue(value.RawText);
-        else if (_gameStringTextType == GameStringTextType.PlainText)
+        else if (gameStringTextType == GameStringTextType.PlainText)
             writer.WriteStringValue(value.PlainText);
-        else if (_gameStringTextType == GameStringTextType.PlainTextWithNewlines)
+        else if (gameStringTextType == GameStringTextType.PlainTextWithNewlines)
             writer.WriteStringValue(value.PlainTextWithNewlines);
-        else if (_gameStringTextType == GameStringTextType.PlainTextWithScaling)
+        else if (gameStringTextType == GameStringTextType.PlainTextWithScaling)
             writer.WriteStringValue(value.PlainTextWithScaling);
-        else if (_gameStringTextType == GameStringTextType.PlainTextWithScalingWithNewlines)
+        else if (gameStringTextType == GameStringTextType.PlainTextWithScalingWithNewlines)
             writer.WriteStringValue(value.PlainTextWithScalingWithNewlines);
-        else if (_gameStringTextType == GameStringTextType.ColoredText)
+        else if (gameStringTextType == GameStringTextType.ColoredText)
             writer.WriteStringValue(value.ColoredText);
-        else if (_gameStringTextType == GameStringTextType.ColoredTextWithScaling)
+        else if (gameStringTextType == GameStringTextType.ColoredTextWithScaling)
             writer.WriteStringValue(value.ColoredTextWithScaling);
         else
             writer.WriteStringValue(value.ToString());

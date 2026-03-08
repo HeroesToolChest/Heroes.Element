@@ -28,7 +28,7 @@ public class SerializerSettings
                 new LinkIdConverter(),
                 new AbilityLinkIdConverter(),
                 new TalentLinkIdConverter(),
-                new GameStringTextConverter(gameStringTextType: GameStringTextType.RawText),
+                new GameStringTextConverter(new GameStringTextConverterOptions() { GameStringTextType = GameStringTextType.RawText }),
                 new HeroesDataVersionConverter(),
             },
             TypeInfoResolver = new HeroesElementResolver()
