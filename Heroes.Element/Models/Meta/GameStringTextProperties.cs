@@ -17,19 +17,24 @@ public class GameStringTextProperties
     public GameStringTextType? GameStringTextType { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to replace font styles variables in the gamestring text with the actual hex values.
+    /// Gets or sets a value indicating whether to replace font constant variables in the gamestring text with the actual color text hex values.
     /// </summary>
-    public bool ReplaceFontStyles { get; set; }
+    public bool ReplaceFontConstantVars { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to preserve font style constant variables in the gamestring text with a new attribute "hlt-name".
-    /// <see cref="ReplaceFontStyles"/> must be <see langword="true"/> for this to be enabled.
+    /// Gets or sets a value indicating whether to replace font styles variables in the gamestring text with the actual color text hex values.
+    /// </summary>
+    public bool ReplaceFontStylesVars { get; set; }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to preserve font constant variables in the gamestring text with a new attribute "hlt-name".
+    /// <see cref="ReplaceFontConstantVars"/> must be <see langword="true"/> for this to be enabled.
     /// </summary>
     public bool PreserveFontStyleConstantVars { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether to preserve font style variables in the gamestring text with a new attribute "hlt-name".
-    /// <see cref="ReplaceFontStyles"/> must be <see langword="true"/> for this to be enabled.
+    /// <see cref="ReplaceFontStylesVars"/> must be <see langword="true"/> for this to be enabled.
     /// </summary>
     public bool PreserveFontStyleVars { get; set; }
 }

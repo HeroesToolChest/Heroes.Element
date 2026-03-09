@@ -151,7 +151,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -231,7 +232,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -377,7 +379,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -448,7 +451,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -561,7 +565,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -604,7 +609,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -661,7 +667,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -704,7 +711,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -761,7 +769,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -804,7 +813,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -861,7 +871,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -904,7 +915,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -961,7 +973,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1002,7 +1015,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1051,7 +1065,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1095,7 +1110,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1156,7 +1172,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1200,7 +1217,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1261,7 +1279,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1305,7 +1324,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1366,7 +1386,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1410,7 +1431,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1471,7 +1493,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1515,7 +1538,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1576,7 +1600,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1621,7 +1646,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1684,7 +1710,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1728,7 +1755,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1789,7 +1817,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1832,7 +1861,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1889,7 +1919,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1932,7 +1963,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -1989,7 +2021,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -2034,7 +2067,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -2095,7 +2129,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }
@@ -2135,7 +2170,8 @@ public class GameStringDocumentTests
             "gameStringText": {
               "locale": "ENUS",
               "textType": "RawText",
-              "replaceFontStyles": true,
+              "replaceFontConstantVars": true,
+              "replaceFontStylesVars": true,
               "preserveFontStyleConstantVars": false,
               "preserveFontStyleVars": false
             }

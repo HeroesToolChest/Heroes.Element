@@ -314,11 +314,21 @@ public class ElementDocumentTests
         string jsonData = """
         {
             "meta": {
-                "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0",
-                "itemsType": "Data",
-                "dataType": "HeroData",
-                "localizedText": "none"
+              "heroesVersion": "2.55.1.88122",
+              "hdpVersion": "5.0.0",
+              "itemsType": "Data",
+              "dataType": "HeroData",
+              "localizedText": "none",
+              "mapName": "Test Map",
+              "localizedText": "Copy",
+              "gameStringText": {
+                "locale": "ENUS",
+                "textType": "RawText",
+                "replaceFontConstantVars": true,
+                "replaceFontStylesVars": true,
+                "preserveFontStyleConstantVars": true,
+                "preserveFontStyleVars": true
+              }
             },
             "items": {}
         }
@@ -336,7 +346,13 @@ public class ElementDocumentTests
         result.HdpVersion.Should().Be("5.0.0");
         result.ItemsType.Should().Be(ItemsType.Data);
         result.DataType.Should().Be(DataType.HeroData);
-        result.LocalizedText.Should().Be(LocalizedTextOption.None);
+        result.LocalizedText.Should().Be(LocalizedTextOption.Copy);
+        result.GameStringTextProperties!.Locale.Should().Be(StormLocale.ENUS);
+        result.GameStringTextProperties.GameStringTextType.Should().Be(GameStringTextType.RawText);
+        result.GameStringTextProperties.ReplaceFontConstantVars.Should().BeTrue();
+        result.GameStringTextProperties.ReplaceFontStylesVars.Should().BeTrue();
+        result.GameStringTextProperties.PreserveFontStyleConstantVars.Should().BeTrue();
+        result.GameStringTextProperties.PreserveFontStyleVars.Should().BeTrue();
         result.IsLegacy.Should().BeFalse();
     }
 
