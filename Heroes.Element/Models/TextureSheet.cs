@@ -6,7 +6,7 @@
 public class TextureSheet
 {
     /// <summary>
-    /// Gets or sets the original image file name with path (as .dds). File path separator is the original found data source.
+    /// Gets or sets the image file name.
     /// </summary>
     public string? Image { get; set; }
 
@@ -19,4 +19,10 @@ public class TextureSheet
     /// Gets or sets the number of column in the texture.
     /// </summary>
     public int? Columns { get; set; }
+
+    /// <summary>
+    /// Gets or sets the original image file name with path (as .dds). Path separators are not normalized.
+    /// </summary>
+    /// <remarks><see cref="Image"/> is for serialization purposes, so this property is for keeping track of the image.</remarks>
+    internal string? ImagePath { get; set; }
 }
