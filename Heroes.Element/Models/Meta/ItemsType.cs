@@ -6,17 +6,17 @@
 public enum ItemsType
 {
     /// <summary>
-    /// Indicates the itmes are of other type.
+    /// Indicates the items are of an <c>other</c> type.
     /// </summary>
     Other,
 
     /// <summary>
-    /// Indicates the items are data.
+    /// Indicates the items are of <c>data</c> type.
     /// </summary>
     Data,
 
     /// <summary>
-    /// Indicates the items are gamestrings only.
+    /// Indicates the items are of <c>gamestrings</c> type.
     /// </summary>
     GameStrings,
 }

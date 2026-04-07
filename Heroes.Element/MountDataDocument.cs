@@ -6,7 +6,7 @@
 public class MountDataDocument : ElementDocument<Mount>, ILoadoutItemRetrieval<Mount>
 {
     private MountDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(dataDocument, gameStringDocument)
+    : base(DataType.MountData, dataDocument, gameStringDocument)
     {
     }
 

@@ -6,7 +6,10 @@ public class SprayDataDocumentTests
     private readonly string _defaultArrangeJson =
 """
     {
-      "meta": {},
+      "meta": {
+        "itemsType": "Data",
+        "dataType": "SprayData"
+      },
       "items": {
         "SprayAnimatedBWAhhhh": {
           "name": "Ahhhh!",
@@ -29,7 +32,10 @@ public class SprayDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "SprayData"
+          },
           "items": {}
         }
         """;
@@ -53,7 +59,10 @@ public class SprayDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "SprayData"
+          },
           "items": {
             "SprayAnimatedBWAhhhh": {
               "name": "Ahhhh!",
@@ -298,7 +307,9 @@ public class SprayDataDocumentTests
         {
           "meta": {
             "heroesVersion": "2.55.1.88122",
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "Data",
+            "dataType": "SprayData"
           },
           "items": {
             "SprayStaticPackHappy": {
@@ -316,6 +327,7 @@ public class SprayDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "FRFR",
               "textType": "RawText",
@@ -388,7 +400,10 @@ public class SprayDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "SprayData"
+          },
           "items": {}
         }
         """;
@@ -401,6 +416,32 @@ public class SprayDataDocumentTests
 
         // assert
         result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    [DataRow("Unknown")]
+    [DataRow("HeroData")]
+    [DataRow("UnitData")]
+    public void Load_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string json = $$"""
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "{{dataType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => SprayDataDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
     private static void HappyFaceBasicAssertions(Spray spray)

@@ -6,7 +6,10 @@ public class UnitDataDocumentTests
     private readonly string _defaultArrangeJson =
     """
     {
-      "meta": {},
+      "meta": {
+        "itemsType": "Data",
+        "dataType": "UnitData"
+      },
       "items": {
         "FootmanUnit": {
           "name": "Footman",
@@ -33,7 +36,10 @@ public class UnitDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "UnitData"
+          },
           "items": {}
         }
         """;
@@ -57,7 +63,10 @@ public class UnitDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "UnitData"
+          },
           "items": {
             "FootmanUnit": {
               "name": "Footman",
@@ -286,7 +295,9 @@ public class UnitDataDocumentTests
         {
           "meta": {
             "heroesVersion": "2.55.1.88122",
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "Data",
+            "dataType": "UnitData"
           },
           "items": {
             "FootmanUnit": {
@@ -302,6 +313,7 @@ public class UnitDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "DEDE",
               "textType": "RawText",
@@ -364,7 +376,10 @@ public class UnitDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "UnitData"
+          },
           "items": {}
         }
         """;
@@ -377,6 +392,31 @@ public class UnitDataDocumentTests
 
         // assert
         result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    [DataRow("Unknown")]
+    [DataRow("HeroData")]
+    public void Load_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string json = $$"""
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "{{dataType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => UnitDataDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
     private static void ArcherUnitBasicAssertions(Unit unit)

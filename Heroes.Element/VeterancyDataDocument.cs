@@ -6,7 +6,7 @@
 public class VeterancyDataDocument : ElementDocument<Veterancy>
 {
     private VeterancyDataDocument(JsonDocument dataDocument)
-    : base(dataDocument, null)
+    : base(DataType.VeterancyData, dataDocument, null)
     {
     }
 

@@ -6,7 +6,7 @@
 public class HeroDataDocument : ElementDocument<Hero>, IStoreItemRetrieval<Hero>
 {
     private HeroDataDocument(JsonDocument document, GameStringDocument? gameStringDocument = null)
-        : base(document, gameStringDocument)
+        : base(DataType.HeroData, document, gameStringDocument)
     {
         JsonSerializerOptions.Converters.Add(new LinkIdConverter());
         JsonSerializerOptions.Converters.Add(new AbilityLinkIdConverter());

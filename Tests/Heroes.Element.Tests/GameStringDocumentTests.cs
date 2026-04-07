@@ -11,7 +11,8 @@ public class GameStringDocumentTests
         """
         {
           "meta": {
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings"
           },
           "items": {}
         }
@@ -75,6 +76,32 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    [DataRow("Data")]
+    [DataRow("Other")]
+    public void Load_WithNonGameStringsItemsType_ThrowsJsonException(string itemsType)
+    {
+        // arrange
+        string json =
+        $$"""
+        {
+          "meta": {
+            "hdpVersion": "5.0.0",
+            "itemsType": "{{itemsType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => GameStringDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected items type*");
+    }
+
+    [TestMethod]
     public void MetaGameStringProperties_WithDifferentLocale_ReturnsCorrectLocale()
     {
         // arrange
@@ -83,6 +110,7 @@ public class GameStringDocumentTests
         {
           "meta": {
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "FRFR",
               "textType": "ColoredText"
@@ -114,6 +142,7 @@ public class GameStringDocumentTests
         {
           "meta": {
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "unitdata",
               "unknown",
@@ -145,6 +174,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "herodata"
             ],
@@ -226,6 +256,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "herodata"
             ],
@@ -373,6 +404,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "unitdata"
             ],
@@ -445,6 +477,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "unitdata"
             ],
@@ -559,6 +592,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "announcerdata"
             ],
@@ -603,6 +637,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "announcerdata"
             ],
@@ -661,6 +696,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "bannerdata"
             ],
@@ -705,6 +741,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "bannerdata"
             ],
@@ -763,6 +800,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "boostdata"
             ],
@@ -807,6 +845,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "boostdata"
             ],
@@ -865,6 +904,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "bundledata"
             ],
@@ -909,6 +949,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "bundledata"
             ],
@@ -967,6 +1008,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "lootchestdata"
             ],
@@ -1009,6 +1051,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "lootchestdata"
             ],
@@ -1059,6 +1102,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "mapdata"
             ],
@@ -1104,6 +1148,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "mapdata"
             ],
@@ -1166,6 +1211,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "skindata"
             ],
@@ -1211,6 +1257,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "skindata"
             ],
@@ -1273,6 +1320,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "mountdata"
             ],
@@ -1318,6 +1366,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "mountdata"
             ],
@@ -1380,6 +1429,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "matchawarddata"
             ],
@@ -1425,6 +1475,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "matchawarddata"
             ],
@@ -1487,6 +1538,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "voicelinedata"
             ],
@@ -1532,6 +1584,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "voicelinedata"
             ],
@@ -1594,6 +1647,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "emoticondata"
             ],
@@ -1640,6 +1694,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "emoticondata"
             ],
@@ -1704,6 +1759,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "spraydata"
             ],
@@ -1749,6 +1805,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "spraydata"
             ],
@@ -1811,6 +1868,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "emoticonpackdata"
             ],
@@ -1855,6 +1913,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "emoticonpackdata"
             ],
@@ -1913,6 +1972,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "portraitpackdata"
             ],
@@ -1957,6 +2017,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "portraitpackdata"
             ],
@@ -2015,6 +2076,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "rewardportraitdata"
             ],
@@ -2061,6 +2123,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "rewardportraitdata"
             ],
@@ -2123,6 +2186,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "typedescriptiondata"
             ],
@@ -2164,6 +2228,7 @@ public class GameStringDocumentTests
           "meta": {
             "heroesVersion": "2.55.14.95623_ptr",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "dataTypes": [
               "typedescriptiondata"
             ],

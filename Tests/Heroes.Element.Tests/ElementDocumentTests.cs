@@ -11,7 +11,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -35,7 +37,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -45,7 +49,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -71,7 +76,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -81,7 +88,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.56.0.88988",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -107,7 +115,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -117,7 +127,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122_ptr",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -143,7 +154,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -167,7 +180,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -177,7 +192,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -203,7 +219,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -213,7 +231,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.1.0"
+                "hdpVersion": "5.1.0",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -240,7 +259,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "{{version1}}"
+                "hdpVersion": "{{version1}}",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -250,7 +271,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "{{version2}}"
+                "hdpVersion": "{{version2}}",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -279,7 +301,9 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "{{version1}}"
+                "hdpVersion": "{{version1}}",
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -289,7 +313,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "{{version2}}"
+                "hdpVersion": "{{version2}}",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -317,7 +342,7 @@ public class ElementDocumentTests
               "heroesVersion": "2.55.1.88122",
               "hdpVersion": "5.0.0",
               "itemsType": "Data",
-              "dataType": "HeroData",
+              "dataType": "Unknown",
               "localizedText": "none",
               "mapName": "Test Map",
               "localizedText": "Copy",
@@ -345,7 +370,7 @@ public class ElementDocumentTests
         result.HeroesVersion.Should().Be(HeroesDataVersion.Parse("2.55.1.88122"));
         result.HdpVersion.Should().Be("5.0.0");
         result.ItemsType.Should().Be(ItemsType.Data);
-        result.DataType.Should().Be(DataType.HeroData);
+        result.DataType.Should().Be(DataType.Unknown);
         result.LocalizedText.Should().Be(LocalizedTextOption.Copy);
         result.GameStringTextProperties!.Locale.Should().Be(StormLocale.ENUS);
         result.GameStringTextProperties.GameStringTextType.Should().Be(GameStringTextType.RawText);
@@ -412,7 +437,8 @@ public class ElementDocumentTests
             "meta": {
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.0.0",
-                "dataType": "HeroData"
+                "itemsType": "Data",
+                "dataType": "Unknown"
             },
             "items": {}
         }
@@ -423,6 +449,7 @@ public class ElementDocumentTests
             "meta": {
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
                 "locale": "enus"
             },
             "items": {}
@@ -451,7 +478,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data"
             },
             "items": {}
         }
@@ -476,7 +504,8 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data"
             },
             "items": {}
         }
@@ -486,6 +515,7 @@ public class ElementDocumentTests
         {
             "meta": {
                 "heroesVersion": "2.55.1.88122",
+                "itemsType": "GameStrings",
                 "hdpVersion": "5.0.0",
                 "locale": "enus"
             },
@@ -513,11 +543,91 @@ public class ElementDocumentTests
         elementData.UpdateGameStringsCalled.Should().BeTrue();
     }
 
+    [TestMethod]
+    [DataRow("GameStrings")]
+    [DataRow("Other")]
+    public void ValidateTypes_WithNonDataItemsType_ThrowsJsonException(string itemsType)
+    {
+        // arrange
+        string jsonData = $$"""
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "{{itemsType}}",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+
+        // act
+        Action act = () => _ = new TestElementBaseData(jsonDocument, null);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected items type*");
+    }
+
+    [TestMethod]
+    [DataRow("HeroData")]
+    [DataRow("AnnouncerData")]
+    [DataRow("UnitData")]
+    public void ValidateTypes_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string jsonData = $$"""
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "{{dataType}}"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+
+        // act
+        Action act = () => _ = new TestElementBaseData(jsonDocument, null);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
+    }
+
+    [TestMethod]
+    public void ValidateTypes_WithMatchingItemsTypeAndDataType_DoesNotThrow()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+
+        // act
+        Action act = () => _ = new TestElementBaseData(jsonDocument, null);
+
+        // assert
+        act.Should().NotThrow();
+    }
+
     // Test implementation of ElementBaseData for testing purposes
     private class TestElementBaseData : ElementDocument<TestElementObject>
     {
         public TestElementBaseData(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
-            : base(jsonDocument, gameStringDocument)
+            : base(DataType.Unknown, jsonDocument, gameStringDocument)
         {
         }
 

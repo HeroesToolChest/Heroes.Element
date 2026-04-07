@@ -7,16 +7,15 @@
 public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocument
     where T : IElementObject
 {
-    private readonly JsonSerializerOptions _metaJsonSerializerOptions;
-
     private bool _disposed;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ElementDocument{T}"/> class using the specified JSON document and serializer options.
     /// </summary>
+    /// <param name="dataType">The expected data type of the JSON document.</param>
     /// <param name="jsonDocument">The <see cref="JsonDocument"/> containing the JSON data to be processed.</param>
     /// <param name="gameStringDocument">The <see cref="JsonDocument"/> containing the JSON gamestrings to be processed.</param>
-    protected ElementDocument(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
+    protected ElementDocument(DataType dataType, JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
     {
         JsonDocument = jsonDocument;
         GameStringDocument = gameStringDocument;
@@ -33,14 +32,14 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
         };
 
         // for meta object only
-        _metaJsonSerializerOptions = new JsonSerializerOptions(JsonSerializerOptions);
-
-        MetaProperties = GetMetaProperties();
+        MetaProperties = GetMetaProperties(new JsonSerializerOptions(JsonSerializerOptions));
 
         JsonSerializerOptions.Converters.Add(new GameStringTextConverter(new GameStringTextConverterOptions()
         {
             StormLocale = MetaProperties.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
         }));
+
+        ValidateTypes(dataType);
     }
 
     /// <inheritdoc/>
@@ -245,12 +244,11 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
         }
     }
 
-    private MetaDataProperties GetMetaProperties()
+    private MetaDataProperties GetMetaProperties(JsonSerializerOptions jsonSerializerOptions)
     {
         if (JsonDocument.RootElement.TryGetProperty(Constants.RootMetaPropertyName, out JsonElement metaElement) && JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out _))
         {
-            MetaDataProperties metaDataProperties = metaElement.Deserialize<MetaDataProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
-
+            MetaDataProperties metaDataProperties = metaElement.Deserialize<MetaDataProperties>(jsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
             if (GameStringDocument is not null)
                 metaDataProperties.GameStringTextProperties = GameStringDocument.MetaGameStringProperties.GameStringTextProperties;
 
@@ -258,5 +256,14 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
         }
 
         throw new JsonException("No 'meta' and/or 'items' property found");
+    }
+
+    private void ValidateTypes(DataType dataType)
+    {
+        if (MetaProperties.ItemsType != ItemsType.Data)
+            throw new JsonException($"The JSON document items type '{MetaProperties.ItemsType}' does not match the expected items type '{ItemsType.Data}'.");
+
+        if (MetaProperties.DataType != dataType)
+            throw new JsonException($"The JSON document data type '{MetaProperties.DataType}' does not match the expected data type '{dataType}'.");
     }
 }

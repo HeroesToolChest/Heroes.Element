@@ -6,7 +6,7 @@
 public class AnnouncerDataDocument : ElementDocument<Announcer>, ILoadoutItemRetrieval<Announcer>
 {
     private AnnouncerDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.AnnouncerData, dataDocument, gameStringDocument)
     {
     }
 

@@ -6,7 +6,10 @@ public class RewardPortraitDataDocumentTests
     private readonly string _defaultArrangeJson =
     """
     {
-      "meta": {},
+      "meta": {
+        "itemsType": "Data",
+        "dataType": "RewardPortraitData"
+      },
       "items": {
         "RewardPortraitRaynor001": {
           "name": "Raynor Portrait 001",
@@ -27,7 +30,10 @@ public class RewardPortraitDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "RewardPortraitData"
+          },
           "items": {}
         }
         """;
@@ -51,7 +57,10 @@ public class RewardPortraitDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "RewardPortraitData"
+          },
           "items": {
             "RewardPortraitRaynor001": {
               "name": "Raynor Portrait 001",
@@ -234,7 +243,9 @@ public class RewardPortraitDataDocumentTests
         {
           "meta": {
             "heroesVersion": "2.55.1.88122",
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "Data",
+            "dataType": "RewardPortraitData"
           },
           "items": {
             "RewardPortraitRaynor002": {
@@ -253,6 +264,7 @@ public class RewardPortraitDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "FRFR",
               "textType": "RawText",
@@ -330,7 +342,10 @@ public class RewardPortraitDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "RewardPortraitData"
+          },
           "items": {}
         }
         """;
@@ -343,6 +358,32 @@ public class RewardPortraitDataDocumentTests
 
         // assert
         result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    [DataRow("Unknown")]
+    [DataRow("HeroData")]
+    [DataRow("UnitData")]
+    public void Load_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string json = $$"""
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "{{dataType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => RewardPortraitDataDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
     private static void Portrait002BasicAssertions(RewardPortrait rewardPortrait)

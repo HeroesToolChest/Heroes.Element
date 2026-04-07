@@ -6,7 +6,7 @@
 public class BundleDataDocument : ElementDocument<Bundle>, IStoreItemRetrieval<Bundle>
 {
     private BundleDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(dataDocument, gameStringDocument)
+    : base(DataType.BundleData, dataDocument, gameStringDocument)
     {
     }
 

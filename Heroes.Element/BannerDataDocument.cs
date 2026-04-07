@@ -6,7 +6,7 @@
 public class BannerDataDocument : ElementDocument<Banner>, ILoadoutItemRetrieval<Banner>
 {
     private BannerDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(dataDocument, gameStringDocument)
+        : base(DataType.BannerData, dataDocument, gameStringDocument)
     {
     }
 

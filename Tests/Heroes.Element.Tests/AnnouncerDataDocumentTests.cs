@@ -6,7 +6,10 @@ public class AnnouncerDataDocumentTests
     private readonly string _defaultArrangeJson =
     """
     {
-      "meta": {},
+      "meta": {
+        "itemsType": "Data",
+        "dataType": "AnnouncerData"
+      },
       "items": {
         "AbathurAnnouncer": {
           "name": "Abathur Announcer",
@@ -29,7 +32,10 @@ public class AnnouncerDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "AnnouncerData"
+          },
           "items": {}
         }
         """;
@@ -53,7 +59,10 @@ public class AnnouncerDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "AnnouncerData"
+          },
           "items": {
             "AbathurAnnouncer": {
               "name": "Abathur Announcer",
@@ -293,7 +302,9 @@ public class AnnouncerDataDocumentTests
         {
           "meta": {
             "heroesVersion": "2.55.1.88122",
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "Data",
+            "dataType": "AnnouncerData"
           },
           "items": {
             "AlarakAnnouncer": {
@@ -311,6 +322,7 @@ public class AnnouncerDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "FRFR",
               "textType": "RawText",
@@ -383,7 +395,10 @@ public class AnnouncerDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "AnnouncerData"
+          },
           "items": {}
         }
         """;
@@ -396,6 +411,32 @@ public class AnnouncerDataDocumentTests
 
         // assert
         result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    [DataRow("Unknown")]
+    [DataRow("HeroData")]
+    [DataRow("UnitData")]
+    public void Load_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string json = $$"""
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "{{dataType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => AnnouncerDataDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
     private static void AlarakBasicAssertions(Announcer announcer)

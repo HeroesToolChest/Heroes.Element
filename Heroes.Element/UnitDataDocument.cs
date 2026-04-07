@@ -6,7 +6,7 @@
 public class UnitDataDocument : ElementDocument<Unit>
 {
     private UnitDataDocument(JsonDocument document, GameStringDocument? gameStringDocument = null)
-    : base(document, gameStringDocument)
+    : base(DataType.UnitData, document, gameStringDocument)
     {
         JsonSerializerOptions.Converters.Add(new LinkIdConverter());
         JsonSerializerOptions.Converters.Add(new AbilityLinkIdConverter());

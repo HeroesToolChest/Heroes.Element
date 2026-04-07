@@ -6,7 +6,10 @@ public class MapDataDocumentTests
     private readonly string _defaultArrangeJson =
     """
     {
-      "meta": {},
+      "meta": {
+        "itemsType": "Data",
+        "dataType": "MapData"
+      },
       "items": {
         "BattlefieldOfEternity": {
           "name": "Battlefield of Eternity"
@@ -25,7 +28,10 @@ public class MapDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MapData"
+          },
           "items": {}
         }
         """;
@@ -49,7 +55,10 @@ public class MapDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MapData"
+          },
           "items": {
             "BattlefieldOfEternity": {
               "name": "Battlefield of Eternity",
@@ -252,7 +261,9 @@ public class MapDataDocumentTests
         {
           "meta": {
             "heroesVersion": "2.55.1.88122",
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "Data",
+            "dataType": "MapData"
           },
           "items": {
             "BattlefieldOfEternity": {
@@ -277,6 +288,7 @@ public class MapDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "FRFR",
               "textType": "RawText",
@@ -395,7 +407,10 @@ public class MapDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MapData"
+          },
           "items": {}
         }
         """;
@@ -408,6 +423,32 @@ public class MapDataDocumentTests
 
         // assert
         result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    [DataRow("Unknown")]
+    [DataRow("HeroData")]
+    [DataRow("UnitData")]
+    public void Load_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string json = $$"""
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "{{dataType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => MapDataDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
     private static void CursedHollowBasicAssertions(Map map)

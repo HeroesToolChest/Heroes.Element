@@ -6,7 +6,7 @@
 public class TypeDescriptionDataDocument : ElementDocument<TypeDescription>
 {
     private TypeDescriptionDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.TypeDescriptionData, dataDocument, gameStringDocument)
     {
     }
 

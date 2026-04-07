@@ -34,6 +34,9 @@ public class GameStringDocument : IDisposable
         {
             StormLocale = MetaGameStringProperties.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
         }));
+
+        if (MetaGameStringProperties.ItemsType != ItemsType.GameStrings)
+            throw new JsonException($"The JSON document items type '{MetaGameStringProperties.ItemsType}' does not match the expected items type '{ItemsType.GameStrings}'.");
     }
 
     /// <summary>

@@ -6,7 +6,7 @@
 public class BoostDataDocument : ElementDocument<Boost>, IStoreItemRetrieval<Boost>
 {
     private BoostDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.BoostData, dataDocument, gameStringDocument)
     {
     }
 

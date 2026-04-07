@@ -6,7 +6,7 @@
 public class MapDataDocument : ElementDocument<Map>
 {
     private MapDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(dataDocument, gameStringDocument)
+    : base(DataType.MapData, dataDocument, gameStringDocument)
     {
     }
 

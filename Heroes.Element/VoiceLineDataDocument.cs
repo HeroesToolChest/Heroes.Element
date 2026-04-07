@@ -6,7 +6,7 @@
 public class VoiceLineDataDocument : ElementDocument<VoiceLine>, ILoadoutItemRetrieval<VoiceLine>
 {
     private VoiceLineDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.VoiceLineData, dataDocument, gameStringDocument)
     {
     }
 

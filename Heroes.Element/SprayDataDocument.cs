@@ -6,7 +6,7 @@
 public class SprayDataDocument : ElementDocument<Spray>, ILoadoutItemRetrieval<Spray>
 {
     private SprayDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.SprayData, dataDocument, gameStringDocument)
     {
     }
 

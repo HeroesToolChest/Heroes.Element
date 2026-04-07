@@ -30,6 +30,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "{{dataType}}"
             },
             "items": {}
@@ -54,6 +55,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "herodata"
             },
             "items": {}
@@ -78,6 +80,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "AnnouncerData"
             },
             "items": {}
@@ -88,7 +91,8 @@ public class DataDocumentTests
         """
         {
             "meta": {
-                "hdpVersion": "5.0.0"
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
             },
             "items": {}
         }
@@ -157,6 +161,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": null
             },
             "items": {}
@@ -181,6 +186,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "NotARealDataType"
             },
             "items": {}
@@ -205,6 +211,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "Unknown"
             },
             "items": {}
@@ -229,6 +236,7 @@ public class DataDocumentTests
         {
             "meta": {
                 "hdpVersion": "5.0.0",
+                "itemsType": "Data",
                 "dataType": "GameStrings"
             },
             "items": {}

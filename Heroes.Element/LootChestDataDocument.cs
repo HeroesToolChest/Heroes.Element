@@ -6,7 +6,7 @@
 public class LootChestDataDocument : ElementDocument<LootChest>, IHyperlinkIdRetrieval<LootChest>
 {
     private LootChestDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.LootChestData, dataDocument, gameStringDocument)
     {
     }
 

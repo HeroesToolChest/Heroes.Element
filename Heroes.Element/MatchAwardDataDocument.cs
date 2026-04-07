@@ -6,7 +6,7 @@
 public class MatchAwardDataDocument : ElementDocument<MatchAward>
 {
     private MatchAwardDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(dataDocument, gameStringDocument)
+    : base(DataType.MatchAwardData, dataDocument, gameStringDocument)
     {
     }
 

@@ -6,7 +6,10 @@ public class MatchAwardDataDocumentTests
     private readonly string _defaultArrangeJson =
     """
     {
-      "meta": {},
+      "meta": {
+        "itemsType": "Data",
+        "dataType": "MatchAwardData"
+      },
       "items": {
         "EndOfMatchAwardMVPBoolean": {
           "gameLink": "EndOfMatchAwardMVPBoolean",
@@ -27,7 +30,10 @@ public class MatchAwardDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MatchAwardData"
+          },
           "items": {}
         }
         """;
@@ -51,7 +57,10 @@ public class MatchAwardDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MatchAwardData"
+          },
           "items": {
             "EndOfMatchAwardMVPBoolean": {
               "gameLink": "EndOfMatchAwardMVPBoolean",
@@ -145,7 +154,9 @@ public class MatchAwardDataDocumentTests
         {
           "meta": {
             "heroesVersion": "2.55.1.88122",
-            "hdpVersion": "5.0.0"
+            "hdpVersion": "5.0.0",
+            "itemsType": "Data",
+            "dataType": "MatchAwardData"
           },
           "items": {
             "EndOfMatchAwardMostXPContributionValue": {
@@ -166,6 +177,7 @@ public class MatchAwardDataDocumentTests
           "meta": {
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
             "gameStringText": {
               "locale": "FRFR",
               "textType": "RawText",
@@ -243,7 +255,10 @@ public class MatchAwardDataDocumentTests
         string json =
         """
         {
-          "meta": {},
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MatchAwardData"
+          },
           "items": {}
         }
         """;
@@ -256,6 +271,32 @@ public class MatchAwardDataDocumentTests
 
         // assert
         result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    [DataRow("Unknown")]
+    [DataRow("HeroData")]
+    [DataRow("UnitData")]
+    public void Load_WithMismatchedDataType_ThrowsJsonException(string dataType)
+    {
+        // arrange
+        string json = $$"""
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "{{dataType}}"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+
+        // act
+        Action act = () => MatchAwardDataDocument.Load(jsonDocument);
+
+        // assert
+        act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
     private static void MostXPBasicAssertions(MatchAward matchAward)

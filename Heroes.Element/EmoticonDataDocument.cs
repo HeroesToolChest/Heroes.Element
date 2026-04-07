@@ -6,7 +6,7 @@
 public class EmoticonDataDocument : ElementDocument<Emoticon>
 {
     private EmoticonDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(dataDocument, gameStringDocument)
+        : base(DataType.EmoticonData, dataDocument, gameStringDocument)
     {
     }
 
