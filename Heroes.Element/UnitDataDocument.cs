@@ -18,6 +18,7 @@ public class UnitDataDocument : ElementDocument<Unit>
     /// <param name="dataDocument">The JSON document containing the data.</param>
     /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="UnitDataDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
     public static UnitDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
     {
         return new UnitDataDocument(dataDocument, gameStringDocument);

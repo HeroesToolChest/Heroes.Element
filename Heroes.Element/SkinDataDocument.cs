@@ -15,7 +15,8 @@ public class SkinDataDocument : ElementDocument<Skin>, ILoadoutItemRetrieval<Ski
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
     /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
-    /// <returns>A <see cref="HeroDataDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <returns>A <see cref="SkinDataDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
     public static SkinDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
     {
         return new SkinDataDocument(dataDocument, gameStringDocument);

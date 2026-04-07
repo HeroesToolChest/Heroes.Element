@@ -14,7 +14,8 @@ public class VeterancyDataDocument : ElementDocument<Veterancy>
     /// Creates a new instance of <see cref="VeterancyDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <returns>A <see cref="HeroDataDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <returns>A <see cref="VeterancyDataDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
     public static VeterancyDataDocument Load(JsonDocument dataDocument)
     {
         return new VeterancyDataDocument(dataDocument);

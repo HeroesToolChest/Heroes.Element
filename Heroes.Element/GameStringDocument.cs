@@ -51,6 +51,7 @@ public class GameStringDocument : IDisposable
     /// </summary>
     /// <param name="jsonDocument">The JSON document containing the data to initialize the <see cref="GameStringDocument"/> instance.</param>
     /// <returns>A <see cref="GameStringDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
     public static GameStringDocument Load(JsonDocument jsonDocument)
     {
         return new GameStringDocument(jsonDocument);
