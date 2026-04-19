@@ -8,11 +8,11 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Authors>Kevin Oliva</Authors>
     <Copyright>Copyright © 2024 - 2026 Kevin Oliva</Copyright>
-    <Description></Description>
-    <PackageProjectUrl></PackageProjectUrl>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageReleaseNotes></PackageReleaseNotes>
-    <PackageTags></PackageTags>
+    <Description>Library to parse JSON files from Heroes Data Parser</Description>
+    <PackageProjectUrl>https://github.com/HeroesToolChest/Heroes.Element</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/HeroesToolChest/Heroes.Element</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/HeroesToolChest/Heroes.Element/releases</PackageReleaseNotes>
+    <PackageTags>hots heroes-of-the-storm HeroesOfTheStorm blizzard json</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <IncludeSymbols>true</IncludeSymbols>
