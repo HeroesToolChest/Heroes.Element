@@ -351,7 +351,7 @@ public class ElementDocumentTests
                 "textType": "RawText",
                 "replaceFontConstantVars": true,
                 "replaceFontStylesVars": true,
-                "preserveFontStyleConstantVars": true,
+                "preserveFontConstantVars": true,
                 "preserveFontStyleVars": true
               }
             },
@@ -376,7 +376,7 @@ public class ElementDocumentTests
         result.GameStringTextProperties.GameStringTextType.Should().Be(GameStringTextType.RawText);
         result.GameStringTextProperties.ReplaceFontConstantVars.Should().BeTrue();
         result.GameStringTextProperties.ReplaceFontStylesVars.Should().BeTrue();
-        result.GameStringTextProperties.PreserveFontStyleConstantVars.Should().BeTrue();
+        result.GameStringTextProperties.PreserveFontConstantVars.Should().BeTrue();
         result.GameStringTextProperties.PreserveFontStyleVars.Should().BeTrue();
         result.IsLegacy.Should().BeFalse();
     }

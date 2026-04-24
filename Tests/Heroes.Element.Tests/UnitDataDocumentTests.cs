@@ -318,7 +318,7 @@ public class UnitDataDocumentTests
               "locale": "DEDE",
               "textType": "RawText",
               "replaceFontStyles": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },

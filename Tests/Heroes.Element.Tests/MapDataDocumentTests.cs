@@ -293,7 +293,7 @@ public class MapDataDocumentTests
               "locale": "FRFR",
               "textType": "RawText",
               "replaceFontStyles": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },

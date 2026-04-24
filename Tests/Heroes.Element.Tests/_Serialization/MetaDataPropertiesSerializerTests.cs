@@ -23,7 +23,7 @@ public class MetaDataPropertiesSerializerTests
                 GameStringTextType = GameStringTextType.RawText,
                 ReplaceFontConstantVars = true,
                 ReplaceFontStylesVars = true,
-                PreserveFontStyleConstantVars = false,
+                PreserveFontConstantVars = false,
                 PreserveFontStyleVars = false,
             },
             TotalItems = 42,
@@ -47,7 +47,7 @@ public class MetaDataPropertiesSerializerTests
                 "textType": "RawText",
                 "replaceFontConstantVars": true,
                 "replaceFontStylesVars": true,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": false
               },
               "totalItems": 42
@@ -183,7 +183,7 @@ public class MetaDataPropertiesSerializerTests
                 GameStringTextType = GameStringTextType.ColoredText,
                 ReplaceFontConstantVars = false,
                 ReplaceFontStylesVars = true,
-                PreserveFontStyleConstantVars = false,
+                PreserveFontConstantVars = false,
                 PreserveFontStyleVars = true,
             },
             TotalItems = 1,
@@ -206,7 +206,7 @@ public class MetaDataPropertiesSerializerTests
                 "textType": "ColoredText",
                 "replaceFontConstantVars": false,
                 "replaceFontStylesVars": true,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": true
               },
               "totalItems": 1

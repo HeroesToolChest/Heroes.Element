@@ -27,13 +27,13 @@ public class GameStringTextProperties
     public bool ReplaceFontStylesVars { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to preserve font constant variables in the gamestring text with a new attribute "hlt-name".
+    /// Gets or sets a value indicating whether to preserve font constant variables in the gamestring text with a new attribute <c>hlt-name</c>.
     /// <see cref="ReplaceFontConstantVars"/> must be <see langword="true"/> for this to be enabled.
     /// </summary>
-    public bool PreserveFontStyleConstantVars { get; set; }
+    public bool PreserveFontConstantVars { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether to preserve font style variables in the gamestring text with a new attribute "hlt-name".
+    /// Gets or sets a value indicating whether to preserve font style variables in the gamestring text with a new attribute <c>hlt-name</c>.
     /// <see cref="ReplaceFontStylesVars"/> must be <see langword="true"/> for this to be enabled.
     /// </summary>
     public bool PreserveFontStyleVars { get; set; }

@@ -343,7 +343,7 @@ public class SkinDataDocumentTests
               "locale": "FRFR",
               "textType": "RawText",
               "replaceFontStyles": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },

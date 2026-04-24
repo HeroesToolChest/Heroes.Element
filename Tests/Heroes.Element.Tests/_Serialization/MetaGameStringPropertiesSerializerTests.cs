@@ -22,7 +22,7 @@ public class MetaGameStringPropertiesSerializerTests
                 GameStringTextType = GameStringTextType.RawText,
                 ReplaceFontConstantVars = true,
                 ReplaceFontStylesVars = true,
-                PreserveFontStyleConstantVars = false,
+                PreserveFontConstantVars = false,
                 PreserveFontStyleVars = false,
             },
         };
@@ -47,7 +47,7 @@ public class MetaGameStringPropertiesSerializerTests
                 "textType": "RawText",
                 "replaceFontConstantVars": true,
                 "replaceFontStylesVars": true,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": false
               }
             }
@@ -77,7 +77,7 @@ public class MetaGameStringPropertiesSerializerTests
                 "locale": "ENUS",
                 "replaceFontConstantVars": false,
                 "replaceFontStylesVars": false,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": false
               }
             }
@@ -154,7 +154,7 @@ public class MetaGameStringPropertiesSerializerTests
                 "locale": "ENUS",
                 "replaceFontConstantVars": false,
                 "replaceFontStylesVars": false,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": false
               }
             }
@@ -222,7 +222,7 @@ public class MetaGameStringPropertiesSerializerTests
                 GameStringTextType = GameStringTextType.ColoredText,
                 ReplaceFontConstantVars = false,
                 ReplaceFontStylesVars = true,
-                PreserveFontStyleConstantVars = false,
+                PreserveFontConstantVars = false,
                 PreserveFontStyleVars = true,
             },
         };
@@ -245,7 +245,7 @@ public class MetaGameStringPropertiesSerializerTests
                 "textType": "ColoredText",
                 "replaceFontConstantVars": false,
                 "replaceFontStylesVars": true,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": true
               }
             }
@@ -307,7 +307,7 @@ public class MetaGameStringPropertiesSerializerTests
                 GameStringTextType = GameStringTextType.RawText,
                 ReplaceFontConstantVars = true,
                 ReplaceFontStylesVars = true,
-                PreserveFontStyleConstantVars = true,
+                PreserveFontConstantVars = true,
                 PreserveFontStyleVars = true,
             },
         };
@@ -327,7 +327,7 @@ public class MetaGameStringPropertiesSerializerTests
                 "textType": "RawText",
                 "replaceFontConstantVars": true,
                 "replaceFontStylesVars": true,
-                "preserveFontStyleConstantVars": true,
+                "preserveFontConstantVars": true,
                 "preserveFontStyleVars": true
               }
             }
@@ -362,7 +362,7 @@ public class MetaGameStringPropertiesSerializerTests
                 "locale": "ENUS",
                 "replaceFontConstantVars": false,
                 "replaceFontStylesVars": false,
-                "preserveFontStyleConstantVars": false,
+                "preserveFontConstantVars": false,
                 "preserveFontStyleVars": false
               }
             }

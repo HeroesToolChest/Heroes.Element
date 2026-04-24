@@ -183,7 +183,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -265,7 +265,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -413,7 +413,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -486,7 +486,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -601,7 +601,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -646,7 +646,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -705,7 +705,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -750,7 +750,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -809,7 +809,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -854,7 +854,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -913,7 +913,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -958,7 +958,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1017,7 +1017,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1060,7 +1060,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1111,7 +1111,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1157,7 +1157,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1220,7 +1220,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1266,7 +1266,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1329,7 +1329,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1375,7 +1375,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1438,7 +1438,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1484,7 +1484,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1547,7 +1547,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1593,7 +1593,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1656,7 +1656,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1703,7 +1703,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1768,7 +1768,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1814,7 +1814,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1877,7 +1877,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1922,7 +1922,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -1981,7 +1981,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -2026,7 +2026,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -2085,7 +2085,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -2132,7 +2132,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -2195,7 +2195,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
@@ -2237,7 +2237,7 @@ public class GameStringDocumentTests
               "textType": "RawText",
               "replaceFontConstantVars": true,
               "replaceFontStylesVars": true,
-              "preserveFontStyleConstantVars": false,
+              "preserveFontConstantVars": false,
               "preserveFontStyleVars": false
             }
           },
