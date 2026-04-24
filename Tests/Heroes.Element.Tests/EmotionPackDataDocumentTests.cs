@@ -370,6 +370,69 @@ public class EmotionPackDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonPackDataDocument emoticonPackData = EmoticonPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. emoticonPackData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<EmoticonPack>();
+        result.OfType<EmoticonPack>().Should().Contain(e => e.Id == "AbathurEmoticonPack1");
+        result.OfType<EmoticonPack>().Should().Contain(e => e.Id == "AbathurEmoticonPack2");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "EmoticonPackData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonPackDataDocument emoticonPackData = EmoticonPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. emoticonPackData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonPackDataDocument emoticonPackData = EmoticonPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. emoticonPackData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        EmoticonPack pack2 = result.OfType<EmoticonPack>().First(e => e.Id == "AbathurEmoticonPack2");
+        Pack2BasicAssertions(pack2);
+    }
+
     private static void Pack2BasicAssertions(EmoticonPack emoticonPack)
     {
         emoticonPack.Id.Should().Be("AbathurEmoticonPack2");

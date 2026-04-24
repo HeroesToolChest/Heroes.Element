@@ -433,6 +433,69 @@ public class BannerDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. bannerData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Banner>();
+        result.OfType<Banner>().Should().Contain(b => b.Id == "BannerD3Imperius");
+        result.OfType<Banner>().Should().Contain(b => b.Id == "BannerD3Tyrael");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "BannerData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. bannerData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. bannerData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Banner tyrael = result.OfType<Banner>().First(b => b.Id == "BannerD3Tyrael");
+        TyraelBasicAssertions(tyrael);
+    }
+
     private static void TyraelBasicAssertions(Banner banner)
     {
         banner.Id.Should().Be("BannerD3Tyrael");

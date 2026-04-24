@@ -110,6 +110,12 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     }
 
     /// <inheritdoc/>
+    public IEnumerable<IElementObject> GetElementObjects()
+    {
+        return GetElements().Cast<IElementObject>();
+    }
+
+    /// <inheritdoc/>
     public void Dispose()
     {
         Dispose(disposing: true);
@@ -194,10 +200,26 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
         if (element is null)
             return default;
 
-        (element as IElementObjectSetter)?.SetId(id);
+        SetProperties(id, element);
+
+        if (string.IsNullOrWhiteSpace(id))
+            throw new JsonException("Element id property cannot be empty or whitespace.");
+
         UpdateGameStringTexts(element);
 
         return element;
+    }
+
+    /// <summary>
+    /// Sets the properties for the specified element after it has been deserialized.
+    /// The <c>id</c> property is required to be set.
+    /// Gamestring properties should not be set in this method, but rather in the <see cref="UpdateGameStringTexts(T)"/> method.
+    /// </summary>
+    /// <param name="id">The identifier of the element.</param>
+    /// <param name="element">The element to set properties for.</param>
+    protected virtual void SetProperties(string id, T element)
+    {
+        (element as IElementObjectSetter)?.SetId(id);
     }
 
     /// <summary>

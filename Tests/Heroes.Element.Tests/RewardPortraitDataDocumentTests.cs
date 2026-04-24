@@ -386,6 +386,69 @@ public class RewardPortraitDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. rewardPortraitData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<RewardPortrait>();
+        result.OfType<RewardPortrait>().Should().Contain(r => r.Id == "RewardPortraitRaynor001");
+        result.OfType<RewardPortrait>().Should().Contain(r => r.Id == "RewardPortraitRaynor002");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "RewardPortraitData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. rewardPortraitData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        RewardPortraitDataDocument rewardPortraitData = RewardPortraitDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. rewardPortraitData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        RewardPortrait portrait002 = result.OfType<RewardPortrait>().First(r => r.Id == "RewardPortraitRaynor002");
+        Portrait002BasicAssertions(portrait002);
+    }
+
     private static void Portrait002BasicAssertions(RewardPortrait rewardPortrait)
     {
         rewardPortrait.Id.Should().Be("RewardPortraitRaynor002");

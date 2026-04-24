@@ -431,6 +431,69 @@ public class BoostDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. boostData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Boost>();
+        result.OfType<Boost>().Should().Contain(b => b.Id == "BoostStimpak");
+        result.OfType<Boost>().Should().Contain(b => b.Id == "BoostMegaStimpak");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "BoostData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. boostData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BoostDataDocument boostData = BoostDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. boostData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Boost megaStimpak = result.OfType<Boost>().First(b => b.Id == "BoostMegaStimpak");
+        MegaStimpakBasicAssertions(megaStimpak);
+    }
+
     private static void MegaStimpakBasicAssertions(Boost boost)
     {
         boost.Id.Should().Be("BoostMegaStimpak");

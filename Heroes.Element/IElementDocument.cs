@@ -35,4 +35,10 @@ public interface IElementDocument : IDisposable
     /// Gets a value indicating whether the HDP version in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
     /// </summary>
     bool MismatchedHdpVersion { get; }
+
+    /// <summary>
+    /// Gets all elements as <see cref="IElementObject"/>.
+    /// </summary>
+    /// <returns>A collection of all elements.</returns>
+    IEnumerable<IElementObject> GetElementObjects();
 }

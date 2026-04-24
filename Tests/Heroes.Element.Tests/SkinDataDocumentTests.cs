@@ -460,6 +460,69 @@ public class SkinDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. skinData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Skin>();
+        result.OfType<Skin>().Should().Contain(s => s.Id == "AbathurMechaVar1");
+        result.OfType<Skin>().Should().Contain(s => s.Id == "AbathurMechaVar2");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "SkinData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. skinData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. skinData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Skin mechaVar2 = result.OfType<Skin>().First(s => s.Id == "AbathurMechaVar2");
+        MechaVar2BasicAssertions(mechaVar2);
+    }
+
     private static void MechaVar2BasicAssertions(Skin skin)
     {
         skin.Id.Should().Be("AbathurMechaVar2");

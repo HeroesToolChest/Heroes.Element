@@ -419,6 +419,69 @@ public class UnitDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. unitData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Unit>();
+        result.OfType<Unit>().Should().Contain(u => u.Id == "FootmanUnit");
+        result.OfType<Unit>().Should().Contain(u => u.Id == "ArcherUnit");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "UnitData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. unitData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        UnitDataDocument unitData = UnitDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. unitData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Unit archer = result.OfType<Unit>().First(u => u.Id == "ArcherUnit");
+        ArcherUnitBasicAssertions(archer);
+    }
+
     private static void ArcherUnitBasicAssertions(Unit unit)
     {
         unit.Id.Should().Be("ArcherUnit");

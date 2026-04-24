@@ -444,6 +444,69 @@ public class SprayDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SprayDataDocument sprayData = SprayDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. sprayData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Spray>();
+        result.OfType<Spray>().Should().Contain(s => s.Id == "SprayAnimatedBWAhhhh");
+        result.OfType<Spray>().Should().Contain(s => s.Id == "SprayStaticPackHappy");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "SprayData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SprayDataDocument sprayData = SprayDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. sprayData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        SprayDataDocument sprayData = SprayDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. sprayData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Spray happyFace = result.OfType<Spray>().First(s => s.Id == "SprayStaticPackHappy");
+        HappyFaceBasicAssertions(happyFace);
+    }
+
     private static void HappyFaceBasicAssertions(Spray spray)
     {
         spray.Id.Should().Be("SprayStaticPackHappy");

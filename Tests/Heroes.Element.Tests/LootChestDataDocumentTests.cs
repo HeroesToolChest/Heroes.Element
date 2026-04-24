@@ -343,6 +343,69 @@ public class LootChestDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        LootChestDataDocument lootChestData = LootChestDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. lootChestData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<LootChest>();
+        result.OfType<LootChest>().Should().Contain(l => l.Id == "LootChestRare");
+        result.OfType<LootChest>().Should().Contain(l => l.Id == "LootChestEpic");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "LootChestData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        LootChestDataDocument lootChestData = LootChestDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. lootChestData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        LootChestDataDocument lootChestData = LootChestDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. lootChestData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        LootChest epic = result.OfType<LootChest>().First(l => l.Id == "LootChestEpic");
+        EpicBasicAssertions(epic);
+    }
+
     private static void EpicBasicAssertions(LootChest lootChest)
     {
         lootChest.Id.Should().Be("LootChestEpic");

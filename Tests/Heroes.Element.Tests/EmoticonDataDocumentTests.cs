@@ -314,6 +314,69 @@ public class EmoticonDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonDataDocument emoticonData = EmoticonDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. emoticonData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Emoticon>();
+        result.OfType<Emoticon>().Should().Contain(e => e.Id == "abathur_pack_1");
+        result.OfType<Emoticon>().Should().Contain(e => e.Id == "abathur_pack_2");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "EmoticonData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonDataDocument emoticonData = EmoticonDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. emoticonData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        EmoticonDataDocument emoticonData = EmoticonDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. emoticonData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Emoticon slug = result.OfType<Emoticon>().First(e => e.Id == "abathur_pack_2");
+        SlugBasicAssertions(slug);
+    }
+
     private static void SlugBasicAssertions(Emoticon emoticon)
     {
         emoticon.Id.Should().Be("abathur_pack_2");

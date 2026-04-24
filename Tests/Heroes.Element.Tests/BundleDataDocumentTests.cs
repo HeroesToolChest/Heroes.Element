@@ -470,6 +470,69 @@ public class BundleDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. bundleData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Bundle>();
+        result.OfType<Bundle>().Should().Contain(b => b.Id == "MegaBundleStarterPack");
+        result.OfType<Bundle>().Should().Contain(b => b.Id == "BundleHeroesOfTheStorm");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "BundleData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. bundleData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. bundleData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Bundle heroesBundle = result.OfType<Bundle>().First(b => b.Id == "BundleHeroesOfTheStorm");
+        HeroesOfTheStormBasicAssertions(heroesBundle);
+    }
+
     private static void HeroesOfTheStormBasicAssertions(Bundle bundle)
     {
         bundle.Id.Should().Be("BundleHeroesOfTheStorm");

@@ -259,6 +259,69 @@ public class TypeDescriptionDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. typeDescriptionData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<TypeDescription>();
+        result.OfType<TypeDescription>().Should().Contain(t => t.Id == "TypeDescriptionHero");
+        result.OfType<TypeDescription>().Should().Contain(t => t.Id == "TypeDescriptionSkin");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "TypeDescriptionData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. typeDescriptionData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. typeDescriptionData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        TypeDescription skin = result.OfType<TypeDescription>().First(t => t.Id == "TypeDescriptionSkin");
+        SkinBasicAssertions(skin);
+    }
+
     private static void SkinBasicAssertions(TypeDescription typeDescription)
     {
         typeDescription.Id.Should().Be("TypeDescriptionSkin");

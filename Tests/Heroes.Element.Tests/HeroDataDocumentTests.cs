@@ -1143,6 +1143,69 @@ public class HeroDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. heroData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Hero>();
+        result.OfType<Hero>().Should().Contain(h => h.Id == "Abathur");
+        result.OfType<Hero>().Should().Contain(h => h.Id == "Alarak");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "HeroData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. heroData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. heroData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Hero alarak = result.OfType<Hero>().First(h => h.Id == "Alarak");
+        AlarakBasicAssertions(alarak);
+    }
+
     private static void AlarakBasicAssertions(Hero hero)
     {
         hero.Id.Should().Be("Alarak");

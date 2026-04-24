@@ -441,6 +441,69 @@ public class MountDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MountDataDocument mountData = MountDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. mountData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Mount>();
+        result.OfType<Mount>().Should().Contain(m => m.Id == "CloudSerpentMount");
+        result.OfType<Mount>().Should().Contain(m => m.Id == "MechanicalSpiderMount");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MountData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MountDataDocument mountData = MountDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. mountData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MountDataDocument mountData = MountDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. mountData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Mount mechanicalSpider = result.OfType<Mount>().First(m => m.Id == "MechanicalSpiderMount");
+        MechanicalSpiderBasicAssertions(mechanicalSpider);
+    }
+
     private static void MechanicalSpiderBasicAssertions(Mount mount)
     {
         mount.Id.Should().Be("MechanicalSpiderMount");

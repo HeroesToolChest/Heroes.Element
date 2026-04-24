@@ -623,6 +623,107 @@ public class ElementDocumentTests
         act.Should().NotThrow();
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {
+                "Element1": {
+                    "id": "Element1"
+                },
+                "Element2": {
+                    "id": "Element2"
+                }
+            }
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        TestElementBaseData elementData = new(jsonDocument, null);
+
+        // act
+        List<object> result = [.. elementData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<TestElementObject>();
+        result.OfType<TestElementObject>().Should().Contain(e => e.Id == "Element1");
+        result.OfType<TestElementObject>().Should().Contain(e => e.Id == "Element2");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        TestElementBaseData elementData = new(jsonDocument, null);
+
+        // act
+        List<object> result = [.. elementData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {
+                "TestElement1": {
+                    "id": "TestElement1"
+                },
+                "TestElement2": {
+                    "id": "TestElement2"
+                }
+            }
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        TestElementBaseData elementData = new(jsonDocument, null);
+
+        // act
+        List<object> result = [.. elementData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        TestElementObject element1 = result.OfType<TestElementObject>().First(e => e.Id == "TestElement1");
+        element1.Id.Should().Be("TestElement1");
+
+        TestElementObject element2 = result.OfType<TestElementObject>().First(e => e.Id == "TestElement2");
+        element2.Id.Should().Be("TestElement2");
+    }
+
     // Test implementation of ElementBaseData for testing purposes
     private class TestElementBaseData : ElementDocument<TestElementObject>
     {
@@ -641,6 +742,11 @@ public class ElementDocumentTests
         protected override void UpdateGameStringTexts(TestElementObject element)
         {
             UpdateGameStringsCalled = true;
+        }
+
+        protected override void SetProperties(string id, TestElementObject element)
+        {
+            element.SetId(id);
         }
     }
 

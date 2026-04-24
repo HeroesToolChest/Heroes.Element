@@ -439,6 +439,69 @@ public class AnnouncerDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. announcerData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Announcer>();
+        result.OfType<Announcer>().Should().Contain(a => a.Id == "AbathurAnnouncer");
+        result.OfType<Announcer>().Should().Contain(a => a.Id == "AlarakAnnouncer");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "AnnouncerData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. announcerData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. announcerData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Announcer alarak = result.OfType<Announcer>().First(h => h.Id == "AlarakAnnouncer");
+        AlarakBasicAssertions(alarak);
+    }
+
     private static void AlarakBasicAssertions(Announcer announcer)
     {
         announcer.Id.Should().Be("AlarakAnnouncer");

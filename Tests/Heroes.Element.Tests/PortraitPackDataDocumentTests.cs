@@ -368,6 +368,69 @@ public class PortraitPackDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. portraitPackData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<PortraitPack>();
+        result.OfType<PortraitPack>().Should().Contain(p => p.Id == "PortraitPackStarcraftLegacy1");
+        result.OfType<PortraitPack>().Should().Contain(p => p.Id == "PortraitPackStarcraftLegacy2");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "PortraitPackData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. portraitPackData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. portraitPackData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        PortraitPack pack2 = result.OfType<PortraitPack>().First(p => p.Id == "PortraitPackStarcraftLegacy2");
+        Pack2BasicAssertions(pack2);
+    }
+
     private static void Pack2BasicAssertions(PortraitPack portraitPack)
     {
         portraitPack.Id.Should().Be("PortraitPackStarcraftLegacy2");

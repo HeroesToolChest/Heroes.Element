@@ -437,6 +437,69 @@ public class VoiceLineDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. voiceLineData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<VoiceLine>();
+        result.OfType<VoiceLine>().Should().Contain(v => v.Id == "AbathurBase_VoiceLine01");
+        result.OfType<VoiceLine>().Should().Contain(v => v.Id == "AbathurBase_VoiceLine02");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "VoiceLineData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. voiceLineData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. voiceLineData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        VoiceLine voiceLine02 = result.OfType<VoiceLine>().First(v => v.Id == "AbathurBase_VoiceLine02");
+        VoiceLine02BasicAssertions(voiceLine02);
+    }
+
     private static void VoiceLine02BasicAssertions(VoiceLine voiceLine)
     {
         voiceLine.Id.Should().Be("AbathurBase_VoiceLine02");

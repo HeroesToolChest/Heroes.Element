@@ -451,6 +451,69 @@ public class MapDataDocumentTests
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
     }
 
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsAllElementsAsObjects()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MapDataDocument mapData = MapDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. mapData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+        result.Should().AllBeOfType<Map>();
+        result.OfType<Map>().Should().Contain(m => m.Id == "BattlefieldOfEternity");
+        result.OfType<Map>().Should().Contain(m => m.Id == "CursedHollow");
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithEmptyItems_ReturnsEmpty()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "itemsType": "Data",
+            "dataType": "MapData"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MapDataDocument mapData = MapDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. mapData.GetElementObjects()];
+
+        // assert
+        result.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetElementObjects_WithItems_ReturnsObjectsWithCorrectProperties()
+    {
+        // arrange
+        string json = _defaultArrangeJson;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        MapDataDocument mapData = MapDataDocument.Load(jsonDocument);
+
+        // act
+        List<object> result = [.. mapData.GetElementObjects()];
+
+        // assert
+        result.Should().HaveCount(2);
+
+        Map cursedHollow = result.OfType<Map>().First(m => m.Id == "CursedHollow");
+        CursedHollowBasicAssertions(cursedHollow);
+    }
+
     private static void CursedHollowBasicAssertions(Map map)
     {
         map.Id.Should().Be("CursedHollow");
