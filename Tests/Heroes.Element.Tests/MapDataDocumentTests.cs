@@ -359,7 +359,7 @@ public class MapDataDocumentTests
         Action act = () => MapDataDocument.Load(jsonDocument);
 
         // assert
-        act.Should().Throw<JsonException>().WithMessage("No 'meta' and/or 'items' property found");
+        act.Should().Throw<JsonException>().WithMessage("No 'meta' or 'items' property found");
     }
 
     [TestMethod]
@@ -379,7 +379,7 @@ public class MapDataDocumentTests
         Action act = () => MapDataDocument.Load(jsonDocument);
 
         // assert
-        act.Should().Throw<JsonException>().WithMessage("No 'meta' and/or 'items' property found");
+        act.Should().Throw<JsonException>().WithMessage("No 'meta' or 'items' property found");
     }
 
     [TestMethod]

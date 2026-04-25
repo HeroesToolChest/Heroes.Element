@@ -549,7 +549,7 @@ public class GameStringDocument : IDisposable
             return metaElement.Deserialize<MetaGameStringProperties>(_metaJsonSerializerOptions) ?? throw new JsonException("Could not deserialize 'meta' object");
         }
 
-        throw new JsonException("No 'meta' and/or 'items' property found");
+        throw new JsonException("No 'meta' or 'items' property found");
     }
 
     private (List<Ability> Abilities, List<Ability> SubAbilities) GetAbilities(Unit unit)

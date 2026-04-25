@@ -277,7 +277,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
             return metaDataProperties;
         }
 
-        throw new JsonException("No 'meta' and/or 'items' property found");
+        throw new JsonException("No 'meta' or 'items' property found");
     }
 
     private void ValidateTypes(DataType dataType)
