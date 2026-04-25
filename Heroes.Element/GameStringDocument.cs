@@ -67,6 +67,7 @@ public class GameStringDocument : IDisposable
     public void UpdateGameStrings(Hero hero)
     {
         ClearStoreItemProperties(hero);
+
         hero.ExpandedRole = null;
         hero.Difficulty = null;
         hero.Title = null;
@@ -75,11 +76,9 @@ public class GameStringDocument : IDisposable
         hero.Shield.ShieldType = null;
         hero.Roles.Clear();
 
-        IEnumerable<Ability> abilities = hero.Abilities.SelectMany(x => x.Value);
-        foreach (Ability ability in abilities)
-        {
-            ClearAbilityTalentBaseData(ability);
-        }
+        (List<Ability> abilities, List<Ability> subAbilities) = GetAbilities(hero);
+
+        ClearAbilities(abilities, subAbilities);
 
         IEnumerable<Talent> talents = hero.Talents.SelectMany(x => x.Value);
         foreach (Talent talent in talents)
@@ -124,7 +123,7 @@ public class GameStringDocument : IDisposable
             }
         }
 
-        SetAbilities(abilities, gameStringElement);
+        SetAbilities(abilities, subAbilities, gameStringElement);
     }
 
     /// <summary>
@@ -139,12 +138,9 @@ public class GameStringDocument : IDisposable
         unit.Life.LifeType = null;
         unit.Shield.ShieldType = null;
 
-        IEnumerable<Ability> abilities = unit.Abilities.SelectMany(x => x.Value);
+        (List<Ability> abilities, List<Ability> subAbilities) = GetAbilities(unit);
 
-        foreach (Ability ability in abilities)
-        {
-            ClearAbilityTalentBaseData(ability);
-        }
+        ClearAbilities(abilities, subAbilities);
 
         if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
             !gameStringElement.TryGetProperty("unit", out JsonElement unitElement))
@@ -161,7 +157,7 @@ public class GameStringDocument : IDisposable
         if (TryGetJsonElement(unitElement, "shieldType", unit.Id, out element))
             unit.Shield.ShieldType = GetGameStringText(element.GetString());
 
-        SetAbilities(abilities, gameStringElement);
+        SetAbilities(abilities, subAbilities, gameStringElement);
     }
 
     /// <summary>
@@ -520,6 +516,19 @@ public class GameStringDocument : IDisposable
         abilityTalentBase.ShortText = null;
     }
 
+    private static void ClearAbilities(List<Ability> abilities, List<Ability> subAbilities)
+    {
+        foreach (Ability ability in abilities)
+        {
+            ClearAbilityTalentBaseData(ability);
+        }
+
+        foreach (Ability subAbility in subAbilities)
+        {
+            ClearAbilityTalentBaseData(subAbility);
+        }
+    }
+
     private GameStringText? GetGameStringText(string? value)
     {
         if (value is null)
@@ -538,13 +547,26 @@ public class GameStringDocument : IDisposable
         throw new JsonException("No 'meta' and/or 'items' property found");
     }
 
-    private void SetAbilities(IEnumerable<Ability> abilities, JsonElement gameStringElement)
+    private (List<Ability> Abilities, List<Ability> SubAbilities) GetAbilities(Unit unit)
+    {
+        List<Ability> abilities = unit.Abilities.SelectMany(x => x.Value).ToList();
+        List<Ability> subAbilities = unit.SubAbilities.SelectMany(x => x.Value).SelectMany(x => x.Value).ToList();
+
+        return (abilities, subAbilities);
+    }
+
+    private void SetAbilities(List<Ability> abilities, List<Ability> subAbilities, JsonElement gameStringElement)
     {
         if (gameStringElement.TryGetProperty("ability", out JsonElement abilityElement))
         {
             foreach (Ability ability in abilities)
             {
                 SetAbilityTalentBaseData(abilityElement, ability, ability.LinkId.Id);
+            }
+
+            foreach (Ability subAbility in subAbilities)
+            {
+                SetAbilityTalentBaseData(abilityElement, subAbility, subAbility.LinkId.Id);
             }
         }
     }

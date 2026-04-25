@@ -313,6 +313,31 @@ public class GameStringDocumentTests
                 "Abathur": "shield"
               }
             },
+            "ability": {
+              "cooldownText": {
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Cooldown: 30 seconds",
+                "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Cooldown: 90 seconds",
+                "AbathurSpawnLocusts|AbathurLocustStrain|Q": "Cooldown: 15 seconds",
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Cooldown: 4 seconds"
+              },
+              "energyText": {
+                "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Costs <c val=\"bfd4fd\">100</c> Mana"
+              },
+              "lifeText": {
+                "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Costs 1 Health"
+              },
+              "name": {
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Deep Tunnel",
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Evolve Monstrosity Active"
+              },
+              "shortText": {
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay."
+              },
+              "fullText": {
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay. While burrowed, the Symbiote is invulnerable and cannot move or attack.",
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Activate to cast Symbiote on Abathur's Monstrosity."
+              }
+            },
             "talent": {
               "cooldownText": {
                 "AbathurPressurizedGlands|AbathurPressurizedGlands|Heroic|Level1": "Cooldown: 5 seconds",
@@ -339,6 +364,13 @@ public class GameStringDocumentTests
         }
         """;
         Hero hero = new("Abathur");
+        hero.Abilities.Add(AbilityTier.Basic, [new Ability() { AbilityElementId = "AbathurDeepTunnel", ButtonElementId = "AbathurDeepTunnel", AbilityType = AbilityType.Z, FullText = new GameStringText("temp") }]);
+        hero.Abilities.Add(
+            AbilityTier.Heroic,
+            [
+                new Ability() { AbilityElementId = "AbathurEvolveMonstrosity", ButtonElementId = "AbathurEvolveMonstrosityHotbar", AbilityType = AbilityType.Heroic },
+                new Ability() { AbilityElementId = "AbathurSpawnLocusts", ButtonElementId = "AbathurLocustStrain", AbilityType = AbilityType.Q },
+            ]);
         hero.Talents.Add(
             TalentTier.Level1,
             [
@@ -350,6 +382,10 @@ public class GameStringDocumentTests
                 new Talent() { TalentElementId = "AbathurSurvivalInstincts", ButtonElementId = "AbathurSurvivalInstincts", AbilityType = AbilityType.Active, Tier = TalentTier.Level4 },
                 new Talent() { TalentElementId = "AbathurRegenBioSteel", ButtonElementId = "AbathurRegenBioSteel", AbilityType = AbilityType.Passive, Tier = TalentTier.Level4, Name = new GameStringText("Bio") }
             ]);
+        hero.SubAbilities.Add(new AbilityLinkId("AbathurEvolveMonstrosity", "AbathurEvolveMonstrosityHotbar", AbilityType.Heroic), new Dictionary<AbilityTier, IList<Ability>>()
+        {
+            { AbilityTier.Heroic, [new Ability() { AbilityElementId = "AbathurEvolveMonstrosityActiveSymbiote", ButtonElementId = "EvolveMonstrosityActiveHotbar", AbilityType = AbilityType.Heroic }] },
+        });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
         GameStringDocument document = GameStringDocument.Load(jsonDocument);
@@ -372,6 +408,11 @@ public class GameStringDocumentTests
         hero.Life.LifeType!.RawText.Should().Be("health");
         hero.Shield.ShieldType!.RawText.Should().Be("shield");
 
+        hero.Abilities[AbilityTier.Basic][0].Name!.RawText.Should().Be("Deep Tunnel");
+        hero.Abilities[AbilityTier.Heroic][0].CooldownText!.RawText.Should().Be("Cooldown: 90 seconds");
+        hero.Abilities[AbilityTier.Heroic][1].CooldownText!.RawText.Should().Be("Cooldown: 15 seconds");
+        hero.Abilities[AbilityTier.Heroic][1].EnergyText.Should().BeNull();
+
         hero.Talents[TalentTier.Level1][0].CooldownText!.RawText.Should().Be("Cooldown: 5 seconds");
         hero.Talents[TalentTier.Level1][0].EnergyText!.RawText.Should().Be("Costs 50 Mana");
         hero.Talents[TalentTier.Level1][0].LifeText!.RawText.Should().Be("Costs 5 Health");
@@ -392,6 +433,11 @@ public class GameStringDocumentTests
         hero.Talents[TalentTier.Level4][1].Name.Should().BeNull();
         hero.Talents[TalentTier.Level4][1].ShortText.Should().BeNull();
         hero.Talents[TalentTier.Level4][1].FullText.Should().BeNull();
+
+        Ability evolveMonstrositySubAbility = hero.SubAbilities[new AbilityLinkId("AbathurEvolveMonstrosity", "AbathurEvolveMonstrosityHotbar", AbilityType.Heroic)][AbilityTier.Heroic][0];
+        evolveMonstrositySubAbility.CooldownText!.RawText.Should().Be("Cooldown: 4 seconds");
+        evolveMonstrositySubAbility.FullText!.RawText.Should().Be("Activate to cast Symbiote on Abathur's Monstrosity.");
+        evolveMonstrositySubAbility.Name!.RawText.Should().Be("Evolve Monstrosity Active");
     }
 
     [TestMethod]
@@ -515,7 +561,8 @@ public class GameStringDocumentTests
               "cooldownText": {
                 "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Cooldown: 30 seconds",
                 "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Cooldown: 90 seconds",
-                "AbathurSpawnLocusts|AbathurLocustStrain|Q": "Cooldown: 15 seconds"
+                "AbathurSpawnLocusts|AbathurLocustStrain|Q": "Cooldown: 15 seconds",
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Cooldown: 4 seconds"
               },
               "energyText": {
                 "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Costs <c val=\"bfd4fd\">100</c> Mana"
@@ -524,13 +571,15 @@ public class GameStringDocumentTests
                 "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Costs 1 Health"
               },
               "name": {
-                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Deep Tunnel"
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Deep Tunnel",
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Evolve Monstrosity Active"
               },
               "shortText": {
                 "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay."
               },
               "fullText": {
-                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay. While burrowed, the Symbiote is invulnerable and cannot move or attack."
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay. While burrowed, the Symbiote is invulnerable and cannot move or attack.",
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Activate to cast Symbiote on Abathur's Monstrosity."
               }
             }
           }
@@ -547,6 +596,10 @@ public class GameStringDocumentTests
                 new Ability() { AbilityElementId = "AbathurEvolveMonstrosity", ButtonElementId = "AbathurEvolveMonstrosityHotbar", AbilityType = AbilityType.Heroic },
                 new Ability() { AbilityElementId = "AbathurSpawnLocusts", ButtonElementId = "AbathurLocustStrain", AbilityType = AbilityType.Q },
             ]);
+        unit.SubAbilities.Add(new AbilityLinkId("AbathurEvolveMonstrosity", "AbathurEvolveMonstrosityHotbar", AbilityType.Heroic), new Dictionary<AbilityTier, IList<Ability>>()
+        {
+            { AbilityTier.Heroic, [new Ability() { AbilityElementId = "AbathurEvolveMonstrosityActiveSymbiote", ButtonElementId = "EvolveMonstrosityActiveHotbar", AbilityType = AbilityType.Heroic }] },
+        });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
         GameStringDocument document = GameStringDocument.Load(jsonDocument);
@@ -580,6 +633,11 @@ public class GameStringDocumentTests
         unit.Abilities[AbilityTier.Heroic][1].Name.Should().BeNull();
         unit.Abilities[AbilityTier.Heroic][1].ShortText.Should().BeNull();
         unit.Abilities[AbilityTier.Heroic][1].FullText.Should().BeNull();
+
+        Ability evolveMonstrositySubAbility = unit.SubAbilities[new AbilityLinkId("AbathurEvolveMonstrosity", "AbathurEvolveMonstrosityHotbar", AbilityType.Heroic)][AbilityTier.Heroic][0];
+        evolveMonstrositySubAbility.CooldownText!.RawText.Should().Be("Cooldown: 4 seconds");
+        evolveMonstrositySubAbility.FullText!.RawText.Should().Be("Activate to cast Symbiote on Abathur's Monstrosity.");
+        evolveMonstrositySubAbility.Name!.RawText.Should().Be("Evolve Monstrosity Active");
     }
 
     [TestMethod]
