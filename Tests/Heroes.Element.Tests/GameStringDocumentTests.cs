@@ -271,6 +271,12 @@ public class GameStringDocumentTests
           },
           "items": {
             "unit": {
+              "description": {
+                "AbathurSymbiote": "Spawn and attach a Symbiote to a target ally or Structure. While active, Abathur controls the Symbiote, gaining access to new Abilities. The Symbiote is able to gain XP from nearby enemy deaths."
+              },
+              "name": {
+                "AbathurSymbiote": "Symbiote"
+              }
             },
             "hero": {
               "description": {
@@ -318,7 +324,9 @@ public class GameStringDocumentTests
                 "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Cooldown: 30 seconds",
                 "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Cooldown: 90 seconds",
                 "AbathurSpawnLocusts|AbathurLocustStrain|Q": "Cooldown: 15 seconds",
-                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Cooldown: 4 seconds"
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Cooldown: 4 seconds",
+                "AbathurSymbioteStab|AbathurSymbioteStab|Q": "Charge Cooldown: 3 seconds"
+                
               },
               "energyText": {
                 "AbathurEvolveMonstrosity|AbathurEvolveMonstrosityHotbar|Heroic": "Costs <c val=\"bfd4fd\">100</c> Mana"
@@ -328,14 +336,17 @@ public class GameStringDocumentTests
               },
               "name": {
                 "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Deep Tunnel",
-                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Evolve Monstrosity Active"
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Evolve Monstrosity Active",
+                "AbathurSymbioteStab|AbathurSymbioteStab|Q": "Stab"
               },
               "shortText": {
-                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay."
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay.",
+                "AbathurSymbioteStab|AbathurSymbioteStab|Q": "Shoots a spike that deals damage to the first enemy it contacts."
               },
               "fullText": {
                 "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Burrow to a target location, emerging after a short delay. While burrowed, the Symbiote is invulnerable and cannot move or attack.",
-                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Activate to cast Symbiote on Abathur's Monstrosity."
+                "AbathurEvolveMonstrosityActiveSymbiote|EvolveMonstrosityActiveHotbar|Heroic": "Activate to cast Symbiote on Abathur's Monstrosity.",
+                "AbathurSymbioteStab|AbathurSymbioteStab|Q": "Shoots a spike towards target area that deals"
               }
             },
             "talent": {
@@ -385,6 +396,13 @@ public class GameStringDocumentTests
         hero.SubAbilities.Add(new AbilityLinkId("AbathurEvolveMonstrosity", "AbathurEvolveMonstrosityHotbar", AbilityType.Heroic), new Dictionary<AbilityTier, IList<Ability>>()
         {
             { AbilityTier.Heroic, [new Ability() { AbilityElementId = "AbathurEvolveMonstrosityActiveSymbiote", ButtonElementId = "EvolveMonstrosityActiveHotbar", AbilityType = AbilityType.Heroic }] },
+        });
+        hero.HeroUnits.Add("AbathurSymbiote", new Unit("AbathurSymbiote")
+        {
+            Abilities = new Dictionary<AbilityTier, IList<Ability>>()
+            {
+                { AbilityTier.Basic, [new Ability() { AbilityElementId = "AbathurSymbioteStab", ButtonElementId = "AbathurSymbioteStab", AbilityType = AbilityType.Q }] },
+            },
         });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -438,6 +456,11 @@ public class GameStringDocumentTests
         evolveMonstrositySubAbility.CooldownText!.RawText.Should().Be("Cooldown: 4 seconds");
         evolveMonstrositySubAbility.FullText!.RawText.Should().Be("Activate to cast Symbiote on Abathur's Monstrosity.");
         evolveMonstrositySubAbility.Name!.RawText.Should().Be("Evolve Monstrosity Active");
+
+        Unit heroUnitAbathurSymbiote = hero.HeroUnits["AbathurSymbiote"];
+        heroUnitAbathurSymbiote.Name!.RawText.Should().Be("Symbiote");
+        heroUnitAbathurSymbiote.Abilities[AbilityTier.Basic][0].Name!.RawText.Should().Be("Stab");
+        heroUnitAbathurSymbiote.Abilities[AbilityTier.Basic][0].ShortText!.RawText.Should().Be("Shoots a spike that deals damage to the first enemy it contacts.");
     }
 
     [TestMethod]

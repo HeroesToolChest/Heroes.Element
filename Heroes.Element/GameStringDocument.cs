@@ -124,6 +124,11 @@ public class GameStringDocument : IDisposable
         }
 
         SetAbilities(abilities, subAbilities, gameStringElement);
+
+        foreach (Unit heroUnit in hero.HeroUnits.Values)
+        {
+            UpdateGameStrings(heroUnit);
+        }
     }
 
     /// <summary>
@@ -549,8 +554,8 @@ public class GameStringDocument : IDisposable
 
     private (List<Ability> Abilities, List<Ability> SubAbilities) GetAbilities(Unit unit)
     {
-        List<Ability> abilities = unit.Abilities.SelectMany(x => x.Value).ToList();
-        List<Ability> subAbilities = unit.SubAbilities.SelectMany(x => x.Value).SelectMany(x => x.Value).ToList();
+        List<Ability> abilities = [.. unit.Abilities.SelectMany(x => x.Value)];
+        List<Ability> subAbilities = [.. unit.SubAbilities.SelectMany(x => x.Value).SelectMany(x => x.Value)];
 
         return (abilities, subAbilities);
     }
