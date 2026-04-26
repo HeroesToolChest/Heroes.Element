@@ -27,19 +27,19 @@ public interface IElementDocument : IDisposable
 
     /// <summary>
     /// Gets a value indicating whether the HeroesVersion in the JSON data matches the version in the <see cref="GameStringDocument"/>.
-    /// This returns <see langword="true"/> if there is no <see cref="GameStringDocument"/>.
+    /// This returns <see langword="true"/> if <see cref="GameStringDocument"/> is <see langword="null"/>.
     /// </summary>
     bool IsMatchedHeroesVersion { get; }
 
     /// <summary>
     /// Gets a value indicating whether the HDP version in the JSON data matches the version in the <see cref="GameStringDocument"/>.
-    /// This returns <see langword="true"/> if there is no <see cref="GameStringDocument"/>.
+    /// This returns <see langword="true"/> if <see cref="GameStringDocument"/> is <see langword="null"/>.
     /// </summary>
     bool IsMatchedHdpVersion { get; }
 
     /// <summary>
-    /// Gets a value indicating whether the <see cref="DataType"/> of the JSON data matches one of the data types in the <see cref="GameStringDocument"/>.
-    /// This returns <see langword="true"/> if there is no <see cref="GameStringDocument"/>.
+    /// Gets a value indicating whether one of the data types in the <see cref="GameStringDocument"/> match with the JSON data <see cref="DataType"/>.
+    /// This returns <see langword="true"/> if <see cref="GameStringDocument"/> is <see langword="null"/>.
     /// </summary>
     bool IsMatchedDataType { get; }
 
