@@ -21,7 +21,7 @@ public interface IElementDocument : IDisposable
     GameStringDocument? GameStringDocument { get; }
 
     /// <summary>
-    /// Gets the metadata properties associated with the JSON data.
+    /// Gets the data meta properties.
     /// </summary>
     MetaDataProperties MetaDataProperties { get; }
 

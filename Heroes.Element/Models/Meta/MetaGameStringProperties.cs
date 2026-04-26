@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Models.Meta;
 
 /// <summary>
-/// Contains properties about the gamestring json file.
+/// Contains properties of the gamestring json file.
 /// </summary>
 public class MetaGameStringProperties : MetaProperties
 {
@@ -17,7 +17,7 @@ public class MetaGameStringProperties : MetaProperties
     public string? MapName { get; set; }
 
     /// <summary>
-    /// Gets or sets the description text for the gamestrings.
+    /// Gets or sets the properties of the gamestrings.
     /// </summary>
     [JsonPropertyName(Constants.DescriptionTextPropertyName)]
     public GameStringTextProperties GameStringTextProperties { get; set; } = new();

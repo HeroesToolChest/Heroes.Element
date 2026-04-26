@@ -45,7 +45,7 @@ public class GameStringDocument : IDisposable
     public JsonDocument JsonDocument { get; }
 
     /// <summary>
-    /// Gets the metadata properties associated with the JSON gamestring data.
+    /// Gets the gamestring meta properties.
     /// </summary>
     public MetaGameStringProperties MetaGameStringProperties { get; }
 
