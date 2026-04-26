@@ -363,7 +363,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, null);
 
         // act
-        MetaDataProperties result = elementData.MetaProperties;
+        MetaDataProperties result = elementData.MetaDataProperties;
 
         // assert
         result.Should().NotBeNull();
@@ -396,7 +396,7 @@ public class ElementDocumentTests
         // act
         Action act = () =>
         {
-            _ = new TestElementBaseData(jsonDocument, null).MetaProperties;
+            _ = new TestElementBaseData(jsonDocument, null).MetaDataProperties;
         };
 
         // assert
@@ -421,53 +421,11 @@ public class ElementDocumentTests
         // act
         Action act = () =>
         {
-            _ = new TestElementBaseData(jsonDocument, null).MetaProperties;
+            _ = new TestElementBaseData(jsonDocument, null).MetaDataProperties;
         };
 
         // assert
         act.Should().Throw<JsonException>();
-    }
-
-    [TestMethod]
-    public void MetaProperties_WithGameStringDocument_OverridesDescriptionText()
-    {
-        // arrange
-        string jsonData = """
-        {
-            "meta": {
-                "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0",
-                "itemsType": "Data",
-                "dataType": "Unknown"
-            },
-            "items": {}
-        }
-        """;
-
-        string gameStringData = """
-        {
-            "meta": {
-                "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "5.0.0",
-                "itemsType": "GameStrings",
-                "locale": "enus"
-            },
-            "items": {}
-        }
-        """;
-
-        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
-        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
-
-        // act
-        MetaDataProperties result = elementData.MetaProperties;
-
-        // assert
-        result.Should().NotBeNull();
-        result.GameStringTextProperties.Should().NotBeNull();
-        result.GameStringTextProperties!.Locale.Should().Be(StormLocale.ENUS);
     }
 
     [TestMethod]

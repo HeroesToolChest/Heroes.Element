@@ -534,6 +534,14 @@ public class GameStringDocument : IDisposable
         }
     }
 
+    private static (List<Ability> Abilities, List<Ability> SubAbilities) GetAbilities(Unit unit)
+    {
+        List<Ability> abilities = [.. unit.Abilities.SelectMany(x => x.Value)];
+        List<Ability> subAbilities = [.. unit.SubAbilities.SelectMany(x => x.Value).SelectMany(x => x.Value)];
+
+        return (abilities, subAbilities);
+    }
+
     private GameStringText? GetGameStringText(string? value)
     {
         if (value is null)
@@ -550,14 +558,6 @@ public class GameStringDocument : IDisposable
         }
 
         throw new JsonException("No 'meta' or 'items' property found");
-    }
-
-    private (List<Ability> Abilities, List<Ability> SubAbilities) GetAbilities(Unit unit)
-    {
-        List<Ability> abilities = [.. unit.Abilities.SelectMany(x => x.Value)];
-        List<Ability> subAbilities = [.. unit.SubAbilities.SelectMany(x => x.Value).SelectMany(x => x.Value)];
-
-        return (abilities, subAbilities);
     }
 
     private void SetAbilities(List<Ability> abilities, List<Ability> subAbilities, JsonElement gameStringElement)
