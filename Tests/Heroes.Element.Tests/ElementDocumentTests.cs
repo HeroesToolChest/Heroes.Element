@@ -4,7 +4,7 @@
 public class ElementDocumentTests
 {
     [TestMethod]
-    public void MismatchedHeroesVersion_WithNullGameStringDocument_ReturnsFalse()
+    public void IsIsMatchedHeroesVersion_WithNullGameStringDocument_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -23,14 +23,14 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, null);
 
         // act
-        bool result = elementData.IsMismatchedHeroesVersion;
+        bool result = elementData.IsMatchedHeroesVersion;
 
         // assert
-        result.Should().BeFalse();
+        result.Should().BeTrue();
     }
 
     [TestMethod]
-    public void MismatchedHeroesVersion_WithMatchingVersions_ReturnsFalse()
+    public void IsMatchedHeroesVersion_WithMatchingVersions_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -62,14 +62,14 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.IsMismatchedHeroesVersion;
+        bool result = elementData.IsMatchedHeroesVersion;
 
         // assert
-        result.Should().BeFalse();
+        result.Should().BeTrue();
     }
 
     [TestMethod]
-    public void MismatchedHeroesVersion_WithDifferentVersions_ReturnsTrue()
+    public void IsMatchedHeroesVersion_WithDifferentVersions_ReturnsFalse()
     {
         // arrange
         string jsonData = """
@@ -101,14 +101,14 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.IsMismatchedHeroesVersion;
+        bool result = elementData.IsMatchedHeroesVersion;
 
         // assert
-        result.Should().BeTrue();
+        result.Should().BeFalse();
     }
 
     [TestMethod]
-    public void MismatchedHeroesVersion_WithDifferentPtrFlags_ReturnsTrue()
+    public void IsMatchedHeroesVersion_WithDifferentPtrFlags_ReturnsFalse()
     {
         // arrange
         string jsonData = """
@@ -140,14 +140,14 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.IsMismatchedHeroesVersion;
+        bool result = elementData.IsMatchedHeroesVersion;
 
         // assert
-        result.Should().BeTrue();
+        result.Should().BeFalse();
     }
 
     [TestMethod]
-    public void MismatchedHdpVersion_WithNullGameStringDocument_ReturnsFalse()
+    public void IsMatchedHdpVersion_WithNullGameStringDocument_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -166,14 +166,14 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, null);
 
         // act
-        bool result = elementData.IsMismatchedHdpVersion;
+        bool result = elementData.IsMatchedHdpVersion;
 
         // assert
-        result.Should().BeFalse();
+        result.Should().BeTrue();
     }
 
     [TestMethod]
-    public void MismatchedHdpVersion_WithMatchingVersions_ReturnsFalse()
+    public void IsMatchedHdpVersion_WithMatchingVersions_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -205,14 +205,14 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.IsMismatchedHdpVersion;
+        bool result = elementData.IsMatchedHdpVersion;
 
         // assert
-        result.Should().BeFalse();
+        result.Should().BeTrue();
     }
 
     [TestMethod]
-    public void MismatchedHdpVersion_WithDifferentVersions_ReturnsTrue()
+    public void IsMatchedHdpVersion_WithDifferentVersions_ReturnsFalse()
     {
         // arrange
         string jsonData = """
@@ -244,57 +244,15 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.IsMismatchedHdpVersion;
-
-        // assert
-        result.Should().BeTrue();
-    }
-
-    [TestMethod]
-    [DataRow("5.0.0-beta", "5.0.0-BETA")]
-    public void MismatchedHdpVersion_WithCaseInsensitiveMatch_ReturnsFalse(string version1, string version2)
-    {
-        // arrange
-        string jsonData = $$"""
-        {
-            "meta": {
-                "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "{{version1}}",
-                "itemsType": "Data",
-                "dataType": "Unknown"
-            },
-            "items": {}
-        }
-        """;
-
-        string gameStringData = $$"""
-        {
-            "meta": {
-                "heroesVersion": "2.55.1.88122",
-                "hdpVersion": "{{version2}}",
-                "itemsType": "GameStrings"
-            },
-            "items": {}
-        }
-        """;
-
-        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
-        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
-
-        // act
-        bool result = elementData.IsMismatchedHdpVersion;
+        bool result = elementData.IsMatchedHdpVersion;
 
         // assert
         result.Should().BeFalse();
     }
 
     [TestMethod]
-    [DataRow("5.0.0", "5.0.1")]
-    [DataRow("5.0.0", "5.1.0")]
-    [DataRow("5.0.0-beta", "5.0.0-alpha")]
-    public void MismatchedHdpVersion_WithDifferentVersionStrings_ReturnsTrue(string version1, string version2)
+    [DataRow("5.0.0-beta", "5.0.0-BETA")]
+    public void IsMatchedHdpVersion_WithCaseInsensitiveMatch_ReturnsTrue(string version1, string version2)
     {
         // arrange
         string jsonData = $$"""
@@ -326,10 +284,52 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.IsMismatchedHdpVersion;
+        bool result = elementData.IsMatchedHdpVersion;
 
         // assert
         result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    [DataRow("5.0.0", "5.0.1")]
+    [DataRow("5.0.0", "5.1.0")]
+    [DataRow("5.0.0-beta", "5.0.0-alpha")]
+    public void IsMatchedHdpVersion_WithDifferentVersionStrings_ReturnsFalse(string version1, string version2)
+    {
+        // arrange
+        string jsonData = $$"""
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "{{version1}}",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = $$"""
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "{{version2}}",
+                "itemsType": "GameStrings"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedHdpVersion;
+
+        // assert
+        result.Should().BeFalse();
     }
 
     [TestMethod]
@@ -680,6 +680,192 @@ public class ElementDocumentTests
 
         TestElementObject element2 = result.OfType<TestElementObject>().First(e => e.Id == "TestElement2");
         element2.Id.Should().Be("TestElement2");
+    }
+
+    [TestMethod]
+    public void IsMatchedDataType_WithNullGameStringDocument_ReturnsTrue()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        TestElementBaseData elementData = new(jsonDocument, null);
+
+        // act
+        bool result = elementData.IsMatchedDataType;
+
+        // assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsMatchedDataType_WithMatchingDataType_ReturnsTrue()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "dataTypes": ["Unknown"]
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedDataType;
+
+        // assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsMatchedDataType_WithMultipleMatchingDataTypes_ReturnsTrue()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "dataTypes": ["HeroData", "Unknown", "AnnouncerData"]
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedDataType;
+
+        // assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsMatchedDataType_WithNonMatchingDataType_ReturnsFalse()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "dataTypes": ["HeroData"]
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedDataType;
+
+        // assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsMatchedDataType_WithEmptyDataTypes_ReturnsFalse()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "dataTypes": []
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedDataType;
+
+        // assert
+        result.Should().BeFalse();
     }
 
     // Test implementation of ElementBaseData for testing purposes

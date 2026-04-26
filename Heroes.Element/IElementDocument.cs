@@ -11,7 +11,7 @@ public interface IElementDocument : IDisposable
     Type ElementType { get; }
 
     /// <summary>
-    /// Gets the underlying JSON document. This is only the data document and not the optional gamestring document.
+    /// Gets the underlying JSON document. This is only the data document and not the optional <see cref="GameStringDocument"/>.
     /// </summary>
     JsonDocument JsonDocument { get; }
 
@@ -26,15 +26,22 @@ public interface IElementDocument : IDisposable
     MetaDataProperties MetaDataProperties { get; }
 
     /// <summary>
-    /// Gets a value indicating whether the HeroesVersion in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
-    /// This returns <see langword="false"/> if there is no <see cref="GameStringDocument"/>.
+    /// Gets a value indicating whether the HeroesVersion in the JSON data matches the version in the <see cref="GameStringDocument"/>.
+    /// This returns <see langword="true"/> if there is no <see cref="GameStringDocument"/>.
     /// </summary>
-    bool IsMismatchedHeroesVersion { get; }
+    bool IsMatchedHeroesVersion { get; }
 
     /// <summary>
-    /// Gets a value indicating whether the HDP version in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
+    /// Gets a value indicating whether the HDP version in the JSON data matches the version in the <see cref="GameStringDocument"/>.
+    /// This returns <see langword="true"/> if there is no <see cref="GameStringDocument"/>.
     /// </summary>
-    bool IsMismatchedHdpVersion { get; }
+    bool IsMatchedHdpVersion { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the <see cref="DataType"/> of the JSON data matches one of the data types in the <see cref="GameStringDocument"/>.
+    /// This returns <see langword="true"/> if there is no <see cref="GameStringDocument"/>.
+    /// </summary>
+    bool IsMatchedDataType { get; }
 
     /// <summary>
     /// Gets all elements as <see cref="IElementObject"/>.
