@@ -23,7 +23,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, null);
 
         // act
-        bool result = elementData.MismatchedHeroesVersion;
+        bool result = elementData.IsMismatchedHeroesVersion;
 
         // assert
         result.Should().BeFalse();
@@ -62,7 +62,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHeroesVersion;
+        bool result = elementData.IsMismatchedHeroesVersion;
 
         // assert
         result.Should().BeFalse();
@@ -101,7 +101,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHeroesVersion;
+        bool result = elementData.IsMismatchedHeroesVersion;
 
         // assert
         result.Should().BeTrue();
@@ -140,7 +140,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHeroesVersion;
+        bool result = elementData.IsMismatchedHeroesVersion;
 
         // assert
         result.Should().BeTrue();
@@ -166,7 +166,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, null);
 
         // act
-        bool result = elementData.MismatchedHdpVersion;
+        bool result = elementData.IsMismatchedHdpVersion;
 
         // assert
         result.Should().BeFalse();
@@ -205,7 +205,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHdpVersion;
+        bool result = elementData.IsMismatchedHdpVersion;
 
         // assert
         result.Should().BeFalse();
@@ -244,7 +244,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHdpVersion;
+        bool result = elementData.IsMismatchedHdpVersion;
 
         // assert
         result.Should().BeTrue();
@@ -284,7 +284,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHdpVersion;
+        bool result = elementData.IsMismatchedHdpVersion;
 
         // assert
         result.Should().BeFalse();
@@ -326,7 +326,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
 
         // act
-        bool result = elementData.MismatchedHdpVersion;
+        bool result = elementData.IsMismatchedHdpVersion;
 
         // assert
         result.Should().BeTrue();

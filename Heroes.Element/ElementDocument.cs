@@ -55,10 +55,10 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     public MetaDataProperties MetaDataProperties { get; }
 
     /// <inheritdoc/>
-    public bool MismatchedHeroesVersion => GameStringDocument is not null && MetaDataProperties.HeroesVersion != GameStringDocument.MetaGameStringProperties.HeroesVersion;
+    public bool IsMismatchedHeroesVersion => GameStringDocument is not null && MetaDataProperties.HeroesVersion != GameStringDocument.MetaGameStringProperties.HeroesVersion;
 
     /// <inheritdoc/>
-    public bool MismatchedHdpVersion => GameStringDocument is not null && !MetaDataProperties.HdpVersion.Equals(GameStringDocument.MetaGameStringProperties.HdpVersion, StringComparison.OrdinalIgnoreCase);
+    public bool IsMismatchedHdpVersion => GameStringDocument is not null && !MetaDataProperties.HdpVersion.Equals(GameStringDocument.MetaGameStringProperties.HdpVersion, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets the options used to configure JSON serialization and deserialization.

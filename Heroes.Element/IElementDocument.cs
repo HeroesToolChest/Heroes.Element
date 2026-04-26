@@ -21,20 +21,20 @@ public interface IElementDocument : IDisposable
     GameStringDocument? GameStringDocument { get; }
 
     /// <summary>
-    /// Gets the metadata properties associated with the JSON data. This includes properties overridden from the optional gamestring document.
+    /// Gets the metadata properties associated with the JSON data.
     /// </summary>
-    MetaDataProperties MetaProperties { get; }
+    MetaDataProperties MetaDataProperties { get; }
 
     /// <summary>
     /// Gets a value indicating whether the HeroesVersion in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
     /// This returns <see langword="false"/> if there is no <see cref="GameStringDocument"/>.
     /// </summary>
-    bool MismatchedHeroesVersion { get; }
+    bool IsMismatchedHeroesVersion { get; }
 
     /// <summary>
     /// Gets a value indicating whether the HDP version in the JSON data does not match the version in the <see cref="GameStringDocument"/>.
     /// </summary>
-    bool MismatchedHdpVersion { get; }
+    bool IsMismatchedHdpVersion { get; }
 
     /// <summary>
     /// Gets all elements as <see cref="IElementObject"/>.
