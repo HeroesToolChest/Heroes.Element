@@ -44,8 +44,14 @@ public interface IElementDocument : IDisposable
     bool IsMatchedDataType { get; }
 
     /// <summary>
+    /// Gets a value indicating whether the map name in the JSON data matches with the map name in the <see cref="GameStringDocument"/>.
+    /// This returns <see langword="true"/> if <see cref="GameStringDocument"/> is <see langword="null"/>.
+    /// </summary>
+    bool IsMatchedMapName { get; }
+
+    /// <summary>
     /// Gets all elements as <see cref="IElementObject"/>.
     /// </summary>
     /// <returns>A collection of all elements.</returns>
-    IEnumerable<IElementObject> GetElementObjects();
+    IEnumerable <IElementObject> GetElementObjects();
 }

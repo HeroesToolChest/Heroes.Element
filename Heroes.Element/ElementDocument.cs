@@ -63,6 +63,12 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     /// <inheritdoc/>
     public bool IsMatchedDataType => GameStringDocument is null || GameStringDocument.MetaGameStringProperties.DataTypes.Contains(MetaDataProperties.DataType);
 
+    /// <inheritdoc/>
+    public bool IsMatchedMapName =>
+        GameStringDocument is null ||
+        (GameStringDocument.MetaGameStringProperties.MapName is null && MetaDataProperties.MapName is null) ||
+        (GameStringDocument.MetaGameStringProperties.MapName is not null && GameStringDocument.MetaGameStringProperties.MapName.Equals(MetaDataProperties.MapName, StringComparison.Ordinal));
+
     /// <summary>
     /// Gets the options used to configure JSON serialization and deserialization.
     /// </summary>

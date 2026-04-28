@@ -868,6 +868,274 @@ public class ElementDocumentTests
         result.Should().BeFalse();
     }
 
+    [TestMethod]
+    public void IsMatchedMapName_WithNullGameStringDocument_ReturnsTrue()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        TestElementBaseData elementData = new(jsonDocument, null);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsMatchedMapName_WithBothMapNamesNull_ReturnsTrue()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsMatchedMapName_WithMatchingMapNames_ReturnsTrue()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown",
+                "mapName": "Test Map"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "mapName": "Test Map"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void IsMatchedMapName_WithDifferentMapNames_ReturnsFalse()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown",
+                "mapName": "Map A"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "mapName": "Map B"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsMatchedMapName_WithMapNameCaseDifference_ReturnsFalse()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown",
+                "mapName": "Test Map"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "mapName": "test map"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsMatchedMapName_WithGameStringMapNameNullAndDataMapNameNotNull_ReturnsFalse()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown",
+                "mapName": "Test Map"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void IsMatchedMapName_WithGameStringMapNameNotNullAndDataMapNameNull_ReturnsFalse()
+    {
+        // arrange
+        string jsonData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "Data",
+                "dataType": "Unknown"
+            },
+            "items": {}
+        }
+        """;
+
+        string gameStringData = """
+        {
+            "meta": {
+                "heroesVersion": "2.55.1.88122",
+                "hdpVersion": "5.0.0",
+                "itemsType": "GameStrings",
+                "mapName": "Test Map"
+            },
+            "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
+        using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
+        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+
+        // act
+        bool result = elementData.IsMatchedMapName;
+
+        // assert
+        result.Should().BeFalse();
+    }
+
     // Test implementation of ElementBaseData for testing purposes
     private class TestElementBaseData : ElementDocument<TestElementObject>
     {
