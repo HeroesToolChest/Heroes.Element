@@ -28,15 +28,15 @@ public class GameStringDocument : IDisposable
         // for meta object only
         _metaJsonSerializerOptions = new JsonSerializerOptions(_jsonSerializerOptions);
 
-        MetaGameStringProperties = GetMetaGameStringProperties();
+        Meta = GetMetaGameStringProperties();
 
         _jsonSerializerOptions.Converters.Add(new GameStringTextConverter(new GameStringTextConverterOptions()
         {
-            StormLocale = MetaGameStringProperties.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
+            StormLocale = Meta.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
         }));
 
-        if (MetaGameStringProperties.ItemsType != ItemsType.GameStrings)
-            throw new JsonException($"The JSON document items type '{MetaGameStringProperties.ItemsType}' does not match the expected items type '{ItemsType.GameStrings}'.");
+        if (Meta.ItemsType != ItemsType.GameStrings)
+            throw new JsonException($"The JSON document items type '{Meta.ItemsType}' does not match the expected items type '{ItemsType.GameStrings}'.");
     }
 
     /// <summary>
@@ -47,7 +47,7 @@ public class GameStringDocument : IDisposable
     /// <summary>
     /// Gets the gamestring meta properties.
     /// </summary>
-    public MetaGameStringProperties MetaGameStringProperties { get; }
+    public MetaGameStringProperties Meta { get; }
 
     /// <summary>
     /// Creates a new instance of <see cref="GameStringDocument"/> from the specified JSON document.
@@ -547,7 +547,7 @@ public class GameStringDocument : IDisposable
         if (value is null)
             return null;
 
-        return new GameStringText(value, MetaGameStringProperties.GameStringTextProperties.Locale);
+        return new GameStringText(value, Meta.GameStringTextProperties.Locale);
     }
 
     private MetaGameStringProperties GetMetaGameStringProperties()

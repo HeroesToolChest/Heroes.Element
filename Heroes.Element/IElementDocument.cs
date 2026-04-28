@@ -23,7 +23,7 @@ public interface IElementDocument : IDisposable
     /// <summary>
     /// Gets the data meta properties.
     /// </summary>
-    MetaDataProperties MetaDataProperties { get; }
+    MetaDataProperties Meta { get; }
 
     /// <summary>
     /// Gets a value indicating whether the HeroesVersion in the JSON data matches the version in the <see cref="GameStringDocument"/>.
@@ -53,5 +53,5 @@ public interface IElementDocument : IDisposable
     /// Gets all elements as <see cref="IElementObject"/>.
     /// </summary>
     /// <returns>A collection of all elements.</returns>
-    IEnumerable <IElementObject> GetElementObjects();
+    IEnumerable<IElementObject> GetElementObjects();
 }

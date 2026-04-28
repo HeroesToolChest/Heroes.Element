@@ -363,7 +363,7 @@ public class ElementDocumentTests
         TestElementBaseData elementData = new(jsonDocument, null);
 
         // act
-        MetaDataProperties result = elementData.MetaDataProperties;
+        MetaDataProperties result = elementData.Meta;
 
         // assert
         result.Should().NotBeNull();
@@ -396,7 +396,7 @@ public class ElementDocumentTests
         // act
         Action act = () =>
         {
-            _ = new TestElementBaseData(jsonDocument, null).MetaDataProperties;
+            _ = new TestElementBaseData(jsonDocument, null).Meta;
         };
 
         // assert
@@ -421,7 +421,7 @@ public class ElementDocumentTests
         // act
         Action act = () =>
         {
-            _ = new TestElementBaseData(jsonDocument, null).MetaDataProperties;
+            _ = new TestElementBaseData(jsonDocument, null).Meta;
         };
 
         // assert

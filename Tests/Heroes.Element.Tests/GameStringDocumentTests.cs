@@ -22,7 +22,7 @@ public class GameStringDocumentTests
         GameStringDocument document = GameStringDocument.Load(jsonDocument);
 
         // act
-        MetaGameStringProperties meta = document.MetaGameStringProperties;
+        MetaGameStringProperties meta = document.Meta;
 
         // assert
         meta.Should().NotBeNull();
@@ -124,7 +124,7 @@ public class GameStringDocumentTests
         GameStringDocument document = GameStringDocument.Load(jsonDocument);
 
         // act
-        MetaGameStringProperties meta = document.MetaGameStringProperties;
+        MetaGameStringProperties meta = document.Meta;
 
         // assert
         meta.Should().NotBeNull();
@@ -157,7 +157,7 @@ public class GameStringDocumentTests
         GameStringDocument document = GameStringDocument.Load(jsonDocument);
 
         // act
-        MetaGameStringProperties meta = document.MetaGameStringProperties;
+        MetaGameStringProperties meta = document.Meta;
 
         // assert
         meta.DataTypes.Should().HaveCount(3).And

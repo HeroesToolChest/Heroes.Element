@@ -32,11 +32,11 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
         };
 
         // for meta object only
-        MetaDataProperties = GetMetaProperties(new JsonSerializerOptions(JsonSerializerOptions));
+        Meta = GetMetaProperties(new JsonSerializerOptions(JsonSerializerOptions));
 
         JsonSerializerOptions.Converters.Add(new GameStringTextConverter(new GameStringTextConverterOptions()
         {
-            StormLocale = MetaDataProperties.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
+            StormLocale = Meta.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
         }));
 
         ValidateTypes(dataType);
@@ -52,22 +52,22 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     public GameStringDocument? GameStringDocument { get; }
 
     /// <inheritdoc/>
-    public MetaDataProperties MetaDataProperties { get; }
+    public MetaDataProperties Meta { get; }
 
     /// <inheritdoc/>
-    public bool IsMatchedHeroesVersion => GameStringDocument is null || MetaDataProperties.HeroesVersion == GameStringDocument.MetaGameStringProperties.HeroesVersion;
+    public bool IsMatchedHeroesVersion => GameStringDocument is null || Meta.HeroesVersion == GameStringDocument.Meta.HeroesVersion;
 
     /// <inheritdoc/>
-    public bool IsMatchedHdpVersion => GameStringDocument is null || MetaDataProperties.HdpVersion.Equals(GameStringDocument.MetaGameStringProperties.HdpVersion, StringComparison.OrdinalIgnoreCase);
+    public bool IsMatchedHdpVersion => GameStringDocument is null || Meta.HdpVersion.Equals(GameStringDocument.Meta.HdpVersion, StringComparison.OrdinalIgnoreCase);
 
     /// <inheritdoc/>
-    public bool IsMatchedDataType => GameStringDocument is null || GameStringDocument.MetaGameStringProperties.DataTypes.Contains(MetaDataProperties.DataType);
+    public bool IsMatchedDataType => GameStringDocument is null || GameStringDocument.Meta.DataTypes.Contains(Meta.DataType);
 
     /// <inheritdoc/>
     public bool IsMatchedMapName =>
         GameStringDocument is null ||
-        (GameStringDocument.MetaGameStringProperties.MapName is null && MetaDataProperties.MapName is null) ||
-        (GameStringDocument.MetaGameStringProperties.MapName is not null && GameStringDocument.MetaGameStringProperties.MapName.Equals(MetaDataProperties.MapName, StringComparison.Ordinal));
+        (GameStringDocument.Meta.MapName is null && Meta.MapName is null) ||
+        (GameStringDocument.Meta.MapName is not null && GameStringDocument.Meta.MapName.Equals(Meta.MapName, StringComparison.Ordinal));
 
     /// <summary>
     /// Gets the options used to configure JSON serialization and deserialization.
@@ -287,10 +287,10 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
 
     private void ValidateTypes(DataType dataType)
     {
-        if (MetaDataProperties.ItemsType != ItemsType.Data)
-            throw new JsonException($"The JSON document items type '{MetaDataProperties.ItemsType}' does not match the expected items type '{ItemsType.Data}'.");
+        if (Meta.ItemsType != ItemsType.Data)
+            throw new JsonException($"The JSON document items type '{Meta.ItemsType}' does not match the expected items type '{ItemsType.Data}'.");
 
-        if (MetaDataProperties.DataType != dataType)
-            throw new JsonException($"The JSON document data type '{MetaDataProperties.DataType}' does not match the expected data type '{dataType}'.");
+        if (Meta.DataType != dataType)
+            throw new JsonException($"The JSON document data type '{Meta.DataType}' does not match the expected data type '{dataType}'.");
     }
 }
