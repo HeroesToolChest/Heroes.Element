@@ -34,6 +34,7 @@ public class GameStringDocument : IDisposable
         {
             StormLocale = Meta.GameStringTextProperties?.Locale ?? StormLocale.ENUS,
         }));
+        _jsonSerializerOptions.Converters.Add(new GameStringItemDictionaryConverter());
 
         if (Meta.ItemsType != ItemsType.GameStrings)
             throw new JsonException($"The JSON document items type '{Meta.ItemsType}' does not match the expected items type '{ItemsType.GameStrings}'.");
@@ -58,6 +59,18 @@ public class GameStringDocument : IDisposable
     public static GameStringDocument Load(JsonDocument jsonDocument)
     {
         return new GameStringDocument(jsonDocument);
+    }
+
+    /// <summary>
+    /// Retrieves the collection of gamestring items from the JSON document.
+    /// </summary>
+    /// <returns>A <see cref="GameStringItemDictionary"/> containing the gamestring items if present; otherwise, an empty collection.</returns>
+    public GameStringItemDictionary GetItems()
+    {
+        if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement))
+            return [];
+
+        return gameStringElement.Deserialize<GameStringItemDictionary>(_jsonSerializerOptions) ?? [];
     }
 
     /// <summary>

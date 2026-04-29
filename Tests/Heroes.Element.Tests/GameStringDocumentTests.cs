@@ -165,6 +165,184 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
+    public void GetItems_WithEmptyItemsSection_ReturnsEmptyDictionary()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings"
+          },
+          "items": {}
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        GameStringItemDictionary items = document.GetItems();
+
+        // assert
+        items.Should().NotBeNull();
+        items.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void GetItems_WithKeyValuePairs_ReturnsCorrectItems()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
+            "gameStringText": {
+              "locale": "ENUS",
+              "textType": "RawText"
+            }
+          },
+          "items": {
+            "hero": {
+              "name": {
+                "Abathur": "Abathur",
+                "Raynor": "Raynor"
+              },
+              "title": {
+                "Abathur": "The Evolution Master"
+              }
+            }
+          }
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        GameStringItemDictionary items = document.GetItems();
+
+        // assert
+        items.Should().NotBeNull();
+        items.Should().ContainKey("hero");
+
+        GameStringFilePropertyName heroProperties = items["hero"];
+        heroProperties.Should().ContainKey("name");
+        heroProperties.Should().ContainKey("title");
+
+        heroProperties["name"].KeyValuePairs.Should().ContainKey("Abathur");
+        heroProperties["name"].KeyValuePairs["Abathur"].RawText.Should().Be("Abathur");
+        heroProperties["name"].KeyValuePairs.Should().ContainKey("Raynor");
+        heroProperties["name"].KeyValuePairs["Raynor"].RawText.Should().Be("Raynor");
+
+        heroProperties["title"].KeyValuePairs.Should().ContainKey("Abathur");
+        heroProperties["title"].KeyValuePairs["Abathur"].RawText.Should().Be("The Evolution Master");
+    }
+
+    [TestMethod]
+    public void GetItems_WithKeyArrayPairs_ReturnsCorrectItems()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
+            "gameStringText": {
+              "locale": "ENUS",
+              "textType": "RawText"
+            }
+          },
+          "items": {
+            "hero": {
+              "roles": {
+                "Abathur": [
+                  "Support",
+                  "Specialist"
+                ]
+              }
+            }
+          }
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        GameStringItemDictionary items = document.GetItems();
+
+        // assert
+        items.Should().NotBeNull();
+        items.Should().ContainKey("hero");
+
+        GameStringFilePropertyName heroProperties = items["hero"];
+        heroProperties.Should().ContainKey("roles");
+
+        heroProperties["roles"].KeyArrayPairs.Should().ContainKey("Abathur");
+        heroProperties["roles"].KeyArrayPairs["Abathur"].Should().HaveCount(2);
+        heroProperties["roles"].KeyArrayPairs["Abathur"][0].RawText.Should().Be("Support");
+        heroProperties["roles"].KeyArrayPairs["Abathur"][1].RawText.Should().Be("Specialist");
+    }
+
+    [TestMethod]
+    public void GetItems_WithMultipleTopLevelKeys_ReturnsAllKeys()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "meta": {
+            "hdpVersion": "5.0.0",
+            "itemsType": "GameStrings",
+            "gameStringText": {
+              "locale": "ENUS",
+              "textType": "RawText"
+            }
+          },
+          "items": {
+            "hero": {
+              "name": {
+                "Abathur": "Abathur"
+              }
+            },
+            "unit": {
+              "name": {
+                "AbathurSymbiote": "Symbiote"
+              }
+            },
+            "ability": {
+              "name": {
+                "AbathurDeepTunnel|AbathurDeepTunnel|Z": "Deep Tunnel"
+              }
+            }
+          }
+        }
+        """;
+
+        using JsonDocument jsonDocument = JsonDocument.Parse(json);
+        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+
+        // act
+        GameStringItemDictionary items = document.GetItems();
+
+        // assert
+        items.Should().NotBeNull();
+        items.Should().HaveCount(3);
+        items.Should().ContainKey("hero");
+        items.Should().ContainKey("unit");
+        items.Should().ContainKey("ability");
+
+        items["hero"]["name"].KeyValuePairs["Abathur"].RawText.Should().Be("Abathur");
+        items["unit"]["name"].KeyValuePairs["AbathurSymbiote"].RawText.Should().Be("Symbiote");
+        items["ability"]["name"].KeyValuePairs["AbathurDeepTunnel|AbathurDeepTunnel|Z"].RawText.Should().Be("Deep Tunnel");
+    }
+
+    [TestMethod]
     public void UpdateGameStrings_HeroPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange

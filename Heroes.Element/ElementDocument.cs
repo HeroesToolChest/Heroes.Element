@@ -102,7 +102,7 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     }
 
     /// <summary>
-    /// Gets all elements of type <typeparamref name="T"/> from the JSON document. If the "items" property is not found, an empty collection is returned.
+    /// Retrieves all elements of type <typeparamref name="T"/> from the JSON document. If the <c>items</c> property is not found, an empty collection is returned.
     /// </summary>
     /// <returns>An <see cref="IEnumerable{T}"/> containing all elements of type <typeparamref name="T"/>.</returns>
     public IEnumerable<T> GetElements()
