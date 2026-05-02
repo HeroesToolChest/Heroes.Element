@@ -16,7 +16,7 @@ public class MetaDataPropertiesSerializerTests
             ItemsType = ItemsType.Data,
             DataType = DataType.HeroData,
             MapName = "Alterac Pass",
-            LocalizedText = LocalizedTextOption.Copy,
+            LocalizedText = LocalizedText.None,
             GameStringTextProperties = new GameStringTextProperties()
             {
                 Locale = StormLocale.ENUS,
@@ -41,7 +41,7 @@ public class MetaDataPropertiesSerializerTests
               "itemsType": "Data",
               "dataType": "HeroData",
               "mapName": "Alterac Pass",
-              "localizedText": "Copy",
+              "localizedText": "None",
               "gameStringText": {
                 "locale": "ENUS",
                 "textType": "RawText",
@@ -155,7 +155,7 @@ public class MetaDataPropertiesSerializerTests
         {
             HeroesVersion = new HeroesDataVersion(2, 55, 14, 95623),
             HdpVersion = "5.0.0",
-            LocalizedText = LocalizedTextOption.Extract,
+            LocalizedText = LocalizedText.Extract,
             TotalItems = 3,
         };
 

@@ -1,6 +1,4 @@
-﻿using Heroes.Element.JsonTypeInfoResolvers;
-
-namespace Heroes.Element.Models.Meta;
+﻿namespace Heroes.Element.Models.Meta;
 
 /// <summary>
 /// Contains properties of the data json file.
@@ -18,10 +16,10 @@ public class MetaDataProperties : MetaProperties
     public string? MapName { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating the serialization of the <see cref="GameStringText"/> properties.
+    /// Gets or sets a value indicating the status of the <see cref="GameStringText"/> properties.
     /// </summary>
     [JsonPropertyName(Constants.LocalizedTextPropertyName)]
-    public LocalizedTextOption LocalizedText { get; set; } = LocalizedTextOption.None;
+    public LocalizedText LocalizedText { get; set; } = LocalizedText.None;
 
     /// <summary>
     /// Gets or sets the properties of the gamestrings.

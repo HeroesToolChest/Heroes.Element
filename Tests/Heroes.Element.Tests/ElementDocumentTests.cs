@@ -345,7 +345,7 @@ public class ElementDocumentTests
               "dataType": "Unknown",
               "localizedText": "none",
               "mapName": "Test Map",
-              "localizedText": "Copy",
+              "localizedText": "None",
               "gameStringText": {
                 "locale": "ENUS",
                 "textType": "RawText",
@@ -371,7 +371,7 @@ public class ElementDocumentTests
         result.HdpVersion.Should().Be("5.0.0");
         result.ItemsType.Should().Be(ItemsType.Data);
         result.DataType.Should().Be(DataType.Unknown);
-        result.LocalizedText.Should().Be(LocalizedTextOption.Copy);
+        result.LocalizedText.Should().Be(LocalizedText.None);
         result.GameStringTextProperties!.Locale.Should().Be(StormLocale.ENUS);
         result.GameStringTextProperties.GameStringTextType.Should().Be(GameStringTextType.RawText);
         result.GameStringTextProperties.ReplaceFontConstantVars.Should().BeTrue();
