@@ -156,7 +156,7 @@ public class MetaDataPropertiesSerializerTests
     }
 
     [TestMethod]
-    public void Serialize_LocalizedTextExtract_ReturnsExtractValue()
+    public void Serialize_LocalizedTextExtracted_ReturnsExtractedValue()
     {
         // arrange
         JsonSerializerOptions options = CreateMetaSerializerOptions();
@@ -165,7 +165,7 @@ public class MetaDataPropertiesSerializerTests
         {
             HeroesVersion = new HeroesDataVersion(2, 55, 14, 95623),
             HdpVersion = "5.0.0",
-            LocalizedText = LocalizedText.Extract,
+            LocalizedText = LocalizedText.Extracted,
             TotalItems = 3,
         };
 
@@ -173,7 +173,7 @@ public class MetaDataPropertiesSerializerTests
         string json = JsonSerializer.Serialize(metaDataProperties, options);
 
         // assert
-        json.Should().Contain("\"localizedText\": \"Extract\"");
+        json.Should().Contain("\"localizedText\": \"Extracted\"");
     }
 
     [TestMethod]
@@ -187,6 +187,7 @@ public class MetaDataPropertiesSerializerTests
             HeroesVersion = new HeroesDataVersion(2, 55, 14, 95623),
             HdpVersion = "5.0.0",
             DataType = DataType.HeroData,
+            LocalizedText = LocalizedText.Extracted,
             GameStringTextProperties = new GameStringTextProperties()
             {
                 Locale = StormLocale.FRFR,
@@ -216,7 +217,7 @@ public class MetaDataPropertiesSerializerTests
               "hdpVersion": "5.0.0",
               "itemsType": "Other",
               "dataType": "HeroData",
-              "localizedText": "None",
+              "localizedText": "Extracted",
               "gameStringText": {
                 "locale": "FRFR",
                 "textType": "ColoredText",

@@ -13,5 +13,5 @@ public enum LocalizedText
     /// <summary>
     /// Indicates the <see cref="GameStringText"/> properties are not in the file.
     /// </summary>
-    Extract,
+    Extracted,
 }
