@@ -24,7 +24,7 @@ public class MetaDataProperties : MetaProperties
     public LocalizedTextOption LocalizedText { get; set; } = LocalizedTextOption.None;
 
     /// <summary>
-    /// Gets or sets the properties of the gamestrings. Will be <see langword="null"/> if <see cref="LocalizedText"/> is set to <see cref="LocalizedTextOption.Extract"/>.
+    /// Gets or sets the properties of the gamestrings.
     /// </summary>
     [JsonPropertyName(Constants.DescriptionTextPropertyName)]
     public GameStringTextProperties? GameStringTextProperties { get; set; }
