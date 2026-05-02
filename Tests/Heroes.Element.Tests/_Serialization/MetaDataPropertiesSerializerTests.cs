@@ -21,10 +21,16 @@ public class MetaDataPropertiesSerializerTests
             {
                 Locale = StormLocale.ENUS,
                 GameStringTextType = GameStringTextType.RawText,
-                ReplaceFontConstantVars = true,
-                ReplaceFontStylesVars = true,
-                PreserveFontConstantVars = false,
-                PreserveFontStyleVars = false,
+                ConstantVars = new ConstantVars()
+                {
+                    Replaced = true,
+                    Preserved = false,
+                },
+                StyleVars = new StyleVars()
+                {
+                    Replaced = true,
+                    Preserved = false,
+                },
             },
             TotalItems = 42,
         };
@@ -45,10 +51,14 @@ public class MetaDataPropertiesSerializerTests
               "gameStringText": {
                 "locale": "ENUS",
                 "textType": "RawText",
-                "replaceFontConstantVars": true,
-                "replaceFontStylesVars": true,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": false
+                "constantVars": {
+                  "replaced": true,
+                  "preserved": false
+                },
+                "styleVars": {
+                  "replaced": true,
+                  "preserved": false
+                }
               },
               "totalItems": 42
             }
@@ -181,10 +191,16 @@ public class MetaDataPropertiesSerializerTests
             {
                 Locale = StormLocale.FRFR,
                 GameStringTextType = GameStringTextType.ColoredText,
-                ReplaceFontConstantVars = false,
-                ReplaceFontStylesVars = true,
-                PreserveFontConstantVars = false,
-                PreserveFontStyleVars = true,
+                ConstantVars = new ConstantVars()
+                {
+                    Replaced = false,
+                    Preserved = true,
+                },
+                StyleVars = new StyleVars()
+                {
+                    Replaced = false,
+                    Preserved = true,
+                },
             },
             TotalItems = 1,
         };
@@ -204,10 +220,14 @@ public class MetaDataPropertiesSerializerTests
               "gameStringText": {
                 "locale": "FRFR",
                 "textType": "ColoredText",
-                "replaceFontConstantVars": false,
-                "replaceFontStylesVars": true,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": true
+                "constantVars": {
+                  "replaced": false,
+                  "preserved": true
+                },
+                "styleVars": {
+                  "replaced": false,
+                  "preserved": true
+                }
               },
               "totalItems": 1
             }

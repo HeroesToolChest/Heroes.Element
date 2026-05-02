@@ -349,10 +349,14 @@ public class ElementDocumentTests
               "gameStringText": {
                 "locale": "ENUS",
                 "textType": "RawText",
-                "replaceFontConstantVars": true,
-                "replaceFontStylesVars": true,
-                "preserveFontConstantVars": true,
-                "preserveFontStyleVars": true
+                "constantVars": {
+                  "replaced": true,
+                  "preserved": true
+                },
+                "styleVars": {
+                  "replaced": true,
+                  "preserved": true
+                }
               }
             },
             "items": {}
@@ -374,10 +378,10 @@ public class ElementDocumentTests
         result.LocalizedText.Should().Be(LocalizedText.None);
         result.GameStringTextProperties!.Locale.Should().Be(StormLocale.ENUS);
         result.GameStringTextProperties.GameStringTextType.Should().Be(GameStringTextType.RawText);
-        result.GameStringTextProperties.ReplaceFontConstantVars.Should().BeTrue();
-        result.GameStringTextProperties.ReplaceFontStylesVars.Should().BeTrue();
-        result.GameStringTextProperties.PreserveFontConstantVars.Should().BeTrue();
-        result.GameStringTextProperties.PreserveFontStyleVars.Should().BeTrue();
+        result.GameStringTextProperties.ConstantVars.Replaced.Should().BeTrue();
+        result.GameStringTextProperties.StyleVars.Replaced.Should().BeTrue();
+        result.GameStringTextProperties.ConstantVars.Preserved.Should().BeTrue();
+        result.GameStringTextProperties.StyleVars.Preserved.Should().BeTrue();
         result.IsLegacy.Should().BeFalse();
     }
 

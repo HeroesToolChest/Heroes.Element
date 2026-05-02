@@ -20,10 +20,16 @@ public class MetaGameStringPropertiesSerializerTests
             {
                 Locale = StormLocale.ENUS,
                 GameStringTextType = GameStringTextType.RawText,
-                ReplaceFontConstantVars = true,
-                ReplaceFontStylesVars = true,
-                PreserveFontConstantVars = false,
-                PreserveFontStyleVars = false,
+                ConstantVars = new ConstantVars()
+                {
+                    Replaced = true,
+                    Preserved = true,
+                },
+                StyleVars = new StyleVars()
+                {
+                    Replaced = false,
+                    Preserved = false,
+                },
             },
         };
 
@@ -45,10 +51,14 @@ public class MetaGameStringPropertiesSerializerTests
               "gameStringText": {
                 "locale": "ENUS",
                 "textType": "RawText",
-                "replaceFontConstantVars": true,
-                "replaceFontStylesVars": true,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": false
+                "constantVars": {
+                  "replaced": true,
+                  "preserved": true
+                },
+                "styleVars": {
+                  "replaced": false,
+                  "preserved": false
+                }
               }
             }
             """);
@@ -75,10 +85,14 @@ public class MetaGameStringPropertiesSerializerTests
               "dataTypes": [],
               "gameStringText": {
                 "locale": "ENUS",
-                "replaceFontConstantVars": false,
-                "replaceFontStylesVars": false,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": false
+                "constantVars": {
+                  "replaced": false,
+                  "preserved": false
+                },
+                "styleVars": {
+                  "replaced": false,
+                  "preserved": false
+                }
               }
             }
             """);
@@ -152,10 +166,14 @@ public class MetaGameStringPropertiesSerializerTests
               ],
               "gameStringText": {
                 "locale": "ENUS",
-                "replaceFontConstantVars": false,
-                "replaceFontStylesVars": false,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": false
+                "constantVars": {
+                  "replaced": false,
+                  "preserved": false
+                },
+                "styleVars": {
+                  "replaced": false,
+                  "preserved": false
+                }
               }
             }
             """);
@@ -220,10 +238,16 @@ public class MetaGameStringPropertiesSerializerTests
             {
                 Locale = StormLocale.FRFR,
                 GameStringTextType = GameStringTextType.ColoredText,
-                ReplaceFontConstantVars = false,
-                ReplaceFontStylesVars = true,
-                PreserveFontConstantVars = false,
-                PreserveFontStyleVars = true,
+                ConstantVars = new ConstantVars()
+                {
+                    Replaced = false,
+                    Preserved = true,
+                },
+                StyleVars = new StyleVars()
+                {
+                    Replaced = false,
+                    Preserved = true,
+                },
             },
         };
 
@@ -243,10 +267,14 @@ public class MetaGameStringPropertiesSerializerTests
               "gameStringText": {
                 "locale": "FRFR",
                 "textType": "ColoredText",
-                "replaceFontConstantVars": false,
-                "replaceFontStylesVars": true,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": true
+                "constantVars": {
+                  "replaced": false,
+                  "preserved": true
+                },
+                "styleVars": {
+                  "replaced": false,
+                  "preserved": true
+                }
               }
             }
             """);
@@ -305,10 +333,16 @@ public class MetaGameStringPropertiesSerializerTests
             {
                 Locale = StormLocale.ENUS,
                 GameStringTextType = GameStringTextType.RawText,
-                ReplaceFontConstantVars = true,
-                ReplaceFontStylesVars = true,
-                PreserveFontConstantVars = true,
-                PreserveFontStyleVars = true,
+                ConstantVars = new ConstantVars()
+                {
+                    Replaced = true,
+                    Preserved = true,
+                },
+                StyleVars = new StyleVars()
+                {
+                    Replaced = true,
+                    Preserved = true,
+                },
             },
         };
 
@@ -325,10 +359,14 @@ public class MetaGameStringPropertiesSerializerTests
               "gameStringText": {
                 "locale": "ENUS",
                 "textType": "RawText",
-                "replaceFontConstantVars": true,
-                "replaceFontStylesVars": true,
-                "preserveFontConstantVars": true,
-                "preserveFontStyleVars": true
+                "constantVars": {
+                  "replaced": true,
+                  "preserved": true
+                },
+                "styleVars": {
+                  "replaced": true,
+                  "preserved": true
+                }
               }
             }
             """);
@@ -360,10 +398,14 @@ public class MetaGameStringPropertiesSerializerTests
               "dataTypes": [],
               "gameStringText": {
                 "locale": "ENUS",
-                "replaceFontConstantVars": false,
-                "replaceFontStylesVars": false,
-                "preserveFontConstantVars": false,
-                "preserveFontStyleVars": false
+                "constantVars": {
+                  "replaced": false,
+                  "preserved": false
+                },
+                "styleVars": {
+                  "replaced": false,
+                  "preserved": false
+                }
               }
             }
             """);
