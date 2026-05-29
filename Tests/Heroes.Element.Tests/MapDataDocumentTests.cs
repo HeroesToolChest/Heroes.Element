@@ -60,7 +60,8 @@ public class MapDataDocumentTests
             "dataType": "MapData"
           },
           "items": {
-            "BattlefieldOfEternity": {
+            "Battlefield (Of)' Eternity": {
+              "localizedId": "battlefield_of_eternity",
               "name": "Battlefield of Eternity",
               "mapId": "1001",
               "mapLink": "BattlefieldOfEternityLink",
@@ -106,12 +107,13 @@ public class MapDataDocumentTests
         MapDataDocument mapData = MapDataDocument.Load(jsonDocument);
 
         // act
-        bool returnResult = mapData.TryGetElementById("BattlefieldOfEternity", out Map? map);
+        bool returnResult = mapData.TryGetElementById("Battlefield (Of)' Eternity", out Map? map);
 
         // assert
         returnResult.Should().BeTrue();
         map.Should().NotBeNull();
-        map.Id.Should().Be("BattlefieldOfEternity");
+        map.Id.Should().Be("Battlefield (Of)' Eternity");
+        map.NormalizedId.Should().Be("battlefield_of_eternity");
         map.Name!.RawText.Should().Be("Battlefield of Eternity");
         map.MapId.Should().Be("1001");
         map.MapLink.Should().Be("BattlefieldOfEternityLink");

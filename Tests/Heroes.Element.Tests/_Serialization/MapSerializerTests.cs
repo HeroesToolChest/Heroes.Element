@@ -9,7 +9,7 @@ public class MapSerializerTests
         // arrange
         SerializerSettings serializerSettings = SerializerSettings.Create();
 
-        Map map = new("map_id")
+        Map map = new("map id")
         {
             // Map properties
             Name = new GameStringText("Map Name"),
@@ -66,6 +66,7 @@ public class MapSerializerTests
         json.Should().Be(
             """
             {
+              "normalizedId": "map_id",
               "name": "Map Name",
               "mapId": "map_replay_id",
               "mapLink": "map_link_id",

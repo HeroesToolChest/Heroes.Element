@@ -14,6 +14,23 @@ public class Map : ElementObject, IName
     {
     }
 
+    /// <summary>
+    /// Gets the normalized id. This is the id with all whitespace replaced by underscores, punctuation removed, and all characters converted to lowercase.
+    /// </summary>
+    public string NormalizedId
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(Id))
+                return string.Empty;
+
+            Span<char> buffer = stackalloc char[Id.Length];
+
+            int length = NormalizeId(buffer, Id);
+            return new string(buffer[..length]);
+        }
+    }
+
     /// <inheritdoc/>
     public GameStringText? Name { get; set; }
 
@@ -62,4 +79,19 @@ public class Map : ElementObject, IName
     /// Gets or sets the relative path of the image that resides in CASC or on file.
     /// </summary>
     internal RelativeFilePath? LoadingScreenImagePath { get; set; }
+
+    private static int NormalizeId(Span<char> buffer, string id)
+    {
+        int index = 0;
+
+        foreach (char c in id)
+        {
+            if (char.IsWhiteSpace(c))
+                buffer[index++] = '_';
+            else if (!char.IsPunctuation(c))
+                buffer[index++] = char.ToLowerInvariant(c);
+        }
+
+        return index;
+    }
 }
