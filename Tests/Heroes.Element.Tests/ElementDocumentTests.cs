@@ -534,7 +534,7 @@ public class ElementDocumentTests
 
     [TestMethod]
     [DataRow("HeroData")]
-    [DataRow("AnnouncerData")]
+    [DataRow("AnnouncerPackData")]
     [DataRow("UnitData")]
     public void ValidateTypes_WithMismatchedDataType_ThrowsJsonException(string dataType)
     {
@@ -774,7 +774,7 @@ public class ElementDocumentTests
                 "heroesVersion": "2.55.1.88122",
                 "hdpVersion": "5.0.0",
                 "itemsType": "GameStrings",
-                "dataTypes": ["HeroData", "Unknown", "AnnouncerData"]
+                "dataTypes": ["HeroData", "Unknown", "AnnouncerPackData"]
             },
             "items": {}
         }

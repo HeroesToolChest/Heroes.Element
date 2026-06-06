@@ -268,13 +268,13 @@ public class JsonTypeInfoModifiersTests
     }
 
     [TestMethod]
-    public void SerializationModifiers_PropertyIsAnnouncer_GameStringItemDictionaryHasPropertyName()
+    public void SerializationModifiers_PropertyIsAnnouncerPack_GameStringItemDictionaryHasPropertyName()
     {
         // arrange
         GameStringItemDictionary gameStringItemDictionary = [];
         JsonSerializerOptions jsonSerializerOptions = GetExtractSerializerOptions(gameStringItemDictionary, LocalizedTextOption.Extract);
 
-        Announcer announcer = new("announcerId")
+        AnnouncerPack announcer = new("announcerId")
         {
             Name = new GameStringText("Announcer name"),
         };
@@ -283,7 +283,7 @@ public class JsonTypeInfoModifiersTests
         JsonSerializer.Serialize(announcer, jsonSerializerOptions); // serialize to get the gameStringItemDictionary
 
         // assert
-        gameStringItemDictionary["announcer"]["name"].KeyValuePairs["announcerId"].RawText.Should().Be("Announcer name");
+        gameStringItemDictionary["announcerPack"]["name"].KeyValuePairs["announcerId"].RawText.Should().Be("Announcer name");
     }
 
     [TestMethod]

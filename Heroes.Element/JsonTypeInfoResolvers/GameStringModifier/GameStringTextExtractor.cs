@@ -26,7 +26,7 @@ internal static class GameStringTextExtractor
             elementName = elementObject switch
             {
                 Hero => JsonNamingPolicy.CamelCase.ConvertName(nameof(Hero)),
-                Announcer => JsonNamingPolicy.CamelCase.ConvertName(nameof(Announcer)),
+                AnnouncerPack => JsonNamingPolicy.CamelCase.ConvertName(nameof(AnnouncerPack)),
                 Banner => JsonNamingPolicy.CamelCase.ConvertName(nameof(Banner)),
                 Bundle => JsonNamingPolicy.CamelCase.ConvertName(nameof(Bundle)),
                 Boost => JsonNamingPolicy.CamelCase.ConvertName(nameof(Boost)),

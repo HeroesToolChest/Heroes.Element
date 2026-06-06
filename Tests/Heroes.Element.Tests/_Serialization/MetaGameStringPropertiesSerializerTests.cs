@@ -148,7 +148,7 @@ public class MetaGameStringPropertiesSerializerTests
         {
             HeroesVersion = new HeroesDataVersion(2, 55, 14, 95623),
             HdpVersion = "5.0.0",
-            DataTypes = [DataType.AnnouncerData],
+            DataTypes = [DataType.AnnouncerPackData],
         };
 
         // act
@@ -162,7 +162,7 @@ public class MetaGameStringPropertiesSerializerTests
               "hdpVersion": "5.0.0",
               "itemsType": "Other",
               "dataTypes": [
-                "AnnouncerData"
+                "AnnouncerPackData"
               ],
               "gameStringText": {
                 "locale": "ENUS",
@@ -189,7 +189,7 @@ public class MetaGameStringPropertiesSerializerTests
         {
             HeroesVersion = new HeroesDataVersion(2, 55, 14, 95623),
             HdpVersion = "5.0.0",
-            DataTypes = [DataType.VoiceLineData, DataType.Unknown, DataType.HeroData, DataType.AnnouncerData],
+            DataTypes = [DataType.VoiceLineData, DataType.Unknown, DataType.HeroData, DataType.AnnouncerPackData],
         };
 
         // act
@@ -200,7 +200,7 @@ public class MetaGameStringPropertiesSerializerTests
         List<string> dataTypes = [.. doc.RootElement.GetProperty("dataTypes").EnumerateArray().Select(e => e.GetString()!)];
 
         dataTypes.Should().HaveCount(4).And
-            .ContainInOrder("Unknown", "HeroData", "AnnouncerData", "VoiceLineData");
+            .ContainInOrder("Unknown", "HeroData", "AnnouncerPackData", "VoiceLineData");
     }
 
     [TestMethod]

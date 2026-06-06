@@ -1,14 +1,14 @@
 ﻿namespace Heroes.Element.Tests;
 
 [TestClass]
-public class AnnouncerDataDocumentTests
+public class AnnouncerPackDataDocumentTests
 {
     private readonly string _defaultArrangeJson =
     """
     {
       "meta": {
         "itemsType": "Data",
-        "dataType": "AnnouncerData"
+        "dataType": "AnnouncerPackData"
       },
       "items": {
         "AbathurAnnouncer": {
@@ -34,7 +34,7 @@ public class AnnouncerDataDocumentTests
         {
           "meta": {
             "itemsType": "Data",
-            "dataType": "AnnouncerData"
+            "dataType": "AnnouncerPackData"
           },
           "items": {}
         }
@@ -44,7 +44,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool result = announcerData.TryGetElementById("other", out Announcer? announcer);
+        bool result = announcerData.TryGetElementById("other", out AnnouncerPack? announcer);
 
         // assert
         result.Should().BeFalse();
@@ -61,7 +61,7 @@ public class AnnouncerDataDocumentTests
         {
           "meta": {
             "itemsType": "Data",
-            "dataType": "AnnouncerData"
+            "dataType": "AnnouncerPackData"
           },
           "items": {
             "AbathurAnnouncer": {
@@ -87,7 +87,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool returnResult = announcerData.TryGetElementById("AbathurAnnouncer", out Announcer? announcer);
+        bool returnResult = announcerData.TryGetElementById("AbathurAnnouncer", out AnnouncerPack? announcer);
 
         // assert
         returnResult.Should().BeTrue();
@@ -119,7 +119,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool result = announcerData.TryGetElementById("other", out Announcer? announcer);
+        bool result = announcerData.TryGetElementById("other", out AnnouncerPack? announcer);
 
         // assert
         result.Should().BeFalse();
@@ -136,7 +136,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        Announcer announcer = announcerData.GetElementById("AlarakAnnouncer");
+        AnnouncerPack announcer = announcerData.GetElementById("AlarakAnnouncer");
 
         // assert
         AlarakBasicAssertions(announcer);
@@ -168,7 +168,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool result = announcerData.TryGetElementByHyperlinkId("AlarakAnnouncer(hyperlink)", out Announcer? announcer);
+        bool result = announcerData.TryGetElementByHyperlinkId("AlarakAnnouncer(hyperlink)", out AnnouncerPack? announcer);
 
         // assert
         result.Should().BeTrue();
@@ -187,7 +187,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool result = announcerData.TryGetElementByHyperlinkId("other", out Announcer? announcer);
+        bool result = announcerData.TryGetElementByHyperlinkId("other", out AnnouncerPack? announcer);
 
         // assert
         result.Should().BeFalse();
@@ -204,7 +204,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        Announcer announcer = announcerData.GetElementByHyperlinkId("AlarakAnnouncer(hyperlink)");
+        AnnouncerPack announcer = announcerData.GetElementByHyperlinkId("AlarakAnnouncer(hyperlink)");
 
         // assert
         AlarakBasicAssertions(announcer);
@@ -236,7 +236,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool result = announcerData.TryGetElementByAttributeId("Alar", out Announcer? announcer);
+        bool result = announcerData.TryGetElementByAttributeId("Alar", out AnnouncerPack? announcer);
 
         // assert
         result.Should().BeTrue();
@@ -255,7 +255,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        bool result = announcerData.TryGetElementByAttributeId("other", out Announcer? announcer);
+        bool result = announcerData.TryGetElementByAttributeId("other", out AnnouncerPack? announcer);
 
         // assert
         result.Should().BeFalse();
@@ -272,7 +272,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        Announcer announcer = announcerData.GetElementByAttributeId("Alar");
+        AnnouncerPack announcer = announcerData.GetElementByAttributeId("Alar");
 
         // assert
         AlarakBasicAssertions(announcer);
@@ -304,7 +304,7 @@ public class AnnouncerDataDocumentTests
             "heroesVersion": "2.55.1.88122",
             "hdpVersion": "5.0.0",
             "itemsType": "Data",
-            "dataType": "AnnouncerData"
+            "dataType": "AnnouncerPackData"
           },
           "items": {
             "AlarakAnnouncer": {
@@ -332,7 +332,7 @@ public class AnnouncerDataDocumentTests
             }
           },
           "items": {
-            "announcer": {
+            "announcerPack": {
               "name": {
                 "AlarakAnnouncer": "Alarak Announcer Localized"
               },
@@ -356,7 +356,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument, gameStringDocument);
 
         // act
-        Announcer announcer = announcerData.GetElementById("AlarakAnnouncer");
+        AnnouncerPack announcer = announcerData.GetElementById("AlarakAnnouncer");
 
         // assert
         announcer.Should().NotBeNull();
@@ -380,7 +380,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        List<Announcer> result = [.. announcerData.GetElements()];
+        List<AnnouncerPack> result = [.. announcerData.GetElements()];
 
         // assert
         result.Should().HaveCount(2);
@@ -397,7 +397,7 @@ public class AnnouncerDataDocumentTests
         {
           "meta": {
             "itemsType": "Data",
-            "dataType": "AnnouncerData"
+            "dataType": "AnnouncerPackData"
           },
           "items": {}
         }
@@ -407,7 +407,7 @@ public class AnnouncerDataDocumentTests
         AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
 
         // act
-        List<Announcer> result = [.. announcerData.GetElements()];
+        List<AnnouncerPack> result = [.. announcerData.GetElements()];
 
         // assert
         result.Should().BeEmpty();
@@ -453,9 +453,9 @@ public class AnnouncerDataDocumentTests
 
         // assert
         result.Should().HaveCount(2);
-        result.Should().AllBeOfType<Announcer>();
-        result.OfType<Announcer>().Should().Contain(a => a.Id == "AbathurAnnouncer");
-        result.OfType<Announcer>().Should().Contain(a => a.Id == "AlarakAnnouncer");
+        result.Should().AllBeOfType<AnnouncerPack>();
+        result.OfType<AnnouncerPack>().Should().Contain(a => a.Id == "AbathurAnnouncer");
+        result.OfType<AnnouncerPack>().Should().Contain(a => a.Id == "AlarakAnnouncer");
     }
 
     [TestMethod]
@@ -467,7 +467,7 @@ public class AnnouncerDataDocumentTests
         {
           "meta": {
             "itemsType": "Data",
-            "dataType": "AnnouncerData"
+            "dataType": "AnnouncerPackData"
           },
           "items": {}
         }
@@ -498,11 +498,11 @@ public class AnnouncerDataDocumentTests
         // assert
         result.Should().HaveCount(2);
 
-        Announcer alarak = result.OfType<Announcer>().First(h => h.Id == "AlarakAnnouncer");
+        AnnouncerPack alarak = result.OfType<AnnouncerPack>().First(h => h.Id == "AlarakAnnouncer");
         AlarakBasicAssertions(alarak);
     }
 
-    private static void AlarakBasicAssertions(Announcer announcer)
+    private static void AlarakBasicAssertions(AnnouncerPack announcer)
     {
         announcer.Id.Should().Be("AlarakAnnouncer");
         announcer.Name!.RawText.Should().Be("Alarak Announcer");

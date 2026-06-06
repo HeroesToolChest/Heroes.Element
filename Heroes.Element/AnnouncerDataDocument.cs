@@ -1,12 +1,12 @@
 ﻿namespace Heroes.Element;
 
 /// <summary>
-/// Represents a data source for managing and retrieving <see cref="Announcer"/> objects from a JSON document.
+/// Represents a data source for managing and retrieving <see cref="AnnouncerPack"/> objects from a JSON document.
 /// </summary>
-public class AnnouncerDataDocument : ElementDocument<Announcer>, ILoadoutItemRetrieval<Announcer>
+public class AnnouncerDataDocument : ElementDocument<AnnouncerPack>, ILoadoutItemRetrieval<AnnouncerPack>
 {
     private AnnouncerDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(DataType.AnnouncerData, dataDocument, gameStringDocument)
+        : base(DataType.AnnouncerPackData, dataDocument, gameStringDocument)
     {
     }
 
@@ -23,7 +23,7 @@ public class AnnouncerDataDocument : ElementDocument<Announcer>, ILoadoutItemRet
     }
 
     /// <inheritdoc/>
-    protected override void UpdateGameStringTexts(Announcer element)
+    protected override void UpdateGameStringTexts(AnnouncerPack element)
     {
         GameStringDocument?.UpdateGameStrings(element);
     }

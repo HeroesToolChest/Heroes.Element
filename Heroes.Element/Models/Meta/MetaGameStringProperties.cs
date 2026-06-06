@@ -6,7 +6,7 @@
 public class MetaGameStringProperties : MetaProperties
 {
     /// <summary>
-    /// Gets or sets the type(s) of data contained in the file (e.g., "HeroData", "AnnouncerData").
+    /// Gets or sets the type(s) of data contained in the file (e.g., "HeroData", "AnnouncerPackData").
     /// </summary>
     [JsonPropertyName(Constants.MetaDataTypesPropertyName)]
     public SortedSet<DataType> DataTypes { get; set; } = [];

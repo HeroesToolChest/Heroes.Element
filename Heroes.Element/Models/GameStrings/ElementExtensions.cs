@@ -28,11 +28,11 @@ public static class ElementExtensions
     /// <summary>
     /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
     /// </summary>
-    /// <param name="announcer">.</param>
+    /// <param name="announcerPack">.</param>
     /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Announcer announcer, GameStringDocument gameStringDocument)
+    public static void UpdateGameStringTexts(this AnnouncerPack announcerPack, GameStringDocument gameStringDocument)
     {
-        gameStringDocument.UpdateGameStrings(announcer);
+        gameStringDocument.UpdateGameStrings(announcerPack);
     }
 
     /// <summary>

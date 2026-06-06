@@ -6,7 +6,7 @@ public class DataDocumentTests
     [TestMethod]
     [DataRow("HeroData", typeof(HeroDataDocument))]
     [DataRow("UnitData", typeof(UnitDataDocument))]
-    [DataRow("AnnouncerData", typeof(AnnouncerDataDocument))]
+    [DataRow("AnnouncerPackData", typeof(AnnouncerDataDocument))]
     [DataRow("BannerData", typeof(BannerDataDocument))]
     [DataRow("BoostData", typeof(BoostDataDocument))]
     [DataRow("BundleData", typeof(BundleDataDocument))]
@@ -81,7 +81,7 @@ public class DataDocumentTests
             "meta": {
                 "hdpVersion": "5.0.0",
                 "itemsType": "Data",
-                "dataType": "AnnouncerData"
+                "dataType": "AnnouncerPackData"
             },
             "items": {}
         }

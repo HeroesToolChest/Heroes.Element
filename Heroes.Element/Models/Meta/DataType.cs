@@ -26,9 +26,9 @@ public enum DataType
     UnitData,
 
     /// <summary>
-    /// Indicates announcer data.
+    /// Indicates announcer pack data.
     /// </summary>
-    AnnouncerData,
+    AnnouncerPackData,
 
     /// <summary>
     /// Indicates banner data.

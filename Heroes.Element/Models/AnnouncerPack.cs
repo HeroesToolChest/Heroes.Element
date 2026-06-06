@@ -1,15 +1,15 @@
 ﻿namespace Heroes.Element.Models;
 
 /// <summary>
-/// Contains the announcer data.
+/// Contains the announcer pack data.
 /// </summary>
-public class Announcer : LoadoutItem, IImage, IImagePath
+public class AnnouncerPack : LoadoutItem, IImage, IImagePath
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Announcer"/> class.
+    /// Initializes a new instance of the <see cref="AnnouncerPack"/> class.
     /// </summary>
     /// <param name="id">The id.</param>
-    public Announcer(string id)
+    public AnnouncerPack(string id)
         : base(id)
     {
         Rarity = Types.Rarity.Common;

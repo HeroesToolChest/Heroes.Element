@@ -43,7 +43,7 @@ public static class DataDocument
         {
             DataType.HeroData => HeroDataDocument.Load(dataDocument, gameStringDocument),
             DataType.UnitData => UnitDataDocument.Load(dataDocument, gameStringDocument),
-            DataType.AnnouncerData => AnnouncerDataDocument.Load(dataDocument, gameStringDocument),
+            DataType.AnnouncerPackData => AnnouncerDataDocument.Load(dataDocument, gameStringDocument),
             DataType.BannerData => BannerDataDocument.Load(dataDocument, gameStringDocument),
             DataType.BoostData => BoostDataDocument.Load(dataDocument, gameStringDocument),
             DataType.BundleData => BundleDataDocument.Load(dataDocument, gameStringDocument),

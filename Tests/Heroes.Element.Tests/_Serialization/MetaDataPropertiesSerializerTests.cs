@@ -100,7 +100,7 @@ public class MetaDataPropertiesSerializerTests
         {
             HeroesVersion = new HeroesDataVersion(2, 55, 14, 95623),
             HdpVersion = "5.0.0",
-            DataType = DataType.AnnouncerData,
+            DataType = DataType.AnnouncerPackData,
             GameStringTextProperties = null,
             TotalItems = 10,
         };
@@ -239,7 +239,7 @@ public class MetaDataPropertiesSerializerTests
     [DataRow(DataType.Unknown)]
     [DataRow(DataType.HeroData)]
     [DataRow(DataType.UnitData)]
-    [DataRow(DataType.AnnouncerData)]
+    [DataRow(DataType.AnnouncerPackData)]
     [DataRow(DataType.BannerData)]
     [DataRow(DataType.BoostData)]
     [DataRow(DataType.BundleData)]

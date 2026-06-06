@@ -179,18 +179,18 @@ public class GameStringDocument : IDisposable
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties for the <see cref="Announcer"/>.
+    /// Updates the <see cref="GameStringText"/> properties for the <see cref="AnnouncerPack"/>.
     /// </summary>
-    /// <param name="announcer">The <see cref="Announcer"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Announcer announcer)
+    /// <param name="announcerPack">The <see cref="AnnouncerPack"/> whose <see cref="GameStringText"/>s to update.</param>
+    public void UpdateGameStrings(AnnouncerPack announcerPack)
     {
-        ClearStoreItemProperties(announcer);
+        ClearStoreItemProperties(announcerPack);
 
         if (!JsonDocument.RootElement.TryGetProperty(Constants.ItemsPropertyName, out JsonElement gameStringElement) ||
-            !gameStringElement.TryGetProperty("announcer", out JsonElement announcerElement))
+            !gameStringElement.TryGetProperty("announcerPack", out JsonElement announcerPackElement))
             return;
 
-        SetStoreItemProperties(announcer.Id, announcer, announcerElement);
+        SetStoreItemProperties(announcerPack.Id, announcerPack, announcerPackElement);
     }
 
     /// <summary>

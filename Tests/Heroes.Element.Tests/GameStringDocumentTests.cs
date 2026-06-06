@@ -842,7 +842,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_AnnouncerPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStrings_AnnouncerPackPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -853,7 +853,7 @@ public class GameStringDocumentTests
             "hdpVersion": "5.0.0",
             "itemsType": "GameStrings",
             "dataTypes": [
-              "announcerdata"
+              "announcerpackdata"
             ],
             "gameStringText": {
               "locale": "ENUS",
@@ -868,7 +868,7 @@ public class GameStringDocumentTests
           }
         }
         """;
-        Announcer announcer = new("AbathurAnnouncer")
+        AnnouncerPack announcer = new("AbathurAnnouncer")
         {
             Description = new GameStringText("temporary description"),
         };
@@ -887,7 +887,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Announcer_ReturnsUpdatedObject()
+    public void UpdateGameStrings_AnnouncerPack_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -898,7 +898,7 @@ public class GameStringDocumentTests
             "hdpVersion": "5.0.0",
             "itemsType": "GameStrings",
             "dataTypes": [
-              "announcerdata"
+              "announcerpackdata"
             ],
             "gameStringText": {
               "locale": "ENUS",
@@ -910,7 +910,7 @@ public class GameStringDocumentTests
             }
           },
           "items": {
-            "announcer": {
+            "announcerPack": {
               "description": {
                 "AbathurAnnouncer": "The Evolution Master will guide you to victory."
               },
@@ -927,7 +927,7 @@ public class GameStringDocumentTests
           }
         }
         """;
-        Announcer announcer = new("AbathurAnnouncer")
+        AnnouncerPack announcer = new("AbathurAnnouncer")
         {
             Description = new GameStringText("temporary description"),
         };

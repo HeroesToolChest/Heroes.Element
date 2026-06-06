@@ -88,10 +88,10 @@ public class ElementExtensionsTest
     }
 
     [TestMethod]
-    public void UpdateGameStringTexts_Announcer_UpdatesGameStringTexts()
+    public void UpdateGameStringTexts_AnnouncerPack_UpdatesGameStringTexts()
     {
         // arrange
-        Announcer announcer = new("announcerId1")
+        AnnouncerPack announcer = new("announcerId1")
         {
             Description = new GameStringText("a description"),
         };
@@ -111,7 +111,7 @@ public class ElementExtensionsTest
             }
           },
           "items": {
-            "announcer": {
+            "announcerPack": {
               "description": {
                 "announcerId1": "updated description"
               }

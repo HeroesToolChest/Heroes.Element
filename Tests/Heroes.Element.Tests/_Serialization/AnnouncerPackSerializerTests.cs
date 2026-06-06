@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Serialization.Tests;
 
 [TestClass]
-public class AnnouncerSerializerTests
+public class AnnouncerPackSerializerTests
 {
     [TestMethod]
     public void Serialize_AllPropertiesSet_ReturnsJson()
@@ -9,7 +9,7 @@ public class AnnouncerSerializerTests
         // arrange
         SerializerSettings serializerSettings = SerializerSettings.Create();
 
-        Announcer announcer = new("id")
+        AnnouncerPack announcer = new("id")
         {
             Name = new GameStringText("Test Announcer"),
             Description = new GameStringText("Test Description"),
@@ -32,7 +32,7 @@ public class AnnouncerSerializerTests
         string json = JsonSerializer.Serialize(announcer, serializerSettings.GetJsonSerializerDataOptions());
 
         // assert
-        serializerSettings.ItemDictionary["announcer"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
+        serializerSettings.ItemDictionary["announcerPack"].Should().HaveCount(5, "it's the total number of gamestringtext properties");
 
         json.Should().Be(
             """
