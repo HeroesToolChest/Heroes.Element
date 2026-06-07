@@ -86,7 +86,6 @@ public class HeroSerializerTests
                             IsQuest = true,
                             UpgradesAbilityType = true,
                             Column = 1,
-                            AbilityTalentLinkIds = new SortedSet<string> { "ability1|button1|Q" },
                             TooltipAbilityLinkIds = new SortedSet<AbilityLinkId>(new LinkIdComparer())
                             {
                                 new("ability1", "button1", AbilityType.Q),

@@ -47,17 +47,6 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public int Column { get; set; }
 
     /// <summary>
-    /// <para>
-    /// Gets or sets a collection of ability and talent link ids that the talent affects or upgrades.
-    /// </para>
-    /// <para>
-    /// This property is for legacy use with HDP version older than 5.0.0.
-    /// </para>
-    /// </summary>
-    [JsonPropertyOrder(103)]
-    public ISet<string> AbilityTalentLinkIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
-
-    /// <summary>
     /// Gets or sets a sorted collection of the ability ids that the talent adds to the tooltips.
     /// </summary>
     [JsonPropertyOrder(104)]
