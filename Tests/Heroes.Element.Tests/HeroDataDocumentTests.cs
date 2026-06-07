@@ -336,6 +336,7 @@ public class HeroDataDocumentTests
                     "abilityType": "W",
                     "isQuest": false,
                     "upgradesAbilityType": true,
+                    "hasHotkey": true,
                     "sort": 1,
                     "tooltipAbilityLinkIds": [
                       "AbathurSymbiote|AbathurSymbiote|Q",
@@ -354,6 +355,7 @@ public class HeroDataDocumentTests
                     "abilityType": "W",
                     "isQuest": false,
                     "upgradesAbilityType": true,
+                    "hasHotkey": false,
                     "sort": 2,
                     "tooltipAbilityLinkIds": [
                       "AbathurToxicNest|AbathurToxicNest|W"
@@ -732,6 +734,7 @@ public class HeroDataDocumentTests
         talentLevel1.ToggleCooldown.Should().BeNull();
         talentLevel1.UpgradesAbilityType.Should().BeTrue();
         talentLevel1.IsQuest.Should().BeFalse();
+        talentLevel1.HasHotkey.Should().BeTrue();
         talentLevel1.TooltipAbilityLinkIds.Should().HaveCount(2)
             .And.ContainInConsecutiveOrder(
                 new AbilityLinkId("AbathurSymbiote", "AbathurSymbiote", AbilityType.Q),

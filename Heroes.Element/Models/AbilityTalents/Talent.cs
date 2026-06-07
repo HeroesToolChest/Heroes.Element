@@ -40,10 +40,22 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public bool UpgradesAbilityType { get; set; }
 
     /// <summary>
+    /// <para>
+    /// Gets or sets a value indicating whether the talent has a hotkey.
+    /// Ingame this is indicated by a hotkey in parentheses after the <see cref="AbilityType"/> on the talent tooltip.
+    /// </para>
+    /// <para>
+    /// This will be <see langword="false"/> if <see cref="AbilityTalentBase.AbilityType"/> is <see cref="Types.AbilityType.Active" />.
+    /// </para>
+    /// </summary>
+    [JsonPropertyOrder(102)]
+    public bool HasHotkey { get; set; }
+
+    /// <summary>
     /// Gets or sets the column number, also known as the sort index number.
     /// </summary>
     [JsonPropertyName("sort")]
-    [JsonPropertyOrder(102)]
+    [JsonPropertyOrder(103)]
     public int Column { get; set; }
 
     /// <summary>

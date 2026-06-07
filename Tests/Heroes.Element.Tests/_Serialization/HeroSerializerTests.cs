@@ -85,6 +85,7 @@ public class HeroSerializerTests
                             Tier = TalentTier.Level1,
                             IsQuest = true,
                             UpgradesAbilityType = true,
+                            HasHotkey = true,
                             Column = 1,
                             TooltipAbilityLinkIds = new SortedSet<AbilityLinkId>(new LinkIdComparer())
                             {
@@ -371,10 +372,8 @@ public class HeroSerializerTests
                     "abilityType": "Q",
                     "isQuest": true,
                     "upgradesAbilityType": true,
+                    "hasHotkey": true,
                     "sort": 1,
-                    "abilityTalentLinkIds": [
-                      "ability1|button1|Q"
-                    ],
                     "tooltipAbilityLinkIds": [
                       "ability1|button1|Q"
                     ],

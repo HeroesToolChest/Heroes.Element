@@ -247,8 +247,8 @@ public class HeroTalentsConverterTests
                     "AbilityType": 0,
                     "IsQuest": false,
                     "UpgradesAbilityType": false,
+                    "HasHotkey": false,
                     "sort": 1,
-                    "AbilityTalentLinkIds": [],
                     "TooltipAbilityLinkIds": [],
                     "PrerequisiteTalentIds": []
                   }
@@ -288,6 +288,7 @@ public class HeroTalentsConverterTests
                         ButtonElementId = "ButtonB",
                         Column = 2,
                         Tier = TalentTier.Level1,
+                        HasHotkey = true,
                     },
                 ],
             },
@@ -319,8 +320,8 @@ public class HeroTalentsConverterTests
                     "AbilityType": 0,
                     "IsQuest": false,
                     "UpgradesAbilityType": false,
+                    "HasHotkey": false,
                     "sort": 1,
-                    "AbilityTalentLinkIds": [],
                     "TooltipAbilityLinkIds": [],
                     "PrerequisiteTalentIds": []
                   },
@@ -341,8 +342,8 @@ public class HeroTalentsConverterTests
                     "AbilityType": 0,
                     "IsQuest": false,
                     "UpgradesAbilityType": false,
+                    "HasHotkey": true,
                     "sort": 2,
-                    "AbilityTalentLinkIds": [],
                     "TooltipAbilityLinkIds": [],
                     "PrerequisiteTalentIds": []
                   },
@@ -363,8 +364,8 @@ public class HeroTalentsConverterTests
                     "AbilityType": 0,
                     "IsQuest": false,
                     "UpgradesAbilityType": false,
+                    "HasHotkey": false,
                     "sort": 3,
-                    "AbilityTalentLinkIds": [],
                     "TooltipAbilityLinkIds": [],
                     "PrerequisiteTalentIds": []
                   }
