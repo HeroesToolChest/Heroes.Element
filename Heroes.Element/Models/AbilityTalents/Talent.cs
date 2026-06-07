@@ -7,7 +7,7 @@
 public class Talent : AbilityTalentBase, IEquatable<Talent>
 {
     /// <summary>
-    /// Gets a unique(ish) id for this talent. Is in the format of TalentElementId|ButtonElementId|AbilityType|TalentTier.
+    /// Gets a unique(ish) id for the talent. Is in the format of <c>TalentElementId|ButtonElementId|AbilityType|TalentTier</c>.
     /// </summary>
     [JsonPropertyOrder(-11)]
     public TalentLinkId LinkId => new(TalentElementId, ButtonElementId, AbilityType, Tier);
@@ -26,7 +26,7 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public TalentTier Tier { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether this is a quest. This indicates if the talent has a quest icon.
+    /// Gets or sets a value indicating whether the talent is a quest and if it has a quest icon.
     /// Ingame the quest icon will be displayed before the <see cref="AbilityType"/> on the talent tooltip.
     /// </summary>
     [JsonPropertyOrder(100)]
@@ -58,7 +58,7 @@ public class Talent : AbilityTalentBase, IEquatable<Talent>
     public ISet<string> AbilityTalentLinkIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
-    /// Gets or sets a sorted collection of the ability ids that this talent adds to the tooltips.
+    /// Gets or sets a sorted collection of the ability ids that the talent adds to the tooltips.
     /// </summary>
     [JsonPropertyOrder(104)]
     public ISet<AbilityLinkId> TooltipAbilityLinkIds { get; set; } = new SortedSet<AbilityLinkId>(new LinkIdComparer());

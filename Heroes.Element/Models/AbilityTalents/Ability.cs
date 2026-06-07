@@ -15,7 +15,7 @@ public class Ability : AbilityTalentBase, IEquatable<Ability>
     }
 
     /// <summary>
-    /// Gets a unique(ish) id for this ability. Is in the format of AbilityElementId|ButtonElementId|AbilityType.
+    /// Gets a unique(ish) id for the ability. Is in the format of <c>AbilityElementId|ButtonElementId|AbilityType</c>.
     /// </summary>
     [JsonPropertyOrder(-10)]
     public AbilityLinkId LinkId => new(AbilityElementId, ButtonElementId, AbilityType);
