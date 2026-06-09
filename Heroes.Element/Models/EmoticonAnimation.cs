@@ -16,7 +16,7 @@ public class EmoticonAnimation : Animation
     public int? Rows { get; set; }
 
     /// <summary>
-    /// Gets or sets the number of column in the texture.
+    /// Gets or sets the number of columns in the texture.
     /// </summary>
     public int? Columns { get; set; }
 }
