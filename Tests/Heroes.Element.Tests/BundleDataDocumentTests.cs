@@ -326,7 +326,7 @@ public class BundleDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -383,8 +383,8 @@ public class BundleDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        BundleDataDocument bundleData = BundleDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         Bundle bundle = bundleData.GetElementById("BundleHeroesOfTheStorm");

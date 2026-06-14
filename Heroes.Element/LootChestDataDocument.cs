@@ -5,8 +5,8 @@
 /// </summary>
 public class LootChestDataDocument : ElementDocument<LootChest>, IHyperlinkIdRetrieval<LootChest>
 {
-    private LootChestDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(DataType.LootChestData, dataDocument, gameStringDocument)
+    private LootChestDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+        : base(DataType.LootChestData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class LootChestDataDocument : ElementDocument<LootChest>, IHyperlinkIdRet
     /// Creates a new instance of <see cref="LootChestDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="LootChestDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static LootChestDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static LootChestDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new LootChestDataDocument(dataDocument, gameStringDocument);
+        return new LootChestDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(LootChest element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

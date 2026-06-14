@@ -3,14 +3,14 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="GameStringText"/> objects from a JSON document.
 /// </summary>
-public class GameStringDocument : IDisposable
+public class GameStringsDocument : IDisposable
 {
     private readonly JsonSerializerOptions _metaJsonSerializerOptions;
     private readonly JsonSerializerOptions _jsonSerializerOptions;
 
     private bool _disposed;
 
-    private GameStringDocument(JsonDocument jsonDocument)
+    private GameStringsDocument(JsonDocument jsonDocument)
     {
         JsonDocument = jsonDocument;
 
@@ -51,14 +51,14 @@ public class GameStringDocument : IDisposable
     public MetaGameStringProperties Meta { get; }
 
     /// <summary>
-    /// Creates a new instance of <see cref="GameStringDocument"/> from the specified JSON document.
+    /// Creates a new instance of <see cref="GameStringsDocument"/> from the specified JSON document.
     /// </summary>
-    /// <param name="jsonDocument">The JSON document containing the data to initialize the <see cref="GameStringDocument"/> instance.</param>
-    /// <returns>A <see cref="GameStringDocument"/> object initialized with the data from the provided JSON document.</returns>
+    /// <param name="jsonDocument">The JSON document containing the data to initialize the <see cref="GameStringsDocument"/> instance.</param>
+    /// <returns>A <see cref="GameStringsDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static GameStringDocument Load(JsonDocument jsonDocument)
+    public static GameStringsDocument Load(JsonDocument jsonDocument)
     {
-        return new GameStringDocument(jsonDocument);
+        return new GameStringsDocument(jsonDocument);
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Hero"/>.
     /// </summary>
     /// <param name="hero">The <see cref="Hero"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Hero hero)
+    public void UpdateGameStringTexts(Hero hero)
     {
         ClearStoreItemProperties(hero);
 
@@ -140,7 +140,7 @@ public class GameStringDocument : IDisposable
 
         foreach (Unit heroUnit in hero.HeroUnits.Values)
         {
-            UpdateGameStrings(heroUnit);
+            UpdateGameStringTexts(heroUnit);
         }
     }
 
@@ -148,7 +148,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Unit"/>.
     /// </summary>
     /// <param name="unit">The <see cref="Unit"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Unit unit)
+    public void UpdateGameStringTexts(Unit unit)
     {
         unit.Name = null;
         unit.Description = null;
@@ -182,7 +182,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="AnnouncerPack"/>.
     /// </summary>
     /// <param name="announcerPack">The <see cref="AnnouncerPack"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(AnnouncerPack announcerPack)
+    public void UpdateGameStringTexts(AnnouncerPack announcerPack)
     {
         ClearStoreItemProperties(announcerPack);
 
@@ -197,7 +197,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Banner"/>.
     /// </summary>
     /// <param name="banner">The <see cref="Banner"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Banner banner)
+    public void UpdateGameStringTexts(Banner banner)
     {
         ClearStoreItemProperties(banner);
 
@@ -212,7 +212,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Boost"/>.
     /// </summary>
     /// <param name="boost">The <see cref="Boost"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Boost boost)
+    public void UpdateGameStringTexts(Boost boost)
     {
         ClearStoreItemProperties(boost);
 
@@ -227,7 +227,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Bundle"/>.
     /// </summary>
     /// <param name="bundle">The <see cref="Bundle"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Bundle bundle)
+    public void UpdateGameStringTexts(Bundle bundle)
     {
         ClearStoreItemProperties(bundle);
 
@@ -242,7 +242,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="LootChest"/>.
     /// </summary>
     /// <param name="lootchest">The <see cref="LootChest"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(LootChest lootchest)
+    public void UpdateGameStringTexts(LootChest lootchest)
     {
         lootchest.Name = null;
         lootchest.Description = null;
@@ -259,7 +259,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Map"/>.
     /// </summary>
     /// <param name="map">The <see cref="Map"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Map map)
+    public void UpdateGameStringTexts(Map map)
     {
         map.Name = null;
 
@@ -304,7 +304,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Skin"/>.
     /// </summary>
     /// <param name="skin">The <see cref="Skin"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Skin skin)
+    public void UpdateGameStringTexts(Skin skin)
     {
         ClearStoreItemProperties(skin);
 
@@ -319,7 +319,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="VoiceLine"/>.
     /// </summary>
     /// <param name="voiceLine">The <see cref="VoiceLine"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(VoiceLine voiceLine)
+    public void UpdateGameStringTexts(VoiceLine voiceLine)
     {
         ClearStoreItemProperties(voiceLine);
 
@@ -334,7 +334,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Mount"/>.
     /// </summary>
     /// <param name="mount">The <see cref="Mount"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Mount mount)
+    public void UpdateGameStringTexts(Mount mount)
     {
         ClearStoreItemProperties(mount);
 
@@ -349,7 +349,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="MatchAward"/>.
     /// </summary>
     /// <param name="matchAward">The <see cref="MatchAward"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(MatchAward matchAward)
+    public void UpdateGameStringTexts(MatchAward matchAward)
     {
         matchAward.ScoreScreenName = null;
         matchAward.ScoreScreenDescription = null;
@@ -377,7 +377,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Spray"/>.
     /// </summary>
     /// <param name="spray">The <see cref="Spray"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Spray spray)
+    public void UpdateGameStringTexts(Spray spray)
     {
         ClearStoreItemProperties(spray);
 
@@ -392,7 +392,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="Emoticon"/>.
     /// </summary>
     /// <param name="emoticon">The <see cref="Emoticon"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(Emoticon emoticon)
+    public void UpdateGameStringTexts(Emoticon emoticon)
     {
         emoticon.Description = null;
         emoticon.SearchText = null;
@@ -422,7 +422,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="EmoticonPack"/>.
     /// </summary>
     /// <param name="emoticonPack">The <see cref="EmoticonPack"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(EmoticonPack emoticonPack)
+    public void UpdateGameStringTexts(EmoticonPack emoticonPack)
     {
         ClearStoreItemProperties(emoticonPack);
 
@@ -437,7 +437,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="PortraitPack"/>.
     /// </summary>
     /// <param name="portraitPack">The <see cref="PortraitPack"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(PortraitPack portraitPack)
+    public void UpdateGameStringTexts(PortraitPack portraitPack)
     {
         ClearStoreItemProperties(portraitPack);
 
@@ -452,7 +452,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="RewardPortrait"/>.
     /// </summary>
     /// <param name="rewardPortrait">The <see cref="RewardPortrait"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(RewardPortrait rewardPortrait)
+    public void UpdateGameStringTexts(RewardPortrait rewardPortrait)
     {
         ClearStoreItemProperties(rewardPortrait);
         rewardPortrait.DescriptionUnearned = null;
@@ -471,7 +471,7 @@ public class GameStringDocument : IDisposable
     /// Updates the <see cref="GameStringText"/> properties for the <see cref="TypeDescription"/>.
     /// </summary>
     /// <param name="typeDescription">The <see cref="TypeDescription"/> whose <see cref="GameStringText"/>s to update.</param>
-    public void UpdateGameStrings(TypeDescription typeDescription)
+    public void UpdateGameStringTexts(TypeDescription typeDescription)
     {
         typeDescription.Name = null;
 

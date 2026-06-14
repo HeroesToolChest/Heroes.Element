@@ -5,8 +5,8 @@
 /// </summary>
 public class RewardPortraitDataDocument : ElementDocument<RewardPortrait>
 {
-    private RewardPortraitDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(DataType.RewardPortraitData, dataDocument, gameStringDocument)
+    private RewardPortraitDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+        : base(DataType.RewardPortraitData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class RewardPortraitDataDocument : ElementDocument<RewardPortrait>
     /// Creates a new instance of <see cref="RewardPortraitDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="RewardPortraitDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static RewardPortraitDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static RewardPortraitDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new RewardPortraitDataDocument(dataDocument, gameStringDocument);
+        return new RewardPortraitDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(RewardPortrait element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

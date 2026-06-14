@@ -310,7 +310,7 @@ public class SkinDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -371,8 +371,8 @@ public class SkinDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        SkinDataDocument skinData = SkinDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         Skin skin = skinData.GetElementById("AbathurMechaVar2");

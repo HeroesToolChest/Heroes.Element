@@ -5,8 +5,8 @@
 /// </summary>
 public class BundleDataDocument : ElementDocument<Bundle>, IStoreItemRetrieval<Bundle>
 {
-    private BundleDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(DataType.BundleData, dataDocument, gameStringDocument)
+    private BundleDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+    : base(DataType.BundleData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class BundleDataDocument : ElementDocument<Bundle>, IStoreItemRetrieval<B
     /// Creates a new instance of <see cref="BundleDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="BundleDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static BundleDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static BundleDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new BundleDataDocument(dataDocument, gameStringDocument);
+        return new BundleDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(Bundle element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

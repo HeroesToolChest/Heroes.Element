@@ -872,7 +872,7 @@ public class HeroDataDocumentTests
     }
 
     [TestMethod]
-    public void GetHeroById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetHeroById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -926,8 +926,8 @@ public class HeroDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        HeroDataDocument heroData = HeroDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         Hero hero = heroData.GetElementById("Alarak");

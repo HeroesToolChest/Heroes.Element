@@ -14,11 +14,11 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     /// </summary>
     /// <param name="dataType">The expected data type of the JSON document.</param>
     /// <param name="jsonDocument">The <see cref="JsonDocument"/> containing the JSON data to be processed.</param>
-    /// <param name="gameStringDocument">The <see cref="JsonDocument"/> containing the JSON gamestrings to be processed.</param>
-    protected ElementDocument(DataType dataType, JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
+    /// <param name="gameStringsDocument">The <see cref="JsonDocument"/> containing the JSON gamestrings to be processed.</param>
+    protected ElementDocument(DataType dataType, JsonDocument jsonDocument, GameStringsDocument? gameStringsDocument = null)
     {
         JsonDocument = jsonDocument;
-        GameStringDocument = gameStringDocument;
+        GameStringsDocument = gameStringsDocument;
 
         // do not serialize with this options in this constructor
         JsonSerializerOptions = new()
@@ -49,25 +49,25 @@ public abstract class ElementDocument<T> : IElementIdRetrieval<T>, IElementDocum
     public JsonDocument JsonDocument { get; }
 
     /// <inheritdoc/>
-    public GameStringDocument? GameStringDocument { get; }
+    public GameStringsDocument? GameStringsDocument { get; }
 
     /// <inheritdoc/>
     public MetaDataProperties Meta { get; }
 
     /// <inheritdoc/>
-    public bool IsMatchedHeroesVersion => GameStringDocument is null || Meta.HeroesVersion == GameStringDocument.Meta.HeroesVersion;
+    public bool IsMatchedHeroesVersion => GameStringsDocument is null || Meta.HeroesVersion == GameStringsDocument.Meta.HeroesVersion;
 
     /// <inheritdoc/>
-    public bool IsMatchedHdpVersion => GameStringDocument is null || Meta.HdpVersion.Equals(GameStringDocument.Meta.HdpVersion, StringComparison.OrdinalIgnoreCase);
+    public bool IsMatchedHdpVersion => GameStringsDocument is null || Meta.HdpVersion.Equals(GameStringsDocument.Meta.HdpVersion, StringComparison.OrdinalIgnoreCase);
 
     /// <inheritdoc/>
-    public bool IsMatchedDataType => GameStringDocument is null || GameStringDocument.Meta.DataTypes.Contains(Meta.DataType);
+    public bool IsMatchedDataType => GameStringsDocument is null || GameStringsDocument.Meta.DataTypes.Contains(Meta.DataType);
 
     /// <inheritdoc/>
     public bool IsMatchedMapName =>
-        GameStringDocument is null ||
-        (GameStringDocument.Meta.MapName is null && Meta.MapName is null) ||
-        (GameStringDocument.Meta.MapName is not null && GameStringDocument.Meta.MapName.Equals(Meta.MapName, StringComparison.Ordinal));
+        GameStringsDocument is null ||
+        (GameStringsDocument.Meta.MapName is null && Meta.MapName is null) ||
+        (GameStringsDocument.Meta.MapName is not null && GameStringsDocument.Meta.MapName.Equals(Meta.MapName, StringComparison.Ordinal));
 
     /// <summary>
     /// Gets the options used to configure JSON serialization and deserialization.

@@ -133,7 +133,7 @@ public class TypeDescriptionDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -178,8 +178,8 @@ public class TypeDescriptionDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TypeDescriptionDataDocument typeDescriptionData = TypeDescriptionDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         TypeDescription typeDescription = typeDescriptionData.GetElementById("TypeDescriptionSkin");

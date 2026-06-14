@@ -5,8 +5,8 @@
 /// </summary>
 public class MountDataDocument : ElementDocument<Mount>, ILoadoutItemRetrieval<Mount>
 {
-    private MountDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(DataType.MountData, dataDocument, gameStringDocument)
+    private MountDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+    : base(DataType.MountData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class MountDataDocument : ElementDocument<Mount>, ILoadoutItemRetrieval<M
     /// Creates a new instance of <see cref="MountDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="MountDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static MountDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static MountDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new MountDataDocument(dataDocument, gameStringDocument);
+        return new MountDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(Mount element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

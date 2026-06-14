@@ -5,8 +5,8 @@
 /// </summary>
 public class MapDataDocument : ElementDocument<Map>
 {
-    private MapDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-    : base(DataType.MapData, dataDocument, gameStringDocument)
+    private MapDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+    : base(DataType.MapData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class MapDataDocument : ElementDocument<Map>
     /// Creates a new instance of <see cref="MapDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="MapDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static MapDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static MapDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new MapDataDocument(dataDocument, gameStringDocument);
+        return new MapDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(Map element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

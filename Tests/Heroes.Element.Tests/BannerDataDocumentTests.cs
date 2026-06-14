@@ -289,7 +289,7 @@ public class BannerDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -346,8 +346,8 @@ public class BannerDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        BannerDataDocument bannerData = BannerDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         Banner banner = bannerData.GetElementById("BannerD3Tyrael");

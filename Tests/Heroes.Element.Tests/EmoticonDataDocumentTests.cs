@@ -166,7 +166,7 @@ public class EmoticonDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -226,8 +226,8 @@ public class EmoticonDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        EmoticonDataDocument emoticonData = EmoticonDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        EmoticonDataDocument emoticonData = EmoticonDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         Emoticon emoticon = emoticonData.GetElementById("abathur_pack_2");

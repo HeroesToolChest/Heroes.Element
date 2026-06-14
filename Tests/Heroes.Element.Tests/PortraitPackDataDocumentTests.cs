@@ -224,7 +224,7 @@ public class PortraitPackDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -281,8 +281,8 @@ public class PortraitPackDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        PortraitPackDataDocument portraitPackData = PortraitPackDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         PortraitPack portraitPack = portraitPackData.GetElementById("PortraitPackStarcraftLegacy2");

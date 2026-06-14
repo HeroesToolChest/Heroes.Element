@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Tests;
 
 [TestClass]
-public class GameStringDocumentTests
+public class GameStringsDocumentTests
 {
     [TestMethod]
     public void MetaGameStringProperties_WithMinimalMeta_ReturnsMinimalProperties()
@@ -19,7 +19,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         MetaGameStringProperties meta = document.Meta;
@@ -47,7 +47,7 @@ public class GameStringDocumentTests
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
 
         // act
-        Action act = () => GameStringDocument.Load(jsonDocument);
+        Action act = () => GameStringsDocument.Load(jsonDocument);
 
         // assert
         act.Should().Throw<JsonException>();
@@ -69,7 +69,7 @@ public class GameStringDocumentTests
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
 
         // act
-        Action act = () => GameStringDocument.Load(jsonDocument);
+        Action act = () => GameStringsDocument.Load(jsonDocument);
 
         // assert
         act.Should().Throw<JsonException>();
@@ -95,7 +95,7 @@ public class GameStringDocumentTests
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
 
         // act
-        Action act = () => GameStringDocument.Load(jsonDocument);
+        Action act = () => GameStringsDocument.Load(jsonDocument);
 
         // assert
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected items type*");
@@ -121,7 +121,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         MetaGameStringProperties meta = document.Meta;
@@ -154,7 +154,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         MetaGameStringProperties meta = document.Meta;
@@ -180,7 +180,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         GameStringItemDictionary items = document.GetItems();
@@ -220,7 +220,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         GameStringItemDictionary items = document.GetItems();
@@ -271,7 +271,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         GameStringItemDictionary items = document.GetItems();
@@ -325,7 +325,7 @@ public class GameStringDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
         GameStringItemDictionary items = document.GetItems();
@@ -343,7 +343,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_HeroPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_HeroPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -383,10 +383,10 @@ public class GameStringDocumentTests
             ]);
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(hero);
+        document.UpdateGameStringTexts(hero);
 
         // assert
         hero.Description.Should().BeNull();
@@ -425,7 +425,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Hero_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Hero_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -584,10 +584,10 @@ public class GameStringDocumentTests
         });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(hero);
+        document.UpdateGameStringTexts(hero);
 
         // assert
         hero.Description!.RawText.Should().Be("A unique Hero who can manipulate the battle from anywhere on the map.");
@@ -642,7 +642,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_UnitPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_UnitPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -681,10 +681,10 @@ public class GameStringDocumentTests
             ]);
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(unit);
+        document.UpdateGameStringTexts(unit);
 
         // assert
         unit.Description.Should().BeNull();
@@ -715,7 +715,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Unit_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Unit_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -803,10 +803,10 @@ public class GameStringDocumentTests
         });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(unit);
+        document.UpdateGameStringTexts(unit);
 
         // assert
         unit.Description!.RawText.Should().Be("Spawn and attach a Symbiote to a target ally or Structure. While active, Abathur controls the Symbiote, gaining access to new Abilities. The Symbiote is able to gain XP from nearby enemy deaths.");
@@ -842,7 +842,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_AnnouncerPackPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_AnnouncerPackPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -874,10 +874,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(announcer);
+        document.UpdateGameStringTexts(announcer);
 
         // assert
         announcer.Description.Should().BeNull();
@@ -887,7 +887,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_AnnouncerPack_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_AnnouncerPack_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -933,10 +933,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(announcer);
+        document.UpdateGameStringTexts(announcer);
 
         // assert
         announcer.Description!.RawText.Should().Be("The Evolution Master will guide you to victory.");
@@ -946,7 +946,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_BannerPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_BannerPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -978,10 +978,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(banner);
+        document.UpdateGameStringTexts(banner);
 
         // assert
         banner.Description.Should().BeNull();
@@ -991,7 +991,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Banner_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Banner_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1037,10 +1037,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(banner);
+        document.UpdateGameStringTexts(banner);
 
         // assert
         banner.Description!.RawText.Should().Be("Banner celebrating the Archangel of Valor.");
@@ -1050,7 +1050,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_BoostPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_BoostPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1082,10 +1082,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(boost);
+        document.UpdateGameStringTexts(boost);
 
         // assert
         boost.Description.Should().BeNull();
@@ -1095,7 +1095,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Boost_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Boost_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1141,10 +1141,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(boost);
+        document.UpdateGameStringTexts(boost);
 
         // assert
         boost.Description!.RawText.Should().Be("Increases experience gain by 50% for 3 days.");
@@ -1154,7 +1154,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_BundlePropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_BundlePropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1186,10 +1186,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(bundle);
+        document.UpdateGameStringTexts(bundle);
 
         // assert
         bundle.Description.Should().BeNull();
@@ -1199,7 +1199,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Bundle_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Bundle_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1245,10 +1245,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(bundle);
+        document.UpdateGameStringTexts(bundle);
 
         // assert
         bundle.Description!.RawText.Should().Be("Get started with this amazing bundle pack!");
@@ -1258,7 +1258,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_LootChestPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_LootChestPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1290,10 +1290,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(lootChest);
+        document.UpdateGameStringTexts(lootChest);
 
         // assert
         lootChest.Description.Should().BeNull();
@@ -1301,7 +1301,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_LootChest_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_LootChest_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1341,10 +1341,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(lootChest);
+        document.UpdateGameStringTexts(lootChest);
 
         // assert
         lootChest.Description!.RawText.Should().Be("Contains four random items. Guaranteed to contain at least one Rare item.");
@@ -1352,7 +1352,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_MapPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_MapPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1383,10 +1383,10 @@ public class GameStringDocumentTests
         map.MapObjectives.Add(new MapObjective { Title = new GameStringText("temp2"), Description = new GameStringText("temp2 desc") });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(map);
+        document.UpdateGameStringTexts(map);
 
         // assert
         map.Name.Should().BeNull();
@@ -1398,7 +1398,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Map_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Map_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1446,10 +1446,10 @@ public class GameStringDocumentTests
         map.MapObjectives.Add(new MapObjective { Title = new GameStringText("temp2"), Description = new GameStringText("temp2 desc") });
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(map);
+        document.UpdateGameStringTexts(map);
 
         // assert
         map.Name!.RawText.Should().Be("Battlefield of Eternity");
@@ -1461,7 +1461,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_SkinPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_SkinPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1493,10 +1493,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        gameStringDocument.UpdateGameStrings(skin);
+        gameStringsDocument.UpdateGameStringTexts(skin);
 
         // assert
         skin.Description.Should().BeNull();
@@ -1507,7 +1507,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Skin_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Skin_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1556,10 +1556,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        gameStringDocument.UpdateGameStrings(skin);
+        gameStringsDocument.UpdateGameStringTexts(skin);
 
         // assert
         skin.Description!.RawText.Should().Be("An alternate skin for the Evolution Master.");
@@ -1570,7 +1570,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_MountPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_MountPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1602,10 +1602,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(mount);
+        document.UpdateGameStringTexts(mount);
 
         // assert
         mount.Description.Should().BeNull();
@@ -1616,7 +1616,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Mount_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Mount_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1665,10 +1665,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(mount);
+        document.UpdateGameStringTexts(mount);
 
         // assert
         mount.Description!.RawText.Should().Be("A mystical serpent from the clouds of Pandaria.");
@@ -1679,7 +1679,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_MatchAwardPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_MatchAwardPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1711,10 +1711,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(matchAward);
+        document.UpdateGameStringTexts(matchAward);
 
         // assert
         matchAward.ScoreScreenName.Should().BeNull();
@@ -1725,7 +1725,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_MatchAward_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_MatchAward_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1774,10 +1774,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(matchAward);
+        document.UpdateGameStringTexts(matchAward);
 
         // assert
         matchAward.ScoreScreenName!.RawText.Should().Be("Most Valuable Player");
@@ -1788,7 +1788,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_VoiceLinePropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_VoiceLinePropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1820,10 +1820,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(voiceLine);
+        document.UpdateGameStringTexts(voiceLine);
 
         // assert
         voiceLine.Name.Should().BeNull();
@@ -1834,7 +1834,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_VoiceLine_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_VoiceLine_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1883,10 +1883,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(voiceLine);
+        document.UpdateGameStringTexts(voiceLine);
 
         // assert
         voiceLine.Name!.RawText.Should().Be("Acceptable");
@@ -1897,7 +1897,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_EmoticonPropertyNotFound_ReturnsWithClearedProperties()
+    public void UpdateGameStringTexts_EmoticonPropertyNotFound_ReturnsWithClearedProperties()
     {
         // arrange
         string json =
@@ -1932,10 +1932,10 @@ public class GameStringDocumentTests
         emoticon.LocalizedAliases.Add(new GameStringText("temp3"));
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(emoticon);
+        document.UpdateGameStringTexts(emoticon);
 
         // assert
         emoticon.Description.Should().BeNull();
@@ -1944,7 +1944,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Emoticon_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Emoticon_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -1994,10 +1994,10 @@ public class GameStringDocumentTests
         emoticon.LocalizedAliases.Add(new GameStringText("temp3"));
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(emoticon);
+        document.UpdateGameStringTexts(emoticon);
 
         // assert
         emoticon.Description!.RawText.Should().Be("Emoticon featuring Abathur, the Evolution Master.");
@@ -2009,7 +2009,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_SprayPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_SprayPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2041,10 +2041,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(spray);
+        document.UpdateGameStringTexts(spray);
 
         // assert
         spray.Name.Should().BeNull();
@@ -2055,7 +2055,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_Spray_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_Spray_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2104,10 +2104,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(spray);
+        document.UpdateGameStringTexts(spray);
 
         // assert
         spray.Name!.RawText.Should().Be("Ahhhh!");
@@ -2118,7 +2118,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_EmoticonPackPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_EmoticonPackPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2150,10 +2150,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(emoticonPack);
+        document.UpdateGameStringTexts(emoticonPack);
 
         // assert
         emoticonPack.Description.Should().BeNull();
@@ -2163,7 +2163,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_EmoticonPack_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_EmoticonPack_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2209,10 +2209,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(emoticonPack);
+        document.UpdateGameStringTexts(emoticonPack);
 
         // assert
         emoticonPack.Name!.RawText.Should().Be("Abathur Pack 1");
@@ -2222,7 +2222,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_PortraitPackPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_PortraitPackPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2254,10 +2254,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(portraitPack);
+        document.UpdateGameStringTexts(portraitPack);
 
         // assert
         portraitPack.Description.Should().BeNull();
@@ -2267,7 +2267,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_PortraitPack_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_PortraitPack_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2313,10 +2313,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(portraitPack);
+        document.UpdateGameStringTexts(portraitPack);
 
         // assert
         portraitPack.Name!.RawText.Should().Be("StarCraft Legacy Pack 1");
@@ -2326,7 +2326,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_RewardPortraitPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_RewardPortraitPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2359,10 +2359,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(rewardPortrait);
+        document.UpdateGameStringTexts(rewardPortrait);
 
         // assert
         rewardPortrait.Description.Should().BeNull();
@@ -2373,7 +2373,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_RewardPortrait_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_RewardPortrait_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2422,10 +2422,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(rewardPortrait);
+        document.UpdateGameStringTexts(rewardPortrait);
 
         // assert
         rewardPortrait.Name!.RawText.Should().Be("Raynor Portrait 001");
@@ -2436,7 +2436,7 @@ public class GameStringDocumentTests
     }
 
     [TestMethod]
-    public void UpdateGameStrings_TypeDescriptionPropertyNotFound_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_TypeDescriptionPropertyNotFound_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2468,17 +2468,17 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(typeDescription);
+        document.UpdateGameStringTexts(typeDescription);
 
         // assert
         typeDescription.Name.Should().BeNull();
     }
 
     [TestMethod]
-    public void UpdateGameStrings_TypeDescription_ReturnsUpdatedObject()
+    public void UpdateGameStringTexts_TypeDescription_ReturnsUpdatedObject()
     {
         // arrange
         string json =
@@ -2515,10 +2515,10 @@ public class GameStringDocumentTests
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        GameStringDocument document = GameStringDocument.Load(jsonDocument);
+        GameStringsDocument document = GameStringsDocument.Load(jsonDocument);
 
         // act
-        document.UpdateGameStrings(typeDescription);
+        document.UpdateGameStringTexts(typeDescription);
 
         // assert
         typeDescription.Name!.RawText.Should().Be("Hero");

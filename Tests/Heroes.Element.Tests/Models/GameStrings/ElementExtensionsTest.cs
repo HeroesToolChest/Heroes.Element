@@ -36,10 +36,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        hero.UpdateGameStringTexts(gameStringDocument);
+        hero.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         hero.Description.RawText.Should().Be("updated description");
@@ -78,10 +78,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        unit.UpdateGameStringTexts(gameStringDocument);
+        unit.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         unit.Description.RawText.Should().Be("updated description");
@@ -120,10 +120,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        announcer.UpdateGameStringTexts(gameStringDocument);
+        announcer.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         announcer.Description.RawText.Should().Be("updated description");
@@ -162,10 +162,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        banner.UpdateGameStringTexts(gameStringDocument);
+        banner.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         banner.Description.RawText.Should().Be("updated description");
@@ -204,10 +204,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        boost.UpdateGameStringTexts(gameStringDocument);
+        boost.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         boost.Description.RawText.Should().Be("updated description");
@@ -246,10 +246,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        bundle.UpdateGameStringTexts(gameStringDocument);
+        bundle.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         bundle.Description.RawText.Should().Be("updated description");
@@ -291,10 +291,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        lootChest.UpdateGameStringTexts(gameStringDocument);
+        lootChest.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         lootChest.Description.RawText.Should().Be("updated description");
@@ -348,10 +348,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        map.UpdateGameStringTexts(gameStringDocument);
+        map.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         map.Name!.RawText.Should().Be("Battlefield of Eternity");
@@ -406,10 +406,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        skin.UpdateGameStringTexts(gameStringDocument);
+        skin.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         skin.Description!.RawText.Should().Be("updated description");
@@ -461,10 +461,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        voiceLine.UpdateGameStringTexts(gameStringDocument);
+        voiceLine.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         voiceLine.Description!.RawText.Should().Be("updated description");
@@ -515,10 +515,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        mount.UpdateGameStringTexts(gameStringDocument);
+        mount.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         mount.Description!.RawText.Should().Be("updated description");
@@ -572,10 +572,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        matchAward.UpdateGameStringTexts(gameStringDocument);
+        matchAward.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         matchAward.ScoreScreenName!.RawText.Should().Be("updated score screen name");
@@ -627,10 +627,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        spray.UpdateGameStringTexts(gameStringDocument);
+        spray.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         spray.Description!.RawText.Should().Be("updated description");
@@ -684,10 +684,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        emoticon.UpdateGameStringTexts(gameStringDocument);
+        emoticon.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         emoticon.Description!.RawText.Should().Be("updated description");
@@ -739,10 +739,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        emoticonPack.UpdateGameStringTexts(gameStringDocument);
+        emoticonPack.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         emoticonPack.Description!.RawText.Should().Be("updated description");
@@ -793,10 +793,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        portraitPack.UpdateGameStringTexts(gameStringDocument);
+        portraitPack.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         portraitPack.Description!.RawText.Should().Be("updated description");
@@ -851,10 +851,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        rewardPortrait.UpdateGameStringTexts(gameStringDocument);
+        rewardPortrait.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         rewardPortrait.Description!.RawText.Should().Be("updated description");
@@ -897,10 +897,10 @@ public class ElementExtensionsTest
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(jsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(jsonDocument);
 
         // act
-        typeDescription.UpdateGameStringTexts(gameStringDocument);
+        typeDescription.UpdateGameStringTexts(gameStringsDocument);
 
         // assert
         typeDescription.Name!.RawText.Should().Be("updated name");

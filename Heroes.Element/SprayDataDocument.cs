@@ -5,8 +5,8 @@
 /// </summary>
 public class SprayDataDocument : ElementDocument<Spray>, ILoadoutItemRetrieval<Spray>
 {
-    private SprayDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(DataType.SprayData, dataDocument, gameStringDocument)
+    private SprayDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+        : base(DataType.SprayData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class SprayDataDocument : ElementDocument<Spray>, ILoadoutItemRetrieval<S
     /// Creates a new instance of <see cref="SprayDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="SprayDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static SprayDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static SprayDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new SprayDataDocument(dataDocument, gameStringDocument);
+        return new SprayDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(Spray element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

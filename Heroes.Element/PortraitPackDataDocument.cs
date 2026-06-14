@@ -5,8 +5,8 @@
 /// </summary>
 public class PortraitPackDataDocument : ElementDocument<PortraitPack>
 {
-    private PortraitPackDataDocument(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
-        : base(DataType.PortraitPackData, dataDocument, gameStringDocument)
+    private PortraitPackDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
+        : base(DataType.PortraitPackData, dataDocument, gameStringsDocument)
     {
     }
 
@@ -14,17 +14,17 @@ public class PortraitPackDataDocument : ElementDocument<PortraitPack>
     /// Creates a new instance of <see cref="PortraitPackDataDocument"/> from the specified JSON document.
     /// </summary>
     /// <param name="dataDocument">The JSON document containing the data.</param>
-    /// <param name="gameStringDocument">The optional JSON document containing the gamestrings.</param>
+    /// <param name="gameStringsDocument">The optional JSON document containing the gamestrings.</param>
     /// <returns>A <see cref="PortraitPackDataDocument"/> object initialized with the data from the provided JSON document.</returns>
     /// <exception cref="JsonException">Thrown when the JSON document is invalid or cannot be parsed.</exception>
-    public static PortraitPackDataDocument Load(JsonDocument dataDocument, GameStringDocument? gameStringDocument = null)
+    public static PortraitPackDataDocument Load(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
     {
-        return new PortraitPackDataDocument(dataDocument, gameStringDocument);
+        return new PortraitPackDataDocument(dataDocument, gameStringsDocument);
     }
 
     /// <inheritdoc/>
     protected override void UpdateGameStringTexts(PortraitPack element)
     {
-        GameStringDocument?.UpdateGameStrings(element);
+        GameStringsDocument?.UpdateGameStringTexts(element);
     }
 }

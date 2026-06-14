@@ -6,182 +6,182 @@
 public static class ElementExtensions
 {
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="hero">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Hero hero, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Hero hero, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(hero);
+        gameStringsDocument.UpdateGameStringTexts(hero);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="unit">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Unit unit, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Unit unit, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(unit);
+        gameStringsDocument.UpdateGameStringTexts(unit);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="announcerPack">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this AnnouncerPack announcerPack, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this AnnouncerPack announcerPack, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(announcerPack);
+        gameStringsDocument.UpdateGameStringTexts(announcerPack);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="banner">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Banner banner, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Banner banner, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(banner);
+        gameStringsDocument.UpdateGameStringTexts(banner);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="boost">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Boost boost, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Boost boost, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(boost);
+        gameStringsDocument.UpdateGameStringTexts(boost);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="bundle">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Bundle bundle, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Bundle bundle, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(bundle);
+        gameStringsDocument.UpdateGameStringTexts(bundle);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="lootChest">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this LootChest lootChest, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this LootChest lootChest, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(lootChest);
+        gameStringsDocument.UpdateGameStringTexts(lootChest);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="map">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Map map, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Map map, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(map);
+        gameStringsDocument.UpdateGameStringTexts(map);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="skin">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Skin skin, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Skin skin, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(skin);
+        gameStringsDocument.UpdateGameStringTexts(skin);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="voiceLine">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this VoiceLine voiceLine, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this VoiceLine voiceLine, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(voiceLine);
+        gameStringsDocument.UpdateGameStringTexts(voiceLine);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="mount">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Mount mount, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Mount mount, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(mount);
+        gameStringsDocument.UpdateGameStringTexts(mount);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="matchAward">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this MatchAward matchAward, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this MatchAward matchAward, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(matchAward);
+        gameStringsDocument.UpdateGameStringTexts(matchAward);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="spray">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Spray spray, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Spray spray, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(spray);
+        gameStringsDocument.UpdateGameStringTexts(spray);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="emoticon">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this Emoticon emoticon, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this Emoticon emoticon, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(emoticon);
+        gameStringsDocument.UpdateGameStringTexts(emoticon);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="emoticonPack">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this EmoticonPack emoticonPack, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this EmoticonPack emoticonPack, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(emoticonPack);
+        gameStringsDocument.UpdateGameStringTexts(emoticonPack);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="portraitPack">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this PortraitPack portraitPack, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this PortraitPack portraitPack, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(portraitPack);
+        gameStringsDocument.UpdateGameStringTexts(portraitPack);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="rewardPortrait">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this RewardPortrait rewardPortrait, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this RewardPortrait rewardPortrait, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(rewardPortrait);
+        gameStringsDocument.UpdateGameStringTexts(rewardPortrait);
     }
 
     /// <summary>
-    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringDocument"/>.
+    /// Updates the <see cref="GameStringText"/> properties from the <paramref name="gameStringsDocument"/>.
     /// </summary>
     /// <param name="typeDescription">.</param>
-    /// <param name="gameStringDocument">Instance of a <see cref="GameStringDocument"/>.</param>
-    public static void UpdateGameStringTexts(this TypeDescription typeDescription, GameStringDocument gameStringDocument)
+    /// <param name="gameStringsDocument">Instance of a <see cref="GameStringsDocument"/>.</param>
+    public static void UpdateGameStringTexts(this TypeDescription typeDescription, GameStringsDocument gameStringsDocument)
     {
-        gameStringDocument.UpdateGameStrings(typeDescription);
+        gameStringsDocument.UpdateGameStringTexts(typeDescription);
     }
 }

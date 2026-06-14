@@ -293,7 +293,7 @@ public class VoiceLineDataDocumentTests
     }
 
     [TestMethod]
-    public void GetElementById_WithGameStringDocument_UpdatesGameStrings()
+    public void GetElementById_WithGameStringsDocument_UpdatesGameStrings()
     {
         // arrange
         string jsonData = """
@@ -350,8 +350,8 @@ public class VoiceLineDataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        VoiceLineDataDocument voiceLineData = VoiceLineDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         VoiceLine voiceLine = voiceLineData.GetElementById("AbathurBase_VoiceLine02");

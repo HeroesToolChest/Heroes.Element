@@ -72,7 +72,7 @@ public class DataDocumentTests
     }
 
     [TestMethod]
-    public void Load_WithGameStringDocument_ReturnsDocumentWithGameStrings()
+    public void Load_WithGameStringsDocument_ReturnsDocumentWithGameStrings()
     {
         // arrange
         string json =
@@ -100,10 +100,10 @@ public class DataDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringJson);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
 
         // act
-        IElementDocument result = DataDocument.Load(jsonDocument, gameStringDocument);
+        IElementDocument result = DataDocument.Load(jsonDocument, gameStringsDocument);
 
         // assert
         result.Should().BeOfType<AnnouncerDataDocument>();

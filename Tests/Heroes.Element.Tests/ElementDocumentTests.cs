@@ -4,7 +4,7 @@
 public class ElementDocumentTests
 {
     [TestMethod]
-    public void IsIsMatchedHeroesVersion_WithNullGameStringDocument_ReturnsTrue()
+    public void IsIsMatchedHeroesVersion_WithNullGameStringsDocument_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -58,8 +58,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHeroesVersion;
@@ -97,8 +97,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHeroesVersion;
@@ -136,8 +136,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHeroesVersion;
@@ -147,7 +147,7 @@ public class ElementDocumentTests
     }
 
     [TestMethod]
-    public void IsMatchedHdpVersion_WithNullGameStringDocument_ReturnsTrue()
+    public void IsMatchedHdpVersion_WithNullGameStringsDocument_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -201,8 +201,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHdpVersion;
@@ -240,8 +240,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHdpVersion;
@@ -280,8 +280,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHdpVersion;
@@ -322,8 +322,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedHdpVersion;
@@ -459,7 +459,7 @@ public class ElementDocumentTests
     }
 
     [TestMethod]
-    public void DeserializeElement_WithGameStringDocument_CallsUpdateGameStrings()
+    public void DeserializeElement_WithGameStringsDocument_CallsUpdateGameStrings()
     {
         // arrange
         string jsonData = """
@@ -494,8 +494,8 @@ public class ElementDocumentTests
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument elementJsonDocument = JsonDocument.Parse(elementJson);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         TestElementObject? result = elementData.CallDeserializeElement(elementJsonDocument.RootElement, "test-id");
@@ -687,7 +687,7 @@ public class ElementDocumentTests
     }
 
     [TestMethod]
-    public void IsMatchedDataType_WithNullGameStringDocument_ReturnsTrue()
+    public void IsMatchedDataType_WithNullGameStringsDocument_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -742,8 +742,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedDataType;
@@ -782,8 +782,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedDataType;
@@ -822,8 +822,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedDataType;
@@ -862,8 +862,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedDataType;
@@ -873,7 +873,7 @@ public class ElementDocumentTests
     }
 
     [TestMethod]
-    public void IsMatchedMapName_WithNullGameStringDocument_ReturnsTrue()
+    public void IsMatchedMapName_WithNullGameStringsDocument_ReturnsTrue()
     {
         // arrange
         string jsonData = """
@@ -927,8 +927,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedMapName;
@@ -968,8 +968,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedMapName;
@@ -1009,8 +1009,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedMapName;
@@ -1050,8 +1050,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedMapName;
@@ -1090,8 +1090,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedMapName;
@@ -1130,8 +1130,8 @@ public class ElementDocumentTests
 
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
-        using GameStringDocument gameStringDocument = GameStringDocument.Load(gameStringJsonDocument);
-        TestElementBaseData elementData = new(jsonDocument, gameStringDocument);
+        using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
+        TestElementBaseData elementData = new(jsonDocument, gameStringsDocument);
 
         // act
         bool result = elementData.IsMatchedMapName;
@@ -1143,8 +1143,8 @@ public class ElementDocumentTests
     // Test implementation of ElementBaseData for testing purposes
     private class TestElementBaseData : ElementDocument<TestElementObject>
     {
-        public TestElementBaseData(JsonDocument jsonDocument, GameStringDocument? gameStringDocument = null)
-            : base(DataType.Unknown, jsonDocument, gameStringDocument)
+        public TestElementBaseData(JsonDocument jsonDocument, GameStringsDocument? gameStringsDocument = null)
+            : base(DataType.Unknown, jsonDocument, gameStringsDocument)
         {
         }
 
