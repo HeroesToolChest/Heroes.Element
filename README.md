@@ -7,7 +7,7 @@ Heroes Element is a .NET library to read the JSON files from [Heroes Data Parser
 The json files are also available in the  [Heroes Data](https://github.com/HeroesToolChest/heroes-data2) repository.
 
 ## Usage
-There is a `<data-file-name>DataDocument` class for each json data file. Each provides a `Load` method that accepts a `JsonDocument`.
+There is a `<data-file-name>DataDocument` class for each json data file. Each provides a `Load` method that accepts a `JsonDocument` for the data file.
 
 Example of loading the `herodata` file.
 ```C#
@@ -29,7 +29,7 @@ IDictionary<AbilityTier, IList<Ability>> abilities = heroData.Abilities;
 IDictionary<TalentTier, IList<Talent>> talents = heroData.Talents;
 ```
 
-Or if the data file's `localizedText` property is set to `Extracted`, a gamestrings file may be loaded in.
+Or if the data file's `meta.localizedText` property is set to `Extracted`, a gamestrings file may be loaded in.
 ```C#
 using FileStream dataFile = File.OpenRead("herodata_97039_enus.json");
 using FileStream gamestringsFile = File.OpenRead("gamestrings_97039_eses.json");
