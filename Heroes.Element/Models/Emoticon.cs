@@ -67,7 +67,7 @@ public class Emoticon : ElementObject, IImage, IImagePath, IDescription
     /// </summary>
     public EmoticonAnimation? Animation { get; set; }
 
-    RelativeFilePath? IImagePath.ImagePath { get; set; }
+    ImagePath? IImagePath.ImagePath { get; set; }
 
     internal TextureSheet TextureSheet { get; set; } = new TextureSheet();
 

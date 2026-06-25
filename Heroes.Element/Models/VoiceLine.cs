@@ -23,5 +23,5 @@ public class VoiceLine : LoadoutItem, IImage, IImagePath
     /// <inheritdoc/>
     public string? Image { get; set; }
 
-    RelativeFilePath? IImagePath.ImagePath { get; set; }
+    ImagePath? IImagePath.ImagePath { get; set; }
 }

@@ -37,7 +37,7 @@ public class TypeDescription : ElementObject, IName
     /// </summary>
     internal TextureSheet TextureSheet { get; set; } = new TextureSheet();
 
-    internal RelativeFilePath? RewardIconPath { get; set; }
+    internal ImagePath? RewardIconPath { get; set; }
 
-    internal RelativeFilePath? LargeIconPath { get; set; }
+    internal ImagePath? LargeIconPath { get; set; }
 }

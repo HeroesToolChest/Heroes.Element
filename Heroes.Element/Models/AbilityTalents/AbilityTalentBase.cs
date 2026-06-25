@@ -103,7 +103,7 @@ public abstract class AbilityTalentBase
     /// <summary>
     /// Gets or sets the relative path of the icon that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? IconPath { get; set; }
+    internal ImagePath? IconPath { get; set; }
 
     internal string? EnergyCost { get; set; }
 

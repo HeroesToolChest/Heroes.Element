@@ -73,12 +73,12 @@ public class Map : ElementObject, IName
     /// <summary>
     /// Gets or sets the relative path of the image that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? ReplayPreviewImagePath { get; set; }
+    internal ImagePath? ReplayPreviewImagePath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the image that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? LoadingScreenImagePath { get; set; }
+    internal ImagePath? LoadingScreenImagePath { get; set; }
 
     private static int NormalizeId(Span<char> buffer, string id)
     {

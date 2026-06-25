@@ -50,35 +50,35 @@ public class HeroPortrait : UnitPortrait
     /// <summary>
     /// Gets or sets the relative path of the hero select portrait that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? HeroSelectPortraitPath { get; set; }
+    internal ImagePath? HeroSelectPortraitPath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the score screen portrait that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? LeaderboardPortraitPath { get; set; }
+    internal ImagePath? LeaderboardPortraitPath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the loading screen portrait that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? LoadingScreenPortraitPath { get; set; }
+    internal ImagePath? LoadingScreenPortraitPath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the party panel portrait that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? PartyPanelPortraitPath { get; set; }
+    internal ImagePath? PartyPanelPortraitPath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the target portrait that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? TargetPortraitPath { get; set; }
+    internal ImagePath? TargetPortraitPath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the draft screen file that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? DraftScreenPath { get; set; }
+    internal ImagePath? DraftScreenPath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the party frame files that resides in CASC or on file.
     /// </summary>
-    internal IList<RelativeFilePath> PartyFramePaths { get; set; } = [];
+    internal IList<ImagePath> PartyFramePaths { get; set; } = [];
 }

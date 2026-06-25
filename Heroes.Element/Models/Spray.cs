@@ -23,5 +23,5 @@ public class Spray : LoadoutItem, IImage, IImagePath
     /// </summary>
     public SprayAnimation? Animation { get; set; }
 
-    RelativeFilePath? IImagePath.ImagePath { get; set; }
+    ImagePath? IImagePath.ImagePath { get; set; }
 }

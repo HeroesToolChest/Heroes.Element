@@ -44,5 +44,5 @@ public class RewardPortrait : StoreItem, IImage, IImagePath
     /// </summary>
     public TextureSheet TextureSheet { get; set; } = new TextureSheet();
 
-    RelativeFilePath? IImagePath.ImagePath { get; set; }
+    ImagePath? IImagePath.ImagePath { get; set; }
 }

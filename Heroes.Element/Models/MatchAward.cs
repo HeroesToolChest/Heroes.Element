@@ -64,15 +64,15 @@ public class MatchAward : ElementObject
     /// <summary>
     /// Gets or sets the relative path of the MVP screen image file that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? MVPScreenImagePath { get; set; }
+    internal ImagePath? MVPScreenImagePath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the score screen image blue file that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? ScoreScreenImageBluePath { get; set; }
+    internal ImagePath? ScoreScreenImageBluePath { get; set; }
 
     /// <summary>
     /// Gets or sets the relative path of the score screen image red file that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? ScoreScreenImageRedPath { get; set; }
+    internal ImagePath? ScoreScreenImageRedPath { get; set; }
 }

@@ -23,5 +23,5 @@ public class MapObjectiveIcon
     /// <summary>
     /// Gets or sets the relative path of the image that resides in CASC or on file.
     /// </summary>
-    internal RelativeFilePath? ImagePath { get; set; }
+    internal ImagePath? ImagePath { get; set; }
 }
