@@ -4,6 +4,8 @@
 
 Heroes Element is a .NET library to read the JSON files from [Heroes Data Parser](https://github.com/HeroesToolChest/HeroesDataParser) and provides an API to access the data with multi-localization support.
 
+This library only supports JSON files generated from Heroes Data Parser `v5.0.0` or later.
+
 The json files are also available in the  [Heroes Data](https://github.com/HeroesToolChest/heroes-data2) repository.
 
 ## Usage
