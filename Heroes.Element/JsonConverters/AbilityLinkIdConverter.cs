@@ -12,17 +12,18 @@ public class AbilityLinkIdConverter : JsonConverter<AbilityLinkId>
         if (string.IsNullOrWhiteSpace(value))
             return null;
 
-        string[] parts = value.Split('|');
+        ReadOnlySpan<char> valueSpan = value.AsSpan();
+        Span<Range> ranges = stackalloc Range[4];
 
-        if (parts.Length == 3)
-        {
-            if (!Enum.TryParse(parts[2], out AbilityType abilityType))
-                throw new JsonException();
+        int count = valueSpan.Split(ranges, '|');
 
-            return new AbilityLinkId(parts[0], parts[1], abilityType);
-        }
+        if (count != 3)
+            throw new JsonException("Not exactly three parts");
 
-        throw new JsonException("Not exactly three parts");
+        if (!Enum.TryParse(valueSpan[ranges[2]], out AbilityType abilityType))
+            throw new JsonException("Invalid ability type");
+
+        return new AbilityLinkId(value[ranges[0]], value[ranges[1]], abilityType);
     }
 
     /// <inheritdoc/>

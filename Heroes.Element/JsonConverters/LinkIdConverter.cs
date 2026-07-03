@@ -12,27 +12,24 @@ public class LinkIdConverter : JsonConverter<LinkId>
         if (string.IsNullOrWhiteSpace(value))
             return null;
 
-        string[] parts = value.Split('|');
+        ReadOnlySpan<char> valueSpan = value.AsSpan();
 
-        if (parts.Length == 3)
-        {
-            if (!Enum.TryParse(parts[2], out AbilityType abilityType))
-                throw new JsonException();
+        Span<Range> ranges = stackalloc Range[5];
+        int count = valueSpan.Split(ranges, '|');
 
-            return new AbilityLinkId(parts[0], parts[1], abilityType);
-        }
+        if (count is not (3 or 4))
+            throw new JsonException("Not exactly three or four parts");
 
-        if (parts.Length == 4)
-        {
-            if (!Enum.TryParse(parts[2], out AbilityType abilityType))
-                throw new JsonException();
-            if (!Enum.TryParse(parts[3], out TalentTier talentTier))
-                throw new JsonException();
+        if (!Enum.TryParse(valueSpan[ranges[2]], out AbilityType abilityType))
+            throw new JsonException("Invalid ability type");
 
-            return new TalentLinkId(parts[0], parts[1], abilityType, talentTier);
-        }
+        if (count == 3)
+            return new AbilityLinkId(value[ranges[0]], value[ranges[1]], abilityType);
 
-        throw new JsonException();
+        if (!Enum.TryParse(valueSpan[ranges[3]], out TalentTier talentTier))
+            throw new JsonException("Invalid talent tier");
+
+        return new TalentLinkId(value[ranges[0]], value[ranges[1]], abilityType, talentTier);
     }
 
     /// <inheritdoc/>
