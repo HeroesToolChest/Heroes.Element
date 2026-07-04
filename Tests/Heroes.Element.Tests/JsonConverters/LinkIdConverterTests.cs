@@ -20,7 +20,6 @@ public class LinkIdConverterTests
     [TestMethod]
     [DataRow(null)]
     [DataRow("")]
-    [DataRow(" ")]
     public void Read_PropertyIsNullOrEmpty_ReturnsNull(string? value)
     {
         // arrange
@@ -136,13 +135,15 @@ public class LinkIdConverterTests
     }
 
     [TestMethod]
-    public void Read_HasLessThanThreeParts_ThrowsException()
+    [DataRow("Element|Button")]
+    [DataRow(" ")]
+    public void Read_HasLessThanThreeParts_ThrowsException(string value)
     {
         // arrange
         string json =
-        """
+        $$"""
         {
-          "LinkId": "Element|Button"
+          "LinkId": "{{value}}"
         }
         """;
 

@@ -8,13 +8,29 @@ public class HeroUnitsConverter : JsonConverter<IDictionary<string, Unit>>
     /// <inheritdoc/>
     public override IDictionary<string, Unit>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        IDictionary<string, Unit>? unitByIds = JsonSerializer.Deserialize<IDictionary<string, Unit>>(ref reader, options);
-        if (unitByIds is null)
+        if (reader.TokenType == JsonTokenType.Null)
             return null;
 
-        foreach (KeyValuePair<string, Unit> unitById in unitByIds)
+        if (reader.TokenType != JsonTokenType.StartObject)
+            throw new JsonException($"Expected StartObject, got {reader.TokenType}.");
+
+        Dictionary<string, Unit> unitByIds = [];
+
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
         {
-            unitById.Value.Id = unitById.Key;
+            if (reader.TokenType != JsonTokenType.PropertyName)
+                throw new JsonException($"Expected PropertyName, got {reader.TokenType}.");
+
+            string id = reader.GetString()!;
+
+            reader.Read(); // -> value start
+
+            Unit? unit = JsonSerializer.Deserialize<Unit>(ref reader, options);
+            if (unit is not null)
+            {
+                unit.Id = id;
+                unitByIds[id] = unit;
+            }
         }
 
         return unitByIds;
@@ -23,6 +39,14 @@ public class HeroUnitsConverter : JsonConverter<IDictionary<string, Unit>>
     /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, IDictionary<string, Unit> value, JsonSerializerOptions options)
     {
-        JsonSerializer.Serialize(writer, value, options);
+        writer.WriteStartObject();
+
+        foreach (KeyValuePair<string, Unit> unitById in value)
+        {
+            writer.WritePropertyName(unitById.Key);
+            JsonSerializer.Serialize(writer, unitById.Value, options);
+        }
+
+        writer.WriteEndObject();
     }
 }

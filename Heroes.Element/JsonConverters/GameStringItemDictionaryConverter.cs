@@ -50,12 +50,16 @@ public class GameStringItemDictionaryConverter : JsonConverter<GameStringItemDic
 
                     if (reader.TokenType == JsonTokenType.StartArray)
                     {
-                        List<GameStringText> list = JsonSerializer.Deserialize<List<GameStringText>>(ref reader, options)!;
+                        List<GameStringText> list = JsonSerializer.Deserialize<List<GameStringText>>(ref reader, options)
+                            ?? throw new JsonException($"Expected an array for '{propertyIdKey}' but got null.");
+
                         propertyId.KeyArrayPairs[propertyIdKey] = list;
                     }
                     else
                     {
-                        GameStringText text = JsonSerializer.Deserialize<GameStringText>(ref reader, options)!;
+                        GameStringText text = JsonSerializer.Deserialize<GameStringText>(ref reader, options)
+                            ?? throw new JsonException($"Expected a value for '{propertyIdKey}' but got null.");
+
                         propertyId.KeyValuePairs[propertyIdKey] = text;
                     }
                 }

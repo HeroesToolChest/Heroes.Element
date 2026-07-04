@@ -20,7 +20,6 @@ public class AbilityLinkIdConverterTests
     [TestMethod]
     [DataRow(null)]
     [DataRow("")]
-    [DataRow(" ")]
     public void Read_PropertyIsNullOrEmtpy_ReturnsAbilityLinkIdAsNull(string? value)
     {
         // arrange
@@ -59,13 +58,15 @@ public class AbilityLinkIdConverterTests
     }
 
     [TestMethod]
-    public void Read_HasLessThanThreeParts_ThrowsException()
+    [DataRow("AlexstraszaGiftOfLife|AlexstraszaGiftOfLifeButton")]
+    [DataRow(" ")]
+    public void Read_HasLessThanThreeParts_ThrowsException(string value)
     {
         // arrange
         string json =
-        """
+        $$"""
         {
-          "AbilityLinkId": "AlexstraszaGiftOfLife|AlexstraszaGiftOfLifeButton"
+          "AbilityLinkId": "{{value}}"
         }
         """;
 

@@ -21,12 +21,11 @@ public class UnitAbilitiesConverter : JsonConverter<IDictionary<AbilityTier, ILi
             if (reader.TokenType != JsonTokenType.PropertyName)
                 throw new JsonException($"Expected PropertyName, got {reader.TokenType}.");
 
-            AbilityTier tier = Enum.Parse<AbilityTier>(reader.GetString()!);
+            AbilityTier tier = JsonConverterHelpers.ParseEnumProperty<AbilityTier>(ref reader);
 
             reader.Read(); // -> array start
 
             IList<Ability>? abilities = JsonSerializer.Deserialize<IList<Ability>>(ref reader, options);
-
             if (abilities is not null)
             {
                 foreach (Ability ability in abilities)

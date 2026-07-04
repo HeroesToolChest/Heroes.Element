@@ -14,7 +14,7 @@ public class HeroTalentsConverter : JsonConverter<IDictionary<TalentTier, IList<
         if (reader.TokenType != JsonTokenType.StartObject)
             throw new JsonException("Expected StartObject token.");
 
-        Dictionary<TalentTier, IList<Talent>> talentsByTier = [];
+        SortedDictionary<TalentTier, IList<Talent>> talentsByTier = [];
 
         while (reader.Read())
         {
@@ -24,7 +24,7 @@ public class HeroTalentsConverter : JsonConverter<IDictionary<TalentTier, IList<
             if (reader.TokenType != JsonTokenType.PropertyName)
                 throw new JsonException("Expected PropertyName token.");
 
-            TalentTier tier = Enum.Parse<TalentTier>(reader.GetString()!);
+            TalentTier tier = JsonConverterHelpers.ParseEnumProperty<TalentTier>(ref reader);
 
             reader.Read();
 

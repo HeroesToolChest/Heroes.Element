@@ -20,7 +20,6 @@ public class TalentLinkIdConverterTests
     [TestMethod]
     [DataRow(null)]
     [DataRow("")]
-    [DataRow(" ")]
     public void Read_PropertyIsNullOrEmpty_ReturnsTalentLinkIdAsNull(string? value)
     {
         // arrange
@@ -60,13 +59,15 @@ public class TalentLinkIdConverterTests
     }
 
     [TestMethod]
-    public void Read_HasLessThanFourParts_ThrowsException()
+    [DataRow("TalentElement|ButtonElement|Q")]
+    [DataRow(" ")]
+    public void Read_HasLessThanFourParts_ThrowsException(string value)
     {
         // arrange
         string json =
-        """
+        $$"""
         {
-          "TalentLinkId": "TalentElement|ButtonElement|Q"
+          "TalentLinkId": "{{value}}"
         }
         """;
 

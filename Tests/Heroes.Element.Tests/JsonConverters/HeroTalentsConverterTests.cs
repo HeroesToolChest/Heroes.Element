@@ -88,6 +88,42 @@ public class HeroTalentsConverterTests
     }
 
     [TestMethod]
+    public void Read_OutOfOrder_CorrectTalentTierOrder()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "Talents": {
+            "Level20": [
+              {
+                "talentId": "Talent1",
+                "buttonId": "Button1",
+                "sort": 1
+              }
+            ],
+            "Level4": [
+              {
+                "talentId": "Talent2",
+                "buttonId": "Button2",
+                "sort": 1
+              }
+            ]
+          }
+        }
+        """;
+
+        // act
+        TestClass testClass = JsonSerializer.Deserialize<TestClass>(json, _jsonSerializerOptions)!;
+
+        // assert
+        testClass.Talents.Should().HaveCount(2);
+        var talents = testClass.Talents.ToList();
+        talents[0].Key.Should().Be(TalentTier.Level4);
+        talents[1].Key.Should().Be(TalentTier.Level20);
+    }
+
+    [TestMethod]
     public void Read_HasMultipleTalentsInTier_ReturnsTierSetOnAllTalents()
     {
         // arrange

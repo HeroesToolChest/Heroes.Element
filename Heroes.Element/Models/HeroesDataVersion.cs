@@ -1,4 +1,6 @@
-﻿namespace Heroes.Element.Models;
+﻿using System.Globalization;
+
+namespace Heroes.Element.Models;
 
 /// <summary>
 /// Contains the information for a Heroes of the Storm version number.
@@ -282,9 +284,9 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
         if (size != 4)
             return false;
 
-        if (int.TryParse(value[buffer[0]], out int major) &&
-            int.TryParse(value[buffer[1]], out int minor) &&
-            int.TryParse(value[buffer[2]], out int revision))
+        if (int.TryParse(value[buffer[0]], NumberStyles.Any, CultureInfo.InvariantCulture, out int major) &&
+            int.TryParse(value[buffer[1]], NumberStyles.Any, CultureInfo.InvariantCulture, out int minor) &&
+            int.TryParse(value[buffer[2]], NumberStyles.Any, CultureInfo.InvariantCulture, out int revision))
         {
             ReadOnlySpan<char> buildSpan = value[buffer[3]];
 
@@ -294,7 +296,7 @@ public class HeroesDataVersion : IComparable, IComparable<HeroesDataVersion>, IE
 
             if (indexPtr > 0)
             {
-                if (int.TryParse(buildSpan[..indexPtr], out build) &&
+                if (int.TryParse(buildSpan[..indexPtr], NumberStyles.Any, CultureInfo.InvariantCulture, out build) &&
                     buildSpan[(indexPtr + 1)..].Equals("ptr", StringComparison.OrdinalIgnoreCase))
                 {
                     result = new HeroesDataVersion(major, minor, revision, build, true);
