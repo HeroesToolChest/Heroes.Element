@@ -8,16 +8,31 @@ public class UnitAbilitiesConverter : JsonConverter<IDictionary<AbilityTier, ILi
     /// <inheritdoc/>
     public override IDictionary<AbilityTier, IList<Ability>>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        IDictionary<AbilityTier, IList<Ability>>? abilitiesByTier = JsonSerializer.Deserialize<IDictionary<AbilityTier, IList<Ability>>>(ref reader, options);
-
-        if (abilitiesByTier is null)
+        if (reader.TokenType == JsonTokenType.Null)
             return null;
 
-        foreach (KeyValuePair<AbilityTier, IList<Ability>> tierAbilities in abilitiesByTier)
+        if (reader.TokenType != JsonTokenType.StartObject)
+            throw new JsonException($"Expected StartObject, got {reader.TokenType}.");
+
+        SortedDictionary<AbilityTier, IList<Ability>> abilitiesByTier = [];
+
+        while (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
         {
-            foreach (Ability ability in tierAbilities.Value)
+            if (reader.TokenType != JsonTokenType.PropertyName)
+                throw new JsonException($"Expected PropertyName, got {reader.TokenType}.");
+
+            AbilityTier tier = Enum.Parse<AbilityTier>(reader.GetString()!);
+
+            reader.Read(); // -> array start
+
+            IList<Ability>? abilities = JsonSerializer.Deserialize<IList<Ability>>(ref reader, options);
+
+            if (abilities is not null)
             {
-                ability.Tier = tierAbilities.Key;
+                foreach (Ability ability in abilities)
+                    ability.Tier = tier;
+
+                abilitiesByTier[tier] = abilities;
             }
         }
 

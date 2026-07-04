@@ -168,6 +168,86 @@ public class UnitSubAbilitiesConverterTests
     }
 
     [TestMethod]
+    public void Read_OutOfOrderTalentLinkIds_ReturnsDictionaryWithSortedOrder()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "SubAbilities": {
+            "AbilityA|ButtonA|Active|Level20": {
+              "Action": [
+                {
+                  "abilityId": "Sub1",
+                  "buttonId": "SubBtn1"
+                }
+              ]
+            },
+            "AbilityB|ButtonB|Active|Level1": {
+              "Activable": [
+                {
+                  "abilityId": "Sub2",
+                  "buttonId": "SubBtn2"
+                }
+              ]
+            }
+          }
+        }
+        """;
+
+        // act
+        TestClass testClass = JsonSerializer.Deserialize<TestClass>(json, _jsonSerializerOptions)!;
+
+        // assert
+        testClass.SubAbilities.Should().HaveCount(2);
+
+        TalentLinkId keyA = new("AbilityB", "ButtonB", AbilityType.Active, TalentTier.Level1);
+        var list = testClass.SubAbilities!.ToList();
+        list[0].Key.Id.Should().Be(keyA.Id);
+
+        TalentLinkId keyB = new("AbilityA", "ButtonA", AbilityType.Active, TalentTier.Level20);
+        list[1].Key.Id.Should().Be(keyB.Id);
+    }
+
+    [TestMethod]
+    public void Read_OutOfOrderAbilityTiers_ReturnsDictionaryWithSortedOrder()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "SubAbilities": {
+            "AbilityA|ButtonA|Active|Level20": {
+              "Activable": [
+                {
+                  "abilityId": "Sub1",
+                  "buttonId": "SubBtn1"
+                }
+              ],
+              "Heroic": [
+                {
+                  "abilityId": "Sub1",
+                  "buttonId": "SubBtn1"
+                }
+              ]
+            }
+          }
+        }
+        """;
+
+        // act
+        TestClass testClass = JsonSerializer.Deserialize<TestClass>(json, _jsonSerializerOptions)!;
+
+        // assert
+        testClass.SubAbilities.Should().ContainSingle();
+
+        var subAbilities = testClass.SubAbilities.ToList();
+        var abilities = subAbilities[0].Value.ToList();
+        abilities[0].Key.Should().Be(AbilityTier.Heroic);
+        abilities[1].Key.Should().Be(AbilityTier.Activable);
+    }
+
+    [TestMethod]
     public void Read_HasNullValue_ReturnsNull()
     {
         // arrange

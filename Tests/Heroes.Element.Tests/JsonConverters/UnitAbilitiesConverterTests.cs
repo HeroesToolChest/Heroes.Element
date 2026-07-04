@@ -114,6 +114,39 @@ public class UnitAbilitiesConverterTests
     }
 
     [TestMethod]
+    public void Read_OutOfOrderTiers_ReturnsCorrectOrder()
+    {
+        // arrange
+        string json =
+        """
+        {
+          "Abilities": {
+            "Heroic": [
+              {
+                "abilityId": "AbilityA",
+                "buttonId": "ButtonA"
+              }
+            ],
+            "Basic": [
+              {
+                "abilityId": "AbilitB",
+                "buttonId": "ButtonB"
+              }
+            ]
+          }
+        }
+        """;
+
+        // act
+        TestClass testClass = JsonSerializer.Deserialize<TestClass>(json, _jsonSerializerOptions)!;
+
+        // assert
+        var abilities = testClass.Abilities!.ToList();
+        abilities[0].Key.Should().Be(AbilityTier.Basic);
+        abilities[1].Key.Should().Be(AbilityTier.Heroic);
+    }
+
+    [TestMethod]
     public void Read_HasNullValue_ReturnsNull()
     {
         // arrange
