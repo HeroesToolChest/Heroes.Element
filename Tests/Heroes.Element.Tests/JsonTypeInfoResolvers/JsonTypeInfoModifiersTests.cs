@@ -482,7 +482,7 @@ public class JsonTypeInfoModifiersTests
                             ButtonElementId = "button1",
                             AbilityType = AbilityType.Q,
                             Name = new GameStringText("value"),
-                        }
+                        },
                     ]
                 },
             },
@@ -517,7 +517,7 @@ public class JsonTypeInfoModifiersTests
                             AbilityType = AbilityType.Q,
                             Tier = TalentTier.Level4,
                             Name = new GameStringText("talentName"),
-                        }
+                        },
                     ]
                 },
             },
@@ -662,7 +662,7 @@ public class JsonTypeInfoModifiersTests
                             ButtonElementId = "SummonMount",
                             AbilityType = AbilityType.Z,
                             CooldownText = new GameStringText("Cooldown: 4 seconds"),
-                        }
+                        },
                     ]
                 },
             },
@@ -682,7 +682,7 @@ public class JsonTypeInfoModifiersTests
                             ButtonElementId = "SummonMount",
                             AbilityType = AbilityType.Z,
                             CooldownText = new GameStringText("Cooldown: 6 seconds"),
-                        }
+                        },
                     ]
                 },
             },

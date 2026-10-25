@@ -373,13 +373,13 @@ public class GameStringsDocumentTests
         hero.Talents.Add(
             TalentTier.Level1,
             [
-                new Talent() { TalentElementId = "AbathurPressurizedGlands", ButtonElementId = "AbathurPressurizedGlands", AbilityType = AbilityType.Heroic, Tier = TalentTier.Level1 }
+                new Talent() { TalentElementId = "AbathurPressurizedGlands", ButtonElementId = "AbathurPressurizedGlands", AbilityType = AbilityType.Heroic, Tier = TalentTier.Level1 },
             ]);
         hero.Talents.Add(
             TalentTier.Level4,
             [
                 new Talent() { TalentElementId = "AbathurSurvivalInstincts", ButtonElementId = "AbathurSurvivalInstincts", AbilityType = AbilityType.Active, Tier = TalentTier.Level4 },
-                new Talent() { TalentElementId = "AbathurRegenBioSteel", ButtonElementId = "AbathurRegenBioSteel", AbilityType = AbilityType.Passive, Tier = TalentTier.Level4, Name = new GameStringText("Bio") }
+                new Talent() { TalentElementId = "AbathurRegenBioSteel", ButtonElementId = "AbathurRegenBioSteel", AbilityType = AbilityType.Passive, Tier = TalentTier.Level4, Name = new GameStringText("Bio") },
             ]);
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -563,13 +563,13 @@ public class GameStringsDocumentTests
         hero.Talents.Add(
             TalentTier.Level1,
             [
-                new Talent() { TalentElementId = "AbathurPressurizedGlands", ButtonElementId = "AbathurPressurizedGlands", AbilityType = AbilityType.Heroic, Tier = TalentTier.Level1 }
+                new Talent() { TalentElementId = "AbathurPressurizedGlands", ButtonElementId = "AbathurPressurizedGlands", AbilityType = AbilityType.Heroic, Tier = TalentTier.Level1 },
             ]);
         hero.Talents.Add(
             TalentTier.Level4,
             [
                 new Talent() { TalentElementId = "AbathurSurvivalInstincts", ButtonElementId = "AbathurSurvivalInstincts", AbilityType = AbilityType.Active, Tier = TalentTier.Level4 },
-                new Talent() { TalentElementId = "AbathurRegenBioSteel", ButtonElementId = "AbathurRegenBioSteel", AbilityType = AbilityType.Passive, Tier = TalentTier.Level4, Name = new GameStringText("Bio") }
+                new Talent() { TalentElementId = "AbathurRegenBioSteel", ButtonElementId = "AbathurRegenBioSteel", AbilityType = AbilityType.Passive, Tier = TalentTier.Level4, Name = new GameStringText("Bio") },
             ]);
         hero.SubAbilities.Add(new AbilityLinkId("AbathurEvolveMonstrosity", "AbathurEvolveMonstrosityHotbar", AbilityType.Heroic), new Dictionary<AbilityTier, IList<Ability>>()
         {
