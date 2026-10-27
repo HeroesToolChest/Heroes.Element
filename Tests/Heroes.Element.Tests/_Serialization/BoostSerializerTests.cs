@@ -23,6 +23,7 @@ public class BoostSerializerTests
             SearchText = new GameStringText("boost search keywords"),
             Description = new GameStringText("Boost Description Text"),
             InfoText = new GameStringText("Boost Info Text"),
+            Licenses = new SortedSet<long> { 20003, 21003 },
         };
 
         // act
@@ -44,7 +45,11 @@ public class BoostSerializerTests
               "event": "Anniversary Event",
               "searchText": "boost search keywords",
               "description": "Boost Description Text",
-              "infoText": "Boost Info Text"
+              "infoText": "Boost Info Text",
+              "licenses": [
+                20003,
+                21003
+              ]
             }
             """);
     }

@@ -73,6 +73,10 @@ public class BoostDataDocumentTests
               "releaseDate": "2015-06-02",
               "category": "boost",
               "event": "no",
+              "licenses": [
+                10003,
+                11003
+              ],
               "description": "Increases experience gain by 50% for 3 days.",
               "searchText": "Stimpack Boost Experience XP 3 Day"
             }
@@ -97,6 +101,8 @@ public class BoostDataDocumentTests
         boost.ReleaseDate.Should().Be(new DateOnly(2015, 6, 2));
         boost.Category.Should().Be("boost");
         boost.Event.Should().Be("no");
+        boost.Licenses.Should().HaveCount(2)
+            .And.Contain([10003, 11003]);
         boost.Description!.RawText.Should().Be("Increases experience gain by 50% for 3 days.");
         boost.SearchText!.RawText.Should().Be("Stimpack Boost Experience XP 3 Day");
     }

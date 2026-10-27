@@ -86,6 +86,10 @@ public class HeroDataDocumentTests
               "defaultMountId": "slime",
               "category": "none",
               "event": "no",
+              "licenses": [
+                10006,
+                11006
+              ],
               "attributes": [
                 "Heroic"
               ],
@@ -596,6 +600,8 @@ public class HeroDataDocumentTests
         hero.InnerRadius.Should().Be(0.75);
         hero.IsMelee.Should().BeTrue();
         hero.KillXP.Should().BeNull();
+        hero.Licenses.Should().HaveCount(2)
+            .And.Contain([10006, 11006]);
         hero.Life.LifeMax.Should().Be(685);
         hero.Life.LifeMaxScaling.Should().Be(0.04);
         hero.Life.LifeRegenerationRate.Should().Be(1.4257);

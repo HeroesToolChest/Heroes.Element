@@ -71,6 +71,10 @@ public class RewardPortraitDataDocumentTests
               "releaseDate": "2015-03-13",
               "category": "rewardportrait",
               "event": "no",
+              "licenses": [
+                10009,
+                11009
+              ],
               "description": "Portrait of Jim Raynor, Marshal of Mar Sara.",
               "searchText": "Raynor Portrait Marshal Terran",
               "descriptionUnearned": "Complete 10 games as Raynor to unlock this portrait.",
@@ -105,6 +109,8 @@ public class RewardPortraitDataDocumentTests
         rewardPortrait.ReleaseDate.Should().Be(new DateOnly(2015, 3, 13));
         rewardPortrait.Category.Should().Be("rewardportrait");
         rewardPortrait.Event.Should().Be("no");
+        rewardPortrait.Licenses.Should().HaveCount(2)
+            .And.Contain([10009, 11009]);
         rewardPortrait.Description!.RawText.Should().Be("Portrait of Jim Raynor, Marshal of Mar Sara.");
         rewardPortrait.SearchText!.RawText.Should().Be("Raynor Portrait Marshal Terran");
         rewardPortrait.DescriptionUnearned!.RawText.Should().Be("Complete 10 games as Raynor to unlock this portrait.");

@@ -26,6 +26,7 @@ public class AnnouncerPackSerializerTests
             HeroId = "AI",
             SearchText = new GameStringText("item1 item2"),
             InfoText = new GameStringText("info text"),
+            Licenses = new SortedSet<long> { 20001, 21001 },
         };
 
         // act
@@ -51,7 +52,11 @@ public class AnnouncerPackSerializerTests
               "image": "test.png",
               "searchText": "item1 item2",
               "description": "Test Description",
-              "infoText": "info text"
+              "infoText": "info text",
+              "licenses": [
+                20001,
+                21001
+              ]
             }
             """);
     }

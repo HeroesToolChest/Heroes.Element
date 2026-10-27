@@ -22,6 +22,7 @@ public class EmoticonPackSerializerTests
             Event = "an event",
             SearchText = new GameStringText("item1 item2"),
             InfoText = new GameStringText("Some info text"),
+            Licenses = new SortedSet<long> { 20005, 21005 },
         };
         emoticonPack.EmoticonIds.Add("abathur_pack_1");
         emoticonPack.EmoticonIds.Add("abathur_pack_2");
@@ -51,7 +52,11 @@ public class EmoticonPackSerializerTests
               ],
               "searchText": "item1 item2",
               "description": "Test Description",
-              "infoText": "Some info text"
+              "infoText": "Some info text",
+              "licenses": [
+                20005,
+                21005
+              ]
             }
             """);
     }

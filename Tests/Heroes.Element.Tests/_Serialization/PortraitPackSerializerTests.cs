@@ -21,6 +21,7 @@ public class PortraitPackSerializerTests
             Category = "portraitpack",
             Event = "an event",
             SearchText = new GameStringText("item1 item2"),
+            Licenses = new SortedSet<long> { 20008, 21008 },
         };
         portraitPack.RewardPortraitIds.Add("SCLegacyPortrait003");
         portraitPack.RewardPortraitIds.Add("SCLegacyPortrait001");
@@ -49,7 +50,11 @@ public class PortraitPackSerializerTests
                 "SCLegacyPortrait003"
               ],
               "searchText": "item1 item2",
-              "description": "Test Description"
+              "description": "Test Description",
+              "licenses": [
+                20008,
+                21008
+              ]
             }
             """);
     }

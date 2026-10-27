@@ -38,6 +38,7 @@ public class BundleSerializerTests
             SearchText = new GameStringText("bundle search keywords"),
             Description = new GameStringText("Bundle Description Text"),
             InfoText = new GameStringText("Bundle Info Text"),
+            Licenses = new SortedSet<long> { 20004, 21004 },
         };
 
         // act
@@ -84,7 +85,11 @@ public class BundleSerializerTests
               "lootChestId": "lootchest1",
               "searchText": "bundle search keywords",
               "description": "Bundle Description Text",
-              "infoText": "Bundle Info Text"
+              "infoText": "Bundle Info Text",
+              "licenses": [
+                20004,
+                21004
+              ]
             }
             """);
     }

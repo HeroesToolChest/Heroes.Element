@@ -25,6 +25,7 @@ public class VoiceLineSerializerTests
             HeroId = "Abathur",
             Image = "test.png",
             InfoText = new GameStringText("Info text"),
+            Licenses = new SortedSet<long> { 20012, 21012 },
         };
 
         // act
@@ -49,7 +50,11 @@ public class VoiceLineSerializerTests
               "image": "test.png",
               "searchText": "item1 item2",
               "description": "Test Description",
-              "infoText": "Info text"
+              "infoText": "Info text",
+              "licenses": [
+                20012,
+                21012
+              ]
             }
             """);
     }

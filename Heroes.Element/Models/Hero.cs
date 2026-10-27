@@ -155,4 +155,8 @@ public class Hero : Unit, ILoadoutItem
     [JsonPropertyOrder(230)]
     [JsonConverter(typeof(HeroUnitsConverter))]
     public IDictionary<string, Unit> HeroUnits { get; set; } = new Dictionary<string, Unit>(StringComparer.Ordinal);
+
+    /// <inheritdoc/>
+    [JsonPropertyOrder(1000)]
+    public ISet<long> Licenses { get; set; } = new SortedSet<long>();
 }

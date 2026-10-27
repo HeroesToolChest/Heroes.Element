@@ -369,7 +369,10 @@ public class GameStringsDocumentTests
           }
         }
         """;
-        Hero hero = new("Abathur");
+        Hero hero = new("Abathur")
+        {
+            Licenses = new SortedSet<long> { 10006, 11006 },
+        };
         hero.Talents.Add(
             TalentTier.Level1,
             [
@@ -401,6 +404,8 @@ public class GameStringsDocumentTests
         hero.Energy.EnergyType.Should().BeNull();
         hero.Life.LifeType.Should().BeNull();
         hero.Shield.ShieldType.Should().BeNull();
+        hero.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10006, 11006]);
 
         hero.Talents[TalentTier.Level1][0].CooldownText.Should().BeNull();
         hero.Talents[TalentTier.Level1][0].EnergyText.Should().BeNull();
@@ -871,6 +876,7 @@ public class GameStringsDocumentTests
         AnnouncerPack announcer = new("AbathurAnnouncer")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10001, 11001 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -884,6 +890,8 @@ public class GameStringsDocumentTests
         announcer.Name.Should().BeNull();
         announcer.SortName.Should().BeNull();
         announcer.SearchText.Should().BeNull();
+        announcer.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10001, 11001]);
     }
 
     [TestMethod]
@@ -975,6 +983,7 @@ public class GameStringsDocumentTests
         Banner banner = new("BannerD3Imperius")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10002, 11002 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -988,6 +997,8 @@ public class GameStringsDocumentTests
         banner.Name.Should().BeNull();
         banner.SortName.Should().BeNull();
         banner.SearchText.Should().BeNull();
+        banner.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10002, 11002]);
     }
 
     [TestMethod]
@@ -1079,6 +1090,7 @@ public class GameStringsDocumentTests
         Boost boost = new("BoostStimpak")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10003, 11003 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1092,6 +1104,8 @@ public class GameStringsDocumentTests
         boost.Name.Should().BeNull();
         boost.SortName.Should().BeNull();
         boost.SearchText.Should().BeNull();
+        boost.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10003, 11003]);
     }
 
     [TestMethod]
@@ -1183,6 +1197,7 @@ public class GameStringsDocumentTests
         Bundle bundle = new("MegaBundleStarterPack")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10004, 11004 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1196,6 +1211,8 @@ public class GameStringsDocumentTests
         bundle.Name.Should().BeNull();
         bundle.SortName.Should().BeNull();
         bundle.SearchText.Should().BeNull();
+        bundle.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10004, 11004]);
     }
 
     [TestMethod]
@@ -1490,6 +1507,7 @@ public class GameStringsDocumentTests
         Skin skin = new("AbathurMechaVar1")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10010, 11010 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1504,6 +1522,8 @@ public class GameStringsDocumentTests
         skin.SortName.Should().BeNull();
         skin.SearchText.Should().BeNull();
         skin.InfoText.Should().BeNull();
+        skin.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10010, 11010]);
     }
 
     [TestMethod]
@@ -1599,6 +1619,7 @@ public class GameStringsDocumentTests
         Mount mount = new("CloudSerpentMount")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10007, 11007 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1613,6 +1634,8 @@ public class GameStringsDocumentTests
         mount.SortName.Should().BeNull();
         mount.SearchText.Should().BeNull();
         mount.InfoText.Should().BeNull();
+        mount.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10007, 11007]);
     }
 
     [TestMethod]
@@ -1817,6 +1840,7 @@ public class GameStringsDocumentTests
         VoiceLine voiceLine = new("AbathurBase_VoiceLine01")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10012, 11012 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1831,6 +1855,8 @@ public class GameStringsDocumentTests
         voiceLine.Description.Should().BeNull();
         voiceLine.SearchText.Should().BeNull();
         voiceLine.InfoText.Should().BeNull();
+        voiceLine.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10012, 11012]);
     }
 
     [TestMethod]
@@ -2038,6 +2064,7 @@ public class GameStringsDocumentTests
         Spray spray = new("SprayAnimatedBWAhhhh")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10011, 11011 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2052,6 +2079,8 @@ public class GameStringsDocumentTests
         spray.Description.Should().BeNull();
         spray.SearchText.Should().BeNull();
         spray.InfoText.Should().BeNull();
+        spray.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10011, 11011]);
     }
 
     [TestMethod]
@@ -2147,6 +2176,7 @@ public class GameStringsDocumentTests
         EmoticonPack emoticonPack = new("AbathurEmoticonPack1")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10005, 11005 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2160,6 +2190,8 @@ public class GameStringsDocumentTests
         emoticonPack.Name.Should().BeNull();
         emoticonPack.SortName.Should().BeNull();
         emoticonPack.SearchText.Should().BeNull();
+        emoticonPack.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10005, 11005]);
     }
 
     [TestMethod]
@@ -2251,6 +2283,7 @@ public class GameStringsDocumentTests
         PortraitPack portraitPack = new("PortraitPackStarcraftLegacy1")
         {
             Description = new GameStringText("temporary description"),
+            Licenses = new SortedSet<long> { 10008, 11008 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2264,6 +2297,8 @@ public class GameStringsDocumentTests
         portraitPack.Name.Should().BeNull();
         portraitPack.SortName.Should().BeNull();
         portraitPack.SearchText.Should().BeNull();
+        portraitPack.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10008, 11008]);
     }
 
     [TestMethod]
@@ -2356,6 +2391,7 @@ public class GameStringsDocumentTests
         {
             Description = new GameStringText("temporary description"),
             DescriptionUnearned = new GameStringText("temporary unearned description"),
+            Licenses = new SortedSet<long> { 10009, 11009 },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2370,6 +2406,8 @@ public class GameStringsDocumentTests
         rewardPortrait.SortName.Should().BeNull();
         rewardPortrait.SearchText.Should().BeNull();
         rewardPortrait.DescriptionUnearned.Should().BeNull();
+        rewardPortrait.Licenses.Should().HaveCount(2, "it's not a gamestring property")
+            .And.Contain([10009, 11009]);
     }
 
     [TestMethod]

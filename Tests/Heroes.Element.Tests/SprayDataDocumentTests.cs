@@ -74,6 +74,10 @@ public class SprayDataDocumentTests
               "releaseDate": "2017-04-25",
               "category": "spray",
               "event": "no",
+              "licenses": [
+                10011,
+                11011
+              ],
               "image": "storm_ui_spray_bwahhh.png",
               "description": "An animated spray featuring Blackheart's Bay.",
               "searchText": "Ahhhh Spray Animated Blackheart",
@@ -105,6 +109,8 @@ public class SprayDataDocumentTests
         spray.ReleaseDate.Should().Be(new DateOnly(2017, 4, 25));
         spray.Category.Should().Be("spray");
         spray.Event.Should().Be("no");
+        spray.Licenses.Should().HaveCount(2)
+            .And.Contain([10011, 11011]);
         spray.Image.Should().Be("storm_ui_spray_bwahhh.png");
         spray.Description!.RawText.Should().Be("An animated spray featuring Blackheart's Bay.");
         spray.SearchText!.RawText.Should().Be("Ahhhh Spray Animated Blackheart");

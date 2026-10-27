@@ -30,6 +30,7 @@ public class SpraySerializerTests
                 Duration = 1000,
             },
             InfoText = new GameStringText("Info Text"),
+            Licenses = new SortedSet<long> { 20011, 21011 },
         };
 
         // act
@@ -58,7 +59,11 @@ public class SpraySerializerTests
               },
               "searchText": "item1 item2",
               "description": "Test Description",
-              "infoText": "Info Text"
+              "infoText": "Info Text",
+              "licenses": [
+                20011,
+                21011
+              ]
             }
             """);
     }

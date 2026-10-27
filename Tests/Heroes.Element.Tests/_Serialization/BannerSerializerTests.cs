@@ -26,6 +26,7 @@ public class BannerSerializerTests
             SearchText = new GameStringText("banner search keywords"),
             Description = new GameStringText("Banner Description Text"),
             InfoText = new GameStringText("Banner Info Text"),
+            Licenses = new SortedSet<long> { 20002, 21002 },
         };
 
         // act
@@ -48,7 +49,11 @@ public class BannerSerializerTests
               "event": "Seasonal Event",
               "searchText": "banner search keywords",
               "description": "Banner Description Text",
-              "infoText": "Banner Info Text"
+              "infoText": "Banner Info Text",
+              "licenses": [
+                20002,
+                21002
+              ]
             }
             """);
     }

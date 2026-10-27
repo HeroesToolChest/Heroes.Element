@@ -26,6 +26,7 @@ public class SkinSerializerTests
 
             // LoadoutItem properties
             AttributeId = "MechaA",
+            Licenses = new SortedSet<long> { 20010, 21010 },
         };
 
         skin.Features.Add("ThemedAbilities");
@@ -69,7 +70,11 @@ public class SkinSerializerTests
               ],
               "searchText": "Mecha Abathur Robot Mechanical",
               "description": "An alternate skin for the Evolution Master.",
-              "infoText": "Legendary Skin from the Mecha universe"
+              "infoText": "Legendary Skin from the Mecha universe",
+              "licenses": [
+                20010,
+                21010
+              ]
             }
             """);
     }

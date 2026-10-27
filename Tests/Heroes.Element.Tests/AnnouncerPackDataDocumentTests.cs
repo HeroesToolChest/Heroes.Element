@@ -74,6 +74,10 @@ public class AnnouncerPackDataDocumentTests
               "releaseDate": "2014-03-13",
               "category": "announcer",
               "event": "no",
+              "licenses": [
+                10001,
+                11001
+              ],
               "gender": "Neutral",
               "heroId": "Abathur",
               "image": "storm_ui_announcer_abathur.png",
@@ -102,6 +106,8 @@ public class AnnouncerPackDataDocumentTests
         announcer.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
         announcer.Category.Should().Be("announcer");
         announcer.Event.Should().Be("no");
+        announcer.Licenses.Should().HaveCount(2)
+            .And.Contain([10001, 11001]);
         announcer.Gender.Should().Be("Neutral");
         announcer.HeroId.Should().Be("Abathur");
         announcer.Image.Should().Be("storm_ui_announcer_abathur.png");
