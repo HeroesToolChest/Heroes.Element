@@ -86,6 +86,11 @@ public enum DataType
     RewardPortraitData,
 
     /// <summary>
+    /// Indicates reward license data.
+    /// </summary>
+    RewardLicenseData,
+
+    /// <summary>
     /// Indicates skin data.
     /// </summary>
     SkinData,

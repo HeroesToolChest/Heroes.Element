@@ -18,6 +18,7 @@ public class DataDocumentTests
     [DataRow("MountData", typeof(MountDataDocument))]
     [DataRow("PortraitPackData", typeof(PortraitPackDataDocument))]
     [DataRow("RewardPortraitData", typeof(RewardPortraitDataDocument))]
+    [DataRow("RewardLicenseData", typeof(RewardLicenseDataDocument))]
     [DataRow("SkinData", typeof(SkinDataDocument))]
     [DataRow("SprayData", typeof(SprayDataDocument))]
     [DataRow("TypeDescriptionData", typeof(TypeDescriptionDataDocument))]

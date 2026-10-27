@@ -251,6 +251,7 @@ public class MetaDataPropertiesSerializerTests
     [DataRow(DataType.MountData)]
     [DataRow(DataType.PortraitPackData)]
     [DataRow(DataType.RewardPortraitData)]
+    [DataRow(DataType.RewardLicenseData)]
     [DataRow(DataType.SkinData)]
     [DataRow(DataType.SprayData)]
     [DataRow(DataType.TypeDescriptionData)]

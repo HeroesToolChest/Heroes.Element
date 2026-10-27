@@ -55,6 +55,7 @@ public static class DataDocument
             DataType.MountData => MountDataDocument.Load(dataDocument, gameStringsDocument),
             DataType.PortraitPackData => PortraitPackDataDocument.Load(dataDocument, gameStringsDocument),
             DataType.RewardPortraitData => RewardPortraitDataDocument.Load(dataDocument, gameStringsDocument),
+            DataType.RewardLicenseData => RewardLicenseDataDocument.Load(dataDocument, gameStringsDocument),
             DataType.SkinData => SkinDataDocument.Load(dataDocument, gameStringsDocument),
             DataType.SprayData => SprayDataDocument.Load(dataDocument, gameStringsDocument),
             DataType.TypeDescriptionData => TypeDescriptionDataDocument.Load(dataDocument, gameStringsDocument),
