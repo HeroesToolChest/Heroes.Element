@@ -118,6 +118,10 @@ public class Hero : Unit, ILoadoutItem
     [JsonPropertyOrder(105)]
     public GameStringText? InfoText { get; set; }
 
+    /// <inheritdoc/>
+    [JsonPropertyOrder(110)]
+    public ISet<string> RequiredRewardArray { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
+
     /// <summary>
     /// Gets or sets a unique collection of <see cref="Skin"/> ids that are associated with this hero.
     /// </summary>
@@ -155,8 +159,4 @@ public class Hero : Unit, ILoadoutItem
     [JsonPropertyOrder(230)]
     [JsonConverter(typeof(HeroUnitsConverter))]
     public IDictionary<string, Unit> HeroUnits { get; set; } = new Dictionary<string, Unit>(StringComparer.Ordinal);
-
-    /// <inheritdoc/>
-    [JsonPropertyOrder(1000)]
-    public ISet<string> RequiredRewardArray { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 }

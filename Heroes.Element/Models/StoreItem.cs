@@ -59,6 +59,6 @@ public abstract class StoreItem : ElementObject, IStoreItem
     public GameStringText? InfoText { get; set; }
 
     /// <inheritdoc/>
-    [JsonPropertyOrder(1000)]
+    [JsonPropertyOrder(110)]
     public ISet<string> RequiredRewardArray { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 }

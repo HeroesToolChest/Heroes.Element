@@ -254,6 +254,10 @@ public class HeroSerializerTests
               "searchText": "search keywords",
               "description": "Hero Description",
               "infoText": "Info about hero",
+              "requiredRewardArray": [
+                "reward1",
+                "reward2"
+              ],
               "life": {
                 "amount": 2500,
                 "scale": 0.04,
@@ -392,11 +396,7 @@ public class HeroSerializerTests
                   "speed": 0,
                   "portraits": {}
                 }
-              },
-              "requiredRewardArray": [
-                "reward1",
-                "reward2"
-              ]
+              }
             }
             """);
     }
