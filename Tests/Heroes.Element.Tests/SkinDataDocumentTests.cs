@@ -74,9 +74,9 @@ public class SkinDataDocumentTests
               "releaseDate": "2018-05-22",
               "category": "skin",
               "event": "none",
-              "licenses": [
-                10010,
-                11010
+              "requiredRewardArray": [
+                "AbathurMechaVar1",
+                "AbathurMechaVar1Alt"
               ],
               "description": "An alternate skin for the Evolution Master.",
               "searchText": "Mecha Abathur Robot Mechanical",
@@ -117,8 +117,8 @@ public class SkinDataDocumentTests
         skin.ReleaseDate.Should().Be(new DateOnly(2018, 5, 22));
         skin.Category.Should().Be("skin");
         skin.Event.Should().Be("none");
-        skin.Licenses.Should().HaveCount(2)
-            .And.Contain([10010, 11010]);
+        skin.RequiredRewardArray.Should().HaveCount(2)
+            .And.Contain(["AbathurMechaVar1", "AbathurMechaVar1Alt"]);
         skin.Description!.RawText.Should().Be("An alternate skin for the Evolution Master.");
         skin.SearchText!.RawText.Should().Be("Mecha Abathur Robot Mechanical");
         skin.InfoText!.RawText.Should().Be("Legendary Skin from the Mecha universe");

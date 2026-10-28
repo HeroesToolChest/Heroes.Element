@@ -24,7 +24,7 @@ public class MountSerializerTests
             SearchText = new GameStringText("Cloud Serpent Mount Flying Dragon"),
             MountCategory = "Flying",
             InfoText = new GameStringText("Cloud Serpent mount"),
-            Licenses = new SortedSet<long> { 20007, 21007 },
+            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
         };
         mount.VariationMountIds.Add("CloudSerpentMountVar1");
         mount.VariationMountIds.Add("CloudSerpentMountVar2");
@@ -55,9 +55,9 @@ public class MountSerializerTests
               "searchText": "Cloud Serpent Mount Flying Dragon",
               "description": "A mystical serpent from the clouds of Pandaria.",
               "infoText": "Cloud Serpent mount",
-              "licenses": [
-                20007,
-                21007
+              "requiredRewardArray": [
+                "reward1",
+                "reward2"
               ]
             }
             """);

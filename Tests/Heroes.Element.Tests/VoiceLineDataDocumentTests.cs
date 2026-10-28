@@ -74,9 +74,9 @@ public class VoiceLineDataDocumentTests
               "releaseDate": "2014-03-13",
               "category": "voiceline",
               "event": "no",
-              "licenses": [
-                10012,
-                11012
+              "requiredRewardArray": [
+                "AbathurBase_VoiceLine01",
+                "AbathurBase_VoiceLine01Alt"
               ],
               "heroId": "Abathur",
               "image": "storm_ui_voice_abathur_acceptable.png",
@@ -105,8 +105,8 @@ public class VoiceLineDataDocumentTests
         voiceLine.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
         voiceLine.Category.Should().Be("voiceline");
         voiceLine.Event.Should().Be("no");
-        voiceLine.Licenses.Should().HaveCount(2)
-            .And.Contain([10012, 11012]);
+        voiceLine.RequiredRewardArray.Should().HaveCount(2)
+            .And.Contain(["AbathurBase_VoiceLine01", "AbathurBase_VoiceLine01Alt"]);
         voiceLine.HeroId.Should().Be("Abathur");
         voiceLine.Image.Should().Be("storm_ui_voice_abathur_acceptable.png");
         voiceLine.Description!.RawText.Should().Be("Voice line from the Evolution Master.");

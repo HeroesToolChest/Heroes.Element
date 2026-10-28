@@ -71,9 +71,9 @@ public class PortraitPackDataDocumentTests
               "releaseDate": "2016-06-14",
               "category": "portraitpack",
               "event": "no",
-              "licenses": [
-                10008,
-                11008
+              "requiredRewardArray": [
+                "PortraitPackStarcraftLegacy1",
+                "PortraitPackStarcraftLegacy1Alt"
               ],
               "description": "A collection of StarCraft legacy portraits.",
               "searchText": "StarCraft Legacy Portrait Pack Terran Zerg Protoss",
@@ -104,8 +104,8 @@ public class PortraitPackDataDocumentTests
         portraitPack.ReleaseDate.Should().Be(new DateOnly(2016, 6, 14));
         portraitPack.Category.Should().Be("portraitpack");
         portraitPack.Event.Should().Be("no");
-        portraitPack.Licenses.Should().HaveCount(2)
-            .And.Contain([10008, 11008]);
+        portraitPack.RequiredRewardArray.Should().HaveCount(2)
+            .And.Contain(["PortraitPackStarcraftLegacy1", "PortraitPackStarcraftLegacy1Alt"]);
         portraitPack.Description!.RawText.Should().Be("A collection of StarCraft legacy portraits.");
         portraitPack.SearchText!.RawText.Should().Be("StarCraft Legacy Portrait Pack Terran Zerg Protoss");
         portraitPack.RewardPortraitIds.Should().HaveCount(3);

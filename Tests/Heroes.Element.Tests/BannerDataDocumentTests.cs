@@ -74,9 +74,9 @@ public class BannerDataDocumentTests
               "releaseDate": "2019-01-08",
               "category": "banner",
               "event": "no",
-              "licenses": [
-                10002,
-                11002
+              "requiredRewardArray": [
+                "BannerD3Imperius",
+                "BannerD3ImperiusAlt"
               ],
               "description": "Banner celebrating the Archangel of Valor.",
               "searchText": "Imperius Banner Diablo Archangel Valor"
@@ -103,8 +103,8 @@ public class BannerDataDocumentTests
         banner.ReleaseDate.Should().Be(new DateOnly(2019, 1, 8));
         banner.Category.Should().Be("banner");
         banner.Event.Should().Be("no");
-        banner.Licenses.Should().HaveCount(2)
-            .And.Contain([10002, 11002]);
+        banner.RequiredRewardArray.Should().HaveCount(2)
+            .And.Contain(["BannerD3Imperius", "BannerD3ImperiusAlt"]);
         banner.Description!.RawText.Should().Be("Banner celebrating the Archangel of Valor.");
         banner.SearchText!.RawText.Should().Be("Imperius Banner Diablo Archangel Valor");
     }

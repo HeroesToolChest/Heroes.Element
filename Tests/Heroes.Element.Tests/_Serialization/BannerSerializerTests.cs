@@ -26,7 +26,7 @@ public class BannerSerializerTests
             SearchText = new GameStringText("banner search keywords"),
             Description = new GameStringText("Banner Description Text"),
             InfoText = new GameStringText("Banner Info Text"),
-            Licenses = new SortedSet<long> { 20002, 21002 },
+            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -50,9 +50,9 @@ public class BannerSerializerTests
               "searchText": "banner search keywords",
               "description": "Banner Description Text",
               "infoText": "Banner Info Text",
-              "licenses": [
-                20002,
-                21002
+              "requiredRewardArray": [
+                "reward1",
+                "reward2"
               ]
             }
             """);

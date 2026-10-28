@@ -3,7 +3,7 @@
 /// <summary>
 /// An interface for an in-game store collection item.
 /// </summary>
-public interface IStoreItem : IName, IHyperlinkId, IFranchise, IRarity, IEventName, IInfoText, IDescription, ILicense
+public interface IStoreItem : IName, IHyperlinkId, IFranchise, IRarity, IEventName, IInfoText, IDescription, IRequiredRewardArray
 {
     /// <summary>
     /// Gets or sets the sort name.

@@ -26,7 +26,7 @@ public class AnnouncerPackSerializerTests
             HeroId = "AI",
             SearchText = new GameStringText("item1 item2"),
             InfoText = new GameStringText("info text"),
-            Licenses = new SortedSet<long> { 20001, 21001 },
+            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -53,9 +53,9 @@ public class AnnouncerPackSerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "info text",
-              "licenses": [
-                20001,
-                21001
+              "requiredRewardArray": [
+                "reward1",
+                "reward2"
               ]
             }
             """);

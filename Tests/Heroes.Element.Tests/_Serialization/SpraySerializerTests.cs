@@ -30,7 +30,7 @@ public class SpraySerializerTests
                 Duration = 1000,
             },
             InfoText = new GameStringText("Info Text"),
-            Licenses = new SortedSet<long> { 20011, 21011 },
+            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -60,9 +60,9 @@ public class SpraySerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "Info Text",
-              "licenses": [
-                20011,
-                21011
+              "requiredRewardArray": [
+                "reward1",
+                "reward2"
               ]
             }
             """);

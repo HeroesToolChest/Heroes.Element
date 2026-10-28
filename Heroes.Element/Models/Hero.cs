@@ -158,5 +158,5 @@ public class Hero : Unit, ILoadoutItem
 
     /// <inheritdoc/>
     [JsonPropertyOrder(1000)]
-    public ISet<long> Licenses { get; set; } = new SortedSet<long>();
+    public ISet<string> RequiredRewardArray { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 }

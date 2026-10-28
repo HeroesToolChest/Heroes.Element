@@ -183,7 +183,7 @@ public class HeroSerializerTests
                 },
             },
             SubAbilities = new SortedDictionary<LinkId, IDictionary<AbilityTier, IList<Ability>>>(),
-            Licenses = new SortedSet<long> { 20006, 21006 },
+            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -393,9 +393,9 @@ public class HeroSerializerTests
                   "portraits": {}
                 }
               },
-              "licenses": [
-                20006,
-                21006
+              "requiredRewardArray": [
+                "reward1",
+                "reward2"
               ]
             }
             """);

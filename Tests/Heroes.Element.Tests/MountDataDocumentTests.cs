@@ -74,9 +74,9 @@ public class MountDataDocumentTests
               "releaseDate": "2014-03-13",
               "category": "mount",
               "event": "no",
-              "licenses": [
-                10007,
-                11007
+              "requiredRewardArray": [
+                "CloudSerpentMount",
+                "CloudSerpentMountAlt"
               ],
               "type": "Flying",
               "description": "A mystical serpent from the clouds of Pandaria.",
@@ -108,8 +108,8 @@ public class MountDataDocumentTests
         mount.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
         mount.Category.Should().Be("mount");
         mount.Event.Should().Be("no");
-        mount.Licenses.Should().HaveCount(2)
-            .And.Contain([10007, 11007]);
+        mount.RequiredRewardArray.Should().HaveCount(2)
+            .And.Contain(["CloudSerpentMount", "CloudSerpentMountAlt"]);
         mount.MountCategory.Should().Be("Flying");
         mount.Description!.RawText.Should().Be("A mystical serpent from the clouds of Pandaria.");
         mount.SearchText!.RawText.Should().Be("Cloud Serpent Mount Flying Dragon");
