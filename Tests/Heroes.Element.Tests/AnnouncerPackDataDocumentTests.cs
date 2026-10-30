@@ -80,6 +80,7 @@ public class AnnouncerPackDataDocumentTests
               ],
               "gender": "Neutral",
               "heroId": "Abathur",
+              "isFreePlay": true,
               "image": "storm_ui_announcer_abathur.png",
               "description": "The Evolution Master will guide you to victory.",
               "searchText": "Abathur Announcer Evolution Master Slug"
@@ -110,6 +111,7 @@ public class AnnouncerPackDataDocumentTests
             .And.Contain(["AbathurAnnouncer", "AbathurAnnouncerAlt"]);
         announcer.Gender.Should().Be("Neutral");
         announcer.HeroId.Should().Be("Abathur");
+        announcer.IsFreePlay.Should().BeTrue();
         announcer.Image.Should().Be("storm_ui_announcer_abathur.png");
         announcer.Description!.RawText.Should().Be("The Evolution Master will guide you to victory.");
         announcer.SearchText!.RawText.Should().Be("Abathur Announcer Evolution Master Slug");
@@ -514,5 +516,6 @@ public class AnnouncerPackDataDocumentTests
         announcer.Name!.RawText.Should().Be("Alarak Announcer");
         announcer.HyperlinkId.Should().Be("AlarakAnnouncer(hyperlink)");
         announcer.AttributeId.Should().Be("Alar");
+        announcer.IsFreePlay.Should().BeFalse();
     }
 }

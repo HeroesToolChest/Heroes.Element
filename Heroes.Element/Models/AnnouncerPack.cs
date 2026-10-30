@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the announcer pack data.
 /// </summary>
-public class AnnouncerPack : LoadoutItem, IImage, IImagePath
+public class AnnouncerPack : LoadoutItem, IFreePlay, IImage, IImagePath
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="AnnouncerPack"/> class.
@@ -24,6 +24,9 @@ public class AnnouncerPack : LoadoutItem, IImage, IImagePath
     /// Gets or sets the hero id.
     /// </summary>
     public string? HeroId { get; set; }
+
+    /// <inheritdoc/>
+    public bool IsFreePlay { get; set; }
 
     /// <inheritdoc/>
     public string? Image { get; set; }

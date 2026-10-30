@@ -74,6 +74,7 @@ public class BannerDataDocumentTests
               "releaseDate": "2019-01-08",
               "category": "banner",
               "event": "no",
+              "isFreePlay": true,
               "requiredRewardArray": [
                 "BannerD3Imperius",
                 "BannerD3ImperiusAlt"
@@ -103,6 +104,7 @@ public class BannerDataDocumentTests
         banner.ReleaseDate.Should().Be(new DateOnly(2019, 1, 8));
         banner.Category.Should().Be("banner");
         banner.Event.Should().Be("no");
+        banner.IsFreePlay.Should().BeTrue();
         banner.RequiredRewardArray.Should().HaveCount(2)
             .And.Contain(["BannerD3Imperius", "BannerD3ImperiusAlt"]);
         banner.Description!.RawText.Should().Be("Banner celebrating the Archangel of Valor.");
@@ -508,5 +510,6 @@ public class BannerDataDocumentTests
         banner.Name!.RawText.Should().Be("Tyrael Banner");
         banner.HyperlinkId.Should().Be("BannerD3Tyrael(hyperlink)");
         banner.AttributeId.Should().Be("Tyra");
+        banner.IsFreePlay.Should().BeFalse();
     }
 }

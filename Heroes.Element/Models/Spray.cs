@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the spray data.
 /// </summary>
-public class Spray : LoadoutItem, IImage, IImagePath
+public class Spray : LoadoutItem, IFreePlay, IImage, IImagePath
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Spray"/> class.
@@ -22,6 +22,9 @@ public class Spray : LoadoutItem, IImage, IImagePath
     /// Gets or sets the animation properties.
     /// </summary>
     public SprayAnimation? Animation { get; set; }
+
+    /// <inheritdoc/>
+    public bool IsFreePlay { get; set; }
 
     ImagePath? IImagePath.ImagePath { get; set; }
 }

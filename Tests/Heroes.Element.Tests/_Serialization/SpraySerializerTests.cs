@@ -29,6 +29,7 @@ public class SpraySerializerTests
                 Frames = 30,
                 Duration = 1000,
             },
+            IsFreePlay = true,
             InfoText = new GameStringText("Info Text"),
             RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
         };
@@ -57,6 +58,7 @@ public class SpraySerializerTests
                 "frames": 30,
                 "duration": 1000
               },
+              "isFreePlay": true,
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "Info Text",

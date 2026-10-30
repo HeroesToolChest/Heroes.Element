@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the banner data.
 /// </summary>
-public class Banner : LoadoutItem
+public class Banner : LoadoutItem, IFreePlay
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Banner"/> class.
@@ -14,4 +14,7 @@ public class Banner : LoadoutItem
     {
         Rarity = Types.Rarity.Common;
     }
+
+    /// <inheritdoc/>
+    public bool IsFreePlay { get; set; }
 }

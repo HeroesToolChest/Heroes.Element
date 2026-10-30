@@ -11,6 +11,9 @@ public class BannerSerializerTests
 
         Banner banner = new("banner_id")
         {
+            // Banner properties
+            IsFreePlay = true,
+
             // LoadoutItem properties (inherited)
             AttributeId = "BANN",
 
@@ -47,6 +50,7 @@ public class BannerSerializerTests
               "releaseDate": "2024-11-20",
               "category": "Banner Category",
               "event": "Seasonal Event",
+              "isFreePlay": true,
               "searchText": "banner search keywords",
               "description": "Banner Description Text",
               "infoText": "Banner Info Text",

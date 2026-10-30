@@ -79,6 +79,7 @@ public class VoiceLineDataDocumentTests
                 "AbathurBase_VoiceLine01Alt"
               ],
               "heroId": "Abathur",
+              "isFreePlay": true,
               "image": "storm_ui_voice_abathur_acceptable.png",
               "description": "Voice line from the Evolution Master.",
               "searchText": "Abathur Acceptable Voice Line Slug"
@@ -108,6 +109,7 @@ public class VoiceLineDataDocumentTests
         voiceLine.RequiredRewardArray.Should().HaveCount(2)
             .And.Contain(["AbathurBase_VoiceLine01", "AbathurBase_VoiceLine01Alt"]);
         voiceLine.HeroId.Should().Be("Abathur");
+        voiceLine.IsFreePlay.Should().BeTrue();
         voiceLine.Image.Should().Be("storm_ui_voice_abathur_acceptable.png");
         voiceLine.Description!.RawText.Should().Be("Voice line from the Evolution Master.");
         voiceLine.SearchText!.RawText.Should().Be("Abathur Acceptable Voice Line Slug");
@@ -512,5 +514,6 @@ public class VoiceLineDataDocumentTests
         voiceLine.Name!.RawText.Should().Be("Evolution Complete");
         voiceLine.HyperlinkId.Should().Be("AbathurBase_VoiceLine02(hyperlink)");
         voiceLine.AttributeId.Should().Be("Abat02");
+        voiceLine.IsFreePlay.Should().BeFalse();
     }
 }

@@ -3,7 +3,7 @@
 /// <summary>
 /// Contains the voiceline data.
 /// </summary>
-public class VoiceLine : LoadoutItem, IImage, IImagePath
+public class VoiceLine : LoadoutItem, IFreePlay, IImage, IImagePath
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="VoiceLine"/> class.
@@ -19,6 +19,9 @@ public class VoiceLine : LoadoutItem, IImage, IImagePath
     /// Gets or sets the <see cref="Hero"/> ids associated with the voiceline.
     /// </summary>
     public string? HeroId { get; set; }
+
+    /// <inheritdoc/>
+    public bool IsFreePlay { get; set; }
 
     /// <inheritdoc/>
     public string? Image { get; set; }

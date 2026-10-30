@@ -79,6 +79,7 @@ public class SprayDataDocumentTests
                 "SprayAnimatedBWAhhhhAlt"
               ],
               "image": "storm_ui_spray_bwahhh.png",
+              "isFreePlay": true,
               "description": "An animated spray featuring Blackheart's Bay.",
               "searchText": "Ahhhh Spray Animated Blackheart",
               "animation": {
@@ -112,6 +113,7 @@ public class SprayDataDocumentTests
         spray.RequiredRewardArray.Should().HaveCount(2)
             .And.Contain(["SprayAnimatedBWAhhhh", "SprayAnimatedBWAhhhhAlt"]);
         spray.Image.Should().Be("storm_ui_spray_bwahhh.png");
+        spray.IsFreePlay.Should().BeTrue();
         spray.Description!.RawText.Should().Be("An animated spray featuring Blackheart's Bay.");
         spray.SearchText!.RawText.Should().Be("Ahhhh Spray Animated Blackheart");
         spray.Animation.Should().NotBeNull();
@@ -519,5 +521,6 @@ public class SprayDataDocumentTests
         spray.Name!.RawText.Should().Be("Happy Face");
         spray.HyperlinkId.Should().Be("SprayStaticPackHappy(hyperlink)");
         spray.AttributeId.Should().Be("SHap");
+        spray.IsFreePlay.Should().BeFalse();
     }
 }
