@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="PortraitPack"/> objects from a JSON document.
 /// </summary>
-public class PortraitPackDataDocument : ElementDocument<PortraitPack>
+public class PortraitPackDataDocument : ElementDocument<PortraitPack>, IStoreItemRetrieval<PortraitPack>
 {
     private PortraitPackDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
         : base(DataType.PortraitPackData, dataDocument, gameStringsDocument)

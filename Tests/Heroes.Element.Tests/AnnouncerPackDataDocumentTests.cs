@@ -41,7 +41,7 @@ public class AnnouncerPackDataDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool result = announcerData.TryGetElementById("other", out AnnouncerPack? announcer);
@@ -89,7 +89,7 @@ public class AnnouncerPackDataDocumentTests
         }
         """;
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool returnResult = announcerData.TryGetElementById("AbathurAnnouncer", out AnnouncerPack? announcer);
@@ -124,7 +124,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool result = announcerData.TryGetElementById("other", out AnnouncerPack? announcer);
@@ -141,7 +141,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         AnnouncerPack announcer = announcerData.GetElementById("AlarakAnnouncer");
@@ -157,7 +157,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         Action act = () => announcerData.GetElementById("other");
@@ -173,7 +173,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool result = announcerData.TryGetElementByHyperlinkId("AlarakAnnouncer(hyperlink)", out AnnouncerPack? announcer);
@@ -192,7 +192,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool result = announcerData.TryGetElementByHyperlinkId("other", out AnnouncerPack? announcer);
@@ -209,7 +209,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         AnnouncerPack announcer = announcerData.GetElementByHyperlinkId("AlarakAnnouncer(hyperlink)");
@@ -225,7 +225,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         Action act = () => announcerData.GetElementByHyperlinkId("other");
@@ -241,7 +241,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool result = announcerData.TryGetElementByAttributeId("Alar", out AnnouncerPack? announcer);
@@ -260,7 +260,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         bool result = announcerData.TryGetElementByAttributeId("other", out AnnouncerPack? announcer);
@@ -277,7 +277,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         AnnouncerPack announcer = announcerData.GetElementByAttributeId("Alar");
@@ -293,7 +293,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         Action act = () => announcerData.GetElementByAttributeId("other");
@@ -361,7 +361,7 @@ public class AnnouncerPackDataDocumentTests
         using JsonDocument jsonDocument = JsonDocument.Parse(jsonData);
         using JsonDocument gameStringJsonDocument = JsonDocument.Parse(gameStringData);
         using GameStringsDocument gameStringsDocument = GameStringsDocument.Load(gameStringJsonDocument);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument, gameStringsDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument, gameStringsDocument);
 
         // act
         AnnouncerPack announcer = announcerData.GetElementById("AlarakAnnouncer");
@@ -385,7 +385,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         List<AnnouncerPack> result = [.. announcerData.GetElements()];
@@ -412,7 +412,7 @@ public class AnnouncerPackDataDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         List<AnnouncerPack> result = [.. announcerData.GetElements()];
@@ -441,7 +441,7 @@ public class AnnouncerPackDataDocumentTests
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
 
         // act
-        Action act = () => AnnouncerDataDocument.Load(jsonDocument);
+        Action act = () => AnnouncerPackDataDocument.Load(jsonDocument);
 
         // assert
         act.Should().Throw<JsonException>().WithMessage("*does not match the expected data type*");
@@ -454,7 +454,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         List<object> result = [.. announcerData.GetElementObjects()];
@@ -482,7 +482,7 @@ public class AnnouncerPackDataDocumentTests
         """;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         List<object> result = [.. announcerData.GetElementObjects()];
@@ -498,7 +498,7 @@ public class AnnouncerPackDataDocumentTests
         string json = _defaultArrangeJson;
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
-        AnnouncerDataDocument announcerData = AnnouncerDataDocument.Load(jsonDocument);
+        AnnouncerPackDataDocument announcerData = AnnouncerPackDataDocument.Load(jsonDocument);
 
         // act
         List<object> result = [.. announcerData.GetElementObjects()];

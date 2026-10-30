@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="EmoticonPack"/> objects from a JSON document.
 /// </summary>
-public class EmoticonPackDataDocument : ElementDocument<EmoticonPack>
+public class EmoticonPackDataDocument : ElementDocument<EmoticonPack>, IStoreItemRetrieval<EmoticonPack>
 {
     private EmoticonPackDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
         : base(DataType.EmoticonPackData, dataDocument, gameStringsDocument)

@@ -6,7 +6,7 @@ public class DataDocumentTests
     [TestMethod]
     [DataRow("HeroData", typeof(HeroDataDocument))]
     [DataRow("UnitData", typeof(UnitDataDocument))]
-    [DataRow("AnnouncerPackData", typeof(AnnouncerDataDocument))]
+    [DataRow("AnnouncerPackData", typeof(AnnouncerPackDataDocument))]
     [DataRow("BannerData", typeof(BannerDataDocument))]
     [DataRow("BoostData", typeof(BoostDataDocument))]
     [DataRow("BundleData", typeof(BundleDataDocument))]
@@ -107,7 +107,7 @@ public class DataDocumentTests
         IElementDocument result = DataDocument.Load(jsonDocument, gameStringsDocument);
 
         // assert
-        result.Should().BeOfType<AnnouncerDataDocument>();
+        result.Should().BeOfType<AnnouncerPackDataDocument>();
     }
 
     [TestMethod]

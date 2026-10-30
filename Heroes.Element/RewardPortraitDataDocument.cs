@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents a data source for managing and retrieving <see cref="RewardPortrait"/> objects from a JSON document.
 /// </summary>
-public class RewardPortraitDataDocument : ElementDocument<RewardPortrait>
+public class RewardPortraitDataDocument : ElementDocument<RewardPortrait>, IStoreItemRetrieval<RewardPortrait>
 {
     private RewardPortraitDataDocument(JsonDocument dataDocument, GameStringsDocument? gameStringsDocument = null)
         : base(DataType.RewardPortraitData, dataDocument, gameStringsDocument)
