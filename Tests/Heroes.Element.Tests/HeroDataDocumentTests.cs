@@ -86,7 +86,7 @@ public class HeroDataDocumentTests
               "defaultMountId": "slime",
               "category": "none",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "Abathur",
                 "AbathurAlt"
               ],
@@ -615,7 +615,7 @@ public class HeroDataDocumentTests
         hero.Ratings.Survivability.Should().Be(1);
         hero.Ratings.Utility.Should().Be(7);
         hero.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
-        hero.RequiredRewardArray.Should().HaveCount(2)
+        hero.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["Abathur", "AbathurAlt"]);
         hero.Roles.Should().ContainSingle();
         hero.Roles.First().RawText.Should().Be("Specialist");

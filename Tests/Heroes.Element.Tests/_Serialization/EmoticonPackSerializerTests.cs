@@ -22,7 +22,7 @@ public class EmoticonPackSerializerTests
             Event = "an event",
             SearchText = new GameStringText("item1 item2"),
             InfoText = new GameStringText("Some info text"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
         emoticonPack.EmoticonIds.Add("abathur_pack_1");
         emoticonPack.EmoticonIds.Add("abathur_pack_2");
@@ -53,7 +53,7 @@ public class EmoticonPackSerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "Some info text",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ]

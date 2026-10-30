@@ -74,7 +74,7 @@ public class VoiceLineDataDocumentTests
               "releaseDate": "2014-03-13",
               "category": "voiceline",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "AbathurBase_VoiceLine01",
                 "AbathurBase_VoiceLine01Alt"
               ],
@@ -106,7 +106,7 @@ public class VoiceLineDataDocumentTests
         voiceLine.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
         voiceLine.Category.Should().Be("voiceline");
         voiceLine.Event.Should().Be("no");
-        voiceLine.RequiredRewardArray.Should().HaveCount(2)
+        voiceLine.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["AbathurBase_VoiceLine01", "AbathurBase_VoiceLine01Alt"]);
         voiceLine.HeroId.Should().Be("Abathur");
         voiceLine.IsFreePlay.Should().BeTrue();

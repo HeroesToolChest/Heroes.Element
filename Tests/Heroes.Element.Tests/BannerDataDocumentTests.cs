@@ -75,7 +75,7 @@ public class BannerDataDocumentTests
               "category": "banner",
               "event": "no",
               "isFreePlay": true,
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "BannerD3Imperius",
                 "BannerD3ImperiusAlt"
               ],
@@ -105,7 +105,7 @@ public class BannerDataDocumentTests
         banner.Category.Should().Be("banner");
         banner.Event.Should().Be("no");
         banner.IsFreePlay.Should().BeTrue();
-        banner.RequiredRewardArray.Should().HaveCount(2)
+        banner.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["BannerD3Imperius", "BannerD3ImperiusAlt"]);
         banner.Description!.RawText.Should().Be("Banner celebrating the Archangel of Valor.");
         banner.SearchText!.RawText.Should().Be("Imperius Banner Diablo Archangel Valor");

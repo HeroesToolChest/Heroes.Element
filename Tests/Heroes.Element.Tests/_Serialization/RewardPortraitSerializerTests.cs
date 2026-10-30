@@ -32,7 +32,7 @@ public class RewardPortraitSerializerTests
                 Columns = 7,
                 Rows = 8,
             },
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -64,7 +64,7 @@ public class RewardPortraitSerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "descriptionUnearned": "Unearned Description",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ]

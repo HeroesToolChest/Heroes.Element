@@ -371,7 +371,7 @@ public class GameStringsDocumentTests
         """;
         Hero hero = new("Abathur")
         {
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
         hero.Talents.Add(
             TalentTier.Level1,
@@ -404,7 +404,7 @@ public class GameStringsDocumentTests
         hero.Energy.EnergyType.Should().BeNull();
         hero.Life.LifeType.Should().BeNull();
         hero.Shield.ShieldType.Should().BeNull();
-        hero.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        hero.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
 
         hero.Talents[TalentTier.Level1][0].CooldownText.Should().BeNull();
@@ -876,7 +876,7 @@ public class GameStringsDocumentTests
         AnnouncerPack announcer = new("AbathurAnnouncer")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -890,7 +890,7 @@ public class GameStringsDocumentTests
         announcer.Name.Should().BeNull();
         announcer.SortName.Should().BeNull();
         announcer.SearchText.Should().BeNull();
-        announcer.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        announcer.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -983,7 +983,7 @@ public class GameStringsDocumentTests
         Banner banner = new("BannerD3Imperius")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -997,7 +997,7 @@ public class GameStringsDocumentTests
         banner.Name.Should().BeNull();
         banner.SortName.Should().BeNull();
         banner.SearchText.Should().BeNull();
-        banner.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        banner.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -1090,7 +1090,7 @@ public class GameStringsDocumentTests
         Boost boost = new("BoostStimpak")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1104,7 +1104,7 @@ public class GameStringsDocumentTests
         boost.Name.Should().BeNull();
         boost.SortName.Should().BeNull();
         boost.SearchText.Should().BeNull();
-        boost.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        boost.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -1197,7 +1197,7 @@ public class GameStringsDocumentTests
         Bundle bundle = new("MegaBundleStarterPack")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1211,7 +1211,7 @@ public class GameStringsDocumentTests
         bundle.Name.Should().BeNull();
         bundle.SortName.Should().BeNull();
         bundle.SearchText.Should().BeNull();
-        bundle.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        bundle.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -1507,7 +1507,7 @@ public class GameStringsDocumentTests
         Skin skin = new("AbathurMechaVar1")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1522,7 +1522,7 @@ public class GameStringsDocumentTests
         skin.SortName.Should().BeNull();
         skin.SearchText.Should().BeNull();
         skin.InfoText.Should().BeNull();
-        skin.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        skin.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -1619,7 +1619,7 @@ public class GameStringsDocumentTests
         Mount mount = new("CloudSerpentMount")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1634,7 +1634,7 @@ public class GameStringsDocumentTests
         mount.SortName.Should().BeNull();
         mount.SearchText.Should().BeNull();
         mount.InfoText.Should().BeNull();
-        mount.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        mount.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -1840,7 +1840,7 @@ public class GameStringsDocumentTests
         VoiceLine voiceLine = new("AbathurBase_VoiceLine01")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -1855,7 +1855,7 @@ public class GameStringsDocumentTests
         voiceLine.Description.Should().BeNull();
         voiceLine.SearchText.Should().BeNull();
         voiceLine.InfoText.Should().BeNull();
-        voiceLine.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        voiceLine.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -2064,7 +2064,7 @@ public class GameStringsDocumentTests
         Spray spray = new("SprayAnimatedBWAhhhh")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2079,7 +2079,7 @@ public class GameStringsDocumentTests
         spray.Description.Should().BeNull();
         spray.SearchText.Should().BeNull();
         spray.InfoText.Should().BeNull();
-        spray.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        spray.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -2176,7 +2176,7 @@ public class GameStringsDocumentTests
         EmoticonPack emoticonPack = new("AbathurEmoticonPack1")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2190,7 +2190,7 @@ public class GameStringsDocumentTests
         emoticonPack.Name.Should().BeNull();
         emoticonPack.SortName.Should().BeNull();
         emoticonPack.SearchText.Should().BeNull();
-        emoticonPack.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        emoticonPack.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -2283,7 +2283,7 @@ public class GameStringsDocumentTests
         PortraitPack portraitPack = new("PortraitPackStarcraftLegacy1")
         {
             Description = new GameStringText("temporary description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2297,7 +2297,7 @@ public class GameStringsDocumentTests
         portraitPack.Name.Should().BeNull();
         portraitPack.SortName.Should().BeNull();
         portraitPack.SearchText.Should().BeNull();
-        portraitPack.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        portraitPack.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 
@@ -2391,7 +2391,7 @@ public class GameStringsDocumentTests
         {
             Description = new GameStringText("temporary description"),
             DescriptionUnearned = new GameStringText("temporary unearned description"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         using JsonDocument jsonDocument = JsonDocument.Parse(json);
@@ -2406,7 +2406,7 @@ public class GameStringsDocumentTests
         rewardPortrait.SortName.Should().BeNull();
         rewardPortrait.SearchText.Should().BeNull();
         rewardPortrait.DescriptionUnearned.Should().BeNull();
-        rewardPortrait.RequiredRewardArray.Should().HaveCount(2, "it's not a gamestring property")
+        rewardPortrait.RewardLicenseIds.Should().HaveCount(2, "it's not a gamestring property")
             .And.Contain(["reward1", "reward2"]);
     }
 

@@ -120,7 +120,7 @@ public class Hero : Unit, ILoadoutItem
 
     /// <inheritdoc/>
     [JsonPropertyOrder(110)]
-    public ISet<string> RequiredRewardArray { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
+    public ISet<string> RewardLicenseIds { get; set; } = new SortedSet<string>(StringComparer.Ordinal);
 
     /// <summary>
     /// Gets or sets a unique collection of <see cref="Skin"/> ids that are associated with this hero.

@@ -26,7 +26,7 @@ public class VoiceLineSerializerTests
             IsFreePlay = true,
             Image = "test.png",
             InfoText = new GameStringText("Info text"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -53,7 +53,7 @@ public class VoiceLineSerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "Info text",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ]

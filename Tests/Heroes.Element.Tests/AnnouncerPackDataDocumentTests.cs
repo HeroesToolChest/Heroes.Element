@@ -74,7 +74,7 @@ public class AnnouncerPackDataDocumentTests
               "releaseDate": "2014-03-13",
               "category": "announcer",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "AbathurAnnouncer",
                 "AbathurAnnouncerAlt"
               ],
@@ -107,7 +107,7 @@ public class AnnouncerPackDataDocumentTests
         announcer.ReleaseDate.Should().Be(new DateOnly(2014, 3, 13));
         announcer.Category.Should().Be("announcer");
         announcer.Event.Should().Be("no");
-        announcer.RequiredRewardArray.Should().HaveCount(2)
+        announcer.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["AbathurAnnouncer", "AbathurAnnouncerAlt"]);
         announcer.Gender.Should().Be("Neutral");
         announcer.HeroId.Should().Be("Abathur");

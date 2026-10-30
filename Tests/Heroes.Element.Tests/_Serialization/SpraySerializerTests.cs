@@ -31,7 +31,7 @@ public class SpraySerializerTests
             },
             IsFreePlay = true,
             InfoText = new GameStringText("Info Text"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -62,7 +62,7 @@ public class SpraySerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "Info Text",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ]

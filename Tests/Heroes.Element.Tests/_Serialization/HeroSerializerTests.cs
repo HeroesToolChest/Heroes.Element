@@ -183,7 +183,7 @@ public class HeroSerializerTests
                 },
             },
             SubAbilities = new SortedDictionary<LinkId, IDictionary<AbilityTier, IList<Ability>>>(),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -254,7 +254,7 @@ public class HeroSerializerTests
               "searchText": "search keywords",
               "description": "Hero Description",
               "infoText": "Info about hero",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ],

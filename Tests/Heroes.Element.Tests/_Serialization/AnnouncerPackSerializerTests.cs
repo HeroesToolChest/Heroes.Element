@@ -27,7 +27,7 @@ public class AnnouncerPackSerializerTests
             IsFreePlay = true,
             SearchText = new GameStringText("item1 item2"),
             InfoText = new GameStringText("info text"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -55,7 +55,7 @@ public class AnnouncerPackSerializerTests
               "searchText": "item1 item2",
               "description": "Test Description",
               "infoText": "info text",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ]

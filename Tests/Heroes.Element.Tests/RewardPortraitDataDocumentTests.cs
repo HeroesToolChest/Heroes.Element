@@ -71,7 +71,7 @@ public class RewardPortraitDataDocumentTests
               "releaseDate": "2015-03-13",
               "category": "rewardportrait",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "RewardPortraitRaynor001",
                 "RewardPortraitRaynor001Alt"
               ],
@@ -109,7 +109,7 @@ public class RewardPortraitDataDocumentTests
         rewardPortrait.ReleaseDate.Should().Be(new DateOnly(2015, 3, 13));
         rewardPortrait.Category.Should().Be("rewardportrait");
         rewardPortrait.Event.Should().Be("no");
-        rewardPortrait.RequiredRewardArray.Should().HaveCount(2)
+        rewardPortrait.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["RewardPortraitRaynor001", "RewardPortraitRaynor001Alt"]);
         rewardPortrait.Description!.RawText.Should().Be("Portrait of Jim Raynor, Marshal of Mar Sara.");
         rewardPortrait.SearchText!.RawText.Should().Be("Raynor Portrait Marshal Terran");

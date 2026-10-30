@@ -73,7 +73,7 @@ public class BundleDataDocumentTests
               "releaseDate": "2016-04-12",
               "category": "bundle",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "MegaBundleStarterPack",
                 "MegaBundleStarterPackAlt"
               ],
@@ -125,7 +125,7 @@ public class BundleDataDocumentTests
         bundle.ReleaseDate.Should().Be(new DateOnly(2016, 4, 12));
         bundle.Category.Should().Be("bundle");
         bundle.Event.Should().Be("no");
-        bundle.RequiredRewardArray.Should().HaveCount(2)
+        bundle.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["MegaBundleStarterPack", "MegaBundleStarterPackAlt"]);
         bundle.Description!.RawText.Should().Be("Get started with this amazing bundle pack!");
         bundle.SearchText!.RawText.Should().Be("Mega Starter Bundle Pack Heroes Skins");

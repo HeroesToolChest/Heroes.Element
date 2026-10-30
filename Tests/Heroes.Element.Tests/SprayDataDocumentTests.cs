@@ -74,7 +74,7 @@ public class SprayDataDocumentTests
               "releaseDate": "2017-04-25",
               "category": "spray",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "SprayAnimatedBWAhhhh",
                 "SprayAnimatedBWAhhhhAlt"
               ],
@@ -110,7 +110,7 @@ public class SprayDataDocumentTests
         spray.ReleaseDate.Should().Be(new DateOnly(2017, 4, 25));
         spray.Category.Should().Be("spray");
         spray.Event.Should().Be("no");
-        spray.RequiredRewardArray.Should().HaveCount(2)
+        spray.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["SprayAnimatedBWAhhhh", "SprayAnimatedBWAhhhhAlt"]);
         spray.Image.Should().Be("storm_ui_spray_bwahhh.png");
         spray.IsFreePlay.Should().BeTrue();

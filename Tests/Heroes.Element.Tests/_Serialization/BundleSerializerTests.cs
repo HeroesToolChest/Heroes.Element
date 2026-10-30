@@ -38,7 +38,7 @@ public class BundleSerializerTests
             SearchText = new GameStringText("bundle search keywords"),
             Description = new GameStringText("Bundle Description Text"),
             InfoText = new GameStringText("Bundle Info Text"),
-            RequiredRewardArray = new SortedSet<string> { "reward1", "reward2" },
+            RewardLicenseIds = new SortedSet<string> { "reward1", "reward2" },
         };
 
         // act
@@ -86,7 +86,7 @@ public class BundleSerializerTests
               "searchText": "bundle search keywords",
               "description": "Bundle Description Text",
               "infoText": "Bundle Info Text",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "reward1",
                 "reward2"
               ]

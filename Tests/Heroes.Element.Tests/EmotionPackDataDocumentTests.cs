@@ -71,7 +71,7 @@ public class EmotionPackDataDocumentTests
               "releaseDate": "2017-04-25",
               "category": "emoticonpack",
               "event": "no",
-              "requiredRewardArray": [
+              "rewardLicenseIds": [
                 "AbathurEmoticonPack1",
                 "AbathurEmoticonPack1Alt"
               ],
@@ -104,7 +104,7 @@ public class EmotionPackDataDocumentTests
         emoticonPack.ReleaseDate.Should().Be(new DateOnly(2017, 4, 25));
         emoticonPack.Category.Should().Be("emoticonpack");
         emoticonPack.Event.Should().Be("no");
-        emoticonPack.RequiredRewardArray.Should().HaveCount(2)
+        emoticonPack.RewardLicenseIds.Should().HaveCount(2)
             .And.Contain(["AbathurEmoticonPack1", "AbathurEmoticonPack1Alt"]);
         emoticonPack.Description!.RawText.Should().Be("A pack of Abathur-themed emoticons.");
         emoticonPack.SearchText!.RawText.Should().Be("Abathur Emoticon Pack Evolution Master Slug");
