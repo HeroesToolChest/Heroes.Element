@@ -1,6 +1,6 @@
 ﻿namespace Heroes.Element.Models;
 
-internal class ImagePath
+internal sealed class ImagePath
 {
     /// <summary>
     /// Gets the relative file path where the image exists at. This may be an mpq file path.

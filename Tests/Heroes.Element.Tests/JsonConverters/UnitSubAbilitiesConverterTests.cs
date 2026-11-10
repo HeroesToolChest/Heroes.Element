@@ -1,6 +1,6 @@
 ﻿using Heroes.Element.Comparers;
 
-namespace Heroes.Element.JsonConverter.Tests;
+namespace Heroes.Element.JsonConverters.Tests;
 
 [TestClass]
 public class UnitSubAbilitiesConverterTests

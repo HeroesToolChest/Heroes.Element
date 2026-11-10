@@ -1141,7 +1141,7 @@ public class ElementDocumentTests
     }
 
     // Test implementation of ElementBaseData for testing purposes
-    private class TestElementBaseData : ElementDocument<TestElementObject>
+    private sealed class TestElementBaseData : ElementDocument<TestElementObject>
     {
         public TestElementBaseData(JsonDocument jsonDocument, GameStringsDocument? gameStringsDocument = null)
             : base(DataType.Unknown, jsonDocument, gameStringsDocument)
@@ -1167,7 +1167,7 @@ public class ElementDocumentTests
     }
 
     // Test implementation of IElementObject for testing purposes
-    private class TestElementObject : IElementObject
+    private sealed class TestElementObject : IElementObject
     {
         public string Id { get; private set; } = string.Empty;
 

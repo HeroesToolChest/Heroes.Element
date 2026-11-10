@@ -1,7 +1,7 @@
 ﻿namespace Heroes.Element.Models.GameStrings.Tests;
 
 [TestClass]
-public class ElementExtensionsTest
+public class ElementExtensionsTests
 {
     [TestMethod]
     public void UpdateGameStringTexts_Hero_UpdatesGameStringTexts()
